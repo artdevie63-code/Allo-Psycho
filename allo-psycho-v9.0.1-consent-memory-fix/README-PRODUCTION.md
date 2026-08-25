@@ -1,0 +1,33 @@
+# Allo Psycho V9.0 — production finale
+
+Correctifs principaux :
+- sauvegarde locale renforcée par un miroir IndexedDB sur le même appareil ;
+- restauration locale avant l’initialisation de l’interface ;
+- Journal, TCC et humeur ne se réinitialisent plus si l’écriture locale échoue ;
+- compagnon IA : session anonyme vérifiée et rafraîchie avant appel, retry unique si nécessaire ;
+- `ai-support` crée l’essai si le chat est ouvert avant la page Premium ;
+- `premium_required` n’est plus renvoyé comme panne HTTP ;
+- moteur Décharge réécrit pour Android/mobile avec Pointer Events, touch et click de secours ;
+- Décharge : 60 secondes fixes ;
+- mesures Avant / Après supprimées ;
+- options d’affichage simplifiées : seul le PIN local reste visible ;
+- Profil, À propos et footer pointent vers `privacy.html` ;
+- un seul champ d’activation accepte les codes Premium classiques et les deux accès privés :
+  - Propriétaire : Admin + Premium permanent ;
+  - Testeur : Premium permanent sans Admin ;
+- aucun UUID ni code privé n’est inclus dans le ZIP ;
+- aucun logo personnalisé ajouté pour le moment.
+
+Déploiement Supabase requis :
+- `premium-access`
+- `ai-support`
+
+Les deux fichiers prêts à copier se trouvent également à la racine des livrables séparés fournis dans la conversation.
+
+
+## Correctif V9.0.1 — consentement et mémoire IA
+- la case d’autorisation IA est enregistrée immédiatement lorsqu’elle change ;
+- `callAI()` resynchronise le consentement depuis le profil local avant de bloquer l’accès ;
+- la mémoire IA est supprimée de localStorage ET du miroir IndexedDB ;
+- une réinitialisation crée un point de coupure : les anciens échanges restent visibles localement mais ne sont plus envoyés à l’IA ;
+- le compagnon repart du prochain message après réinitialisation.
