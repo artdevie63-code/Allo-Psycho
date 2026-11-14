@@ -2964,8 +2964,18 @@ select{
           <span id="threadStatusV7">🧭 Fil : exploration</span>
           <button type="button" class="btn btn-light" id="shortModeV7">⚡ Réponses courtes : auto</button>
           <button type="button" class="btn btn-light" id="summaryV7">📝 Synthèse du fil</button>
+          <button type="button" class="btn btn-light" id="archiveChatV925">📦 Archiver</button>
+          <button type="button" class="btn btn-light" id="clearChatV925">🗑️ Effacer le fil</button>
+          <button type="button" class="btn btn-light" id="toggleArchivesV925">🗂 Archives</button>
         </div>
         <div id="aiQuotaV922" class="ai-quota-v922" aria-live="polite">✨ Premium · jusqu’à 12 messages IA par jour</div>
+        <div id="chatArchivesV925" class="card" hidden style="margin:10px 0 12px;padding:13px">
+          <div style="display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap">
+            <strong>🗂 Discussions archivées</strong>
+            <button type="button" class="btn btn-light" id="closeArchivesV925">Fermer</button>
+          </div>
+          <div id="chatArchiveListV925" class="history-list" style="margin-top:10px"></div>
+        </div>
         <div id="chatRouteV923" class="chat-route-v923" hidden></div>
         <div class="chat-directions-v924" id="chatDirectionsV924">
           <button type="button" class="btn btn-light" data-chat-dir="understand">🧠 Comprendre</button>
@@ -3482,7 +3492,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
     // les pertes accidentelles de données locales.
     const ALLO_CRITICAL_KEYS_V9=[
       "alloPsychoProfile","alloPsychoJournal","alloPsychoTCC","alloPsychoHumeurs",
-      "alloPsychoChat","alloPsychoTherapyMemory","alloPsychoLastTccV71",
+      "alloPsychoChat","alloPsychoChatArchives","alloPsychoTherapyMemory","alloPsychoLastTccV71",
       "alloPsychoPathsV7","alloPsychoSelfTestsV7","alloPsychoSessionsV7",
       "alloPsychoTccDraftV7","alloPsychoTccDraftV741","alloPsychoTccIndexV741",
       "alloPsychoTccMode","alloPsychoShortV7","alloPsychoLastState","alloPsychoLastActivity","alloPsychoAiContextResetAt"
@@ -8321,7 +8331,10 @@ window.addEventListener("unhandledrejection",function(e){
 const $=id=>document.getElementById(id);
 const read=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(_){return d}};
 const write=(k,v)=>{try{const raw=JSON.stringify(v);localStorage.setItem(k,raw);if(typeof alloPersistMirrorV9==="function")alloPersistMirrorV9(k,raw)}catch(_){}};
-const page=n=>document.querySelector('[data-page="'+n+'"]')?.click();
+const page=n=>{
+  if(typeof afficherPage==="function"){afficherPage(n);return}
+  document.querySelector('[data-page="'+n+'"]')?.click();
+};
 const tools={
  breathing:{label:"🌿 Respiration 5 · 5",page:"relax",anchor:"breathingCardV8"},
  urgent:{label:"🕊️ Urgence Calme",page:"relax",selector:'[data-premium-calm-v83="urgent"]'},
@@ -8465,6 +8478,131 @@ function ux(){
 }
 function init(){renderDaily();renderFeedback();renderKit();renderEvolution();renderBadges();renderSeason();ux();setInterval(()=>{renderDaily();renderEvolution();renderBadges()},4000)}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(init,900),{once:true});else setTimeout(init,900);
+})();
+</script>
+
+<script>
+/* ALLO PSYCHO V9.2.5 — gestion locale des discussions IA */
+(function(){
+"use strict";
+const CHAT_KEY="alloPsychoChat";
+const ARCHIVE_KEY="alloPsychoChatArchives";
+const RESET_KEY="alloPsychoAiContextResetAt";
+const $=id=>document.getElementById(id);
+const read=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k)||"null");return v==null?d:v}catch(_){return d}};
+const mirror=(k,v)=>{
+  try{
+    const raw=JSON.stringify(v);
+    localStorage.setItem(k,raw);
+    if(typeof alloPersistMirrorV9==="function")alloPersistMirrorV9(k,raw);
+  }catch(_){}
+};
+const deleteMirror=async k=>{
+  try{localStorage.removeItem(k)}catch(_){}
+  try{if(typeof alloPersistDeleteKeyV901==="function")await alloPersistDeleteKeyV901(k)}catch(_){}
+};
+function esc(s){
+  return String(s||"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+}
+function active(){
+  const h=read(CHAT_KEY,[]);
+  return Array.isArray(h)?h.filter(x=>x&&["user","assistant"].includes(x.role)&&typeof x.content==="string"):[];
+}
+function resetMessages(){
+  const box=$("messages");if(!box)return;
+  box.innerHTML='<div class="message ai">🌸 Bonjour, je suis là avec toi.\n\nTu peux me raconter ce qui te traverse l\'esprit aujourd\'hui, sans jugement. 💕</div>';
+}
+function renderActive(){
+  const box=$("messages");if(!box)return;
+  const h=active();
+  if(!h.length){resetMessages();return}
+  box.innerHTML="";
+  h.slice(-16).forEach(item=>{
+    const d=document.createElement("div");
+    d.className="message "+(item.role==="assistant"?"ai":"user");
+    d.textContent=item.content;
+    box.appendChild(d);
+  });
+  box.scrollTop=box.scrollHeight;
+}
+function titleFor(messages){
+  const first=messages.find(x=>x.role==="user"&&x.content.trim())||messages[0];
+  const base=(first?.content||"Discussion").replace(/\s+/g," ").trim();
+  return base.length>52?base.slice(0,52)+"…":base;
+}
+function renderArchives(){
+  const list=$("chatArchiveListV925");if(!list)return;
+  const a=read(ARCHIVE_KEY,[]);
+  if(!Array.isArray(a)||!a.length){
+    list.innerHTML='<div class="empty">Aucune discussion archivée.</div>';
+    return;
+  }
+  list.innerHTML=a.slice().reverse().map(x=>{
+    const date=x.archived_at?new Date(x.archived_at).toLocaleString("fr-FR"):"";
+    return '<div class="history-item" style="display:flex;gap:8px;justify-content:space-between;align-items:center;flex-wrap:wrap">'+
+      '<div style="min-width:180px;flex:1"><strong>'+esc(x.title||"Discussion")+'</strong><small style="display:block;margin-top:3px">'+esc(date)+' · '+Number(x.messages?.length||0)+' message(s)</small></div>'+
+      '<div style="display:flex;gap:6px;flex-wrap:wrap"><button type="button" class="btn btn-light" data-restore-chat="'+esc(x.id)+'">↩️ Restaurer</button><button type="button" class="btn btn-light" data-delete-archive="'+esc(x.id)+'">🗑️ Supprimer</button></div>'+
+    '</div>';
+  }).join("");
+  list.querySelectorAll("[data-restore-chat]").forEach(b=>b.onclick=()=>restoreArchive(b.dataset.restoreChat));
+  list.querySelectorAll("[data-delete-archive]").forEach(b=>b.onclick=()=>deleteArchive(b.dataset.deleteArchive));
+}
+async function clearActive(withConfirm=true){
+  const h=active();
+  if(!h.length){resetMessages();return}
+  if(withConfirm&&!window.confirm("Effacer définitivement la discussion active ?"))return;
+  await deleteMirror(CHAT_KEY);
+  mirror(RESET_KEY,new Date().toISOString());
+  resetMessages();
+  try{if(typeof afficherToast==="function")afficherToast("🗑️ Discussion effacée.")}catch(_){}
+}
+async function archiveActive(){
+  const h=active();
+  if(!h.length){
+    try{if(typeof afficherToast==="function")afficherToast("Aucune discussion à archiver.")}catch(_){}
+    return;
+  }
+  const a=read(ARCHIVE_KEY,[]);
+  const item={id:"chat-"+Date.now()+"-"+Math.random().toString(36).slice(2,8),title:titleFor(h),archived_at:new Date().toISOString(),messages:h};
+  const next=(Array.isArray(a)?a:[]).concat(item).slice(-30);
+  mirror(ARCHIVE_KEY,next);
+  await deleteMirror(CHAT_KEY);
+  mirror(RESET_KEY,new Date().toISOString());
+  resetMessages();
+  renderArchives();
+  try{if(typeof afficherToast==="function")afficherToast("📦 Discussion archivée localement.")}catch(_){}
+}
+async function restoreArchive(id){
+  const a=read(ARCHIVE_KEY,[]);
+  const item=(Array.isArray(a)?a:[]).find(x=>x.id===id);
+  if(!item)return;
+  if(active().length&&!window.confirm("Remplacer la discussion active par cette archive ?"))return;
+  mirror(CHAT_KEY,Array.isArray(item.messages)?item.messages.slice(-40):[]);
+  await deleteMirror(RESET_KEY);
+  mirror(ARCHIVE_KEY,a.filter(x=>x.id!==id));
+  renderActive();renderArchives();
+  try{if(typeof afficherToast==="function")afficherToast("↩️ Discussion restaurée.")}catch(_){}
+}
+function deleteArchive(id){
+  const a=read(ARCHIVE_KEY,[]);
+  const item=(Array.isArray(a)?a:[]).find(x=>x.id===id);
+  if(!item)return;
+  if(!window.confirm("Supprimer définitivement cette discussion archivée ?"))return;
+  mirror(ARCHIVE_KEY,a.filter(x=>x.id!==id));
+  renderArchives();
+  try{if(typeof afficherToast==="function")afficherToast("🗑️ Archive supprimée.")}catch(_){}
+}
+function init(){
+  $("archiveChatV925")?.addEventListener("click",archiveActive);
+  $("clearChatV925")?.addEventListener("click",()=>clearActive(true));
+  $("toggleArchivesV925")?.addEventListener("click",()=>{
+    const p=$("chatArchivesV925");if(!p)return;
+    p.hidden=!p.hidden;if(!p.hidden)renderArchives();
+  });
+  $("closeArchivesV925")?.addEventListener("click",()=>{const p=$("chatArchivesV925");if(p)p.hidden=true});
+  renderArchives();
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })();
 </script>
 
