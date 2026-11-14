@@ -2260,6 +2260,21 @@ select{
 .ux-test-v923{margin-top:14px;padding:13px;border:1px dashed #baa8b2;border-radius:17px;background:#fff;display:none}body.ux-test-active-v923 .ux-test-v923{display:block}
 @media(max-width:720px){.daily-steps-v923,.monthly-grid-v923,.quick-kit-v923,.evo-insights-v923{grid-template-columns:1fr}}
 
+
+/* ===== V9.2.4 — fonctions originales adaptatives ===== */
+.inner-weather-v924,.manual-v924,.monthly-summary-v924,.weekly-challenge-v924,.capsule-v924{background:linear-gradient(145deg,#fffdfa,#f7f3fb)}
+.weather-move-v924{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.weather-move-v924 button.active{background:#57484f;color:#fff}
+.fog-toggle-v924{margin-top:10px}.fog-mode-v924 .card:not(.guided-home-v922):not(.daily-thread-v923):not(.capsule-v924){display:none!important}.fog-mode-v924 .guided-home-v922 .guided-step-v922:nth-of-type(n+2){display:none}.fog-mode-v924 .guided-home-v922 .guided-reco-v922{display:block}
+.manual-grid-v924{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:12px}.manual-item-v924{padding:12px;border-radius:17px;background:#fff;border:1px solid #eadfe5}.manual-item-v924 strong{display:block;font-size:.69rem}.manual-item-v924 span{display:block;margin-top:4px;color:var(--soft);font-size:.65rem;line-height:1.45}
+.challenge-v924{padding:14px;border-radius:18px;background:#fff;border:1px solid #eadfe5;margin-top:12px}
+.capsule-live-v924{margin-top:12px;padding:14px;border-radius:18px;background:#fff;border:1px solid #eadfe5}.capsule-live-v924[hidden]{display:none}.capsule-timer-v924{font-size:1.6rem;font-weight:950;margin:8px 0}
+.resource-list-v924{display:flex;flex-direction:column;gap:8px;margin-top:10px}.resource-item-v924{padding:11px 12px;border-radius:15px;background:#faf7f5;border:1px solid #eee5e2;font-size:.7rem;line-height:1.45}
+.chat-directions-v924{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0 12px}.chat-directions-v924 button{min-height:38px;padding:7px 10px;font-size:.68rem}
+.monthly-summary-grid-v924{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:10px}
+.monthly-summary-grid-v924>div{padding:12px;border-radius:17px;background:#fff;border:1px solid #eadfe5;font-size:.68rem;line-height:1.45}
+.journal-mode-v924{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 12px}
+@media(max-width:720px){.manual-grid-v924,.monthly-summary-grid-v924{grid-template-columns:1fr}}
+
 </style>
 </head>
 
@@ -2392,6 +2407,57 @@ select{
           <div class="daily-step-v923"><b>3 · À revoir plus tard</b><p id="dailyLaterV923">L’app te rappellera localement ce qui mérite d’être repris.</p><button type="button" class="btn btn-light" id="dailyLaterBtnV923" hidden>Reprendre</button></div>
         </div>
         <div id="toolFeedbackV923" class="feedback-v923" hidden></div>
+      </div>
+
+      <div class="card inner-weather-v924" id="innerWeatherV924">
+        <p class="eyebrow">MA MÉTÉO INTÉRIEURE</p>
+        <h3>🌦️ Est-ce que ça bouge ?</h3>
+        <p class="muted">L’intensité compte, mais son mouvement aussi.</p>
+        <div class="weather-move-v924">
+          <button type="button" class="btn btn-light" data-weather-move="up">↗️ Ça monte</button>
+          <button type="button" class="btn btn-light" data-weather-move="same">➡️ Ça reste pareil</button>
+          <button type="button" class="btn btn-light" data-weather-move="down">↘️ Ça redescend</button>
+        </div>
+        <button type="button" class="btn btn-light fog-toggle-v924" id="fogModeBtnV924" hidden>🌫️ Mode brouillard : simplifier l’écran</button>
+      </div>
+
+      <div class="card capsule-v924">
+        <p class="eyebrow">CAPSULE EXPRESS</p>
+        <h3>⏱️ 90 secondes pour changer de rythme</h3>
+        <p class="muted">Une micro-intervention adaptée à ton état, sans ouvrir un parcours complet.</p>
+        <button type="button" class="btn btn-dark" id="startCapsuleV924">Lancer ma capsule</button>
+        <div class="capsule-live-v924" id="capsuleLiveV924" hidden><strong id="capsuleTitleV924">Capsule</strong><div class="capsule-timer-v924" id="capsuleTimerV924">01:30</div><p id="capsuleTextV924" class="muted"></p><button type="button" class="btn btn-light" id="stopCapsuleV924">Arrêter</button></div>
+      </div>
+
+      <div class="card manual-v924">
+        <p class="eyebrow">MON MANUEL PERSONNEL · LOCAL</p>
+        <h3>📘 Ce que j’apprends sur moi</h3>
+        <p class="muted">Une synthèse prudente construite à partir de tes propres retours, sans diagnostic.</p>
+        <div class="manual-grid-v924">
+          <div class="manual-item-v924"><strong>Quand ça monte</strong><span id="manualTriggerV924">Pas encore assez de recul.</span></div>
+          <div class="manual-item-v924"><strong>Ce qui m’aide</strong><span id="manualHelpfulV924">Tes retours apparaîtront ici.</span></div>
+          <div class="manual-item-v924"><strong>Mon premier réflexe utile</strong><span id="manualReflexV924">À construire progressivement.</span></div>
+        </div>
+        <button type="button" class="btn btn-light" id="replayHelpfulV924" hidden>🔁 Rejouer ce qui a marché</button>
+      </div>
+
+      <div class="card weekly-challenge-v924">
+        <p class="eyebrow">DÉFI SURPRISE</p>
+        <h3>🎲 Mission thérapeutique de la semaine</h3>
+        <div id="weeklyChallengeV924" class="challenge-v924"></div>
+      </div>
+
+      <div class="card monthly-summary-v924">
+        <p class="eyebrow">MON BILAN DU MOIS · LOCAL</p>
+        <h3>🗓️ Le mois en quelques repères</h3>
+        <div id="monthlySummaryV924" class="monthly-summary-grid-v924"></div>
+      </div>
+
+      <div class="card">
+        <p class="eyebrow">MES PHRASES RESSOURCES · LOCAL</p>
+        <h3>💬 Les phrases que je veux garder</h3>
+        <p class="muted">Double-clique sur une réponse du compagnon pour l’épingler ici.</p>
+        <div id="resourceListV924" class="resource-list-v924"><div class="empty">Aucune phrase épinglée.</div></div>
       </div>
 
       <div class="card badge-card-v923">
@@ -2901,6 +2967,11 @@ select{
         </div>
         <div id="aiQuotaV922" class="ai-quota-v922" aria-live="polite">✨ Premium · jusqu’à 12 messages IA par jour</div>
         <div id="chatRouteV923" class="chat-route-v923" hidden></div>
+        <div class="chat-directions-v924" id="chatDirectionsV924">
+          <button type="button" class="btn btn-light" data-chat-dir="understand">🧠 Comprendre</button>
+          <button type="button" class="btn btn-light" data-chat-dir="calm">🌿 M’apaiser</button>
+          <button type="button" class="btn btn-light" data-chat-dir="act">👣 Agir</button>
+        </div>
 
         <div id="crisisCard" class="crisis-card" aria-live="assertive">
           <h3 id="crisisTitle"></h3>
@@ -8394,6 +8465,109 @@ function ux(){
 }
 function init(){renderDaily();renderFeedback();renderKit();renderEvolution();renderBadges();renderSeason();ux();setInterval(()=>{renderDaily();renderEvolution();renderBadges()},4000)}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(init,900),{once:true});else setTimeout(init,900);
+})();
+</script>
+
+<script>
+/* ALLO PSYCHO V9.2.4 — adaptatif, original et local-first */
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const read=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(_){return d}};
+const write=(k,v)=>{try{const raw=JSON.stringify(v);localStorage.setItem(k,raw);if(typeof alloPersistMirrorV9==="function")alloPersistMirrorV9(k,raw)}catch(_){}};
+
+function getFeedback(){return read("alloPsychoToolFeedbackV923",[])}
+function ranked(){
+ const a=getFeedback(),m={};a.forEach(x=>{const z=m[x.tool]||(m[x.tool]={n:0,h:0,d:0,dn:0});z.n++;z.h+=Number(x.help||0);if(Number.isFinite(Number(x.before))&&Number.isFinite(Number(x.after))){z.d+=Number(x.before)-Number(x.after);z.dn++}});
+ return Object.entries(m).map(([tool,z])=>({tool,n:z.n,score:z.h/(z.n||1)+(z.dn?(z.d/z.dn):0)})).sort((a,b)=>b.score-a.score);
+}
+const labels={breathing:"Respiration 5 · 5",urgent:"Urgence Calme",tcc:"TCC guidée",release:"Décharge",journal:"Journal",chat:"Compagnon"};
+function page(n){document.querySelector('[data-page="'+n+'"]')?.click()}
+function route(tool){
+ const map={breathing:["relax","breathingCardV8"],urgent:["relax","breathingCardV8"],tcc:["write","tccWizardV72"],release:["games",null],journal:["write","journalText"],chat:["chat","chatInput"]};
+ const x=map[tool]||map.journal;page(x[0]);setTimeout(()=>{if(tool==="release")document.querySelector('[data-game="release"]')?.click();const el=x[1]?$(x[1]):null;el?.scrollIntoView?.({behavior:"smooth",block:"center"});el?.focus?.()},250);
+}
+function renderManual(){
+ const m=read("alloPsychoTherapyMemory",{})||{},r=ranked(),moods=read("alloPsychoHumeurs",[]);
+ const dominant=m.recurring_theme||(()=>{
+  const count={};moods.slice(-20).forEach(x=>count[x.mood]=(count[x.mood]||0)+1);return Object.entries(count).sort((a,b)=>b[1]-a[1])[0]?.[0]||null
+ })();
+ if($("manualTriggerV924"))$("manualTriggerV924").textContent=dominant?("Tendance récente : "+dominant+". À considérer comme un repère, pas une conclusion."):"Pas encore assez de recul.";
+ if($("manualHelpfulV924"))$("manualHelpfulV924").textContent=m.helpful||(r[0]?labels[r[0].tool]||r[0].tool:"Tes retours apparaîtront ici.");
+ if($("manualReflexV924"))$("manualReflexV924").textContent=r[0]?("Commencer par "+(labels[r[0].tool]||r[0].tool).toLowerCase()+"."):(m.next_small_step||"À construire progressivement.");
+ const b=$("replayHelpfulV924");if(b){b.hidden=!r[0];b.onclick=()=>route(r[0].tool)}
+}
+function weather(){
+ const state=localStorage.getItem("alloPsychoLastState")||"";
+ const saved=localStorage.getItem("alloPsychoWeatherMoveV924")||"";
+ document.querySelectorAll("[data-weather-move]").forEach(b=>{b.classList.toggle("active",b.dataset.weatherMove===saved);b.onclick=()=>{localStorage.setItem("alloPsychoWeatherMoveV924",b.dataset.weatherMove);document.querySelectorAll("[data-weather-move]").forEach(x=>x.classList.toggle("active",x===b));if(typeof afficherToast==="function")afficherToast("🌦️ Évolution enregistrée sur cet appareil.")}});
+ const fog=$("fogModeBtnV924");if(fog){fog.hidden=state!=="overload";fog.onclick=()=>{document.body.classList.toggle("fog-mode-v924");fog.textContent=document.body.classList.contains("fog-mode-v924")?"🌤️ Afficher à nouveau l’ensemble":"🌫️ Mode brouillard : simplifier l’écran"}}
+ if(state==="overload" && !sessionStorage.getItem("alloFogOfferedV924")){sessionStorage.setItem("alloFogOfferedV924","1");}
+}
+const capsules={
+ anxious:["🌿 Revenir au souffle",["Pose les pieds au sol.","Expire un peu plus longtemps que tu n’inspires.","N’essaie pas de résoudre : reviens juste au présent."]],
+ angry:["⚡ Faire redescendre la pression",["Dessers les mâchoires et les épaules.","Pousse les pieds dans le sol 5 secondes puis relâche.","Choisis ce qui peut attendre 10 minutes."]],
+ sad:["🌧️ Remettre un peu d’élan",["Regarde autour de toi et nomme 3 choses visibles.","Choisis une action de moins de 2 minutes.","Le but n’est pas d’aller bien, seulement d’avancer d’un millimètre."]],
+ overload:["🌫️ Réduire la surcharge",["Arrête une tâche.","Éloigne une stimulation inutile.","Choisis une seule prochaine action."]],
+ reflect:["🧠 Remettre de l’ordre",["Quel est le fait certain ?","Quelle est l’interprétation ?","Quel besoin apparaît derrière ?"]],
+ calm:["🌿 Consolider",["Repère ce qui va plutôt bien.","Choisis ce que tu veux préserver aujourd’hui.","Fais-en une intention très simple."]]
+};
+let timer=null;
+function capsule(){
+ const btn=$("startCapsuleV924"),live=$("capsuleLiveV924");if(!btn||!live)return;
+ btn.onclick=()=>{const st=localStorage.getItem("alloPsychoLastState")||"calm",x=capsules[st]||capsules.calm;live.hidden=false;$("capsuleTitleV924").textContent=x[0];let left=90;clearInterval(timer);
+ const tick=()=>{const mm=String(Math.floor(left/60)).padStart(2,"0"),ss=String(left%60).padStart(2,"0");$("capsuleTimerV924").textContent=mm+":"+ss;const idx=left>60?0:left>30?1:2;$("capsuleTextV924").textContent=x[1][idx];if(left--<=0){clearInterval(timer);$("capsuleTextV924").textContent="✨ Capsule terminée. Observe simplement ce qui a changé, même légèrement.";const arr=read("alloPsychoToolFeedbackV923",[]);arr.push({tool:"capsule90",help:1,at:new Date().toISOString()});write("alloPsychoToolFeedbackV923",arr.slice(-120));renderManual()}};tick();timer=setInterval(tick,1000)};
+ $("stopCapsuleV924")?.addEventListener("click",()=>{clearInterval(timer);live.hidden=true});
+}
+const challenges=[
+ "Remarque une pensée aujourd’hui et demande-toi : « fait ou interprétation ? »",
+ "Choisis une chose à faire volontairement à 80 % plutôt qu’à 100 %.",
+ "Repère un besoin derrière une émotion sans chercher à le corriger.",
+ "Fais une pause de 60 secondes avant de répondre à une sollicitation.",
+ "Note un petit progrès que tu aurais ignoré il y a quelques semaines.",
+ "Dis « pas maintenant » à une chose non prioritaire.",
+ "Choisis un geste qui aide ton futur toi de demain matin."
+];
+function challenge(){
+ const d=new Date(),week=Math.floor((d-new Date(d.getFullYear(),0,1))/604800000),idx=week%challenges.length,key=d.getFullYear()+"-"+week;
+ const done=read("alloPsychoWeeklyChallengeDoneV924",{})[key];
+ const box=$("weeklyChallengeV924");if(!box)return;box.innerHTML='<strong>'+challenges[idx]+'</strong><div style="margin-top:10px"><button type="button" class="btn '+(done?"btn-light":"btn-dark")+'" id="challengeDoneV924">'+(done?"✓ Mission réalisée":"Je l’ai fait")+'</button></div>';
+ $("challengeDoneV924").onclick=()=>{const x=read("alloPsychoWeeklyChallengeDoneV924",{});x[key]=true;write("alloPsychoWeeklyChallengeDoneV924",x);challenge();if(typeof afficherToast==="function")afficherToast("🎲 Mission validée. Petit pas > perfection.")};
+}
+function summary(){
+ const now=new Date(),ym=now.toISOString().slice(0,7);
+ const moods=read("alloPsychoHumeurs",[]).filter(x=>String(x.at||"").startsWith(ym));
+ const fb=getFeedback().filter(x=>String(x.at||"").startsWith(ym));
+ const journals=read("alloPsychoJournaux",[]).filter(x=>String(x.date||x.created_at||x.at||"").includes(now.getFullYear()));
+ const r=ranked()[0],m=read("alloPsychoTherapyMemory",{})||{};
+ const counts={};moods.forEach(x=>counts[x.mood]=(counts[x.mood]||0)+1);const dom=Object.entries(counts).sort((a,b)=>b[1]-a[1])[0]?.[0]||"—";
+ if($("monthlySummaryV924"))$("monthlySummaryV924").innerHTML=
+ '<div><strong>🌦️ État le plus noté</strong><br>'+dom+'</div>'+
+ '<div><strong>🌿 Outil le plus aidant</strong><br>'+(r?(labels[r.tool]||r.tool):"Pas encore assez de retours")+'</div>'+
+ '<div><strong>👣 Petit pas actuel</strong><br>'+(m.next_small_step||"Aucun enregistré")+'</div>'+
+ '<div><strong>✨ Activité</strong><br>'+moods.length+" états · "+fb.length+" retours outils · "+journals.length+" journaux enregistrés"+'</div>';
+}
+function resources(){
+ const box=$("resourceListV924"),arr=read("alloPsychoResourcePhrasesV924",[]);if(!box)return;
+ box.innerHTML=arr.length?arr.slice(-12).reverse().map((x,i)=>'<div class="resource-item-v924">'+x.text+' <button type="button" data-del-resource="'+(arr.length-1-i)+'" style="float:right;border:0;background:transparent">×</button></div>').join(""):'<div class="empty">Aucune phrase épinglée.</div>';
+ box.querySelectorAll("[data-del-resource]").forEach(b=>b.onclick=()=>{arr.splice(Number(b.dataset.delResource),1);write("alloPsychoResourcePhrasesV924",arr);resources()});
+}
+document.addEventListener("dblclick",e=>{const m=e.target.closest?.(".message.ai");if(!m)return;const txt=(m.textContent||"").trim();if(!txt)return;const arr=read("alloPsychoResourcePhrasesV924",[]);if(!arr.some(x=>x.text===txt)){arr.push({text:txt.slice(0,500),at:new Date().toISOString()});write("alloPsychoResourcePhrasesV924",arr.slice(-30));resources();if(typeof afficherToast==="function")afficherToast("💬 Phrase ressource épinglée.")}});
+function journalMode(){
+ const prompts=[
+  "Qu’est-ce qui prend le plus de place dans ma tête aujourd’hui ?",
+  "Qu’est-ce que je ressens, et de quoi aurais-je besoin ?",
+  "Quel est le fait certain, et quelle histoire mon esprit ajoute-t-il ?",
+  "Quel serait un petit pas réaliste pour les prochaines 24 heures ?",
+  "Qu’est-ce qui m’a aidé, même un tout petit peu, récemment ?"
+ ];
+ document.querySelectorAll("[data-journal-mode]").forEach(b=>b.onclick=()=>{const p=$("journalPromptV924");if(b.dataset.journalMode==="free"){p.hidden=true}else{p.hidden=false;p.textContent="🌷 "+prompts[Math.floor(Math.random()*prompts.length)];const t=$("journalText");if(t&&!t.value.trim())t.placeholder=p.textContent.replace("🌷 ","")}})
+}
+function chatDirections(){
+ document.querySelectorAll("[data-chat-dir]").forEach(b=>b.onclick=()=>{const inp=$("chatInput");if(!inp)return;const q={understand:"Aide-moi à comprendre ce qui se passe avec une seule question à la fois.",calm:"Aide-moi d’abord à m’apaiser avec quelque chose de très simple.",act:"Aide-moi à choisir un petit pas concret et réaliste."};inp.value=q[b.dataset.chatDir];inp.focus()});
+}
+function init(){weather();capsule();challenge();summary();resources();journalMode();chatDirections();renderManual();setInterval(()=>{renderManual();summary();weather()},5000)}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(init,1000),{once:true});else setTimeout(init,1000);
 })();
 </script>
 </body>
