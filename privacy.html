@@ -4,18 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="index,follow">
+<meta name="description" content="Politique de confidentialité et mentions légales d’Allo Psycho.">
 <title>Politique de confidentialité & mentions légales — Allo Psycho</title>
 <style>
-:root{--bg:#fffaf7;--card:#fff;--text:#40383c;--soft:#756a70}
+:root{--bg:#fffaf7;--card:#fff;--text:#40383c;--soft:#756a70;--line:#eee3e8}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.65}
 main{width:min(900px,calc(100% - 28px));margin:28px auto 50px}
-a{color:#604d62}
-.back{display:inline-block;margin-bottom:16px;padding:9px 13px;border-radius:999px;background:#fff;text-decoration:none;border:1px solid #eee3e8}
+a{color:#604d62}.back{display:inline-block;margin-bottom:16px;padding:9px 13px;border-radius:999px;background:#fff;text-decoration:none;border:1px solid var(--line)}
 .card{background:var(--card);border-radius:24px;padding:24px;box-shadow:0 12px 36px rgba(80,60,70,.08)}
-h1{line-height:1.15}h2{margin-top:28px;font-size:1.08rem}
-p,li{color:var(--soft)}strong{color:var(--text)}
-.notice{padding:13px 15px;border-radius:16px;background:#faf5fb}
+h1{line-height:1.15}h2{margin-top:30px;font-size:1.08rem}p,li{color:var(--soft)}strong{color:var(--text)}
+.notice{padding:13px 15px;border-radius:16px;background:#faf5fb}.small{font-size:.86rem}.updated{font-size:.75rem;color:#93868d}
+ul{padding-left:22px}
 </style>
 </head>
 <body>
@@ -24,5 +24,52 @@ p,li{color:var(--soft)}strong{color:var(--text)}
 <article class="card">
 <p><strong>POLITIQUE DE CONFIDENTIALITÉ & MENTIONS LÉGALES</strong></p>
 <h1>Allo Psycho</h1>
+<p class="updated">Dernière mise à jour : 14 novembre 2026</p>
 
-<p class="notice"><strong>Allo Psycho est un outil numérique d’accompagnement psychologique conçu par une psychologue clinicienne et psychothérapeute.</strong> Il peut soutenir l’auto-observation, la régulation émotionnelle et le travail psychologique entre les séances. Il ne pose pas se���q�^
+<p class="notice"><strong>Allo Psycho est un outil numérique d’accompagnement psychologique conçu par une psychologue clinicienne.</strong> Il peut soutenir l’auto-observation, la régulation émotionnelle et le travail psychologique entre les séances. Il ne pose pas de diagnostic et ne remplace pas une consultation, une évaluation clinique, un suivi médical ou les soins nécessitant l’intervention directe d’un professionnel.</p>
+
+<h2>1. Éditrice</h2>
+<p>Allo Psycho est édité par <strong>Laëtitia GUILLAUME, Psychologue Clinicienne</strong>. Les informations de contact destinées aux utilisateurs sont accessibles depuis le site et l’application Allo Psycho.</p>
+
+<h2>2. Principe « local first »</h2>
+<p>Le profil d’usage, le journal, les suivis d’humeur, les fiches TCC, les routines, la progression, l’historique de conversation et la mémoire thérapeutique structurée sont conçus pour rester <strong>sur l’appareil de l’utilisateur</strong>. L’application utilise le stockage local du navigateur et un miroir IndexedDB sur le même appareil afin de limiter les pertes accidentelles.</p>
+<p>Ces données locales peuvent être perdues si l’utilisateur efface les données du navigateur, change d’appareil ou désinstalle l’application sans export préalable.</p>
+
+<h2>3. Compagnon IA</h2>
+<p>Le compagnon IA est une fonctionnalité <strong>Premium</strong>, limitée à <strong>12 messages par jour et par utilisateur</strong>. Son utilisation nécessite un consentement distinct dans l’application.</p>
+<p>Lorsqu’un utilisateur choisit d’envoyer un message, l’application peut transmettre au service IA :</p>
+<ul>
+<li>le message volontairement envoyé ;</li>
+<li>un historique récent limité de la conversation ;</li>
+<li>quelques préférences minimales de réponse ;</li>
+<li>une mémoire thérapeutique locale minimale comprenant uniquement des éléments courts comme l’objectif actuel, le thème récurrent, l’outil utilisé, ce qui a aidé, le petit pas prévu et le dernier point de suivi.</li>
+</ul>
+<p>Le journal complet, les fiches TCC complètes et les autres historiques locaux ne sont pas transmis automatiquement au fournisseur IA.</p>
+<p>Le traitement d’inférence est actuellement assuré par <strong>GroqCloud (Groq)</strong>. Groq indique ne pas utiliser les entrées et sorties de ses clients pour entraîner ses modèles pour son propre compte. Des données d’inférence peuvent toutefois être temporairement journalisées pour des besoins de fiabilité ou de lutte contre les abus selon les réglages du compte Groq. Groq propose un réglage <strong>Zero Data Retention (ZDR)</strong> permettant d’empêcher cette conservation pour l’inférence. Les infrastructures de conservation de données Groq peuvent être situées aux États-Unis.</p>
+
+<h2>4. Supabase</h2>
+<p>Supabase est utilisé pour les fonctions serveur nécessaires au fonctionnement sécurisé de l’application : session anonyme, contrôle de l’accès Premium, compteur quotidien de messages IA, synchronisation d’abonnement et fonctions Stripe. Les tables techniques publiques sont protégées par Row Level Security (RLS) et ne contiennent pas le journal ou les contenus psychologiques locaux de l’utilisateur.</p>
+
+<h2>5. Paiement Premium</h2>
+<p>Les paiements et abonnements sont gérés par <strong>Stripe</strong>. Stripe reçoit uniquement les informations nécessaires au paiement, à la gestion de l’abonnement et aux obligations associées. Les contenus psychologiques locaux ne sont pas transmis à Stripe.</p>
+
+<h2>6. Consentement et contrôle utilisateur</h2>
+<p>L’utilisateur peut refuser ou retirer le consentement IA à tout moment depuis les Options. Il peut également réinitialiser la mémoire IA locale, exporter ses données locales ou supprimer les données enregistrées sur son appareil.</p>
+
+<h2>7. Sécurité et minimisation</h2>
+<p>Allo Psycho applique un principe de minimisation : seules les informations nécessaires à la fonctionnalité choisie sont traitées. Les clés secrètes des services tiers ne sont pas intégrées dans le navigateur ; elles restent côté serveur.</p>
+
+<h2>8. Situations d’urgence</h2>
+<p>Allo Psycho n’est pas un service d’urgence. En France, en cas de danger immédiat ou d’urgence médicale, contactez le <strong>15</strong> ou le <strong>112</strong>. En cas de crise suicidaire, le <strong>3114</strong> est accessible 24 h/24 et 7 j/7.</p>
+
+<h2>9. Limites du compagnon IA</h2>
+<p>Les réponses générées peuvent être inexactes ou inadaptées. Le compagnon ne réalise pas de diagnostic et ne remplace pas le jugement d’un professionnel. Si une difficulté persiste, s’aggrave ou affecte fortement le fonctionnement quotidien, l’utilisateur est encouragé à consulter un psychologue, un médecin ou un autre professionnel de santé adapté à sa situation.</p>
+
+<h2>10. Évolution de cette politique</h2>
+<p>Cette politique peut être mise à jour lorsque les fonctionnalités, fournisseurs ou conditions de traitement évoluent. La date de dernière mise à jour figure en haut de cette page.</p>
+
+<p class="notice small"><strong>Copyright © 2026 Laëtitia GUILLAUME — Allo Psycho.</strong> Tous droits réservés.</p>
+</article>
+</main>
+</body>
+</html>
