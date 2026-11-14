@@ -113,7 +113,7 @@ async function consumeDailyQuota(userId: string) {
   const admin = createClient(url, service, { auth: { persistSession: false } });
   const { data, error } = await admin.rpc("consume_ai_daily_message", {
     p_user_id: userId,
-    p_limit: 20,
+    p_limit: 12,
   });
 
   if (error) {
@@ -122,9 +122,9 @@ async function consumeDailyQuota(userId: string) {
   }
 
   const count = typeof data === "number" ? data : Number(data);
-  if (!count || count > 20) return { ok: false, remaining: 0, diagnostic: "daily_limit" };
+  if (!count || count > 12) return { ok: false, remaining: 0, diagnostic: "daily_limit" };
 
-  return { ok: true, remaining: Math.max(0, 20 - count), count };
+  return { ok: true, remaining: Math.max(0, 12 - count), count };
 }
 
 Deno.serve(async (req: Request) => {
@@ -190,9 +190,9 @@ Deno.serve(async (req: Request) => {
     if (!quota.ok) {
       return json({
         daily_limit_reached: true,
-        limit: 20,
+        limit: 12,
         remaining: 0,
-        reply: "Tu as atteint la limite de 20 messages IA pour aujourd’hui. Le compteur sera réinitialisé demain.",
+        reply: "Tu as atteint la limite de 12 messages IA pour aujourd’hui. Le compteur sera réinitialisé demain.",
       });
     }
 
@@ -289,7 +289,7 @@ Deno.serve(async (req: Request) => {
       memory: parsedOutput.memory,
       model,
       premium_source: premium.source || null,
-      daily_limit: 20,
+      daily_limit: 12,
       daily_remaining: quota.remaining,
     });
   } catch (e) {
