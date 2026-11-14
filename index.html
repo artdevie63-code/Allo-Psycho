@@ -2219,6 +2219,26 @@ select{
       .options-shortcuts-v921{grid-template-columns:1fr}
     }
 
+
+/* ===== V9.2.2 — Accueil guidé + quota IA ===== */
+.guided-home-v922{background:linear-gradient(145deg,#fffdfa,#f7f1fb)}
+.guided-step-v922{margin-top:17px;padding:15px;border:1px solid #eee3e8;border-radius:21px;background:rgba(255,255,255,.72)}
+.guided-step-head-v922{display:flex;align-items:center;gap:10px;margin-bottom:11px}
+.guided-step-head-v922>span{width:29px;height:29px;display:grid;place-items:center;border-radius:50%;background:#57484f;color:#fff;font-weight:950;font-size:.72rem;flex:0 0 auto}
+.guided-step-head-v922 strong{display:block;font-size:.86rem}
+.guided-step-head-v922 small{display:block;margin-top:2px;color:var(--soft);font-size:.68rem}
+.guided-needs-v922[aria-disabled="true"]{opacity:.52}
+.guided-needs-v922[aria-disabled="true"] button{pointer-events:none}
+.need-grid-v922{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.need-grid-v922 button{border:1px solid #eadfe5;background:#fff;border-radius:18px;padding:11px 8px;color:var(--text);min-height:78px}
+.need-grid-v922 button strong,.need-grid-v922 button small{display:block}.need-grid-v922 button strong{font-size:.75rem;margin-top:4px}.need-grid-v922 button small{font-size:.6rem;color:var(--soft);margin-top:2px}
+.need-grid-v922 button.active,.guided-grid-v922 button.active{background:#57484f;color:#fff;border-color:#57484f}.need-grid-v922 button.active small,.guided-grid-v922 button.active small{color:#f1e9ed}
+.guided-reco-v922{margin-top:14px}.guided-reco-v922 .guided-actions-v922{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}
+.guided-resume-v922{margin-top:10px;padding:12px 14px;border-radius:17px;background:#fff7e8;border:1px solid #f0dfbd;font-size:.74rem}
+.guided-history-v922{margin-top:0}.ai-quota-v922{margin:-2px 0 11px;padding:9px 12px;border-radius:14px;background:#f7f2fb;border:1px solid #e9def2;color:#65566c;font-size:.68rem;font-weight:850}
+@media(max-width:800px){.need-grid-v922{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.guided-grid-v922{grid-template-columns:repeat(2,1fr)}.guided-reco-v922 .guided-actions-v922 .btn{width:100%}}
+
 </style>
 </head>
 
@@ -2311,20 +2331,63 @@ select{
       id="page-relax"
       class="page active"
     >
-      <div class="card smart-home-v7">
-        <p class="eyebrow">MAINTENANT</p>
-        <h2>🌤️ De quoi as-tu besoin ?</h2>
-        <p class="muted">Une orientation simple, calculée uniquement sur cet appareil.</p>
-        <div class="state-grid-v7">
-          <button type="button" data-state="anxious" aria-label="AnxiétéÇa tourne dans ma tête">😰<strong>Anxiété</strong><small>Ça tourne dans ma tête</small></button>
-          <button type="button" data-state="angry" aria-label="TensionJai besoin de me défouler">😤<strong>Tension</strong><small>J’ai besoin de me défouler</small></button>
-          <button type="button" data-state="sad" aria-label="À platPeu dénergie">🌧️<strong>À plat</strong><small>Peu d’énergie</small></button>
-          <button type="button" data-state="overload" aria-label="SurchargeTrop de choses">🌪️<strong>Surcharge</strong><small>Trop de choses</small></button>
-          <button type="button" data-state="reflect" aria-label="ComprendreMettre les choses à plat">🧠<strong>Comprendre</strong><small>Mettre les choses à plat</small></button>
-          <button type="button" data-state="calm" aria-label="CalmeEntretenir mon équilibre">🌿<strong>Calme</strong><small>Entretenir mon équilibre</small></button>
+      <div class="card smart-home-v7 guided-home-v922">
+        <p class="eyebrow">MON POINT DE DÉPART</p>
+        <h2>🌈 Comment je me sens, et de quoi ai-je besoin ?</h2>
+        <p class="muted">Deux choix simples pour t’orienter vers l’outil ou le parcours le plus utile maintenant. Tout ce suivi reste sur cet appareil.</p>
+
+        <div class="guided-step-v922">
+          <div class="guided-step-head-v922"><span>1</span><div><strong>Comment je me sens ?</strong><small>Choisis ce qui se rapproche le plus de ton état actuel.</small></div></div>
+          <div class="state-grid-v7 guided-grid-v922" id="feelingGridV922">
+            <button type="button" data-feeling="anxious">😰<strong>Anxieux·se</strong><small>Ça tourne dans ma tête</small></button>
+            <button type="button" data-feeling="angry">😤<strong>Tendu·e</strong><small>Ça monte ou ça déborde</small></button>
+            <button type="button" data-feeling="sad">🌧️<strong>À plat</strong><small>Peu d’énergie ou d’élan</small></button>
+            <button type="button" data-feeling="overload">🌪️<strong>Surchargé·e</strong><small>Trop de choses à la fois</small></button>
+            <button type="button" data-feeling="reflect">🧠<strong>Confus·e</strong><small>J’ai besoin d’y voir plus clair</small></button>
+            <button type="button" data-feeling="calm">🌿<strong>Plutôt calme</strong><small>Je veux entretenir mon équilibre</small></button>
+          </div>
         </div>
-        <div id="smartRecoV7" class="smart-reco-v7">Choisis ton état du moment.</div>
+
+        <div class="guided-step-v922 guided-needs-v922" id="guidedNeedsV922" aria-disabled="true">
+          <div class="guided-step-head-v922"><span>2</span><div><strong>De quoi ai-je besoin ?</strong><small>Le même état peut appeler des réponses différentes.</small></div></div>
+          <div class="need-grid-v922">
+            <button type="button" data-need="calm">🌿<strong>M’apaiser</strong><small>Faire baisser la tension</small></button>
+            <button type="button" data-need="understand">🧠<strong>Comprendre</strong><small>Mettre les choses à plat</small></button>
+            <button type="button" data-need="release">⚡<strong>Décharger</strong><small>Faire sortir la tension</small></button>
+            <button type="button" data-need="act">👣<strong>Faire un petit pas</strong><small>Passer doucement à l’action</small></button>
+            <button type="button" data-need="talk">💬<strong>En parler</strong><small>Être guidé·e par le compagnon</small></button>
+          </div>
+        </div>
+
+        <div id="smartRecoV7" class="smart-reco-v7 guided-reco-v922">Commence par choisir comment tu te sens.</div>
+        <div id="guidedResumeV922" class="guided-resume-v922" hidden></div>
+      </div>      <div class="card guided-history-v922">
+        <p class="eyebrow">MON SUIVI · LOCAL</p>
+        <h3>💕 Mes derniers états</h3>
+        <p class="muted">L’état choisi à l’accueil alimente ce suivi local pour t’aider à observer ton évolution, sans diagnostic.</p>
+        <div id="moodHistory" class="history-list"><div class="empty">Aucun état enregistré. 🌸</div></div>
       </div>
+
+      <div class="card evolution-combined-v73">
+        <p class="eyebrow">MON ÉVOLUTION · LOCAL</p>
+        <h2>📈 Humeur & progression</h2>
+        <p class="muted">Ces tendances sont calculées sur cet appareil à partir de tes propres enregistrements. Elles ne constituent pas un diagnostic.</p>
+        <div class="progress-stats-v7">
+          <div><strong id="trendMoodV7">—</strong><small>tendance humeur</small></div>
+          <div><strong id="activeDaysV7">0</strong><small>jours actifs / 7</small></div>
+          <div><strong id="tccCountV7">0</strong><small>fiches TCC</small></div>
+          <div><strong id="journalCountV7">0</strong><small>journaux</small></div>
+        </div>
+        <div class="analytics analytics-v73">
+          <div class="stat"><span id="statCalme" class="stat-number">0</span><span class="stat-label">😊 Calme</span></div>
+          <div class="stat"><span id="statNuageux" class="stat-number">0</span><span class="stat-label">😔 Nuageux</span></div>
+          <div class="stat"><span id="statOrageux" class="stat-number">0</span><span class="stat-label">🤯 Orageux</span></div>
+          <div class="stat"><span id="statPose" class="stat-number">0</span><span class="stat-label">🧘‍♂️ Posé</span></div>
+        </div>
+        <div id="weekBarsV7" class="week-bars-v7"></div>
+        <div id="helpInsightV7" class="smart-reco-v7">🌱 Les tendances se préciseront au fil de l’utilisation.</div>
+      </div>
+
 
 
 
@@ -2368,9 +2431,6 @@ select{
           <div id="audioProgress" class="audio-progress"></div>
         </div>
         <div id="audioTime" class="audio-time" aria-live="polite">00:00</div>
-        <div style="margin-top:8px;text-align:center"><a class="muted" style="font-size:.7rem" target="_blank" rel="noopener" href="https://piezzrqryhzvrimeqwgi.supabase.co/storage/v1/object/public/audios/seance1.mp3">Tester le MP3 directement ↗</a></div>
-        <details style="margin:8px auto 0;max-width:430px"><summary class="muted" style="cursor:pointer;font-size:.7rem;text-align:center">Lecteur audio de secours</summary><audio controls preload="metadata" style="width:100%;margin-top:8px" src="https://piezzrqryhzvrimeqwgi.supabase.co/storage/v1/object/public/audios/seance1.mp3">Votre navigateur ne prend pas en charge l’audio.</audio></details>
-
         <div
           id="audioStatus"
           class="audio-status"
@@ -2778,6 +2838,7 @@ select{
           <button type="button" class="btn btn-light" id="shortModeV7">⚡ Réponses courtes : auto</button>
           <button type="button" class="btn btn-light" id="summaryV7">📝 Synthèse du fil</button>
         </div>
+        <div id="aiQuotaV922" class="ai-quota-v922" aria-live="polite">✨ Premium · jusqu’à 12 messages IA par jour</div>
 
         <div id="crisisCard" class="crisis-card" aria-live="assertive">
           <h3 id="crisisTitle"></h3>
@@ -2797,44 +2858,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
           <textarea id="chatInput" rows="3" maxlength="3000" placeholder="Écris ce que tu ressens, ce qui s’est passé, ou ce que tu aimerais comprendre…" aria-label="Message à Allo Psycho"></textarea>
           <button type="submit" id="sendButton" class="btn btn-dark" aria-label="Envoyer mon message">Envoyer ↑</button>
         </form>
-        <small class="chat-privacy-v85">Le message est transmis à l’IA seulement lorsque tu choisis de l’envoyer.</small>
-      </div>
-
-      <div class="card">
-        <p class="eyebrow">MON HUMEUR</p>
-        <h2>🌈 Comment je me sens ?</h2>
-        <p class="muted">Choisis l'humeur qui te ressemble le plus aujourd'hui.</p>
-        <div class="moods">
-          <button type="button" class="mood" data-mood="Calme">😊<br>Calme</button>
-          <button type="button" class="mood" data-mood="Nuageux">😔<br>Nuageux</button>
-          <button type="button" class="mood" data-mood="Orageux">🤯<br>Orageux</button>
-          <button type="button" class="mood" data-mood="Posé">🧘‍♂️<br>Posé</button>
-        </div>
-        <button type="button" id="saveMoodButton" class="btn btn-dark full" disabled>💾 Enregistrer mon humeur</button>
-        <div class="history">
-          <h3>💕 Mes dernières humeurs</h3>
-          <div id="moodHistory" class="history-list"><div class="empty">Aucune humeur enregistrée. 🌸</div></div>
-        </div>
-      </div>
-
-      <div class="card evolution-combined-v73">
-        <p class="eyebrow">MON ÉVOLUTION · LOCAL</p>
-        <h2>📈 Humeur & progression</h2>
-        <p class="muted">Ces tendances sont calculées sur cet appareil à partir de tes propres enregistrements. Elles ne constituent pas un diagnostic.</p>
-        <div class="progress-stats-v7">
-          <div><strong id="trendMoodV7">—</strong><small>tendance humeur</small></div>
-          <div><strong id="activeDaysV7">0</strong><small>jours actifs / 7</small></div>
-          <div><strong id="tccCountV7">0</strong><small>fiches TCC</small></div>
-          <div><strong id="journalCountV7">0</strong><small>journaux</small></div>
-        </div>
-        <div class="analytics analytics-v73">
-          <div class="stat"><span id="statCalme" class="stat-number">0</span><span class="stat-label">😊 Calme</span></div>
-          <div class="stat"><span id="statNuageux" class="stat-number">0</span><span class="stat-label">😔 Nuageux</span></div>
-          <div class="stat"><span id="statOrageux" class="stat-number">0</span><span class="stat-label">🤯 Orageux</span></div>
-          <div class="stat"><span id="statPose" class="stat-number">0</span><span class="stat-label">🧘‍♂️ Posé</span></div>
-        </div>
-        <div id="weekBarsV7" class="week-bars-v7"></div>
-        <div id="helpInsightV7" class="smart-reco-v7">🌱 Les tendances se préciseront au fil de l’utilisation.</div>
+        <small class="chat-privacy-v85">Le message est transmis à l’IA seulement lorsque tu choisis de l’envoyer. Le compagnon ne remplace pas une consultation ou une évaluation clinique.</small>
       </div>
 
       <div class="card">
@@ -2952,7 +2976,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
         <p class="eyebrow">CONFIDENTIALITÉ</p>
         <h3>Mes choix de données</h3>
         <div class="privacy-box">
-          <strong>Privacy First :</strong> profil, journal, humeur, TCC, routines et historique restent sur cet appareil. Ils ne sont pas enregistrés dans les tables patient Supabase. Le consentement IA est séparé : seul le message que tu choisis d’envoyer et quelques préférences minimales non identifiantes peuvent être transmis pour générer une réponse.
+          <strong>Privacy First :</strong> profil, journal, humeur, TCC, routines et historique restent sur cet appareil. Ils ne sont pas enregistrés dans les tables patient Supabase. Le consentement IA est séparé : lorsque tu envoies volontairement un message, ce message, un historique récent limité, quelques préférences minimales et la mémoire thérapeutique locale minimale peuvent être transmis au fournisseur IA uniquement pour générer la réponse.
         </div>
         <div style="height:10px"></div>
         <label class="consent-row">
@@ -2962,7 +2986,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
         <div style="height:8px"></div>
         <label class="consent-row">
           <input id="aiConsent" type="checkbox">
-          <span><strong>J’autorise l’utilisation de l’IA</strong> uniquement lorsque je lui envoie volontairement un message. Mon journal complet et mes historiques locaux ne sont pas transmis automatiquement. Je peux retirer ce choix à tout moment.</span>
+          <span><strong>J’autorise l’utilisation de l’IA</strong> uniquement lorsque je lui envoie volontairement un message. Je comprends que le message, un contexte récent limité et une mémoire thérapeutique minimale peuvent être transmis au fournisseur IA pour produire la réponse. Mon journal complet, mes fiches TCC complètes et mes autres historiques locaux ne sont pas transmis automatiquement. Je peux retirer ce choix et réinitialiser la mémoire locale à tout moment.</span>
         </label>
         <div style="height:12px"></div>
         <div class="profile-actions">
@@ -3058,7 +3082,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
       <div class="card">
         <h3>Ce que Premium débloque</h3>
         <div class="premium-grid">
-          <div class="premium-feature"><b>🤖 Compagnon IA avancé</b><small>Conversation personnalisée, plans et outils psychologiques enrichis.</small></div>
+          <div class="premium-feature"><b>🤖 Compagnon IA avancé</b><small>Conversation personnalisée et mémoire locale minimale, jusqu’à 12 messages IA par jour.</small></div>
           <div class="premium-feature"><b>🎧 Audios thérapeutiques</b><small>Tes séances et contenus audio personnalisés, distincts de la musique relaxante gratuite.</small></div>
           <div class="premium-feature"><b>🎮 Programmes & outils avancés</b><small>Programmes guidés en 7 étapes, Urgence Calme, respiration 3–6–9, Décharge, Gribouille & libère et TCC enrichie.</small></div>
         </div>
@@ -4499,7 +4523,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
      * IA — compatibilité legacy
      * =====================================================
      * Toute requête IA passe désormais par la Edge Function Supabase
-     * ai-support, qui utilise MISTRAL_API_KEY côté serveur et l’endpoint régional UE de Mistral.
+     * ai-support, qui utilise GROQ_API_KEY côté serveur.
      */
 
     async function demanderIA(message) {
@@ -5476,6 +5500,12 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
             return "✨ Le compagnon IA avancé fait partie de Premium. Ton journal, ton humeur et les outils gratuits restent accessibles.";
           }
 
+          if(result.data?.daily_limit_reached){
+            const q=document.getElementById("aiQuotaV922");
+            if(q)q.textContent="✨ Premium · 0 message IA restant aujourd’hui sur 12";
+            return result.data.reply||"Tu as atteint la limite de 12 messages IA pour aujourd’hui. Le compteur sera réinitialisé demain.";
+          }
+
           if(result.error||!result.data){
             console.warn("IA Edge Function :",result.error);
             return "La connexion au compagnon IA a été interrompue. Ta session reste enregistrée ; réessaie simplement dans quelques instants.";
@@ -5492,6 +5522,12 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
               localStorage.setItem("alloPsychoTherapyMemory",raw);
               alloPersistMirrorV9("alloPsychoTherapyMemory",raw);
             }catch(_){}
+          }
+
+          if(Number.isFinite(Number(result.data.daily_remaining))){
+            const remaining=Math.max(0,Math.min(12,Number(result.data.daily_remaining)));
+            const q=document.getElementById("aiQuotaV922");
+            if(q)q.textContent="✨ Premium · "+remaining+" message"+(remaining>1?"s":"")+" IA restant"+(remaining>1?"s":"")+" aujourd’hui sur 12";
           }
 
           const reply=
@@ -6417,67 +6453,137 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
   const activatePage=(name)=>{const b=document.querySelector('[data-page="'+name+'"]');if(b)b.click()};
 
   // 1 — Smart home & resume
-  const recommendations={
-    anxious:['TCC','Commence par identifier la prédiction qui tourne en boucle.','write','tcc'],
-    angry:['Décharge','Une minute pour faire sortir la tension avant de réfléchir.','games','release'],
-    sad:['Journal','Écris seulement ce qui pèse, puis ce dont tu aurais besoin.','write','journal'],
-    overload:['Urgence Calme','Reviens au présent avec un protocole sensoriel guidé.','relax','calm'],
-    reflect:['Compagnon IA','Mets les faits, pensées et émotions dans l’ordre.','chat','chat'],
-    calm:['Routine','Profite du calme pour consolider ce qui te fait du bien.','relax','routine']
+  let selectedFeeling=localStorage.getItem('alloPsychoLastState')||'';
+  let selectedNeed=localStorage.getItem('alloPsychoLastNeed')||'';
+
+  const feelingMood={
+    anxious:['Nuageux','😔'],
+    angry:['Orageux','🤯'],
+    sad:['Nuageux','😔'],
+    overload:['Orageux','🤯'],
+    reflect:['Posé','🧘‍♂️'],
+    calm:['Calme','😊']
   };
-  document.querySelectorAll('[data-state]').forEach(b=>b.addEventListener('click',()=>{
-    document.querySelectorAll('[data-state]').forEach(x=>x.classList.remove('active'));
-    b.classList.add('active');
-    const r=recommendations[b.dataset.state];
-    $('smartRecoV7').innerHTML='<strong>'+r[0]+'</strong> · '+r[1]+' <button type="button" class="btn btn-light" id="goRecoV7" aria-label="Ouvrir">Ouvrir</button>';
-    $('goRecoV7')?.addEventListener('click',()=>{
-      const state=b.dataset.state;
-      if(state==='anxious'){
-        document.querySelector('[data-page="write"]')?.click();
-        setTimeout(()=>{
-          document.getElementById('tccWizardV72')?.scrollIntoView({behavior:'smooth',block:'start'});
-          document.getElementById('tccCurrentV741')?.focus();
-        },300);
-        return;
-      }
-      if(state==='angry'){
-        document.querySelector('[data-page="games"]')?.click();
-        setTimeout(()=>document.querySelector('[data-game="release"]')?.click(),300);
-        return;
-      }
-      if(state==='sad'){
-        document.querySelector('[data-page="write"]')?.click();
-        setTimeout(()=>document.getElementById('journalText')?.focus(),300);
-        return;
-      }
-      if(state==='reflect'){
-        document.querySelector('[data-page="chat"]')?.click();
-        setTimeout(()=>document.getElementById('chatInput')?.focus(),300);
-        return;
-      }
-      if(state==='overload'){
-        document.querySelector('[data-page="relax"]')?.click();
-        setTimeout(()=>{
-          const choice=document.querySelector('[data-premium-calm-v83="urgent"]');
-          choice?.scrollIntoView({behavior:'smooth',block:'center'});
-          choice?.focus();
-        },250);
-        return;
-      }
-      if(state==='calm'){
-        document.querySelector('[data-page="relax"]')?.click();
-        setTimeout(()=>{
-          const routine=document.getElementById('routineCardV861');
-          routine?.scrollIntoView({behavior:'smooth',block:'start'});
-          routine?.querySelector('input,button')?.focus();
-        },250);
-        return;
-      }
-      document.querySelector('[data-page="relax"]')?.click();
+  const pathByFeeling={anxious:'anxiety',overload:'sensitivity',reflect:'rumination'};
+  const pathLabels={anxiety:'🌿 Apaiser l’anxiété',sensitivity:'🌙 Mieux vivre ma sensibilité',rumination:'🔄 Sortir de la rumination',limits:'🧱 Poser mes limites',procrastination:'🚀 Procrastination & peur'};
+
+  function recordGuidedMood(feeling){
+    const mapped=feelingMood[feeling]; if(!mapped)return;
+    const nowTs=Date.now();
+    const last=read('alloPsychoLastGuidedMoodV922',null);
+    if(last&&last.feeling===feeling&&nowTs-Number(last.ts||0)<30*60*1000)return;
+    const arr=read('alloPsychoHumeurs',[]);
+    arr.push({mood:mapped[0],emoji:mapped[1],date:new Date().toLocaleString('fr-FR',{dateStyle:'short',timeStyle:'short'}),at:new Date().toISOString(),source:'guided-home'});
+    write('alloPsychoHumeurs',arr);
+    write('alloPsychoLastGuidedMoodV922',{feeling,ts:nowTs});
+    try{if(typeof afficherHumeurs==='function')afficherHumeurs()}catch(_){}
+    renderProgress();
+  }
+
+  function guidedChoice(feeling,need){
+    const path=pathByFeeling[feeling]||null;
+    if(need==='calm'){
+      if(feeling==='overload')return {title:'🕊️ Urgence Calme',text:'Commence par réduire la surcharge avant d’analyser.',action:'urgent',path};
+      return {title:'🌿 Respiration 5 · 5',text:'Un premier temps court pour revenir au présent et faire baisser l’activation.',action:'breathing',path};
+    }
+    if(need==='understand'){
+      return {title:'🧠 TCC guidée',text:'Sépare la situation, la pensée, l’émotion et les faits avant de choisir ton prochain pas.',action:'tcc',path:path|| (feeling==='angry'?'limits':null)};
+    }
+    if(need==='release'){
+      return {title:'⚡ Décharge',text:'Fais sortir une partie de la tension avant de réfléchir ou décider.',action:'release',path:feeling==='overload'?'sensitivity':null};
+    }
+    if(need==='act'){
+      if(feeling==='sad')return {title:'📖 Un petit pas dans le journal',text:'Choisis une action minuscule et réaliste pour les prochaines minutes.',action:'journal',path:null};
+      return {title:'👣 Mon petit pas',text:'Transforme ce qui te préoccupe en une action très courte et concrète.',action:'tcc',path:path};
+    }
+    return {title:'💬 Compagnon thérapeutique',text:'Mets des mots sur ce qui se passe et avance avec une seule question utile à la fois.',action:'chat',path};
+  }
+
+  function goGuidedAction(action){
+    if(action==='tcc'){
+      activatePage('write');
+      setTimeout(()=>{document.getElementById('tccWizardV72')?.scrollIntoView({behavior:'smooth',block:'start'});document.getElementById('tccCurrentV741')?.focus()},250);
+      return;
+    }
+    if(action==='release'){
+      activatePage('games');
+      setTimeout(()=>document.querySelector('[data-game="release"]')?.click(),250);
+      return;
+    }
+    if(action==='journal'){
+      activatePage('write');
+      setTimeout(()=>document.getElementById('journalText')?.focus(),250);
+      return;
+    }
+    if(action==='chat'){
+      activatePage('chat');
+      setTimeout(()=>document.getElementById('chatInput')?.focus(),250);
+      return;
+    }
+    activatePage('relax');
+    if(action==='urgent'){
+      setTimeout(()=>{const x=document.querySelector('[data-premium-calm-v83="urgent"]');x?.scrollIntoView({behavior:'smooth',block:'center'});x?.focus()},250);
+    }else{
+      setTimeout(()=>document.getElementById('breathingCardV8')?.scrollIntoView({behavior:'smooth',block:'start'}),250);
+    }
+  }
+
+  function renderGuidedRecommendation(){
+    const reco=$('smartRecoV7'),needs=$('guidedNeedsV922');
+    if(!reco||!needs)return;
+    needs.setAttribute('aria-disabled',selectedFeeling?'false':'true');
+    document.querySelectorAll('[data-feeling]').forEach(x=>x.classList.toggle('active',x.dataset.feeling===selectedFeeling));
+    document.querySelectorAll('[data-need]').forEach(x=>x.classList.toggle('active',x.dataset.need===selectedNeed));
+
+    if(!selectedFeeling){reco.textContent='Commence par choisir comment tu te sens.';return}
+    if(!selectedNeed){reco.innerHTML='<strong>Étape 2</strong> · De quoi aurais-tu le plus besoin maintenant ?';return}
+
+    const r=guidedChoice(selectedFeeling,selectedNeed);
+    recordGuidedMood(selectedFeeling);
+    reco.innerHTML='<strong>'+r.title+'</strong> · '+r.text+
+      '<div class="guided-actions-v922">'+
+      '<button type="button" class="btn btn-dark" id="goGuidedNowV922">Commencer maintenant</button>'+
+      (r.path?'<button type="button" class="btn btn-light" id="goGuidedPathV922">Voir mon parcours en étapes</button>':'')+
+      '<button type="button" class="btn btn-light" id="chooseMyselfV922">Je préfère choisir moi-même</button>'+
+      '</div>';
+    $('goGuidedNowV922')?.addEventListener('click',()=>goGuidedAction(r.action));
+    $('goGuidedPathV922')?.addEventListener('click',()=>{
+      activatePage('premium');
+      setTimeout(()=>{try{showPath(r.path)}catch(_){ } $('pathDetailV7')?.scrollIntoView({behavior:'smooth',block:'start'})},250);
     });
-    localStorage.setItem('alloPsychoLastState',b.dataset.state);
+    $('chooseMyselfV922')?.addEventListener('click',()=>activatePage('games'));
+  }
+
+  document.querySelectorAll('[data-feeling]').forEach(b=>b.addEventListener('click',()=>{
+    selectedFeeling=b.dataset.feeling;
+    localStorage.setItem('alloPsychoLastState',selectedFeeling);
+    renderGuidedRecommendation();
   }));
-// 2 — Progress dashboard
+  document.querySelectorAll('[data-need]').forEach(b=>b.addEventListener('click',()=>{
+    if(!selectedFeeling)return;
+    selectedNeed=b.dataset.need;
+    localStorage.setItem('alloPsychoLastNeed',selectedNeed);
+    renderGuidedRecommendation();
+  }));
+
+  function renderGuidedResume(){
+    const box=$('guidedResumeV922');if(!box)return;
+    const all=read('alloPsychoPathsV7',{});
+    const entry=Object.entries(all).find(([_,v])=>{
+      const done=Array.isArray(v)?v:(v?.done||[]);
+      return done.length>0&&done.length<7;
+    });
+    if(!entry){box.hidden=true;return}
+    const [key,v]=entry,done=Array.isArray(v)?v:(v?.done||[]);
+    box.hidden=false;
+    box.innerHTML='🧭 <strong>Parcours en cours :</strong> '+(pathLabels[key]||key)+' · '+done.length+'/7 étapes <button type="button" class="btn btn-light" id="resumeGuidedPathV922">Reprendre</button>';
+    $('resumeGuidedPathV922')?.addEventListener('click',()=>{activatePage('premium');setTimeout(()=>{try{showPath(key)}catch(_){} $('pathDetailV7')?.scrollIntoView({behavior:'smooth',block:'start'})},250)});
+  }
+
+  renderGuidedRecommendation();
+  renderGuidedResume();
+
+  // 2 — Progress dashboard
   function renderProgress(){
     const moods=read('alloPsychoHumeurs',[]),journals=read('alloPsychoJournal',[]),tcc=read('alloPsychoTCC',[]),sessions=read('alloPsychoSessionsV7',[]);
     if($('journalCountV7'))$('journalCountV7').textContent=journals.length;
@@ -6485,9 +6591,9 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
     const score={Calme:4,'Posé':4,Nuageux:2,Orageux:1};
     const recent=moods.slice(-7).map(x=>score[x.mood]||score[x.humeur]||0).filter(Boolean);
     if($('trendMoodV7'))$('trendMoodV7').textContent=recent.length?(recent.reduce((a,b)=>a+b,0)/recent.length>=3?'↗ stable+':'→ variable'):'—';
-    const days=new Set();[...moods,...journals,...tcc,...sessions].forEach(x=>{const d=x.date||x.created_at||x.at;if(d)days.add(String(d).slice(0,10))});
+    const days=new Set();[...moods,...journals,...tcc,...sessions].forEach(x=>{const d=x.at||x.created_at||x.date;if(d)days.add(String(d).slice(0,10))});
     const now=new Date();let active=0,bars=[];
-    for(let i=6;i>=0;i--){const d=new Date(now);d.setDate(now.getDate()-i);const iso=d.toISOString().slice(0,10);const n=[...moods,...journals,...tcc,...sessions].filter(x=>String(x.date||x.created_at||x.at||'').slice(0,10)===iso).length;if(n)active++;bars.push({d:d.toLocaleDateString('fr-FR',{weekday:'short'}).slice(0,2),n})}
+    for(let i=6;i>=0;i--){const d=new Date(now);d.setDate(now.getDate()-i);const iso=d.toISOString().slice(0,10);const n=[...moods,...journals,...tcc,...sessions].filter(x=>String(x.at||x.created_at||x.date||'').slice(0,10)===iso).length;if(n)active++;bars.push({d:d.toLocaleDateString('fr-FR',{weekday:'short'}).slice(0,2),n})}
     if($('activeDaysV7'))$('activeDaysV7').textContent=active;
     if($('weekBarsV7'))$('weekBarsV7').innerHTML=bars.map(x=>'<div><i style="height:'+Math.min(90,6+x.n*18)+'px"></i>'+x.d+'</div>').join('');
     const beforeAfter=read('alloPsychoLegacyRemovedV9',[]);
@@ -6605,7 +6711,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
   $('summaryV7')?.addEventListener('click',()=>{const input=$('chatInput');if(input){input.value='Fais-moi une synthèse courte du fil actuel : ce que nous avons compris, le mécanisme principal, ce qui semble m’aider ou non, et une seule prochaine étape concrète.';input.focus()}});
   $('shortModeV7')?.addEventListener('click',()=>{const on=localStorage.getItem('alloPsychoShortV7')==='1';localStorage.setItem('alloPsychoShortV7',on?'0':'1');$('shortModeV7').textContent=on?'⚡ Réponses courtes : auto':'⚡ Réponses courtes : activées';$('shortModeV7').classList.toggle('active',!on)});
   const mem=read('alloPsychoTherapyMemory',{});
-  if($('threadStatusV7')){const threadLast=mem.last_intervention||'';$('threadStatusV7').textContent=localStorage.getItem('alloPsychoTccMode')==='1'?'🧠 Fil : TCC guidée':threadLast?'🧭 Fil : '+String(threadLast).slice(0,42):'🧭 Fil : exploration'}
+  if($('threadStatusV7')){const threadLast=mem.last_tool||mem.recurring_theme||'';$('threadStatusV7').textContent=localStorage.getItem('alloPsychoTccMode')==='1'?'🧠 Fil : TCC guidée':threadLast?'🧭 Fil : '+String(threadLast).slice(0,42):'🧭 Fil : exploration'}
 
   // 7 — Premium 7-day paths
   const paths={
