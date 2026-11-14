@@ -2275,6 +2275,19 @@ select{
 .journal-mode-v924{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 12px}
 @media(max-width:720px){.manual-grid-v924,.monthly-summary-grid-v924{grid-template-columns:1fr}}
 
+
+/* ===== V9.2.6 — interface progressive, moins bavarde ===== */
+.progressive-toggle-v926{width:100%;margin:12px 0;padding:12px 14px;border:1px solid #e8dfe3;border-radius:17px;background:#fff;color:var(--text);font-weight:900;text-align:left;cursor:pointer}
+.progressive-toggle-v926 small{display:block;margin-top:3px;color:var(--soft);font-weight:600;font-size:.66rem}
+.progressive-group-v926[hidden]{display:none!important}
+.progressive-group-v926{display:block}
+#guidedNeedsV922[aria-disabled="true"]{display:none!important}
+#smartRecoV7.progressive-wait-v926{display:none}
+#page-chat .chat>p.muted{max-width:580px}
+#page-chat .chat-advanced-v926{margin:0}
+#page-premium>.premium-hero{margin-top:0}
+@media(max-width:650px){.progressive-toggle-v926{font-size:.78rem}}
+
 </style>
 </head>
 
@@ -8708,5 +8721,161 @@ function init(){weather();capsule();challenge();summary();resources();journalMod
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(init,1000),{once:true});else setTimeout(init,1000);
 })();
 </script>
+
+<script>
+/* ALLO PSYCHO V9.2.6 — progressive disclosure */
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+
+function makeToggle(label,help){
+  const b=document.createElement("button");
+  b.type="button";
+  b.className="progressive-toggle-v926";
+  b.innerHTML=label+(help?"<small>"+help+"</small>":"");
+  return b;
+}
+
+function bindToggle(btn,group,openLabel,closedLabel){
+  function sync(){
+    const open=!group.hidden;
+    btn.firstChild.textContent=(open?openLabel:closedLabel);
+    btn.setAttribute("aria-expanded",open?"true":"false");
+  }
+  btn.addEventListener("click",()=>{group.hidden=!group.hidden;sync()});
+  sync();
+}
+
+function setupHome(){
+  const page=$("page-relax"),lead=page?.querySelector(".guided-home-v922");
+  if(!page||!lead||$("homeMoreV926"))return;
+
+  const group=document.createElement("div");
+  group.id="homeMoreV926";
+  group.className="progressive-group-v926";
+  group.hidden=true;
+
+  const children=[...page.children].filter(x=>x!==lead);
+  children.forEach(x=>group.appendChild(x));
+
+  const toggle=makeToggle("＋ Voir mes autres outils","Ils restent disponibles, mais ne s’affichent que si tu en as besoin.");
+  toggle.id="homeMoreToggleV926";
+  page.appendChild(toggle);
+  page.appendChild(group);
+  bindToggle(toggle,group,"− Masquer les autres outils","＋ Voir mes autres outils");
+
+  const reco=$("smartRecoV7");
+  if(reco&&!localStorage.getItem("alloPsychoLastNeed"))reco.classList.add("progressive-wait-v926");
+
+  document.addEventListener("click",e=>{
+    const t=e.target.closest?.("#goGuidedNowV922");
+    if(t){
+      group.hidden=false;
+      toggle.firstChild.textContent="− Masquer les autres outils";
+      toggle.setAttribute("aria-expanded","true");
+    }
+  },true);
+}
+
+function setupGuidedSteps(){
+  const needs=$("guidedNeedsV922"),reco=$("smartRecoV7");
+  document.querySelectorAll("[data-feeling]").forEach(b=>b.addEventListener("click",()=>{
+    if(needs)needs.style.display="";
+    if(reco)reco.classList.add("progressive-wait-v926");
+  }));
+  document.querySelectorAll("[data-need]").forEach(b=>b.addEventListener("click",()=>{
+    if(reco)reco.classList.remove("progressive-wait-v926");
+  }));
+  if(localStorage.getItem("alloPsychoLastNeed"))reco?.classList.remove("progressive-wait-v926");
+}
+
+function setupChat(){
+  const card=$("page-chat")?.querySelector(".card.chat");
+  if(!card||$("chatAdvancedV926"))return;
+  const first=card.querySelector(".tcc-mode-bar");
+  if(!first)return;
+
+  const group=document.createElement("div");
+  group.id="chatAdvancedV926";
+  group.className="progressive-group-v926 chat-advanced-v926";
+  group.hidden=true;
+
+  const ids=["tccModeBtn","threadStatusV7","aiQuotaV922","chatRouteV923","chatDirectionsV924","chatArchivesV925"];
+  const blocks=new Set();
+  ids.forEach(id=>{
+    const el=$(id);
+    if(!el)return;
+    if(id==="tccModeBtn")blocks.add(el.closest(".tcc-mode-bar"));
+    else if(id==="threadStatusV7")blocks.add(el.closest(".chat-tools-v7"));
+    else blocks.add(el);
+  });
+  blocks.forEach(el=>el&&group.appendChild(el));
+
+  const toggle=makeToggle("⚙️ Options de conversation","Mode TCC, réponses courtes, synthèse, archives et directions.");
+  toggle.id="chatAdvancedToggleV926";
+  const before=$("crisisCard");
+  card.insertBefore(toggle,before);
+  card.insertBefore(group,before);
+  bindToggle(toggle,group,"⚙️ Masquer les options","⚙️ Options de conversation");
+}
+
+function setupProfile(){
+  const page=$("page-profile");
+  if(!page||$("profileMoreV926"))return;
+  const hero=[...page.children].find(x=>x.classList?.contains("hero"));
+  if(!hero)return;
+
+  const group=document.createElement("div");
+  group.id="profileMoreV926";
+  group.className="progressive-group-v926";
+  group.hidden=true;
+  [...page.children].filter(x=>x!==hero).forEach(x=>group.appendChild(x));
+
+  const toggle=makeToggle("⚙️ Ouvrir mes réglages","Préférences, espace privé, questionnaires, audio et protection.");
+  toggle.id="profileMoreToggleV926";
+  page.appendChild(toggle);
+  page.appendChild(group);
+  bindToggle(toggle,group,"⚙️ Fermer mes réglages","⚙️ Ouvrir mes réglages");
+}
+
+function setupPremium(){
+  const page=$("page-premium");
+  if(!page||$("premiumMoreV926"))return;
+  const hero=page.querySelector(".premium-hero");
+  if(!hero)return;
+  page.insertBefore(hero,page.firstChild);
+
+  const group=document.createElement("div");
+  group.id="premiumMoreV926";
+  group.className="progressive-group-v926";
+  group.hidden=true;
+  [...page.children].filter(x=>x!==hero).forEach(x=>group.appendChild(x));
+
+  const toggle=makeToggle("✨ Voir mon parcours et gérer Premium","Parcours, détails de l’offre, abonnement et code d’accès.");
+  toggle.id="premiumMoreToggleV926";
+  page.appendChild(toggle);
+  page.appendChild(group);
+  bindToggle(toggle,group,"✨ Masquer les détails Premium","✨ Voir mon parcours et gérer Premium");
+
+  document.addEventListener("click",e=>{
+    if(e.target.closest?.("#goGuidedPathV922,#resumeGuidedPathV922")){
+      group.hidden=false;
+      toggle.firstChild.textContent="✨ Masquer les détails Premium";
+      toggle.setAttribute("aria-expanded","true");
+    }
+  },true);
+}
+
+function init(){
+  setupHome();
+  setupGuidedSteps();
+  setupChat();
+  setupProfile();
+  setupPremium();
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
+})();
+</script>
+
 </body>
 </html>
