@@ -2288,6 +2288,25 @@ select{
 #page-premium>.premium-hero{margin-top:0}
 @media(max-width:650px){.progressive-toggle-v926{font-size:.78rem}}
 
+
+/* ===== V9.2.7 — navigation par thématiques / parcours ===== */
+.theme-hub-v927{margin-top:14px}
+.theme-grid-v927{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.theme-card-v927{border:1px solid #eadfe5;background:#fff;border-radius:20px;padding:14px;text-align:left;color:var(--text);cursor:pointer}
+.theme-card-v927 strong,.theme-card-v927 small{display:block}
+.theme-card-v927 strong{font-size:.82rem}
+.theme-card-v927 small{margin-top:4px;color:var(--soft);font-size:.65rem;line-height:1.4}
+.theme-card-v927.active{background:#57484f;color:#fff;border-color:#57484f}
+.theme-card-v927.active small{color:#f3ecef}
+.theme-panel-v927{margin-top:12px;padding:15px;border:1px solid #eadfe5;border-radius:20px;background:#faf7f5}
+.theme-panel-v927[hidden]{display:none!important}
+.theme-panel-v927 h3{margin:0 0 5px}
+.theme-panel-v927 p{margin:0;color:var(--soft);font-size:.72rem;line-height:1.5}
+.theme-actions-v927{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.theme-actions-v927 .btn{font-size:.7rem}
+.all-tools-v927{margin-top:10px}
+@media(max-width:680px){.theme-grid-v927{grid-template-columns:1fr}}
+
 </style>
 </head>
 
@@ -8873,6 +8892,188 @@ function init(){
   setupProfile();
   setupPremium();
 }
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
+})();
+</script>
+
+
+<script>
+/* ALLO PSYCHO V9.2.7 — thématiques / parcours */
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+
+const THEMES={
+  anxiety:{
+    icon:"🌿",title:"Anxiété & apaisement",
+    text:"Faire baisser l’activation, comprendre l’alarme et retrouver de la marge.",
+    path:"anxiety",
+    actions:[
+      ["Respirer maintenant","breathing"],
+      ["Parler de ce qui m’inquiète","chat"],
+      ["Faire une TCC guidée","tcc"]
+    ]
+  },
+  rumination:{
+    icon:"🔄",title:"Pensées & rumination",
+    text:"Sortir des boucles mentales, distinguer faits et pensées, retrouver une action utile.",
+    path:"rumination",
+    actions:[
+      ["TCC guidée","tcc"],
+      ["Attrape-pensées","thoughts"],
+      ["Écrire pour clarifier","journal"]
+    ]
+  },
+  sensitivity:{
+    icon:"🌙",title:"Sensibilité & surcharge",
+    text:"Réduire la surcharge, se recentrer et mieux protéger son énergie.",
+    path:"sensitivity",
+    actions:[
+      ["Urgence calme","urgent"],
+      ["Décharger la tension","release"],
+      ["Parler sans tout analyser","chat"]
+    ]
+  },
+  limits:{
+    icon:"🧱",title:"Relations & limites",
+    text:"Clarifier ses besoins, poser des limites et sortir de la culpabilité relationnelle.",
+    path:"limits",
+    actions:[
+      ["Faire le point en TCC","tcc"],
+      ["Préparer ce que je veux dire","journal"],
+      ["En parler","chat"]
+    ]
+  },
+  procrastination:{
+    icon:"🚀",title:"Motivation & procrastination",
+    text:"Réduire la friction, dépasser la peur de mal faire et commencer par un petit pas.",
+    path:"procrastination",
+    actions:[
+      ["Définir un petit pas","tcc"],
+      ["Écrire mon action de 5 minutes","journal"],
+      ["Me faire guider","chat"]
+    ]
+  },
+  sleep:{
+    icon:"🌙",title:"Sommeil & récupération",
+    text:"Décharger la journée, ralentir et préparer une récupération plus régulière.",
+    path:null,
+    actions:[
+      ["Respiration douce","breathing"],
+      ["Décharger dans le journal","journal"],
+      ["Écouter une relaxation","audio"]
+    ]
+  }
+};
+
+function activatePage(name){
+  if(typeof afficherPage==="function"){afficherPage(name);return}
+  document.querySelector('[data-page="'+name+'"]')?.click();
+}
+
+function openAction(action){
+  if(action==="chat"){
+    activatePage("chat");
+    setTimeout(()=>$("chatInput")?.focus(),220);
+    return;
+  }
+  if(action==="journal"){
+    activatePage("write");
+    setTimeout(()=>$("journalText")?.focus(),220);
+    return;
+  }
+  if(action==="tcc"){
+    activatePage("write");
+    setTimeout(()=>$("tccWizardV72")?.scrollIntoView({behavior:"smooth",block:"start"}),240);
+    return;
+  }
+  if(action==="thoughts"){
+    activatePage("games");
+    setTimeout(()=>document.querySelector('[data-game="thoughts"]')?.click(),180);
+    return;
+  }
+  if(action==="release"){
+    activatePage("games");
+    setTimeout(()=>document.querySelector('[data-game="release"]')?.click(),180);
+    return;
+  }
+  activatePage("relax");
+  if(action==="urgent"){
+    setTimeout(()=>document.querySelector('[data-premium-calm-v83="urgent"]')?.click(),220);
+  }else if(action==="breathing"){
+    setTimeout(()=>$("breathingCardV8")?.scrollIntoView({behavior:"smooth",block:"start"}),220);
+  }else if(action==="audio"){
+    setTimeout(()=>$("audioButton")?.scrollIntoView({behavior:"smooth",block:"center"}),220);
+  }
+}
+
+function openPath(path){
+  if(!path)return;
+  activatePage("premium");
+  const more=$("premiumMoreV926");
+  const toggle=$("premiumMoreToggleV926");
+  if(more)more.hidden=false;
+  if(toggle){
+    toggle.setAttribute("aria-expanded","true");
+    if(toggle.firstChild)toggle.firstChild.textContent="✨ Masquer les détails Premium";
+  }
+  setTimeout(()=>{
+    try{if(typeof showPath==="function")showPath(path)}catch(_){}
+    $("pathDetailV7")?.scrollIntoView({behavior:"smooth",block:"start"});
+  },260);
+}
+
+function setupThemeHub(){
+  const page=$("page-relax"),lead=page?.querySelector(".guided-home-v922");
+  if(!page||!lead||$("themeHubV927"))return;
+
+  const hub=document.createElement("div");
+  hub.id="themeHubV927";
+  hub.className="card theme-hub-v927";
+  hub.innerHTML=
+    '<p class="eyebrow">MES THÉMATIQUES</p>'+
+    '<h2>🧭 Choisir mon parcours</h2>'+
+    '<p class="muted">Choisis ce que tu veux travailler. L’app ne montre ensuite que les outils liés à cette thématique.</p>'+
+    '<div class="theme-grid-v927" id="themeGridV927"></div>'+
+    '<div class="theme-panel-v927" id="themePanelV927" hidden></div>';
+
+  lead.insertAdjacentElement("afterend",hub);
+
+  const grid=$("themeGridV927"),panel=$("themePanelV927");
+  grid.innerHTML=Object.entries(THEMES).map(([key,t])=>
+    '<button type="button" class="theme-card-v927" data-theme-v927="'+key+'">'+
+    '<strong>'+t.icon+' '+t.title+'</strong><small>'+t.text+'</small></button>'
+  ).join("");
+
+  function render(key){
+    const t=THEMES[key]; if(!t)return;
+    localStorage.setItem("alloPsychoThemeV927",key);
+    grid.querySelectorAll("[data-theme-v927]").forEach(b=>b.classList.toggle("active",b.dataset.themeV927===key));
+    panel.hidden=false;
+    panel.innerHTML=
+      '<h3>'+t.icon+' '+t.title+'</h3><p>'+t.text+'</p>'+
+      '<div class="theme-actions-v927">'+
+      t.actions.map((a,i)=>'<button type="button" class="btn '+(i===0?'btn-dark':'btn-light')+'" data-theme-action-v927="'+a[1]+'">'+a[0]+'</button>').join("")+
+      (t.path?'<button type="button" class="btn btn-light" data-theme-path-v927="'+t.path+'">🧭 Parcours en étapes</button>':'')+
+      '</div>';
+    panel.querySelectorAll("[data-theme-action-v927]").forEach(b=>b.onclick=()=>openAction(b.dataset.themeActionV927));
+    panel.querySelectorAll("[data-theme-path-v927]").forEach(b=>b.onclick=()=>openPath(b.dataset.themePathV927));
+  }
+
+  grid.querySelectorAll("[data-theme-v927]").forEach(b=>b.onclick=()=>render(b.dataset.themeV927));
+  const saved=localStorage.getItem("alloPsychoThemeV927");
+  if(saved&&THEMES[saved])render(saved);
+
+  const oldToggle=$("homeMoreToggleV926");
+  if(oldToggle){
+    oldToggle.classList.add("all-tools-v927");
+    if(oldToggle.firstChild)oldToggle.firstChild.textContent="＋ Tous les outils";
+    const small=oldToggle.querySelector("small");
+    if(small)small.textContent="Accès libre à l’ensemble des outils, hors parcours thématique.";
+  }
+}
+
+function init(){setupThemeHub()}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })();
 </script>
