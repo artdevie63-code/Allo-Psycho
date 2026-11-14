@@ -2200,6 +2200,25 @@ select{
   }
 }
 
+
+
+    /* V9.2.1 — navigation simplifiée + première connexion */
+    .tabs{grid-template-columns:repeat(5,minmax(0,1fr));}
+    .options-shortcuts-v921{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+    .options-shortcuts-v921 .btn{text-align:center;text-decoration:none}
+    .onboarding-v921{position:fixed;inset:0;z-index:1200;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(43,35,39,.48);backdrop-filter:blur(12px)}
+    .onboarding-v921.visible{display:flex}
+    .onboarding-card-v921{width:min(620px,100%);max-height:92vh;overflow:auto;padding:24px;border-radius:28px;background:#fffaf7;box-shadow:0 28px 90px rgba(40,30,35,.28)}
+    .onboarding-card-v921 h2{margin-bottom:6px}
+    .onboarding-card-v921 .form{margin-top:16px}
+    .onboarding-note-v921{padding:12px 14px;border-radius:16px;background:#f8f3f5;color:var(--soft);font-size:.76rem;line-height:1.5}
+    @media(max-width:700px){
+      .tabs{display:flex;overflow-x:auto;grid-template-columns:none;scrollbar-width:none}
+      .tabs::-webkit-scrollbar{display:none}
+      .tab{flex:0 0 auto;min-width:88px;padding:8px 10px}
+      .options-shortcuts-v921{grid-template-columns:1fr}
+    }
+
 </style>
 </head>
 
@@ -2214,6 +2233,23 @@ select{
   
   <div id="updateV7" class="update-v7"><span>✨ Nouvelle version disponible</span><button type="button" id="updateBtnV7" aria-label="Mettre à jour">Mettre à jour</button></div>
   <div id="lockV7" class="lock-v7"><div class="lock-card-v7"><h2>🧠 Allo Psycho</h2><p>Entre ton PIN local.</p><input id="unlockPinV7" type="password" inputmode="numeric" maxlength="8"><button type="button" class="btn btn-dark full" id="unlockV7" aria-label="Ouvrir">Ouvrir</button><small id="unlockErrV7"></small></div></div>
+
+  <div id="onboardingV921" class="onboarding-v921" role="dialog" aria-modal="true" aria-labelledby="onboardingTitleV921">
+    <div class="onboarding-card-v921">
+      <p class="eyebrow">PREMIÈRE CONNEXION</p>
+      <h2 id="onboardingTitleV921">🌷 Personnalise ton espace</h2>
+      <p class="muted">Ces préférences sont enregistrées sur cet appareil. Tu pourras les modifier ensuite dans <strong>Options</strong>.</p>
+      <div class="onboarding-note-v921">L’année de naissance est facultative. Tu peux utiliser un prénom ou simplement un pseudo.</div>
+      <form id="onboardingFormV921" class="form">
+        <div><label for="onboardingNameV921">Prénom ou pseudo</label><input id="onboardingNameV921" type="text" maxlength="80" placeholder="Comment souhaites-tu être appelé·e ?"></div>
+        <div><label for="onboardingBirthV921">Année de naissance (facultatif)</label><input id="onboardingBirthV921" type="text" inputmode="numeric" maxlength="4" placeholder="AAAA"></div>
+        <div><label for="onboardingToneV921">Style de réponse préféré</label><select id="onboardingToneV921" style="width:100%;min-height:46px;border:1px solid #eee5e2;border-radius:16px;padding:11px;background:#faf7f5;color:var(--text)"><option value="doux">Doux et rassurant</option><option value="direct">Clair et concret</option><option value="court">Très court</option></select></div>
+        <div><label for="onboardingGoalV921">Mon objectif principal</label><select id="onboardingGoalV921" style="width:100%;min-height:46px;border:1px solid #eee5e2;border-radius:16px;padding:11px;background:#faf7f5;color:var(--text)"><option value="apaisement">Réduire le stress et m’apaiser</option><option value="confiance">Renforcer ma confiance</option><option value="sommeil">Améliorer mon sommeil</option><option value="motivation">Retrouver motivation et énergie</option><option value="habitudes">Créer de meilleures habitudes</option><option value="relations">Mieux vivre mes relations</option></select></div>
+        <div><label for="onboardingRoutineV921">Rythme de routine</label><select id="onboardingRoutineV921" style="width:100%;min-height:46px;border:1px solid #eee5e2;border-radius:16px;padding:11px;background:#faf7f5;color:var(--text)"><option value="souple">Souple — 3 petits pas</option><option value="minimal">Minimal — 1 action essentielle</option><option value="structure">Structuré — matin, journée, soir</option></select></div>
+        <button type="submit" class="btn btn-dark full">💾 Enregistrer mes préférences</button>
+      </form>
+    </div>
+  </div>
   <main class="app">
 
     <!-- HEADER -->
@@ -2258,65 +2294,12 @@ select{
     <!-- NAVIGATION -->
 
     <nav class="tabs" aria-label="Navigation principale">
-
-      <button
-        type="button"
-        class="tab active"
-        data-page="relax"
-       aria-label="SE RELAXER">
-        🌿 SE RELAXER
-      </button>
-
-      <button
-        type="button"
-        class="tab"
-        data-page="games"
-       aria-label="MA BULLE">
-        🎮 MA BULLE
-      </button>
-
-      <button
-        type="button"
-        class="tab"
-        data-page="write"
-       aria-label="ÉCRIRE">
-        📖 ÉCRIRE
-      </button>
-
-      <button
-        type="button"
-        class="tab"
-        data-page="chat"
-       aria-label="CONVERSER">
-        💬 CONVERSER
-      </button>
-
-      <button
-        type="button"
-        class="tab"
-        data-page="profile"
-       aria-label="OPTIONS">
-        ⚙️ OPTIONS
-      </button>
-
-      <button type="button" class="tab" data-page="premium" aria-label="PREMIUM">
-        ✨ PREMIUM
-      </button>
-
-      <button type="button" class="tab" data-page="about" aria-label="À PROPOS">
-        🌷 À PROPOS
-      </button>
-
-      <button
-        type="button"
-        class="tab"
-        id="adminTab"
-        data-page="admin"
-        style="display:none"
-       aria-label="ADMINISTRATION">
-        🔐 ADMINISTRATION
-      </button>
-
+      <button type="button" class="tab active" data-page="relax" aria-label="ACCUEIL">🏠 ACCUEIL</button>
+      <button type="button" class="tab" data-page="games" aria-label="OUTILS">🧰 OUTILS</button>
+      <button type="button" class="tab" data-page="write" aria-label="JOURNAL">📖 JOURNAL</button>
+      <button type="button" class="tab" data-page="chat" aria-label="PARLER">💬 PARLER</button>
+      <button type="button" class="tab" data-page="profile" aria-label="OPTIONS">⚙️ OPTIONS</button>
+      <button type="button" class="tab" id="adminTab" data-page="admin" style="display:none" aria-label="ADMINISTRATION">🔐 ADMIN</button>
     </nav>
 
 
@@ -2881,6 +2864,10 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
         <div id="ownerAccessV862" class="owner-access-v862" hidden>
           <div id="ownerBadgeV862" class="owner-badge-v862" hidden>👑 Propriétaire · Admin · Premium permanent</div>
           <div id="testerBadgeV90" class="owner-badge-v862" hidden>🧪 Testeur · Premium permanent</div>
+        <div class="options-shortcuts-v921">
+          <button type="button" class="btn btn-dark" id="openPremiumV921">✨ Premium & abonnement</button>
+          <button type="button" class="btn btn-light" id="openAboutV921">🌷 À propos & contact</button>
+        </div>
         </div>
       </div>
 
@@ -2924,7 +2911,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
                 <option value="structure">Structuré — matin, journée, soir</option>
               </select>
             </div>
-            <button type="submit" class="btn btn-dark" aria-label="Enregistrer mon profil">💾 Enregistrer mon profil</button>
+            <button type="submit" class="btn btn-dark" aria-label="Enregistrer mes préférences">💾 Enregistrer mes préférences</button>
           </form>
         </div>
 
@@ -7991,5 +7978,91 @@ window.addEventListener("unhandledrejection",function(e){
 })();
 </script>
 
+
+<script>
+(function(){
+  "use strict";
+  const ONBOARDING_KEY="alloPsychoOnboardingV921";
+  const PROFILE_KEY="alloPsychoProfile";
+  const $=id=>document.getElementById(id);
+
+  function openPageV921(page){
+    if(typeof afficherPage==="function"){
+      afficherPage(page);
+      return;
+    }
+    document.querySelector('[data-page="'+page+'"]')?.click();
+  }
+
+  function syncOptionsFromProfileV921(profile){
+    if(!profile)return;
+    if($("profileName"))$("profileName").value=profile.display_name||"";
+    if($("profileBirthYear"))$("profileBirthYear").value=profile.birth_year||"";
+    if($("profileTone"))$("profileTone").value=profile.response_style||"doux";
+    if($("profileGoal"))$("profileGoal").value=profile.primary_goal||"apaisement";
+    if($("profileRoutine"))$("profileRoutine").value=profile.routine_preference||"souple";
+  }
+
+  function existingProfileV921(){
+    try{return JSON.parse(localStorage.getItem(PROFILE_KEY)||"null")}catch(_){return null}
+  }
+
+  function shouldShowOnboardingV921(){
+    if(localStorage.getItem(ONBOARDING_KEY)==="1")return false;
+    const profile=existingProfileV921();
+    if(profile){
+      localStorage.setItem(ONBOARDING_KEY,"1");
+      return false;
+    }
+    return true;
+  }
+
+  function showOnboardingV921(){
+    if(!shouldShowOnboardingV921())return;
+    $("onboardingV921")?.classList.add("visible");
+  }
+
+  $("onboardingFormV921")?.addEventListener("submit",function(e){
+    e.preventDefault();
+    const birth=($("onboardingBirthV921")?.value||"").trim();
+    if(birth && !/^\d{4}$/.test(birth)){
+      if(typeof afficherToast==="function")afficherToast("🌱 L’année de naissance doit être au format AAAA.");
+      return;
+    }
+    const current=existingProfileV921()||{};
+    const payload={
+      ...current,
+      display_name:($("onboardingNameV921")?.value||"").trim()||null,
+      birth_year:birth?Number(birth):null,
+      response_style:$("onboardingToneV921")?.value||"doux",
+      primary_goal:$("onboardingGoalV921")?.value||"apaisement",
+      routine_preference:$("onboardingRoutineV921")?.value||"souple",
+      health_consent:current.health_consent===true,
+      ai_consent:current.ai_consent===true,
+      updated_at:new Date().toISOString(),
+      storage_mode:"local-only"
+    };
+    const raw=JSON.stringify(payload);
+    localStorage.setItem(PROFILE_KEY,raw);
+    localStorage.setItem(ONBOARDING_KEY,"1");
+    try{if(typeof alloPersistMirrorV9==="function")alloPersistMirrorV9(PROFILE_KEY,raw)}catch(_){}
+    syncOptionsFromProfileV921(payload);
+    $("onboardingV921")?.classList.remove("visible");
+    if(typeof afficherToast==="function")afficherToast("💚 Préférences enregistrées.");
+    openPageV921("relax");
+  });
+
+  $("openPremiumV921")?.addEventListener("click",()=>openPageV921("premium"));
+  $("openAboutV921")?.addEventListener("click",()=>openPageV921("about"));
+
+  // Si un ancien profil existe, il est considéré comme déjà configuré.
+  // Sinon l'écran s'affiche une seule fois sur cet appareil.
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",()=>setTimeout(showOnboardingV921,700),{once:true});
+  }else{
+    setTimeout(showOnboardingV921,700);
+  }
+})();
+</script>
 </body>
 </html>
