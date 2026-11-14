@@ -2309,6 +2309,25 @@ select{
 
 /* V9.2.8 thematic workshops */
 .theme-workshop-v928{margin-top:12px;border-top:1px solid #eadfe5;padding-top:12px}.theme-workshop-v928[hidden]{display:none!important}.workshop-tabs-v928{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}.workshop-tabs-v928 button{border:1px solid #e5dce1;background:#fff;border-radius:999px;padding:8px 10px;font-size:.66rem;font-weight:900;color:var(--text)}.workshop-tabs-v928 button.active{background:#57484f;color:#fff;border-color:#57484f}.workshop-panel-v928{padding:14px;border-radius:18px;background:#fff;border:1px solid #eadfe5}.choice-grid-v928{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}.choice-v928{border:1px solid #eadfe5;background:#faf8f7;border-radius:16px;padding:11px;text-align:left;color:var(--text)}.choice-v928 strong,.choice-v928 small{display:block}.choice-v928 small{margin-top:4px;color:var(--soft);font-size:.63rem;line-height:1.4}.choice-v928.selected{background:#57484f;color:#fff}.choice-v928.selected small{color:#f2eaee}.consequence-v928{margin-top:10px;padding:12px;border-radius:16px;background:#f7fbf7;border:1px solid #dfe9df;font-size:.7rem;line-height:1.5}.simulator-v928 textarea,.functioning-v928 textarea,.review-v928 textarea{width:100%;min-height:88px;border:1px solid #e5dce1;border-radius:14px;padding:10px;background:#fff;color:var(--text)}.mission-card-v928{padding:13px;border-radius:17px;background:#fff8ef;border:1px solid #f0e1ca}.progress-stage-v928{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}.progress-stage-v928 span{padding:6px 9px;border-radius:999px;background:#eee8ee;font-size:.62rem;font-weight:900}.progress-stage-v928 span.done{background:#dfeadf}.progress-stage-v928 span.current{background:#57484f;color:#fff}.function-map-v928{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}.function-map-v928 div{padding:10px;border:1px solid #eadfe5;border-radius:15px;background:#faf7f5}.deferred-v928{margin-top:10px;padding:11px 12px;border-radius:15px;background:#fff6df;border:1px solid #edd9a8;font-size:.68rem}@media(max-width:680px){.choice-grid-v928,.function-map-v928{grid-template-columns:1fr}}
+
+/* ===== V9.2.9 — lisibilité, progression et cohérence ===== */
+body{font-size:16px}
+.card small,.muted,.privacy-mini-v7,.theme-card-v927 small,.choice-v928 small,.function-map-v928 span,.workshop-panel-v928 p{font-size:max(.76rem,12px)!important;line-height:1.5}
+.tcc-steps-v7 span{font-size:.76rem!important;padding:8px 11px!important}
+#tccPanelV741 label strong{font-size:1rem}
+#tccPanelV741 label small{display:block;margin-top:5px;font-size:.82rem!important}
+.tcc-panel-input-v7{font-size:1rem;line-height:1.5;min-height:120px}
+.gameInstructions,.game-reflection{font-size:.82rem}
+.thought-card{font-size:1.02rem!important;line-height:1.4}
+.progress-stage-v928{align-items:center}
+.progress-stage-v928 span{font-size:.72rem!important;padding:8px 11px!important;position:relative}
+.progress-stage-v928 span.done::before{content:"🏅 ";font-size:.9rem}
+.progress-stage-v928 span.current::before{content:"✨ ";font-size:.9rem}
+.theme-badge-v929{display:flex;align-items:center;gap:10px;margin:10px 0;padding:11px 13px;border-radius:17px;background:linear-gradient(145deg,#fff7df,#f5efff);border:1px solid #eadfe5}
+.theme-badge-v929 .icon{font-size:1.7rem}.theme-badge-v929 strong{display:block;font-size:.8rem}.theme-badge-v929 small{display:block;color:var(--soft);font-size:.74rem!important}
+.functioning-fixed-v929{display:grid;gap:9px}.functioning-fixed-v929 .row{padding:11px 12px;border-radius:15px;background:#faf7f5;border:1px solid #eadfe5}.functioning-fixed-v929 .row strong{display:block;font-size:.78rem}.functioning-fixed-v929 .row span{display:block;margin-top:3px;font-size:.76rem;color:var(--soft)}
+@media(max-width:760px){body{font-size:16px}.tab{font-size:.72rem!important}.brand p,.connection{font-size:.72rem!important}}
+
 </style>
 </head>
 
@@ -2870,12 +2889,11 @@ select{
           </p>
 
           <h2>
-            🧠 Restructuration cognitive
+            🧠 Faire le point sur une pensée
           </h2>
 
           <p class="muted">
-            Transforme progressivement une pensée
-            difficile en une pensée plus équilibrée.
+            Observe une pensée difficile, vérifie les faits, puis cherche une formulation plus juste.
           </p>
 
           
@@ -5997,11 +6015,26 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
   <script>
   (function(){
     const MODES={
-      thoughts:{eyebrow:'TRI MENTAL',title:'🗑️ Attrape-pensées',instructions:'balaie à gauche vers 🗑️ pour laisser passer une pensée rigide ou négative, et à droite vers ❤️ pour garder une pensée aidante.'},
+      thoughts:{eyebrow:'TRI MENTAL',title:'🗑️ Attrape-pensées',instructions:'balaie à gauche une pensée rigide, absolue ou catastrophique ; garde à droite une pensée utile, nuancée et crédible. Le but n’est pas de penser positif, mais de penser plus juste.'},
       release:{eyebrow:'DÉCHARGE',title:'💥 Décharge',instructions:'Élimine rapidement les cibles de pression. Les cibles résistantes demandent plusieurs impacts ; les bonus chargent une onde de décharge.'},
       scribble:{eyebrow:'DÉCHARGE GRAPHIQUE',title:'✍️ Gribouille & libère',instructions:'Trace vite, en zigzag ou en boucles avec ton doigt ou ta souris. Puis efface la page pour marquer la fin de la décharge.'}
     };
-    const thoughts=[{text:'Je peux avancer par petits pas',keep:true},{text:'Une émotion finit par bouger',keep:true},{text:'Je peux demander du soutien',keep:true},{text:'Je dois tout réussir',keep:false},{text:'Tout va forcément mal finir',keep:false},{text:'Une erreur dit tout de moi',keep:false},{text:'Je peux choisir ce que je fais maintenant',keep:true},{text:'Je ne devrais jamais être anxieux',keep:false}];
+    const thoughts=[
+{text:'Je peux avancer par petits pas',keep:true},
+{text:'Je peux être inquiet·ète et quand même agir',keep:true},
+{text:'Une erreur ne résume pas toute ma valeur',keep:true},
+{text:'Je peux demander du soutien sans être faible',keep:true},
+{text:'Je ne sais pas encore comment cela va se passer',keep:true},
+{text:'Je peux vérifier les faits avant de conclure',keep:true},
+{text:'Je dois tout réussir',keep:false},
+{text:'Tout va forcément mal finir',keep:false},
+{text:'Une erreur prouve que je suis incapable',keep:false},
+{text:'Si cette personne ne répond pas, c’est forcément contre moi',keep:false},
+{text:'Je dois être certain·e avant d’agir',keep:false},
+{text:'Je ne devrais jamais ressentir d’anxiété',keep:false},
+{text:'Si je pose une limite, on va forcément me rejeter',keep:false},
+{text:'Je dois attendre d’être motivé·e pour commencer',keep:false}
+];
     const words=['TROP','PRESSION','STOP','INJUSTICE','SATURATION','TENSION','RAS-LE-BOL','URGENCE'];
     const flowWords=['pression','contrôle','rumination','fatigue','trop-plein','comparaison'];
     let mode='thoughts',score=0,timer=null,activeCleanups=[];
@@ -6025,8 +6058,8 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
         score+=ok?1:0; renderScore(score+' choix');
         card.classList.add(keep?'swipe-out-right':'swipe-out-left');
         $('gameReflection').textContent=ok
-          ? (keep?'❤️ Celle-ci peut t’accompagner : garde ce qui aide sans exiger la perfection.':'🗑️ Tu peux laisser passer une pensée sans devoir lui obéir.')
-          : '🌿 Essaie autrement : est-ce une pensée aidante et nuancée, ou une règle/prédiction qui enferme ?';
+          ? (keep?'❤️ Pensée utile et crédible : elle laisse de la place aux faits et à l’action.':'🗑️ Pensée rigide repérée : tu peux la remarquer sans la traiter comme un fait.')
+          : '🌿 Regarde sa forme : est-elle absolue (« toujours », « jamais », « forcément ») ou laisse-t-elle de la place à plusieurs possibilités ?';
         setTimeout(thoughtRound,360);
       }
       card.addEventListener('pointerdown',e=>{drag=true;startX=e.clientX;startY=e.clientY;dx=dy=0;card.setPointerCapture(e.pointerId);card.classList.add('dragging')});
@@ -7125,13 +7158,13 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
   const toast=(m)=>typeof afficherToast==="function"?afficherToast(m):console.log(m);
 
   const steps=[
-    {title:"Situation",help:"Que s’est-il passé, concrètement et de façon observable ?"},
-    {title:"Pensée automatique",help:"Quelle phrase exacte a traversé ton esprit ?"},
-    {title:"Émotion / intensité",help:"Quelle émotion ? Ajoute une intensité de 0 à 100."},
-    {title:"Faits pour",help:"Quels faits observables semblent soutenir cette pensée ?"},
-    {title:"Faits qui nuancent",help:"Quels contre-exemples, informations manquantes ou autres explications ?"},
-    {title:"Pensée alternative équilibrée",help:"Quelle formulation serait plus nuancée, crédible et réaliste ?"},
-    {title:"Action / expérience",help:"Quel petit test concret pourrait t’apporter une nouvelle information ?"}
+    {title:"Ce qui s’est passé",help:"Décris seulement les faits, sans interpréter."},
+    {title:"La pensée",help:"Quelle phrase t’est venue automatiquement ?"},
+    {title:"Ce que je ressens",help:"Quelle émotion ? Intensité de 0 à 100."},
+    {title:"Ce qui va dans ce sens",help:"Quels faits soutiennent vraiment cette pensée ?"},
+    {title:"Ce qui la nuance",help:"Qu’est-ce qui montre que ce n’est peut-être pas toute l’histoire ?"},
+    {title:"Une pensée plus juste",help:"Formule une phrase crédible, ni trop positive ni catastrophique."},
+    {title:"Mon petit test",help:"Quelle petite action pourrait m’apporter une information nouvelle ?"}
   ];
 
   let index=Number(sessionStorage.getItem("alloPsychoTccIndexV741")||0);
@@ -9105,6 +9138,53 @@ else{const a=read("alloPsychoThemeReviewsV928",{});o.innerHTML='<div class="revi
 w.querySelectorAll("[data-w]").forEach(b=>b.onclick=()=>open(b.dataset.w));const s=state(k);open(!s.scenario?"scenario":!s.simulator?"simulator":!s.mission?"mission":!s.functioning?"functioning":"review")}
 function init(){const g=$("themeGridV927");if(g)g.addEventListener("click",e=>{const b=e.target.closest("[data-theme-v927]");if(b)setTimeout(()=>render(b.dataset.themeV927),0)});const k=localStorage.getItem("alloPsychoThemeV927");if(k&&C[k]&&$("themePanelV927")&&!$("themePanelV927").hidden)render(k)}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
+})();
+</script>
+<script>
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const maps={
+ anxiety:[["Déclencheurs","incertitude, attente, sensations"],["Réflexes","vérifier, anticiper, éviter"],["Ressources","faits, respiration, exposition graduée"],["À surveiller","chercher une certitude impossible"]],
+ rumination:[["Déclencheurs","fatigue, conflit, erreur, solitude"],["Réflexes","rejouer, comparer, analyser encore"],["Ressources","défusion, action, temps dédié"],["À surveiller","répéter sans information nouvelle"]],
+ sensitivity:[["Déclencheurs","bruit, foule, interruptions, charge émotionnelle"],["Réflexes","tenir trop longtemps, absorber, s’isoler tard"],["Ressources","sas, limites, environnement ajusté"],["À surveiller","tout devient trop fort en même temps"]],
+ limits:[["Déclencheurs","demandes, critiques, peur de décevoir"],["Réflexes","dire oui, se justifier, éviter"],["Ressources","phrase courte, besoin, répétition calme"],["À surveiller","se sentir responsable de l’émotion de l’autre"]],
+ procrastination:[["Déclencheurs","flou, peur de l’échec, ennui, perfectionnisme"],["Réflexes","préparer, attendre, se distraire"],["Ressources","micro-action, environnement, temps limité"],["À surveiller","penser au projet entier au lieu du prochain geste"]],
+ sleep:[["Déclencheurs","fatigue, écrans, ruminations, horaires variables"],["Réflexes","résoudre, scroller, surveiller l’heure"],["Ressources","décharge écrite, routine, lumière du jour"],["À surveiller","le lit devient un lieu de travail mental"]]
+};
+const labels={anxiety:"Anxiété",rumination:"Rumination",sensitivity:"Surcharge",limits:"Limites",procrastination:"Motivation",sleep:"Sommeil"};
+const read=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(d))}catch(_){return d}};
+const write=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+
+function badge(){
+ const k=localStorage.getItem("alloPsychoThemeV927"); const p=$("themePanelV927"); if(!k||!p)return;
+ const s=read("alloPsychoThemeProgressV928",{})[k]||{};
+ const n=["scenario","simulator","mission","functioning","review"].filter(x=>s[x]).length;
+ let b=$("themeBadgeV929"); if(!b){b=document.createElement("div");b.id="themeBadgeV929";b.className="theme-badge-v929";p.prepend(b)}
+ const levels=[["🌱","Découverte"],["🧭","En route"],["🛠️","En pratique"],["🌿","Intégration"],["⭐","Consolidation"],["🏆","Parcours complété"]];
+ const [icon,name]=levels[n];
+ b.innerHTML='<span class="icon">'+icon+'</span><div><strong>'+name+' · '+(labels[k]||"Parcours")+'</strong><small>'+n+'/5 jalons validés</small></div>';
+}
+function renderFunctioning(){
+ const k=localStorage.getItem("alloPsychoThemeV927"),o=$("workshopPanelV928"); if(!k||!o||!maps[k])return;
+ const notes=read("alloPsychoFunctionMapNotesV928",{})[k]||"";
+ o.innerHTML='<div class="functioning-v928"><h4>🧩 Mon fonctionnement</h4><p>Repère ce qui déclenche, ce que tu fais automatiquement et ce qui t’aide réellement.</p><div class="functioning-fixed-v929">'+maps[k].map(x=>'<div class="row"><strong>'+x[0]+'</strong><span>'+x[1]+'</span></div>').join("")+'</div><textarea id="mapV929" placeholder="Ce que je reconnais chez moi, mes signes précoces, ce que je veux tester…"></textarea><button type="button" class="btn btn-dark" id="saveMapV929">Enregistrer</button></div>';
+ $("mapV929").value=notes;
+ $("saveMapV929").onclick=()=>{
+   const a=read("alloPsychoFunctionMapNotesV928",{});a[k]=$("mapV929").value.trim();write("alloPsychoFunctionMapNotesV928",a);
+   const all=read("alloPsychoThemeProgressV928",{});all[k]={...(all[k]||{}),functioning:true};write("alloPsychoThemeProgressV928",all);badge();
+   const prog=$("themeProgressV928");if(prog){const spans=[...prog.children];if(spans[3]){spans[3].classList.add("done");spans[3].classList.remove("current")}}
+ };
+}
+document.addEventListener("click",e=>{
+ const t=e.target.closest?.('[data-w="functioning"]');
+ if(t){setTimeout(renderFunctioning,0)}
+ const theme=e.target.closest?.("[data-theme-v927]");
+ if(theme)setTimeout(badge,20);
+},true);
+const obs=new MutationObserver(()=>badge());
+const p=$("themePanelV927");if(p)obs.observe(p,{childList:true,subtree:false});
+setTimeout(badge,300);
 })();
 </script>
 </body>
