@@ -2328,6 +2328,21 @@ body{font-size:16px}
 .functioning-fixed-v929{display:grid;gap:9px}.functioning-fixed-v929 .row{padding:11px 12px;border-radius:15px;background:#faf7f5;border:1px solid #eadfe5}.functioning-fixed-v929 .row strong{display:block;font-size:.78rem}.functioning-fixed-v929 .row span{display:block;margin-top:3px;font-size:.76rem;color:var(--soft)}
 @media(max-width:760px){body{font-size:16px}.tab{font-size:.72rem!important}.brand p,.connection{font-size:.72rem!important}}
 
+
+/* ===== V9.3.0 — ateliers générés à partir des réponses ===== */
+.generated-box-v930{margin-top:11px;padding:13px 14px;border-radius:17px;background:#f7fbf7;border:1px solid #dce9df;font-size:.78rem;line-height:1.55}
+.generated-box-v930 strong{display:block;margin-bottom:5px}
+.exercise-box-v930{margin-top:9px;padding:12px 13px;border-radius:16px;background:#fff8ef;border:1px solid #f0e1ca}
+.exercise-box-v930 b{display:block;margin-bottom:5px}
+.response-grid-v930{display:grid;gap:9px;margin-top:10px}
+.response-grid-v930 label{font-size:.78rem;font-weight:800}
+.response-grid-v930 textarea,.response-grid-v930 input{width:100%;border:1px solid #e5dce1;border-radius:14px;padding:10px;background:#fff;color:var(--text);font-size:.95rem}
+.response-grid-v930 textarea{min-height:82px}
+.mission-options-v930{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.mission-options-v930 button{border:1px solid #eadfe5;background:#fff;border-radius:15px;padding:11px;text-align:left;color:var(--text)}
+.mission-options-v930 button.active{background:#57484f;color:#fff}
+@media(max-width:680px){.mission-options-v930{grid-template-columns:1fr}}
+
 </style>
 </head>
 
@@ -7158,13 +7173,13 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
   const toast=(m)=>typeof afficherToast==="function"?afficherToast(m):console.log(m);
 
   const steps=[
-    {title:"Ce qui s’est passé",help:"Décris seulement les faits, sans interpréter."},
-    {title:"La pensée",help:"Quelle phrase t’est venue automatiquement ?"},
-    {title:"Ce que je ressens",help:"Quelle émotion ? Intensité de 0 à 100."},
-    {title:"Ce qui va dans ce sens",help:"Quels faits soutiennent vraiment cette pensée ?"},
-    {title:"Ce qui la nuance",help:"Qu’est-ce qui montre que ce n’est peut-être pas toute l’histoire ?"},
-    {title:"Une pensée plus juste",help:"Formule une phrase crédible, ni trop positive ni catastrophique."},
-    {title:"Mon petit test",help:"Quelle petite action pourrait m’apporter une information nouvelle ?"}
+    {title:"Situation",help:"Que s’est-il passé, concrètement et de façon observable ? Décris le contexte sans interprétation : où, quand, avec qui, et ce qui s’est réellement produit."},
+    {title:"Pensée automatique",help:"Quelle phrase exacte a traversé ton esprit à ce moment-là ? Essaie de l’écrire telle qu’elle est apparue, même si elle te semble excessive."},
+    {title:"Émotion / intensité",help:"Quelle émotion as-tu ressentie ? Donne-lui un nom et estime son intensité de 0 à 100."},
+    {title:"Faits pour",help:"Quels faits observables semblent soutenir cette pensée ? Garde seulement ce que tu pourrais décrire à quelqu’un d’extérieur."},
+    {title:"Faits qui nuancent",help:"Quels contre-exemples, informations manquantes ou autres explications montrent que cette pensée n’est peut-être pas toute l’histoire ?"},
+    {title:"Pensée alternative équilibrée",help:"Quelle formulation serait plus nuancée, crédible et réaliste ? Elle n’a pas besoin d’être positive : seulement plus juste."},
+    {title:"Action / expérience",help:"Quel petit test concret pourrait t’apporter une nouvelle information ? Choisis une action faisable, observable et suffisamment petite."}
   ];
 
   let index=Number(sessionStorage.getItem("alloPsychoTccIndexV741")||0);
@@ -9192,6 +9207,131 @@ document.addEventListener("click",e=>{
 const obs=new MutationObserver(()=>badge());
 const p=$("themePanelV927");if(p)obs.observe(p,{childList:true,subtree:false});
 setTimeout(badge,300);
+})();
+</script>
+<script>
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const read=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(d))}catch(_){return d}};
+const write=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+
+const themeNames={anxiety:"Anxiété & apaisement",rumination:"Pensées & rumination",sensitivity:"Sensibilité & surcharge",limits:"Relations & limites",procrastination:"Motivation & procrastination",sleep:"Sommeil & récupération"};
+
+const exercises={
+ anxiety:["Différer une vérification de 10 minutes et noter l’intensité avant/après.","Écrire : ce que je sais / ce que j’imagine / ce que je peux faire maintenant.","Tester une petite incertitude sans chercher immédiatement à la résoudre."],
+ rumination:["Programmer un créneau de rumination de 15 minutes plus tard.","Ajouter devant la pensée : « J’ai la pensée que… » puis revenir à une action concrète.","Classer la question : soluble aujourd’hui / sans réponse disponible maintenant."],
+ sensitivity:["Créer un sas de 10 minutes avec une stimulation en moins.","Repérer le premier signe corporel de surcharge et agir à ce moment-là.","Choisir une limite préventive avant d’arriver à saturation."],
+ limits:["Préparer une réponse en deux phrases maximum.","Tester une petite limite et observer la réaction réelle plutôt que prévue.","Écrire : ce qui m’appartient / ce qui appartient à l’autre."],
+ procrastination:["Faire uniquement le premier geste pendant 5 minutes.","Définir une version « suffisamment bonne » de la tâche.","Retirer une friction concrète de l’environnement avant de commencer."],
+ sleep:["Faire une liste « pas maintenant » avant le lit.","Créer un sas de 15 minutes sans résolution de problème.","Après une mauvaise nuit, garder une heure de lever aussi stable que possible."]
+};
+
+function currentTheme(){return localStorage.getItem("alloPsychoThemeV927")||"anxiety"}
+function getWorkshop(k){const all=read("alloPsychoGeneratedWorkshopV930",{});return all[k]||{}}
+function saveWorkshop(k,patch){const all=read("alloPsychoGeneratedWorkshopV930",{});all[k]={...(all[k]||{}),...patch,updatedAt:Date.now()};write("alloPsychoGeneratedWorkshopV930",all)}
+
+function derive(k,data){
+  const scenario=read("alloPsychoThemeChoicesV928",{})[k];
+  const sim=(data.simulator||"").trim();
+  const concern=(data.concern||"").trim();
+  const prediction=(data.prediction||"").trim();
+  const need=(data.need||"").trim();
+  const choice=scenario?.label||"aucun choix encore";
+  const pattern={
+    anxiety:"Tu sembles surtout chercher à réduire rapidement l’incertitude. Le point de travail est de distinguer danger réel et besoin de certitude.",
+    rumination:"Le mécanisme principal semble être la recherche d’une réponse définitive par l’analyse répétée. Le point de travail est de revenir à une question soluble ou à l’action.",
+    sensitivity:"Le fonctionnement semble lié à l’accumulation avant récupération. Le point de travail est d’intervenir plus tôt, avant la saturation.",
+    limits:"Le fonctionnement semble mêler besoin personnel et anticipation de la réaction de l’autre. Le point de travail est de clarifier la limite sans surjustifier.",
+    procrastination:"Le fonctionnement semble concentrer l’attention sur toute la tâche plutôt que sur le prochain geste. Le point de travail est de réduire la taille du démarrage.",
+    sleep:"Le fonctionnement semble transformer le temps de repos en temps de résolution. Le point de travail est de déplacer le traitement des problèmes hors du lit."
+  }[k];
+
+  const summary='À partir de tes réponses'+(sim?' — « '+sim.slice(0,120)+(sim.length>120?'…':'')+' »':'')+', '+pattern;
+  const target=exercises[k][
+    prediction.length>80?2:
+    concern.length>80?1:0
+  ];
+  const mission=need
+    ? 'Mission adaptée : '+target+' Garde comme repère ton besoin formulé : « '+need.slice(0,100)+' ».'
+    : 'Mission adaptée : '+target;
+  const review='Choix exploré : '+choice+'. '+(prediction?'Prévision : « '+prediction.slice(0,120)+' ». ':'')+'Après le test, compare ce que tu avais prévu avec ce qui s’est réellement passé.';
+  return {summary,target,mission,review};
+}
+
+function renderAdaptive(tab){
+  const k=currentTheme(),o=$("workshopPanelV928");if(!o)return;
+  const data=getWorkshop(k),g=derive(k,data);
+
+  if(tab==="simulator"){
+    o.innerHTML='<div class="simulator-v928"><h4>💬 Simulateur · situation réelle</h4><p>Pars d’une situation qui te concerne vraiment. Les étapes suivantes seront générées à partir de tes réponses.</p>'+
+      '<div class="response-grid-v930">'+
+      '<label>La situation<textarea id="v930Concern" placeholder="Que se passe-t-il concrètement ?"></textarea></label>'+
+      '<label>Ce que je prévois ou redoute<textarea id="v930Prediction" placeholder="Qu’est-ce que tu penses qu’il va se passer ?"></textarea></label>'+
+      '<label>Ce dont j’aurais besoin<textarea id="v930Need" placeholder="Calme, clarté, limite, repos, action…"></textarea></label>'+
+      '<label>Ce que je pourrais dire ou faire<textarea id="v930Simulator" placeholder="Teste ici une réponse, une phrase ou un premier geste…"></textarea></label>'+
+      '</div><button type="button" class="btn btn-dark" id="v930Generate">Générer la suite</button><div id="v930Generated"></div></div>';
+    $("v930Concern").value=data.concern||"";$("v930Prediction").value=data.prediction||"";$("v930Need").value=data.need||"";$("v930Simulator").value=data.simulator||"";
+    $("v930Generate").onclick=()=>{
+      const patch={concern:$("v930Concern").value.trim(),prediction:$("v930Prediction").value.trim(),need:$("v930Need").value.trim(),simulator:$("v930Simulator").value.trim()};
+      saveWorkshop(k,patch);
+      const gg=derive(k,{...data,...patch});
+      $("v930Generated").innerHTML='<div class="generated-box-v930"><strong>Ce qui ressort</strong>'+gg.summary+'<div class="exercise-box-v930"><b>Exercice lié</b>'+gg.target+'</div></div>';
+      markStage(k,"simulator");
+    };
+  }
+
+  if(tab==="mission"){
+    const gg=derive(k,data);
+    const selected=data.missionChoice||"";
+    const opts=[gg.target,exercises[k][1],exercises[k][2]].filter((v,i,a)=>a.indexOf(v)===i);
+    o.innerHTML='<div class="mission-v928"><h4>👣 Mission adaptée</h4><p>'+gg.mission+'</p><div class="mission-options-v930">'+opts.map((x,i)=>'<button type="button" data-v930-mission="'+i+'" class="'+(selected===x?'active':'')+'">'+x+'</button>').join("")+'</div><label style="display:block;margin-top:10px">Ce que je vais tester<textarea id="v930MissionNote" style="width:100%;min-height:80px;border:1px solid #e5dce1;border-radius:14px;padding:10px"></textarea></label><button type="button" class="btn btn-dark" id="v930MissionSave">Valider ma mission</button></div>';
+    $("v930MissionNote").value=data.missionNote||"";
+    o.querySelectorAll("[data-v930-mission]").forEach(b=>b.onclick=()=>{o.querySelectorAll("[data-v930-mission]").forEach(x=>x.classList.remove("active"));b.classList.add("active");saveWorkshop(k,{missionChoice:opts[+b.dataset.v930Mission]})});
+    $("v930MissionSave").onclick=()=>{saveWorkshop(k,{missionNote:$("v930MissionNote").value.trim()});markStage(k,"mission");renderAdaptive("mission")};
+  }
+
+  if(tab==="functioning"){
+    const gg=derive(k,data);
+    o.innerHTML='<div class="functioning-v928"><h4>🧩 Mon fonctionnement · généré à partir de mes réponses</h4><div class="generated-box-v930"><strong>Synthèse actuelle</strong>'+gg.summary+'</div>'+
+      '<div class="exercise-box-v930"><b>Exercice directement lié</b>'+gg.target+'</div>'+
+      '<div class="response-grid-v930"><label>Ce que je reconnais le plus<textarea id="v930Recognize" placeholder="Ce qui me ressemble dans cette synthèse…"></textarea></label><label>Ce qui m’aide réellement<textarea id="v930Helpful" placeholder="Ce qui a déjà fonctionné, même un peu…"></textarea></label><label>Mon signal précoce<textarea id="v930Signal" placeholder="Le premier signe qui me dit que ça commence…"></textarea></label></div>'+
+      '<button type="button" class="btn btn-dark" id="v930FunctionSave">Mettre à jour mon fonctionnement</button></div>';
+    $("v930Recognize").value=data.recognize||"";$("v930Helpful").value=data.helpful||"";$("v930Signal").value=data.signal||"";
+    $("v930FunctionSave").onclick=()=>{saveWorkshop(k,{recognize:$("v930Recognize").value.trim(),helpful:$("v930Helpful").value.trim(),signal:$("v930Signal").value.trim()});markStage(k,"functioning");renderAdaptive("functioning")};
+  }
+
+  if(tab==="review"){
+    const fresh=getWorkshop(k),gg=derive(k,fresh);
+    const automatic=[
+      fresh.recognize?'Je reconnais : '+fresh.recognize:"",
+      fresh.helpful?'Ce qui m’aide : '+fresh.helpful:"",
+      fresh.signal?'Mon signal précoce : '+fresh.signal:"",
+      fresh.missionChoice?'Mission testée : '+fresh.missionChoice:""
+    ].filter(Boolean);
+    o.innerHTML='<div class="review-v928"><h4>✅ Bilan interactif</h4><div class="generated-box-v930"><strong>Bilan généré</strong>'+gg.review+(automatic.length?'<br><br>'+automatic.join("<br>"):"")+'</div>'+
+      '<div class="exercise-box-v930"><b>Exercice de consolidation</b>Avant de refaire la même situation, écris en une phrase : « Quand je remarque '+(fresh.signal||"mon signal")+', je choisis de '+(fresh.missionChoice||gg.target).toLowerCase()+' ».</div>'+
+      '<div class="response-grid-v930"><label>Ce qui s’est réellement passé<textarea id="v930Reality" placeholder="Résultat observé après la mission…"></textarea></label><label>Ce que j’apprends<textarea id="v930Learning" placeholder="Ce que cela change dans ma compréhension…"></textarea></label><label>Mon prochain test<textarea id="v930Next" placeholder="Une petite expérience à poursuivre…"></textarea></label></div>'+
+      '<button type="button" class="btn btn-dark" id="v930ReviewSave">Consolider ce bilan</button></div>';
+    $("v930Reality").value=fresh.reality||"";$("v930Learning").value=fresh.learning||"";$("v930Next").value=fresh.next||"";
+    $("v930ReviewSave").onclick=()=>{saveWorkshop(k,{reality:$("v930Reality").value.trim(),learning:$("v930Learning").value.trim(),next:$("v930Next").value.trim()});markStage(k,"review");renderAdaptive("review")};
+  }
+}
+
+function markStage(k,stage){
+  const all=read("alloPsychoThemeProgressV928",{});all[k]={...(all[k]||{}),[stage]:true};write("alloPsychoThemeProgressV928",all);
+  const prog=$("themeProgressV928");if(prog){const map={scenario:0,simulator:1,mission:2,functioning:3,review:4},i=map[stage],spans=[...prog.children];if(spans[i]){spans[i].classList.add("done");spans[i].classList.remove("current")}}
+}
+
+// Override the old dynamic panels after their click handlers have rendered.
+document.addEventListener("click",e=>{
+  const b=e.target.closest?.("[data-w]");
+  if(!b)return;
+  const tab=b.dataset.w;
+  if(["simulator","mission","functioning","review"].includes(tab)){
+    setTimeout(()=>renderAdaptive(tab),0);
+  }
+},true);
 })();
 </script>
 </body>
