@@ -1,0 +1,28 @@
+{
+  "name": "Allo Psycho",
+  "short_name": "Allo Psycho",
+  "description": "Un espace privé et anonyme pour respirer, écrire et avancer à son rythme.",
+  "lang": "fr-FR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#f8dce7",
+  "background_color": "#fffaf7",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "id": "./",
+  "prefer_related_applications": false
+}
