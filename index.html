@@ -9162,15 +9162,15 @@ function badge(){
  const n=["scenario","simulator","mission","functioning","review"].filter(x=>s[x]).length;
  let b=$("themeBadgeV929"); if(!b){b=document.createElement("div");b.id="themeBadgeV929";b.className="theme-badge-v929";p.prepend(b)}
  const levels=[
-   ["🌱","Apprenti·e du calme"],
-   ["🌊","Dompteur·se de tempête"],
-   ["🔎","Détective des pensées"],
-   ["👣","Champion·ne du petit pas"],
-   ["✨","Maître·sse du non parfait"],
-   ["🧭","Explorateur·rice des besoins"]
+   ["🌱","Découverte","Apprenti·e du calme"],
+   ["🌊","En route","Dompteur·se de tempête"],
+   ["🔎","En pratique","Détective des pensées"],
+   ["👣","Intégration","Champion·ne du petit pas"],
+   ["✨","Consolidation","Maître·sse du non parfait"],
+   ["🧭","Parcours complété","Explorateur·rice des besoins"]
  ];
- const [icon,name]=levels[n];
- b.innerHTML='<span class="icon">'+icon+'</span><div><strong>'+name+'</strong><small>'+(labels[k]||"Parcours")+' · '+n+'/5 jalons validés</small></div>';
+ const [icon,stage,name]=levels[n];
+ b.innerHTML='<span class="icon">'+icon+'</span><div><strong>'+stage+' · '+name+'</strong><small>'+(labels[k]||"Parcours")+' · '+n+'/5 jalons validés</small></div>';
 }
 function renderFunctioning(){
  const k=localStorage.getItem("alloPsychoThemeV927"),o=$("workshopPanelV928"); if(!k||!o||!maps[k])return;
