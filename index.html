@@ -2239,6 +2239,27 @@ select{
 @media(max-width:800px){.need-grid-v922{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.guided-grid-v922{grid-template-columns:repeat(2,1fr)}.guided-reco-v922 .guided-actions-v922 .btn{width:100%}}
 
+
+/* ===== V9.2.3 — continuité, contenus évolutifs & badges ===== */
+.daily-thread-v923{background:linear-gradient(145deg,#fff9f2,#f5f0fb)}
+.daily-steps-v923,.monthly-grid-v923{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:13px}
+.daily-step-v923,.monthly-card-v923{padding:14px;border:1px solid #eadfe5;border-radius:18px;background:#fff;min-height:110px}
+.daily-step-v923 b,.monthly-card-v923 b{display:block;font-size:.78rem;margin-bottom:5px}
+.daily-step-v923 p,.monthly-card-v923 p{margin:0;color:var(--soft);font-size:.69rem;line-height:1.48}
+.quick-kit-v923{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:12px}
+.quick-tool-v923{border:1px solid #eadfe5;background:#fff;border-radius:18px;padding:13px;text-align:left;color:var(--text)}
+.quick-tool-v923 strong,.quick-tool-v923 small{display:block}.quick-tool-v923 strong{font-size:.77rem}.quick-tool-v923 small{margin-top:3px;color:var(--soft);font-size:.62rem}
+.tool-help-v923{margin-top:12px;padding:12px 14px;border-radius:17px;background:#f7fbf7;border:1px solid #dfeadf;font-size:.72rem;line-height:1.5}
+.feedback-v923{margin-top:12px;padding:14px;border-radius:18px;background:#fff8ef;border:1px solid #f0e1ca}.feedback-v923[hidden]{display:none}.feedback-v923 input[type=range]{width:100%}
+.feedback-actions-v923{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.evo-insights-v923{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:12px}
+.evo-insight-v923{padding:12px 13px;border-radius:17px;background:#faf7f5;border:1px solid #eee5e2}.evo-insight-v923 strong{display:block;font-size:.7rem}.evo-insight-v923 span{display:block;margin-top:4px;color:var(--soft);font-size:.66rem;line-height:1.45}
+.badge-card-v923{background:linear-gradient(145deg,#fffaf0,#f5edff)}.badge-main-v923{display:flex;align-items:center;gap:14px;padding:14px;border-radius:20px;background:#fff;border:1px solid #eadfe5}.badge-icon-v923{font-size:2.3rem}.badge-main-v923 strong,.badge-main-v923 small{display:block}.badge-main-v923 small{color:var(--soft);margin-top:3px}.badge-row-v923{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.badge-chip-v923{padding:7px 10px;border-radius:999px;background:#fff;border:1px solid #eadfe5;font-size:.65rem}.badge-chip-v923.locked{opacity:.42}
+.season-v923{background:linear-gradient(145deg,#f7fbff,#fff8f3)}.season-tag-v923{display:inline-flex;padding:6px 10px;border-radius:999px;background:#fff;border:1px solid #e5e3ee;font-size:.64rem;font-weight:850;margin-bottom:8px}
+.chat-route-v923{margin:8px 0 12px;padding:11px 12px;border-radius:15px;background:#f4f8f5;border:1px solid #dce9df;font-size:.7rem}.chat-route-v923 button{margin-top:7px}
+.ux-test-v923{margin-top:14px;padding:13px;border:1px dashed #baa8b2;border-radius:17px;background:#fff;display:none}body.ux-test-active-v923 .ux-test-v923{display:block}
+@media(max-width:720px){.daily-steps-v923,.monthly-grid-v923,.quick-kit-v923,.evo-insights-v923{grid-template-columns:1fr}}
+
 </style>
 </head>
 
@@ -2333,7 +2354,7 @@ select{
     >
       <div class="card smart-home-v7 guided-home-v922">
         <p class="eyebrow">MON POINT DE DÉPART</p>
-        <h2>🌈 Comment je me sens, et de quoi ai-je besoin ?</h2>
+        <h2>🌈 Comment je me sens et de quoi ai-je besoin ?</h2>
         <p class="muted">Deux choix simples pour t’orienter vers l’outil ou le parcours le plus utile maintenant. Tout ce suivi reste sur cet appareil.</p>
 
         <div class="guided-step-v922">
@@ -2361,7 +2382,41 @@ select{
 
         <div id="smartRecoV7" class="smart-reco-v7 guided-reco-v922">Commence par choisir comment tu te sens.</div>
         <div id="guidedResumeV922" class="guided-resume-v922" hidden></div>
-      </div>      <div class="card guided-history-v922">
+      </div>      <div class="card daily-thread-v923" id="dailyThreadV923">
+        <p class="eyebrow">MON FIL DU JOUR</p>
+        <h3>👣 Maintenant · Petit pas · À revoir</h3>
+        <p class="muted">Un fil simple pour avancer sans devoir parcourir tous les outils.</p>
+        <div class="daily-steps-v923">
+          <div class="daily-step-v923"><b>1 · Maintenant</b><p id="dailyNowV923">Choisis d’abord comment tu te sens et ce dont tu as besoin.</p><button type="button" class="btn btn-light" id="dailyNowBtnV923" hidden>Commencer</button></div>
+          <div class="daily-step-v923"><b>2 · Mon petit pas</b><p id="dailyStepV923">Aucun petit pas défini pour le moment.</p><button type="button" class="btn btn-light" id="dailyStepBtnV923" hidden>Faire le point</button></div>
+          <div class="daily-step-v923"><b>3 · À revoir plus tard</b><p id="dailyLaterV923">L’app te rappellera localement ce qui mérite d’être repris.</p><button type="button" class="btn btn-light" id="dailyLaterBtnV923" hidden>Reprendre</button></div>
+        </div>
+        <div id="toolFeedbackV923" class="feedback-v923" hidden></div>
+      </div>
+
+      <div class="card badge-card-v923">
+        <p class="eyebrow">MA PROGRESSION LUDIQUE</p>
+        <h3>🏅 Mes badges thérapeutiques</h3>
+        <div class="badge-main-v923"><div id="badgeIconV923" class="badge-icon-v923">🌱</div><div><strong id="badgeNameV923">Apprenti·e du calme</strong><small id="badgeTextV923">Chaque petit pas compte. Les badges célèbrent la pratique, pas la performance.</small></div></div>
+        <div id="badgeRowV923" class="badge-row-v923"></div>
+      </div>
+
+      <div class="card season-v923">
+        <span id="seasonTagV923" class="season-tag-v923">NOUVEAUTÉS DU MOIS</span>
+        <h3 id="seasonTitleV923">✨ Un contenu différent chaque mois</h3>
+        <p id="seasonIntroV923" class="muted">Des micro-contenus se renouvellent mensuellement et un nouveau pack thématique apparaît chaque trimestre.</p>
+        <div id="monthlyGridV923" class="monthly-grid-v923"></div>
+      </div>
+
+      <div class="card">
+        <p class="eyebrow">MON KIT RAPIDE · LOCAL</p>
+        <h3>⭐ Mes outils qui m’aident</h3>
+        <p class="muted">Les trois raccourcis évoluent selon tes retours. Au départ, l’app propose des essentiels.</p>
+        <div id="quickKitV923" class="quick-kit-v923"></div>
+        <div id="bestToolsV923" class="tool-help-v923">🌱 Après quelques utilisations, l’app pourra te rappeler les outils qui semblent réellement t’aider.</div>
+      </div>
+
+      <div class="card guided-history-v922">
         <p class="eyebrow">MON SUIVI · LOCAL</p>
         <h3>💕 Mes derniers états</h3>
         <p class="muted">L’état choisi à l’accueil alimente ce suivi local pour t’aider à observer ton évolution, sans diagnostic.</p>
@@ -2386,6 +2441,12 @@ select{
         </div>
         <div id="weekBarsV7" class="week-bars-v7"></div>
         <div id="helpInsightV7" class="smart-reco-v7">🌱 Les tendances se préciseront au fil de l’utilisation.</div>
+        <div id="evoInsightsV923" class="evo-insights-v923">
+          <div class="evo-insight-v923"><strong>🔁 Ce qui revient</strong><span id="evoThemeV923">Pas encore assez de recul.</span></div>
+          <div class="evo-insight-v923"><strong>🌿 Ce qui semble m’aider</strong><span id="evoHelpfulV923">Tes retours apparaîtront ici.</span></div>
+          <div class="evo-insight-v923"><strong>👣 Mon prochain petit pas</strong><span id="evoStepV923">Aucun petit pas enregistré.</span></div>
+          <div class="evo-insight-v923"><strong>🧭 Parcours en cours</strong><span id="evoPathV923">Aucun parcours démarré.</span></div>
+        </div>
       </div>
 
 
@@ -2839,6 +2900,7 @@ select{
           <button type="button" class="btn btn-light" id="summaryV7">📝 Synthèse du fil</button>
         </div>
         <div id="aiQuotaV922" class="ai-quota-v922" aria-live="polite">✨ Premium · jusqu’à 12 messages IA par jour</div>
+        <div id="chatRouteV923" class="chat-route-v923" hidden></div>
 
         <div id="crisisCard" class="crisis-card" aria-live="assertive">
           <h3 id="crisisTitle"></h3>
@@ -2888,10 +2950,10 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
         <div id="ownerAccessV862" class="owner-access-v862" hidden>
           <div id="ownerBadgeV862" class="owner-badge-v862" hidden>👑 Propriétaire · Admin · Premium permanent</div>
           <div id="testerBadgeV90" class="owner-badge-v862" hidden>🧪 Testeur · Premium permanent</div>
+        </div>
         <div class="options-shortcuts-v921">
           <button type="button" class="btn btn-dark" id="openPremiumV921">✨ Premium & abonnement</button>
           <button type="button" class="btn btn-light" id="openAboutV921">🌷 À propos & contact</button>
-        </div>
         </div>
       </div>
 
@@ -2971,6 +3033,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
         </div>
       </div>
 
+<div class="card ux-test-v923" id="uxTestPanelV923"><p class="eyebrow">MODE TEST UTILISATEUR</p><h3>🧪 Test de simplicité</h3><p class="muted">Visible uniquement avec <code>?ux-test=1</code>. Les mesures restent sur cet appareil.</p><div id="uxTestStatsV923" class="muted">Aucune donnée de test.</div><div class="profile-actions" style="margin-top:10px"><button type="button" class="btn btn-light" id="uxTestExportV923">Copier le bilan</button><button type="button" class="btn btn-light" id="uxTestResetV923">Réinitialiser</button></div></div>
 <div class="data-bottom-label-v72"><p class="eyebrow">CONFIDENTIALITÉ & CHOIX DE DONNÉES</p></div>
 <div class="card data-bottom-v72">
         <p class="eyebrow">CONFIDENTIALITÉ</p>
@@ -5530,6 +5593,13 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
             if(q)q.textContent="✨ Premium · "+remaining+" message"+(remaining>1?"s":"")+" IA restant"+(remaining>1?"s":"")+" aujourd’hui sur 12";
           }
 
+          if(result.data.app_suggestion&&typeof result.data.app_suggestion==="object"){
+            try{
+              localStorage.setItem("alloPsychoLastAppSuggestionV923",JSON.stringify(result.data.app_suggestion));
+              window.dispatchEvent(new CustomEvent("allo-ai-suggestion",{detail:result.data.app_suggestion}));
+            }catch(_){}
+          }
+
           const reply=
             typeof result.data==="string"
               ?result.data
@@ -6844,6 +6914,8 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
     const currentBtn=document.querySelector('[data-step-open="'+done.length+'"]:not([disabled])');
     currentBtn?.click();
   }
+  window.alloShowPathV923=showPath;
+  window.alloPathsV923=paths;
   drawPaths();
 
   // 8 — Protection PIN uniquement
@@ -8168,6 +8240,160 @@ window.addEventListener("unhandledrejection",function(e){
   }else{
     setTimeout(showOnboardingV921,700);
   }
+})();
+</script>
+
+<script>
+/* ALLO PSYCHO V9.2.3 — continuité quotidienne, contenus évolutifs, badges */
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const read=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(_){return d}};
+const write=(k,v)=>{try{const raw=JSON.stringify(v);localStorage.setItem(k,raw);if(typeof alloPersistMirrorV9==="function")alloPersistMirrorV9(k,raw)}catch(_){}};
+const page=n=>document.querySelector('[data-page="'+n+'"]')?.click();
+const tools={
+ breathing:{label:"🌿 Respiration 5 · 5",page:"relax",anchor:"breathingCardV8"},
+ urgent:{label:"🕊️ Urgence Calme",page:"relax",selector:'[data-premium-calm-v83="urgent"]'},
+ tcc:{label:"🧠 TCC guidée",page:"write",anchor:"tccWizardV72"},
+ release:{label:"⚡ Décharge",page:"games",selector:'[data-game="release"]'},
+ journal:{label:"📖 Journal",page:"write",anchor:"journalText"},
+ chat:{label:"💬 Compagnon",page:"chat",anchor:"chatInput"}
+};
+function label(k){return tools[k]?.label||k}
+function route(k){
+ const t=tools[k];if(!t)return;page(t.page);
+ setTimeout(()=>{const e=t.anchor?$(t.anchor):document.querySelector(t.selector||"");e?.scrollIntoView?.({behavior:"smooth",block:"center"});e?.focus?.();if(k==="release")e?.click?.()},250);
+}
+function memory(){return read("alloPsychoTherapyMemory",{})||{}}
+function activePath(){
+ const a=read("alloPsychoPathsV7",{});
+ for(const [k,v] of Object.entries(a)){const d=Array.isArray(v)?v:(v?.done||[]);if(d.length>0&&d.length<7)return {key:k,done:d.length}}
+ return null;
+}
+function currentReco(){
+ const f=localStorage.getItem("alloPsychoLastState")||"",n=localStorage.getItem("alloPsychoLastNeed")||"";
+ const map={
+  "anxious|calm":["breathing","Respirer d’abord pour diminuer l’activation."],
+  "anxious|understand":["tcc","Mettre la situation et les pensées à plat."],
+  "angry|release":["release","Décharger avant de décider."],
+  "sad|act":["journal","Choisir un petit pas réaliste."],
+  "overload|calm":["urgent","Réduire la surcharge maintenant."],
+  "reflect|understand":["tcc","Clarifier les faits, pensées et besoins."],
+  "calm|act":["journal","Consolider ce qui fonctionne."]
+ };
+ const r=map[f+"|"+n]||null;return r?{action:r[0],text:r[1]}:null;
+}
+function beginTool(k){
+ const before=Number(prompt("Avant de commencer, ta tension de 0 à 10 ? (facultatif)")||"");
+ write("alloPsychoActiveToolV923",{action:k,before:Number.isFinite(before)?Math.max(0,Math.min(10,before)):null,started_at:new Date().toISOString()});
+ setTimeout(renderFeedback,650);
+}
+function renderDaily(){
+ const m=memory(),r=currentReco(),p=activePath();
+ if($("dailyNowV923")){$("dailyNowV923").textContent=r?.text||"Choisis d’abord comment tu te sens et ce dont tu as besoin.";$("dailyNowBtnV923").hidden=!r;$("dailyNowBtnV923").onclick=()=>{beginTool(r.action);route(r.action)}}
+ if($("dailyStepV923")){$("dailyStepV923").textContent=m.next_small_step||"Aucun petit pas défini pour le moment.";$("dailyStepBtnV923").hidden=!m.next_small_step;$("dailyStepBtnV923").onclick=()=>{page("chat");setTimeout(()=>{const i=$("chatInput");if(i){i.value="Mon dernier petit pas était : "+m.next_small_step+". Aide-moi à faire le point brièvement.";i.focus()}},250)}}
+ if($("dailyLaterV923")){
+  if(p){const nm=window.alloPathsV923?.[p.key]?.name||p.key;$("dailyLaterV923").textContent="Parcours à reprendre : "+nm+" · "+p.done+"/7 étapes.";$("dailyLaterBtnV923").hidden=false;$("dailyLaterBtnV923").onclick=()=>{page("premium");setTimeout(()=>{window.alloShowPathV923?.(p.key);$("pathDetailV7")?.scrollIntoView({behavior:"smooth"})},250)}}
+  else{$("dailyLaterV923").textContent=m.last_follow_up||"L’app te rappellera localement ce qui mérite d’être repris.";$("dailyLaterBtnV923").hidden=true}
+ }
+}
+function renderFeedback(){
+ const a=read("alloPsychoActiveToolV923",null),b=$("toolFeedbackV923");if(!b)return;if(!a){b.hidden=true;return}
+ b.hidden=false;b.innerHTML='<strong>Après '+label(a.action)+'</strong><label>Tension maintenant : <b id="afterValueV923">5/10</b></label><input id="afterRangeV923" type="range" min="0" max="10" value="5"><div class="feedback-actions-v923"><button class="btn btn-light" data-h="2">👍 Ça m’a aidé</button><button class="btn btn-light" data-h="1">🙂 Un peu</button><button class="btn btn-light" data-h="0">Pas vraiment</button></div>';
+ $("afterRangeV923").oninput=e=>$("afterValueV923").textContent=e.target.value+"/10";
+ b.querySelectorAll("[data-h]").forEach(x=>x.onclick=()=>{const arr=read("alloPsychoToolFeedbackV923",[]);arr.push({tool:a.action,before:a.before,after:Number($("afterRangeV923").value),help:Number(x.dataset.h),at:new Date().toISOString()});write("alloPsychoToolFeedbackV923",arr.slice(-120));localStorage.removeItem("alloPsychoActiveToolV923");b.hidden=true;renderKit();renderEvolution();renderBadges()});
+}
+function rankedTools(){
+ const a=read("alloPsychoToolFeedbackV923",[]),m={};a.forEach(x=>{const z=m[x.tool]||(m[x.tool]={n:0,h:0,d:0,dn:0});z.n++;z.h+=Number(x.help||0);if(Number.isFinite(Number(x.before))&&Number.isFinite(Number(x.after))){z.d+=Number(x.before)-Number(x.after);z.dn++}});
+ return Object.entries(m).map(([tool,z])=>({tool,n:z.n,score:(z.h/(z.n||1))*2+(z.dn?z.d/z.dn:0)})).sort((a,b)=>b.score-a.score);
+}
+function renderKit(){
+ const r=rankedTools(),p=[...r.map(x=>x.tool),"breathing","tcc","journal"].filter((x,i,a)=>a.indexOf(x)===i).slice(0,3);
+ if($("quickKitV923"))$("quickKitV923").innerHTML=p.map(k=>'<button class="quick-tool-v923" data-kit="'+k+'"><strong>'+label(k)+'</strong><small>'+(r.some(x=>x.tool===k)?"D’après tes retours locaux":"Raccourci essentiel")+'</small></button>').join("");
+ document.querySelectorAll("[data-kit]").forEach(x=>x.onclick=()=>{beginTool(x.dataset.kit);route(x.dataset.kit)});
+ if($("bestToolsV923"))$("bestToolsV923").textContent=r.length?"🌿 "+r.slice(0,2).map(x=>label(x.tool)).join(" et ")+" semblent les plus utiles pour toi actuellement.":"🌱 Après quelques utilisations, l’app pourra te rappeler les outils qui semblent réellement t’aider.";
+}
+function renderEvolution(){
+ const m=memory(),r=rankedTools(),p=activePath();
+ if($("evoThemeV923"))$("evoThemeV923").textContent=m.recurring_theme||"Pas encore assez de recul.";
+ if($("evoHelpfulV923"))$("evoHelpfulV923").textContent=m.helpful||(r[0]?label(r[0].tool):"Tes retours apparaîtront ici.");
+ if($("evoStepV923"))$("evoStepV923").textContent=m.next_small_step||"Aucun petit pas enregistré.";
+ if($("evoPathV923"))$("evoPathV923").textContent=p?((window.alloPathsV923?.[p.key]?.name||p.key)+" · "+p.done+"/7 étapes"):"Aucun parcours démarré.";
+}
+const badges=[
+ {n:0,icon:"🌱",name:"Apprenti·e du calme"},
+ {n:3,icon:"🫧",name:"Respirateur·rice en herbe"},
+ {n:7,icon:"🧠",name:"Détective des pensées"},
+ {n:12,icon:"👣",name:"Collectionneur·se de petits pas"},
+ {n:20,icon:"🧭",name:"Explorateur·rice de soi"},
+ {n:35,icon:"🌿",name:"Jardinier·ère de l’équilibre"},
+ {n:60,icon:"✨",name:"Maître·sse du petit mieux"}
+];
+function activityCount(){
+ return read("alloPsychoToolFeedbackV923",[]).length+read("alloPsychoTCC",[]).length+read("alloPsychoJournaux",[]).length+read("alloPsychoHumeurs",[]).length;
+}
+function renderBadges(){
+ const n=activityCount();let cur=badges[0];badges.forEach(b=>{if(n>=b.n)cur=b});
+ if($("badgeIconV923"))$("badgeIconV923").textContent=cur.icon;if($("badgeNameV923"))$("badgeNameV923").textContent=cur.name;
+ if($("badgeTextV923"))$("badgeTextV923").textContent=n+" petits actes d’auto-soin enregistrés localement. Les badges célèbrent la pratique, pas la perfection.";
+ if($("badgeRowV923"))$("badgeRowV923").innerHTML=badges.map(b=>'<span class="badge-chip-v923 '+(n>=b.n?"":"locked")+'">'+b.icon+" "+b.name+'</span>').join("");
+}
+const months=[
+ ["Janvier","Nouveau départ doux","Choisir une intention réaliste","journal"],
+ ["Février","Relations & limites","Dire oui, non ou pas maintenant","tcc"],
+ ["Mars","Énergie & élan","Le plus petit pas possible","journal"],
+ ["Avril","Anxiété & incertitude","Revenir aux faits","tcc"],
+ ["Mai","Confiance","Repérer ce qui est déjà là","journal"],
+ ["Juin","Surcharge","Alléger plutôt que tenir davantage","urgent"],
+ ["Juillet","Pause & récupération","Ralentir sans culpabiliser","breathing"],
+ ["Août","Présence","Revenir aux sensations","breathing"],
+ ["Septembre","Reprise","Choisir une priorité","tcc"],
+ ["Octobre","Rumination","Sortir de la boucle","tcc"],
+ ["Novembre","Émotions","Nommer sans juger","journal"],
+ ["Décembre","Bilan & douceur","Voir les petits progrès","journal"]
+];
+const quarters=[
+ ["T1 · Janvier–Mars","🌱 Pack Repartir doucement","intentions, énergie, activation comportementale"],
+ ["T2 · Avril–Juin","🌿 Pack Réguler & se protéger","anxiété, confiance, limites et surcharge"],
+ ["T3 · Juillet–Septembre","☀️ Pack Récupérer & reprendre","repos, présence, reprise progressive"],
+ ["T4 · Octobre–Décembre","✨ Pack Comprendre & consolider","rumination, émotions, bilan et maintien"]
+];
+function renderSeason(){
+ const d=new Date(),m=d.getMonth(),q=Math.floor(m/3),x=months[m],y=quarters[q];
+ if($("seasonTagV923"))$("seasonTagV923").textContent="NOUVEAUTÉS · "+x[0].toUpperCase();
+ if($("seasonTitleV923"))$("seasonTitleV923").textContent="✨ "+x[1];
+ if($("seasonIntroV923"))$("seasonIntroV923").textContent=y[1]+" · "+y[2]+".";
+ if($("monthlyGridV923"))$("monthlyGridV923").innerHTML=
+  '<div class="monthly-card-v923"><b>🎯 Focus du mois</b><p>'+x[2]+'</p><button class="btn btn-light" data-season="'+x[3]+'">Essayer</button></div>'+
+  '<div class="monthly-card-v923"><b>🧭 Pack trimestriel</b><p>'+y[0]+' · '+y[1]+'</p><button class="btn btn-light" id="seasonPathV923">Voir les parcours</button></div>'+
+  '<div class="monthly-card-v923"><b>🎲 Défi ludique</b><p>3 petits actes d’auto-soin cette semaine pour faire progresser ton badge.</p><button class="btn btn-light" id="seasonBadgeV923">Voir mes badges</button></div>';
+ document.querySelectorAll("[data-season]").forEach(b=>b.onclick=()=>{beginTool(b.dataset.season);route(b.dataset.season)});
+ $("seasonPathV923")?.addEventListener("click",()=>page("premium"));
+ $("seasonBadgeV923")?.addEventListener("click",()=>$("badgeNameV923")?.scrollIntoView({behavior:"smooth"}));
+}
+function renderAISuggestion(s){
+ const b=$("chatRouteV923");if(!b)return;if(!s?.action){b.hidden=true;return}
+ const map={breathing:"breathing",tcc:"tcc",release:"release",journal:"journal",chat:"chat",urgent:"urgent"};
+ const a=map[s.action]||s.action;if(!tools[a]){b.hidden=true;return}
+ b.hidden=false;b.innerHTML="🧭 <strong>Proposition dans l’app :</strong> "+(s.label||label(a))+'<br><button class="btn btn-light" id="aiRouteBtnV923">Ouvrir</button>';
+ $("aiRouteBtnV923").onclick=()=>{beginTool(a);route(a)};
+}
+window.addEventListener("allo-ai-suggestion",e=>renderAISuggestion(e.detail));
+try{renderAISuggestion(read("alloPsychoLastAppSuggestionV923",null))}catch(_){}
+function ux(){
+ if(!new URLSearchParams(location.search).has("ux-test"))return;document.body.classList.add("ux-test-active-v923");
+ const start=Date.now();write("alloPsychoUxStartV923",start);
+ const events=read("alloPsychoUxEventsV923",[]);
+ const mark=(name)=>{events.push({name,seconds:Math.round((Date.now()-start)/1000),at:new Date().toISOString()});write("alloPsychoUxEventsV923",events);renderUx()};
+ document.querySelectorAll("[data-feeling]").forEach(x=>x.addEventListener("click",()=>mark("premier_etat"),{once:true}));
+ $("openPremiumV921")?.addEventListener("click",()=>mark("premium_trouve"),{once:true});
+ $("dailyLaterBtnV923")?.addEventListener("click",()=>mark("reprise_parcours"),{once:true});
+ function renderUx(){if($("uxTestStatsV923"))$("uxTestStatsV923").textContent=events.length?events.map(e=>e.name+" : "+e.seconds+" s").join(" · "):"Aucune donnée de test."}
+ renderUx();$("uxTestResetV923")?.addEventListener("click",()=>{localStorage.removeItem("alloPsychoUxEventsV923");location.reload()});
+ $("uxTestExportV923")?.addEventListener("click",async()=>{try{await navigator.clipboard.writeText(JSON.stringify(events,null,2));if(typeof afficherToast==="function")afficherToast("🧪 Bilan copié.")}catch(_){}});
+}
+function init(){renderDaily();renderFeedback();renderKit();renderEvolution();renderBadges();renderSeason();ux();setInterval(()=>{renderDaily();renderEvolution();renderBadges()},4000)}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(init,900),{once:true});else setTimeout(init,900);
 })();
 </script>
 </body>
