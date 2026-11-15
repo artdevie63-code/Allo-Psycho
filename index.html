@@ -2354,6 +2354,13 @@ body{font-size:16px}
 .mood-chart-empty-v931{min-height:170px;display:grid;place-items:center;text-align:center;color:var(--soft);font-size:.78rem;padding:20px}
 .mood-legend-v931{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;color:var(--soft);font-size:.72rem}
 
+
+/* ===== V9.3.2 — bilans d'évolution périodiques ===== */
+.period-tabs-v932{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 12px}.period-tabs-v932 .active{background:#57484f;color:#fff}
+.period-summary-lead-v932{grid-column:1/-1;padding:14px;border-radius:17px;background:#fff;border:1px solid #eadfe5}
+.period-summary-lead-v932 strong{display:block;font-size:.9rem;margin-bottom:4px}
+.period-summary-lead-v932 span{font-size:.76rem;color:var(--soft)}
+
 </style>
 </head>
 
@@ -2532,9 +2539,15 @@ body{font-size:16px}
       </div>
 
       <div class="card monthly-summary-v924">
-        <p class="eyebrow">MON BILAN DU MOIS · LOCAL</p>
-        <h3>🗓️ Le mois en quelques repères</h3>
-        <div id="monthlySummaryV924" class="monthly-summary-grid-v924"></div>
+        <p class="eyebrow">MES BILANS D'ÉVOLUTION · LOCAL</p>
+        <h3>🗓️ Mensuel · Trimestriel · Annuel</h3>
+        <p class="muted">Calculés automatiquement à partir du schéma de mes humeurs, des intensités et des retours après exercices.</p>
+        <div class="period-tabs-v932">
+          <button type="button" class="btn btn-light active" data-period-v932="month">Mois</button>
+          <button type="button" class="btn btn-light" data-period-v932="quarter">Trimestre</button>
+          <button type="button" class="btn btn-light" data-period-v932="year">Année</button>
+        </div>
+        <div id="periodSummaryV932" class="monthly-summary-grid-v924"></div>
       </div>
 
       <div class="card">
@@ -9416,6 +9429,52 @@ document.addEventListener("click",e=>{
 window.addEventListener("storage",e=>{if(["alloPsychoHumeurs","alloPsychoToolFeedbackV923","alloPsychoTCC"].includes(e.key))render()});
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",render,{once:true});else render();
 window.alloRenderMoodTrendV931=render;
+})();
+</script>
+<script>
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const read=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(d))}catch(_){return d}};
+function ts(x){const raw=x?.at||x?.created_at||x?.date;const t=raw?new Date(raw).getTime():NaN;return Number.isFinite(t)?t:Date.now()}
+function intensity(v){const m=String(v||"").match(/\b(100|[1-9]?\d)\b/);return m?Number(m[1]):null}
+function data(){
+ const out=[],mood={Calme:85,"Posé":78,Nuageux:48,Orageux:22};
+ read("alloPsychoHumeurs",[]).forEach(x=>{const v=mood[x.mood]??mood[x.humeur];if(Number.isFinite(v))out.push({at:ts(x),value:v,source:"humeur"})});
+ read("alloPsychoToolFeedbackV923",[]).forEach(x=>{const a=Number(x.after);if(Number.isFinite(a))out.push({at:ts(x),value:Math.max(0,Math.min(100,100-a*10)),source:"exercice",tool:x.tool})});
+ read("alloPsychoTCC",[]).forEach(x=>{const n=intensity(x?.steps?.[2]??x?.emotion??x?.intensity);if(n!==null)out.push({at:ts(x),value:100-n,source:"intensité"})});
+ return out.sort((a,b)=>a.at-b.at);
+}
+function periodStart(kind){
+ const d=new Date();
+ if(kind==="month")return new Date(d.getFullYear(),d.getMonth(),1).getTime();
+ if(kind==="quarter"){const q=Math.floor(d.getMonth()/3)*3;return new Date(d.getFullYear(),q,1).getTime()}
+ return new Date(d.getFullYear(),0,1).getTime();
+}
+function summarize(kind){
+ const all=data(),start=periodStart(kind),p=all.filter(x=>x.at>=start);
+ const label=kind==="month"?"ce mois":kind==="quarter"?"ce trimestre":"cette année";
+ if(!p.length)return {lead:"Pas encore assez de données",meta:"Aucune mesure disponible pour "+label+".",avg:null,delta:null,exercise:null,count:0};
+ const avg=p.reduce((a,x)=>a+x.value,0)/p.length;
+ const n=Math.max(1,Math.min(5,p.length)),first=p.slice(0,n).reduce((a,x)=>a+x.value,0)/n,last=p.slice(-n).reduce((a,x)=>a+x.value,0)/n,delta=last-first;
+ const tools={};p.filter(x=>x.tool).forEach(x=>{tools[x.tool]=(tools[x.tool]||0)+1});const exercise=Object.entries(tools).sort((a,b)=>b[1]-a[1])[0]?.[0]||null;
+ const lead=delta>7?"↗️ Amélioration globale":delta<-7?"↘️ Baisse globale":"➡️ Évolution plutôt stable";
+ return {lead,meta:"Calcul automatique sur "+p.length+" mesure"+(p.length>1?"s":"")+" pour "+label+".",avg,delta,exercise,count:p.length};
+}
+function toolName(x){return ({breathing:"respiration",tcc:"TCC",journal:"journal",release:"décharge",urgent:"urgence calme",capsule90:"capsule 90 s"})[x]||x}
+function render(kind="month"){
+ const box=$("periodSummaryV932");if(!box)return;const s=summarize(kind);
+ box.innerHTML='<div class="period-summary-lead-v932"><strong>'+s.lead+'</strong><span>'+s.meta+'</span></div>'+
+ '<div><strong>Niveau moyen</strong><br>'+(s.avg===null?"—":Math.round(s.avg)+"/100")+'</div>'+
+ '<div><strong>Évolution</strong><br>'+(s.delta===null?"—":(s.delta>=0?"+":"")+Math.round(s.delta)+" points")+'</div>'+
+ '<div><strong>Mesures prises en compte</strong><br>'+s.count+'</div>'+
+ '<div><strong>Exercice le plus utilisé</strong><br>'+(s.exercise?toolName(s.exercise):"—")+'</div>';
+ document.querySelectorAll("[data-period-v932]").forEach(b=>b.classList.toggle("active",b.dataset.periodV932===kind));
+}
+document.addEventListener("click",e=>{const b=e.target.closest?.("[data-period-v932]");if(b)render(b.dataset.periodV932)},true);
+document.addEventListener("click",e=>{if(e.target.closest("#saveMoodButton,[data-h],#tccNextV741,#__oldTccNext"))setTimeout(()=>render(document.querySelector("[data-period-v932].active")?.dataset.periodV932||"month"),130)},true);
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>render("month"),{once:true});else render("month");
+window.alloRenderPeriodSummaryV932=render;
 })();
 </script>
 </body>
