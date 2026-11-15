@@ -2343,6 +2343,17 @@ body{font-size:16px}
 .mission-options-v930 button.active{background:#57484f;color:#fff}
 @media(max-width:680px){.mission-options-v930{grid-template-columns:1fr}}
 
+
+/* ===== V9.3.1 — schéma des humeurs calculé ===== */
+.mood-trend-v931{margin-top:12px}
+.mood-trend-summary-v931{display:flex;flex-direction:column;gap:3px;margin-bottom:10px}
+.mood-trend-summary-v931 strong{font-size:.92rem}
+.mood-trend-summary-v931 small{font-size:.76rem!important;color:var(--soft)}
+.mood-chart-v931{width:100%;min-height:190px;border:1px solid #eadfe5;border-radius:18px;background:#fff;padding:8px;overflow:hidden}
+.mood-chart-v931 svg{display:block;width:100%;height:190px}
+.mood-chart-empty-v931{min-height:170px;display:grid;place-items:center;text-align:center;color:var(--soft);font-size:.78rem;padding:20px}
+.mood-legend-v931{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;color:var(--soft);font-size:.72rem}
+
 </style>
 </head>
 
@@ -2480,11 +2491,16 @@ body{font-size:16px}
       <div class="card inner-weather-v924" id="innerWeatherV924">
         <p class="eyebrow">SCHÉMA DE MES HUMEURS</p>
         <h3>📈 Comment mon humeur évolue ?</h3>
-        <p class="muted">Observe simplement si ton humeur monte, reste stable ou redescend.</p>
-        <div class="weather-move-v924">
-          <button type="button" class="btn btn-light" data-weather-move="up">↗️ Ça monte</button>
-          <button type="button" class="btn btn-light" data-weather-move="same">➡️ Ça reste pareil</button>
-          <button type="button" class="btn btn-light" data-weather-move="down">↘️ Ça redescend</button>
+        <p class="muted">Calculé automatiquement à partir de tes humeurs enregistrées, des intensités notées et des retours avant/après les exercices.</p>
+        <div class="mood-trend-v931" id="moodTrendV931">
+          <div class="mood-trend-summary-v931">
+            <strong id="moodTrendLabelV931">Pas encore assez de données</strong>
+            <small id="moodTrendMetaV931">Enregistre quelques humeurs ou intensités pour voir apparaître la courbe.</small>
+          </div>
+          <div class="mood-chart-v931" id="moodChartV931" aria-label="Graphique de l’évolution de l’humeur"></div>
+          <div class="mood-legend-v931">
+            <span>● Humeur</span><span>● Intensité / exercice</span>
+          </div>
         </div>
         <button type="button" class="btn btn-light fog-toggle-v924" id="fogModeBtnV924" hidden>🌫️ Mode brouillard : simplifier l’écran</button>
       </div>
@@ -9332,6 +9348,74 @@ document.addEventListener("click",e=>{
     setTimeout(()=>renderAdaptive(tab),0);
   }
 },true);
+})();
+</script>
+<script>
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const read=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(d))}catch(_){return d}};
+function ts(x){
+  const raw=x?.at||x?.created_at||x?.date;
+  const t=raw?new Date(raw).getTime():NaN;
+  return Number.isFinite(t)?t:Date.now();
+}
+function parseIntensity(v){
+  const m=String(v||"").match(/\b(100|[1-9]?\d)\b/);
+  if(!m)return null;
+  const n=Number(m[1]);
+  return n>=0&&n<=100?n:null;
+}
+function points(){
+  const out=[];
+  const moodScore={Calme:85,"Posé":78,Nuageux:48,Orageux:22};
+  read("alloPsychoHumeurs",[]).forEach(x=>{
+    const value=moodScore[x.mood]??moodScore[x.humeur];
+    if(Number.isFinite(value))out.push({at:ts(x),value,kind:"mood",label:x.mood||x.humeur||"Humeur"});
+  });
+  read("alloPsychoToolFeedbackV923",[]).forEach(x=>{
+    const before=Number(x.before),after=Number(x.after);
+    const t=ts(x);
+    if(Number.isFinite(before))out.push({at:t-1000,value:Math.max(0,Math.min(100,100-before*10)),kind:"exercise",label:"Avant exercice"});
+    if(Number.isFinite(after))out.push({at:t,value:Math.max(0,Math.min(100,100-after*10)),kind:"exercise",label:"Après exercice"});
+  });
+  read("alloPsychoTCC",[]).forEach(x=>{
+    const raw=x?.steps?.[2]??x?.emotion??x?.intensity;
+    const intensity=parseIntensity(raw);
+    if(intensity!==null)out.push({at:ts(x),value:100-intensity,kind:"intensity",label:"Intensité émotionnelle"});
+  });
+  return out.sort((a,b)=>a.at-b.at).slice(-30);
+}
+function trend(p){
+  if(p.length<2)return {label:"Pas encore assez de données",meta:p.length+" point"+(p.length>1?"s":"")+" disponible"+(p.length>1?"s":"")};
+  const n=Math.min(5,p.length);
+  const first=p.slice(0,n).reduce((a,x)=>a+x.value,0)/n;
+  const last=p.slice(-n).reduce((a,x)=>a+x.value,0)/n;
+  const delta=last-first;
+  if(delta>7)return {label:"↗️ Tendance globale en amélioration",meta:"Calcul automatique sur "+p.length+" mesures · évolution +"+Math.round(delta)+" points"};
+  if(delta<-7)return {label:"↘️ Tendance globale en baisse",meta:"Calcul automatique sur "+p.length+" mesures · évolution "+Math.round(delta)+" points"};
+  return {label:"➡️ Tendance globalement stable",meta:"Calcul automatique sur "+p.length+" mesures · variation "+(delta>=0?"+":"")+Math.round(delta)+" points"};
+}
+function render(){
+  const box=$("moodChartV931"),lab=$("moodTrendLabelV931"),meta=$("moodTrendMetaV931");if(!box||!lab||!meta)return;
+  localStorage.removeItem("alloPsychoWeatherMoveV924");
+  const p=points(),t=trend(p);lab.textContent=t.label;meta.textContent=t.meta;
+  if(p.length<2){box.innerHTML='<div class="mood-chart-empty-v931">La courbe apparaîtra automatiquement après plusieurs humeurs, intensités ou retours d’exercices.</div>';return}
+  const W=640,H=190,L=34,R=14,T=14,B=28,w=W-L-R,h=H-T-B;
+  const minT=p[0].at,maxT=p[p.length-1].at,span=Math.max(1,maxT-minT);
+  const xy=p.map(x=>({x:L+((x.at-minT)/span)*w,y:T+(100-x.value)/100*h,...x}));
+  const path=xy.map((q,i)=>(i?"L":"M")+q.x.toFixed(1)+" "+q.y.toFixed(1)).join(" ");
+  const grid=[0,25,50,75,100].map(v=>{const y=T+(100-v)/100*h;return '<line x1="'+L+'" y1="'+y+'" x2="'+(W-R)+'" y2="'+y+'" stroke="currentColor" opacity=".08"/><text x="4" y="'+(y+4)+'" font-size="10" fill="currentColor" opacity=".55">'+v+'</text>'}).join("");
+  const dots=xy.map(q=>'<circle cx="'+q.x.toFixed(1)+'" cy="'+q.y.toFixed(1)+'" r="4.2" fill="currentColor"><title>'+q.label+' · '+Math.round(q.value)+'/100</title></circle>').join("");
+  const start=new Date(minT).toLocaleDateString("fr-FR",{day:"2-digit",month:"2-digit"}),end=new Date(maxT).toLocaleDateString("fr-FR",{day:"2-digit",month:"2-digit"});
+  box.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Évolution calculée de l’humeur de 0 à 100">'+grid+'<path d="'+path+'" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".72"/>'+dots+'<text x="'+L+'" y="'+(H-7)+'" font-size="10" fill="currentColor" opacity=".55">'+start+'</text><text x="'+(W-R)+'" y="'+(H-7)+'" text-anchor="end" font-size="10" fill="currentColor" opacity=".55">'+end+'</text></svg>';
+}
+document.addEventListener("click",e=>{
+  if(e.target.closest("#saveMoodButton,[data-h],#tccNextV741,#__oldTccNext"))setTimeout(render,120);
+},true);
+window.addEventListener("storage",e=>{if(["alloPsychoHumeurs","alloPsychoToolFeedbackV923","alloPsychoTCC"].includes(e.key))render()});
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",render,{once:true});else render();
+window.alloRenderMoodTrendV931=render;
 })();
 </script>
 </body>
