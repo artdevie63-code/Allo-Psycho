@@ -2361,6 +2361,11 @@ body{font-size:16px}
 .period-summary-lead-v932 strong{display:block;font-size:.9rem;margin-bottom:4px}
 .period-summary-lead-v932 span{font-size:.76rem;color:var(--soft)}
 
+
+/* ===== V9.3.3 — + d'outils dans le menu supérieur ===== */
+#page-moretools #moreToolsContentV933{display:grid;gap:12px}
+#page-moretools .progressive-toggle-v926{display:none!important}
+
 </style>
 </head>
 
@@ -2438,6 +2443,7 @@ body{font-size:16px}
     <nav class="tabs" aria-label="Navigation principale">
       <button type="button" class="tab active" data-page="relax" aria-label="ACCUEIL">🏠 ACCUEIL</button>
       <button type="button" class="tab" data-page="games" aria-label="OUTILS">🧰 OUTILS</button>
+      <button type="button" class="tab" data-page="moretools" aria-label="PLUS D’OUTILS">＋ D’OUTILS</button>
       <button type="button" class="tab" data-page="write" aria-label="JOURNAL">📖 JOURNAL</button>
       <button type="button" class="tab" data-page="chat" aria-label="PARLER">💬 PARLER</button>
       <button type="button" class="tab" data-page="profile" aria-label="OPTIONS">⚙️ OPTIONS</button>
@@ -2819,6 +2825,16 @@ body{font-size:16px}
     <!-- =====================================================
          MA BULLE ANTI-STRESS — mini-jeux locaux
     ====================================================== -->
+    <section id="page-moretools" class="page">
+      <div class="card hero">
+        <div class="hero-emoji">🧰</div>
+        <p class="eyebrow">PLUS D’OUTILS</p>
+        <h2>Mes outils complémentaires</h2>
+        <p class="muted">Retrouve ici les outils libres, bilans, ressources et fonctions complémentaires, sans alourdir l’accueil.</p>
+      </div>
+      <div id="moreToolsContentV933"></div>
+    </section>
+
     <section id="page-games" class="page">
       <div class="card hero game-hero">
         <div class="hero-emoji">🎮</div>
@@ -9475,6 +9491,39 @@ document.addEventListener("click",e=>{const b=e.target.closest?.("[data-period-v
 document.addEventListener("click",e=>{if(e.target.closest("#saveMoodButton,[data-h],#tccNextV741,#__oldTccNext"))setTimeout(()=>render(document.querySelector("[data-period-v932].active")?.dataset.periodV932||"month"),130)},true);
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>render("month"),{once:true});else render("month");
 window.alloRenderPeriodSummaryV932=render;
+})();
+</script>
+<script>
+(function(){
+"use strict";
+function moveMoreTools(){
+  const dest=document.getElementById("moreToolsContentV933");
+  const group=document.getElementById("homeMoreV926");
+  const toggle=document.getElementById("homeMoreToggleV926");
+  if(!dest)return;
+  if(group){
+    group.hidden=false;
+    while(group.firstChild)dest.appendChild(group.firstChild);
+    group.remove();
+  }
+  if(toggle)toggle.remove();
+
+  // If some complementary cards were left directly on Home before the old grouping ran,
+  // keep only the guided start and thematic hub there.
+  const home=document.getElementById("page-relax");
+  if(home){
+    [...home.children].forEach(el=>{
+      if(el.classList?.contains("guided-home-v922"))return;
+      if(el.id==="themeHubV927")return;
+      if(el.id==="homeMoreToggleV926"||el.id==="homeMoreV926")return;
+      if(el.closest?.("#themeHubV927"))return;
+      dest.appendChild(el);
+    });
+  }
+}
+if(document.readyState==="loading"){
+  document.addEventListener("DOMContentLoaded",()=>setTimeout(moveMoreTools,80),{once:true});
+}else setTimeout(moveMoreTools,80);
 })();
 </script>
 </body>
