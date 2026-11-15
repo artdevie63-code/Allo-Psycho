@@ -2405,6 +2405,15 @@ body{font-size:16px}
 @media(max-width:760px){.tools-theme-nav-v936{grid-template-columns:1fr 1fr}}
 @media(max-width:480px){.tools-theme-nav-v936{grid-template-columns:1fr}}
 
+
+/* ===== V9.3.7 — bilan Attrape-pensées interactif ===== */
+.thought-summary-action-v936{border:1px solid #eadfe5;background:#faf7f5;border-radius:16px;padding:12px;text-align:left;color:var(--text);cursor:pointer}
+.thought-summary-action-v936 strong,.thought-summary-action-v936 span,.thought-summary-action-v936 small{display:block}
+.thought-summary-action-v936 span{margin-top:4px;font-size:.78rem}.thought-summary-action-v936 small{margin-top:5px;color:var(--soft);font-size:.7rem!important}
+.thought-summary-action-v936:hover{transform:translateY(-1px);background:#fff}
+.thought-detail-v936{margin:10px 0 14px;padding:13px 14px;border-radius:16px;background:#fff;border:1px solid #eadfe5;text-align:left}
+.thought-detail-v936 p,.thought-detail-v936 li{font-size:.78rem;line-height:1.5}.thought-detail-v936 ol{padding-left:20px}
+
 </style>
 </head>
 
@@ -6189,9 +6198,10 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
         '<h3>Fin de la série</h3>'+
         '<p>Tu as repéré <strong>'+thoughtSession.correct+' / '+thoughtSession.deck.length+'</strong> cartes.</p>'+
         '<div class="thought-summary-grid-v935">'+
-          '<div><strong>À surveiller</strong><span>'+dominant+'</span></div>'+
-          '<div><strong>Réflexe utile</strong><span>faits → hypothèses → action possible</span></div>'+
+          '<button type="button" class="thought-summary-action-v936" id="thoughtWatchV936"><strong>À surveiller</strong><span>'+dominant+'</span><small>Voir comment le repérer</small></button>'+
+          '<button type="button" class="thought-summary-action-v936" id="thoughtReflexV936"><strong>Réflexe utile</strong><span>faits → hypothèses → action possible</span><small>Voir la méthode en 3 étapes</small></button>'+
         '</div>'+
+        '<div id="thoughtSummaryDetailV936"></div>'+
         '<button type="button" class="btn btn-dark" id="thoughtTransformV935">Transformer une pensée</button>'+
         '<button type="button" class="btn btn-light" id="thoughtReplayV935">Nouvelle série</button>'+
       '</div>';
@@ -6199,6 +6209,22 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
       renderScore('Série terminée');
       $('gameReflection').textContent='🌿 Le but n’est pas d’avoir “juste” à chaque fois : c’est d’apprendre à ralentir une conclusion automatique.';
       $('thoughtReplayV935')?.addEventListener('click',startThoughtSession);
+      $('thoughtWatchV936')?.addEventListener('click',()=>{
+        const d=$('thoughtSummaryDetailV936');if(!d)return;
+        d.innerHTML='<div class="thought-detail-v936"><strong>🔎 Comment repérer « '+dominant+' » ?</strong><p>Observe les mots absolus, les prédictions certaines, les conclusions tirées sans faits suffisants ou l’impression qu’une émotion prouve quelque chose.</p><button type="button" class="btn btn-light" id="thoughtWatchExerciseV936">Faire un mini-exercice</button></div>';
+        $('thoughtWatchExerciseV936')?.addEventListener('click',()=>{
+          d.innerHTML='<div class="thought-detail-v936"><strong>Mini-exercice</strong><p>Prends une pensée récente et complète :</p><ol><li>Le fait certain est…</li><li>Ce que j’imagine / suppose est…</li><li>Une autre possibilité serait…</li></ol></div>';
+        });
+      });
+      $('thoughtReflexV936')?.addEventListener('click',()=>{
+        const d=$('thoughtSummaryDetailV936');if(!d)return;
+        d.innerHTML='<div class="thought-detail-v936"><strong>🧭 Réflexe en 3 étapes</strong><ol><li><b>Faits</b> — qu’est-ce qui est objectivement observable ?</li><li><b>Hypothèses</b> — qu’est-ce que j’ajoute, prédis ou interprète ?</li><li><b>Action possible</b> — quel petit geste peut m’apporter une information nouvelle ?</li></ol><button type="button" class="btn btn-light" id="thoughtReflexApplyV936">L’appliquer maintenant</button></div>';
+        $('thoughtReflexApplyV936')?.addEventListener('click',()=>{
+          const candidates=thoughtSession.answers.filter(x=>x.item.answer!=='useful');
+          const pick=candidates[candidates.length-1]?.item||thoughtDeck.find(x=>x.answer==='rigid');
+          d.innerHTML='<div class="thought-detail-v936"><strong>Application</strong><p>« '+pick.text+' »</p><p><b>Fait :</b> …</p><p><b>Hypothèse :</b> …</p><p><b>Action possible :</b> …</p></div>';
+        });
+      });
       $('thoughtTransformV935')?.addEventListener('click',()=>{
         const candidates=thoughtSession.answers.filter(x=>x.item.answer!=='useful');
         const pick=candidates[candidates.length-1]?.item||thoughtDeck.find(x=>x.answer==='rigid');
