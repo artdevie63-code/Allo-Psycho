@@ -2375,6 +2375,21 @@ body{font-size:16px}
 .audio-status-v934.approved{background:#eef8ef;border-color:#d7e9d9}.audio-status-v934.rejected{background:#fff0f0;border-color:#f0d1d1}
 @media(max-width:720px){.audio-candidate-v934{flex-direction:column}.audio-candidate-actions-v934{justify-content:flex-start}}
 
+
+/* ===== V9.3.5 — Attrape-pensées enrichi ===== */
+#page-games .game-card{overflow:hidden}
+.thought-progress-v935{position:absolute;top:10px;left:12px;right:12px;display:flex;align-items:center;gap:10px;font-size:.72rem;font-weight:850;color:var(--soft);z-index:4}
+.thought-progress-v935 i{height:6px;flex:1;border-radius:999px;background:#eee8ee;overflow:hidden}.thought-progress-v935 b{display:block;height:100%;border-radius:999px;background:currentColor;transition:.25s}
+.thought-card-v935{display:flex!important;flex-direction:column;justify-content:center;gap:9px;padding:30px 24px!important;text-align:center;min-height:145px!important;box-shadow:0 16px 38px rgba(64,48,57,.10)}
+.thought-card-v935 strong{font-size:1.08rem;line-height:1.45}.thought-context-v935{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--soft);font-weight:900}
+.thought-swipe-sides-v935{opacity:.84}.thought-check-out-v935{animation:thoughtCheckV935 .4s ease forwards}@keyframes thoughtCheckV935{to{transform:translate(-50%,-70%) scale(.9);opacity:0}}
+.game-controls:has(.thought-choice-btn-v935){display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.thought-choice-btn-v935{border:1px solid #eadfe5;border-radius:15px;padding:10px 8px;background:#fff;color:var(--text);font-weight:850;font-size:.76rem}.thought-choice-btn-v935.check{background:#fff8ef}.thought-choice-btn-v935:hover{transform:translateY(-1px)}
+.game-reflection strong{font-size:.84rem}.thought-correct-v935{display:inline-block;margin-top:4px;font-weight:800}
+.thought-summary-v935,.thought-transform-v935{padding:18px;text-align:center;max-width:620px;margin:auto}.thought-summary-icon-v935{font-size:2.4rem}.thought-summary-v935 h3,.thought-transform-v935 h3{margin:7px 0}.thought-summary-grid-v935{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:14px 0}.thought-summary-grid-v935 div{padding:12px;border-radius:16px;background:#faf7f5;border:1px solid #eadfe5}.thought-summary-grid-v935 strong,.thought-summary-grid-v935 span{display:block}.thought-summary-grid-v935 span{margin-top:4px;color:var(--soft);font-size:.76rem}
+.thought-summary-v935 .btn{margin:4px}.thought-transform-v935 label{display:block;text-align:left;font-weight:800;font-size:.78rem;margin:10px 0}.thought-transform-v935 textarea{width:100%;min-height:72px;margin-top:5px;border:1px solid #e5dce1;border-radius:14px;padding:10px;font-size:.95rem}.thought-original-v935,.thought-rewrite-v935{padding:12px 14px;border-radius:16px;border:1px solid #eadfe5;background:#faf7f5;text-align:left}.thought-rewrite-v935{background:#f2f8f2;margin:12px 0}.thought-rewrite-v935 strong,.thought-rewrite-v935 span{display:block}.thought-rewrite-v935 span{margin-top:5px;line-height:1.5}
+@media(max-width:620px){.game-controls:has(.thought-choice-btn-v935),.thought-summary-grid-v935{grid-template-columns:1fr}.thought-choice-btn-v935{min-height:44px}}
+
 </style>
 </head>
 
@@ -2858,7 +2873,7 @@ body{font-size:16px}
       </div>
       <div class="card game-card">
         <div class="game-top"><div><p class="eyebrow" id="gameEyebrow">TRI MENTAL</p><h3 id="gameTitle">🗑️ Attrape-pensées</h3></div><div class="game-score" id="gameScore" aria-live="polite">0 ☀️</div></div>
-        <p class="muted" id="gameInstructions">Glisse chaque pensée vers « Je garde » ou « Je laisse passer ». Le but est d'apprendre à distinguer une pensée utile d'une pensée automatique.</p>
+        <p class="muted" id="gameInstructions">Classe chaque pensée : rigide, à vérifier ou utile. Le but n’est pas de penser positif, mais de distinguer faits, hypothèses et règles qui enferment.</p>
         <div id="gameArena" class="game-arena" role="group" aria-label="Zone de mini-jeu"></div>
         <div id="gameControls" class="game-controls" aria-live="polite"></div>
         <div class="game-actions"><button type="button" id="gameStart" class="btn btn-dark" aria-label="Commencer">▶ Commencer</button><button type="button" id="gameStop" class="btn btn-light" aria-label="Terminer">■ Terminer</button></div>
@@ -6120,33 +6135,130 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
     function cleanup(){clearInterval(timer);timer=null;activeCleanups.splice(0).forEach(fn=>{try{fn()}catch(_){}})}
     function renderScore(label){if($('gameScore'))$('gameScore').textContent=label||String(score)}
     function setMode(next){cleanup();mode=next;score=0;document.querySelectorAll('.game-choice').forEach(b=>b.classList.toggle('active',b.dataset.game===mode));const m=MODES[mode];$('gameEyebrow').textContent=m.eyebrow;$('gameTitle').textContent=m.title;$('gameInstructions').textContent=m.instructions;$('gameArena').innerHTML='';$('gameControls').innerHTML='';renderScore(mode==='thoughts'?'0 choix':mode==='release'?'Tension 100%':'Gribouille');$('gameReflection').textContent='🌱 Ici, pas de performance : observe seulement ce que le geste change en toi.'}
+    const thoughtDeck=[
+      {text:'Je dois tout réussir sinon ce sera un échec',answer:'rigid',type:'Tout ou rien',why:'Cette pensée transforme une situation nuancée en réussite totale ou échec total.',rewrite:'Je peux viser suffisamment bien et apprendre de ce qui ne fonctionne pas.'},
+      {text:'Cette personne ne répond pas : elle doit être fâchée contre moi',answer:'check',type:'Lecture de pensée',why:'Il existe plusieurs explications possibles. Il manque des faits avant de conclure.',rewrite:'Je remarque mon interprétation. Je n’ai pas encore assez d’informations pour savoir.'},
+      {text:'Je suis anxieux·se, donc quelque chose de grave va arriver',answer:'rigid',type:'Raisonnement émotionnel',why:'Une émotion donne une information sur ton état, pas une preuve sur ce qui va arriver.',rewrite:'Mon anxiété est réelle, mais elle ne prédit pas à elle seule ce qui va se passer.'},
+      {text:'Je peux être inquiet·ète et quand même faire un petit pas',answer:'useful',type:'Pensée flexible',why:'Elle reconnaît l’émotion sans en faire une interdiction d’agir.',rewrite:'Je peux être inquiet·ète et quand même faire un petit pas.'},
+      {text:'Mon responsable a dit « on en reparle demain » : ça va forcément mal se passer',answer:'check',type:'Prédiction',why:'La situation mérite peut-être une préparation, mais le résultat n’est pas encore connu.',rewrite:'Je peux préparer ce que je veux dire sans décider à l’avance de l’issue.'},
+      {text:'Une erreur prouve que je suis incapable',answer:'rigid',type:'Étiquetage',why:'Une action ou une erreur ne résume pas une personne entière.',rewrite:'J’ai fait une erreur dans cette situation ; cela ne définit pas toutes mes capacités.'},
+      {text:'Je peux vérifier les faits avant de conclure',answer:'useful',type:'Retour aux faits',why:'Cette pensée crée une pause entre l’interprétation et la conclusion.',rewrite:'Je peux vérifier les faits avant de conclure.'},
+      {text:'Si je pose une limite, cette personne risque de mal le prendre',answer:'check',type:'Hypothèse plausible',why:'C’est possible, mais pas certain. La réaction de l’autre peut être observée plutôt qu’anticipée comme un fait.',rewrite:'L’autre peut ne pas aimer ma limite ; je peux quand même la formuler clairement et observer sa réaction.'},
+      {text:'Je ne devrais jamais ressentir d’anxiété',answer:'rigid',type:'Exigence',why:'Les émotions ne se commandent pas. Exiger leur disparition ajoute souvent une lutte supplémentaire.',rewrite:'Je préférerais être moins anxieux·se, mais je peux apprendre à traverser cette émotion.'},
+      {text:'Je ne sais pas encore comment cela va se passer',answer:'useful',type:'Tolérance à l’incertitude',why:'Cette formulation laisse la place à plusieurs issues sans inventer une certitude.',rewrite:'Je ne sais pas encore comment cela va se passer.'},
+      {text:'J’ai reçu une critique : il faut que je comprenne exactement ce que tout le monde pense de moi',answer:'rigid',type:'Besoin de certitude',why:'Chercher une certitude totale sur le regard des autres entretient souvent la rumination.',rewrite:'Je peux regarder ce qui est utile dans cette critique sans connaître toutes les pensées des autres.'},
+      {text:'J’ai moins d’énergie depuis quelques jours : je vais forcément rester comme ça',answer:'rigid',type:'Généralisation',why:'Un état actuel est étendu à tout l’avenir sans données suffisantes.',rewrite:'Je traverse une période de baisse d’énergie ; je peux observer son évolution et ajuster mes prochains pas.'},
+      {text:'Je me sens mal après cette conversation ; peut-être que quelque chose m’a blessé·e',answer:'check',type:'Signal à explorer',why:'L’émotion mérite d’être écoutée, mais plusieurs interprétations restent possibles.',rewrite:'Quelque chose m’a touché·e. Je peux préciser ce que j’ai ressenti avant de conclure sur l’intention de l’autre.'},
+      {text:'Je peux demander du soutien sans que cela signifie que je suis faible',answer:'useful',type:'Pensée équilibrée',why:'Elle ouvre une option d’action sans nier la difficulté.',rewrite:'Je peux demander du soutien sans que cela signifie que je suis faible.'},
+      {text:'Je dois attendre d’être motivé·e pour commencer',answer:'rigid',type:'Condition rigide',why:'La motivation peut apparaître après le démarrage, pas seulement avant.',rewrite:'Je peux commencer très petit, même si ma motivation n’est pas encore là.'},
+      {text:'Cette tâche est importante et je ne sais pas encore combien de temps elle prendra',answer:'check',type:'Incertitude réelle',why:'Il manque une information concrète. Estimer ou tester 5 minutes donnera plus de données.',rewrite:'Je peux commencer par cinq minutes pour mieux estimer la suite.'},
+      {text:'Une émotion forte finit généralement par évoluer, même si elle est pénible maintenant',answer:'useful',type:'Perspective temporelle',why:'Cette pensée ne promet pas un soulagement immédiat mais remet l’émotion dans le temps.',rewrite:'Ce que je ressens peut évoluer ; je n’ai pas à résoudre toute la situation maintenant.'},
+      {text:'Si je dis non une fois, on ne voudra plus jamais de moi',answer:'rigid',type:'Catastrophisme',why:'Une conséquence extrême est présentée comme certaine à partir d’une seule limite.',rewrite:'Dire non peut créer un inconfort, mais une relation ne se résume pas à un seul refus.'}
+    ];
+    let thoughtSession={deck:[],index:0,correct:0,answers:[],active:false};
+
+    function shuffleThoughts(){
+      const a=[...thoughtDeck];
+      for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}
+      return a.slice(0,8);
+    }
+
+    function thoughtSummary(){
+      const arena=$('gameArena'),controls=$('gameControls');
+      if(!arena)return;
+      const types={};
+      thoughtSession.answers.filter(x=>x.item.answer!=='useful').forEach(x=>types[x.item.type]=(types[x.item.type]||0)+1);
+      const dominant=Object.entries(types).sort((a,b)=>b[1]-a[1])[0]?.[0]||'pensées automatiques';
+      arena.innerHTML='<div class="thought-summary-v935">'+
+        '<div class="thought-summary-icon-v935">🧠✨</div>'+
+        '<h3>Fin de la série</h3>'+
+        '<p>Tu as repéré <strong>'+thoughtSession.correct+' / '+thoughtSession.deck.length+'</strong> cartes.</p>'+
+        '<div class="thought-summary-grid-v935">'+
+          '<div><strong>À surveiller</strong><span>'+dominant+'</span></div>'+
+          '<div><strong>Réflexe utile</strong><span>faits → hypothèses → action possible</span></div>'+
+        '</div>'+
+        '<button type="button" class="btn btn-dark" id="thoughtTransformV935">Transformer une pensée</button>'+
+        '<button type="button" class="btn btn-light" id="thoughtReplayV935">Nouvelle série</button>'+
+      '</div>';
+      if(controls)controls.innerHTML='';
+      renderScore('Série terminée');
+      $('gameReflection').textContent='🌿 Le but n’est pas d’avoir “juste” à chaque fois : c’est d’apprendre à ralentir une conclusion automatique.';
+      $('thoughtReplayV935')?.addEventListener('click',startThoughtSession);
+      $('thoughtTransformV935')?.addEventListener('click',()=>{
+        const candidates=thoughtSession.answers.filter(x=>x.item.answer!=='useful');
+        const pick=candidates[candidates.length-1]?.item||thoughtDeck.find(x=>x.answer==='rigid');
+        arena.innerHTML='<div class="thought-transform-v935">'+
+          '<p class="eyebrow">REFORMULATION EXPRESS</p>'+
+          '<h3>'+pick.type+'</h3>'+
+          '<div class="thought-original-v935">« '+pick.text+' »</div>'+
+          '<label>1 · Quel fait est certain ?<textarea id="thoughtFactV935" placeholder="Ce que je sais réellement…"></textarea></label>'+
+          '<label>2 · Qu’est-ce que j’ajoute ou suppose ?<textarea id="thoughtAssumeV935" placeholder="Mon interprétation, ma prédiction…"></textarea></label>'+
+          '<div class="thought-rewrite-v935"><strong>Exemple de pensée plus équilibrée</strong><span>'+pick.rewrite+'</span></div>'+
+          '<button type="button" class="btn btn-light" id="thoughtBackV935">← Retour au bilan</button>'+
+        '</div>';
+        $('thoughtBackV935')?.addEventListener('click',thoughtSummary);
+      });
+    }
+
+    function classifyThought(item,choice){
+      if(!thoughtSession.active)return;
+      const ok=choice===item.answer;
+      thoughtSession.correct+=ok?1:0;
+      thoughtSession.answers.push({item,choice,ok});
+      renderScore((thoughtSession.index+1)+' / '+thoughtSession.deck.length);
+
+      const feedback=$('gameReflection');
+      const labels={rigid:'🗑 Pensée rigide',check:'🔎 À vérifier',useful:'❤️ Pensée utile'};
+      feedback.innerHTML='<strong>'+(ok?'✓ '+labels[choice]:'À regarder de plus près')+'</strong><br>'+item.why+
+        (ok?'':'<br><span class="thought-correct-v935">Ici : '+labels[item.answer]+'.</span>');
+
+      const card=document.querySelector('.thought-card');
+      if(card)card.classList.add(choice==='rigid'?'swipe-out-left':choice==='useful'?'swipe-out-right':'thought-check-out-v935');
+
+      thoughtSession.index++;
+      setTimeout(()=>{
+        if(thoughtSession.index>=thoughtSession.deck.length)thoughtSummary();
+        else thoughtRound();
+      },650);
+    }
+
     function thoughtRound(){
-      const arena=$('gameArena'); arena.innerHTML='';
-      const item=thoughts[Math.floor(Math.random()*thoughts.length)];
-      const sides=document.createElement('div'); sides.className='thought-swipe-sides';
-      sides.innerHTML='<div class="thought-swipe-side left" id="thoughtLeft">🗑️ LAISSER PASSER</div><div class="thought-swipe-side right" id="thoughtRight">❤️ GARDER</div>';
-      const card=document.createElement('div'); card.className='thought-card swipe-card'; card.textContent=item.text;
-      const hint=document.createElement('div'); hint.className='thought-swipe-hint'; hint.textContent='← poubelle · glisse la carte · cœur →';
+      const arena=$('gameArena'),controls=$('gameControls');
+      if(!arena)return;
+      if(!thoughtSession.active||!thoughtSession.deck.length)startThoughtSession();
+      const item=thoughtSession.deck[thoughtSession.index];
+      if(!item){thoughtSummary();return}
+
+      arena.innerHTML='<div class="thought-progress-v935"><span>Carte '+(thoughtSession.index+1)+' / '+thoughtSession.deck.length+'</span><i><b style="width:'+((thoughtSession.index/thoughtSession.deck.length)*100)+'%"></b></i></div>';
+      const sides=document.createElement('div'); sides.className='thought-swipe-sides thought-swipe-sides-v935';
+      sides.innerHTML='<div class="thought-swipe-side left" id="thoughtLeft">🗑️ RIGIDE</div><div class="thought-swipe-side right" id="thoughtRight">❤️ UTILE</div>';
+      const card=document.createElement('div');card.className='thought-card swipe-card thought-card-v935';
+      card.innerHTML='<span class="thought-context-v935">Pensée automatique</span><strong>'+item.text+'</strong>';
+      const hint=document.createElement('div');hint.className='thought-swipe-hint';hint.textContent='← rigide · glisse · utile →';
       arena.append(sides,card,hint);
-      let startX=0,startY=0,dx=0,dy=0,drag=false;
-      const left=()=>document.getElementById('thoughtLeft'); const right=()=>document.getElementById('thoughtRight');
-      function reset(){card.style.transition='.18s ease';card.style.transform='translate(-50%,-50%) rotate(0deg)';left()?.classList.remove('hot');right()?.classList.remove('hot');setTimeout(()=>card.style.transition='',190)}
-      function finish(direction){
-        const keep=direction==='right'; const ok=keep===item.keep;
-        score+=ok?1:0; renderScore(score+' choix');
-        card.classList.add(keep?'swipe-out-right':'swipe-out-left');
-        $('gameReflection').textContent=ok
-          ? (keep?'❤️ Pensée utile et crédible : elle laisse de la place aux faits et à l’action.':'🗑️ Pensée rigide repérée : tu peux la remarquer sans la traiter comme un fait.')
-          : '🌿 Regarde sa forme : est-elle absolue (« toujours », « jamais », « forcément ») ou laisse-t-elle de la place à plusieurs possibilités ?';
-        setTimeout(thoughtRound,360);
+
+      if(controls){
+        controls.innerHTML='<button type="button" class="thought-choice-btn-v935 rigid" data-thought-choice="rigid">🗑 Rigide</button>'+
+          '<button type="button" class="thought-choice-btn-v935 check" data-thought-choice="check">🔎 À vérifier</button>'+
+          '<button type="button" class="thought-choice-btn-v935 useful" data-thought-choice="useful">❤️ Utile</button>';
+        controls.querySelectorAll('[data-thought-choice]').forEach(b=>b.onclick=()=>classifyThought(item,b.dataset.thoughtChoice));
       }
+
+      let startX=0,startY=0,dx=0,dy=0,drag=false;
+      const left=()=>document.getElementById('thoughtLeft'),right=()=>document.getElementById('thoughtRight');
+      function reset(){card.style.transition='.18s ease';card.style.transform='translate(-50%,-50%) rotate(0deg)';left()?.classList.remove('hot');right()?.classList.remove('hot');setTimeout(()=>card.style.transition='',190)}
       card.addEventListener('pointerdown',e=>{drag=true;startX=e.clientX;startY=e.clientY;dx=dy=0;card.setPointerCapture(e.pointerId);card.classList.add('dragging')});
-      card.addEventListener('pointermove',e=>{if(!drag)return;dx=e.clientX-startX;dy=e.clientY-startY;const rot=Math.max(-16,Math.min(16,dx/14));card.style.transform=`translate(calc(-50% + ${dx}px),calc(-50% + ${dy*.18}px)) rotate(${rot}deg)`;left()?.classList.toggle('hot',dx<-70);right()?.classList.toggle('hot',dx>70)});
-      card.addEventListener('pointerup',()=>{if(!drag)return;drag=false;card.classList.remove('dragging'); if(dx<-90)finish('left'); else if(dx>90)finish('right'); else reset()});
+      card.addEventListener('pointermove',e=>{if(!drag)return;dx=e.clientX-startX;dy=e.clientY-startY;const rot=Math.max(-15,Math.min(15,dx/15));card.style.transform=`translate(calc(-50% + ${dx}px),calc(-50% + ${dy*.15}px)) rotate(${rot}deg)`;left()?.classList.toggle('hot',dx<-70);right()?.classList.toggle('hot',dx>70)});
+      card.addEventListener('pointerup',()=>{if(!drag)return;drag=false;card.classList.remove('dragging');if(dx<-90)classifyThought(item,'rigid');else if(dx>90)classifyThought(item,'useful');else reset()});
       card.addEventListener('pointercancel',()=>{drag=false;reset()});
-      // Accessibilité clavier : flèches gauche/droite lorsque la carte a le focus.
-      card.tabIndex=0; card.setAttribute('role','button'); card.setAttribute('aria-label','Pensée à trier. Flèche gauche pour laisser passer, flèche droite pour garder.');
-      card.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){e.preventDefault();finish('left')}if(e.key==='ArrowRight'){e.preventDefault();finish('right')}});
+      card.tabIndex=0;card.setAttribute('role','button');card.setAttribute('aria-label','Pensée à classer. Gauche : rigide, droite : utile, ou bouton À vérifier.');
+      card.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){e.preventDefault();classifyThought(item,'rigid')}else if(e.key==='ArrowRight'){e.preventDefault();classifyThought(item,'useful')}else if(e.key==='ArrowDown'||e.key==='Enter'){e.preventDefault();classifyThought(item,'check')}});
+    }
+
+    function startThoughtSession(){
+      thoughtSession={deck:shuffleThoughts(),index:0,correct:0,answers:[],active:true};
+      $('gameReflection').innerHTML='<strong>Comment décider ?</strong><br>🗑 <b>Rigide</b> : absolue, catastrophique ou présentée comme certaine. · 🔎 <b>À vérifier</b> : plausible mais il manque des faits. · ❤️ <b>Utile</b> : nuancée, crédible et orientée vers l’action.';
+      thoughtRound();
     }
     function releaseGame(){
       const arena=$('gameArena');
@@ -6437,8 +6549,8 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
       $('scribbleClear').addEventListener('click',()=>{ctx.clearRect(0,0,c.width,c.height);distance=0;fill.style.width='100%';renderScore('Tension relâchée');note.style.opacity='1';note.innerHTML='Page effacée 🌿<br>Tu peux recommencer si nécessaire.';if(navigator.vibrate)navigator.vibrate([12,25,12]);$('gameReflection').textContent='✍️ Tu as fait sortir la tension par le geste. Observe ce qui reste, sans obligation de te sentir calme immédiatement.'});
     }
 
-    function start(){cleanup();score=0;if(mode==='thoughts')thoughtRound();else if(mode==='release')releaseGame();else scribbleGame()}
-    function stop(){cleanup();$('gameArena').innerHTML='';$('gameReflection').textContent=mode==='thoughts'?'🌤️ Quelle pensée mérite d’être vérifiée plutôt que crue automatiquement ?':mode==='release'?'🌿 Ta tension est-elle identique, plus basse ou simplement différente ?':'✍️ Qu’est-ce que tu veux laisser sur la page plutôt que garder en toi ?'}
+    function start(){cleanup();score=0;if(mode==='thoughts')startThoughtSession();else if(mode==='release')releaseGame();else scribbleGame()}
+    function stop(){cleanup();if(mode==='thoughts'&&thoughtSession.active&&thoughtSession.answers.length){thoughtSession.active=false;thoughtSummary();return}$('gameArena').innerHTML='';$('gameControls').innerHTML='';$('gameReflection').textContent=mode==='thoughts'?'🌤️ Repère une pensée automatique et demande-toi : fait, hypothèse ou règle rigide ?':mode==='release'?'🌿 Ta tension est-elle identique, plus basse ou simplement différente ?':'✍️ Qu’est-ce que tu veux laisser sur la page plutôt que garder en toi ?'}
     function wire(){document.querySelectorAll('.game-choice').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.game)));$('gameStart')?.addEventListener('click',start);$('gameStop')?.addEventListener('click',stop);setMode('thoughts')}
     if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',wire,{once:true});else wire();
   })();
