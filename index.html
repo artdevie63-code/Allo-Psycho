@@ -2414,6 +2414,17 @@ body{font-size:16px}
 .thought-detail-v936{margin:10px 0 14px;padding:13px 14px;border-radius:16px;background:#fff;border:1px solid #eadfe5;text-align:left}
 .thought-detail-v936 p,.thought-detail-v936 li{font-size:.78rem;line-height:1.5}.thought-detail-v936 ol{padding-left:20px}
 
+
+/* ===== V9.3.8 — niveaux, points et badges mini-jeux ===== */
+.game-meta-v938{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 12px}
+.game-meta-v938 span{padding:7px 10px;border-radius:999px;background:#f3eef2;border:1px solid #e5dce1;font-size:.72rem;font-weight:900}
+.game-level-v938{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}
+.game-level-v938 button{border:1px solid #eadfe5;background:#fff;border-radius:14px;padding:8px 10px;font-size:.72rem;font-weight:850;color:var(--text)}
+.game-level-v938 button.active{background:#57484f;color:#fff;border-color:#57484f}
+.game-badge-v938{margin-top:10px;padding:12px 14px;border-radius:17px;background:#fff8ef;border:1px solid #edd9a8;text-align:center}
+.game-badge-v938 strong{display:block;font-size:.84rem}.game-badge-v938 small{display:block;margin-top:4px;color:var(--soft);font-size:.72rem!important}
+.level-up-v938{animation:levelPopV938 .55s ease}@keyframes levelPopV938{0%{transform:scale(.96);opacity:.4}70%{transform:scale(1.03)}100%{transform:scale(1);opacity:1}}
+
 </style>
 </head>
 
@@ -9938,6 +9949,121 @@ document.addEventListener("click",e=>{
 },true);
 
 window.alloRouteV936=route;window.alloOpenPathV936=openPath;
+})();
+</script>
+<script>
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const read=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(d))}catch(_){return d}};
+const write=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+
+const levels={
+ thoughts:[
+  {id:1,name:"Niveau 1 · Repérer",need:6,bonus:10},
+  {id:2,name:"Niveau 2 · Nuancer",need:7,bonus:15},
+  {id:3,name:"Niveau 3 · Vérifier",need:8,bonus:20}
+ ],
+ release:[
+  {id:1,name:"Niveau 1 · Décharger",need:8,bonus:10},
+  {id:2,name:"Niveau 2 · Résister",need:14,bonus:15},
+  {id:3,name:"Niveau 3 · Maîtriser",need:20,bonus:20}
+ ],
+ scribble:[
+  {id:1,name:"Niveau 1 · Libérer",need:1,bonus:10},
+  {id:2,name:"Niveau 2 · Transformer",need:2,bonus:15},
+  {id:3,name:"Niveau 3 · Créer",need:3,bonus:20}
+ ]
+};
+const badgeTable=[
+ {pts:0,icon:"🌱",name:"Apprenti·e du calme"},
+ {pts:40,icon:"🎯",name:"Explorateur·rice des pensées"},
+ {pts:90,icon:"🧠",name:"Détective des pensées"},
+ {pts:150,icon:"👣",name:"Champion·ne du petit pas"},
+ {pts:230,icon:"✨",name:"Maître·sse du non parfait"},
+ {pts:320,icon:"🏆",name:"Explorateur·rice des besoins"}
+];
+
+function state(){
+ return read("alloPsychoMiniGameProgressV938",{points:0,levels:{thoughts:1,release:1,scribble:1},best:{}});
+}
+function save(s){write("alloPsychoMiniGameProgressV938",s);renderMeta()}
+function currentMode(){
+ const active=document.querySelector(".game-choice.active");
+ return active?.dataset.game||"thoughts";
+}
+function badgeFor(points){
+ let b=badgeTable[0];badgeTable.forEach(x=>{if(points>=x.pts)b=x});return b;
+}
+function ensureUI(){
+ const card=document.querySelector("#page-games .game-card");if(!card||$("gameMetaV938"))return;
+ const top=card.querySelector(".game-top");
+ const meta=document.createElement("div");meta.id="gameMetaV938";meta.className="game-meta-v938";
+ meta.innerHTML='<span id="gameLevelLabelV938">Niveau 1</span><span id="gamePointsV938">0 pts</span><span id="gameBadgeLabelV938">🌱 Apprenti·e du calme</span>';
+ top?.insertAdjacentElement("afterend",meta);
+ const lvl=document.createElement("div");lvl.id="gameLevelChooserV938";lvl.className="game-level-v938";meta.insertAdjacentElement("afterend",lvl);
+ const badge=document.createElement("div");badge.id="gameBadgeBoxV938";badge.className="game-badge-v938";badge.hidden=true;lvl.insertAdjacentElement("afterend",badge);
+ renderMeta();renderLevels();
+}
+function renderMeta(){
+ const s=state(),mode=currentMode(),lv=s.levels[mode]||1,b=badgeFor(s.points);
+ if($("gameLevelLabelV938"))$("gameLevelLabelV938").textContent="Niveau "+lv;
+ if($("gamePointsV938"))$("gamePointsV938").textContent=s.points+" pts";
+ if($("gameBadgeLabelV938"))$("gameBadgeLabelV938").textContent=b.icon+" "+b.name;
+}
+function renderLevels(){
+ const box=$("gameLevelChooserV938");if(!box)return;
+ const s=state(),mode=currentMode(),cur=s.levels[mode]||1;
+ box.innerHTML=levels[mode].map(x=>'<button type="button" data-level-v938="'+x.id+'" '+(x.id>cur?'disabled':'')+' class="'+(x.id===cur?'active':'')+'">'+x.name+'</button>').join("");
+ box.querySelectorAll("[data-level-v938]").forEach(b=>b.onclick=()=>{
+   const n=Number(b.dataset.levelV938);
+   if(n>cur)return;
+   sessionStorage.setItem("alloPsychoSelectedGameLevelV938",String(n));
+   box.querySelectorAll("button").forEach(x=>x.classList.toggle("active",x===b));
+ });
+}
+function award(mode,score,total){
+ const s=state(),cur=s.levels[mode]||1;
+ const cfg=levels[mode][cur-1]||levels[mode][0];
+ const threshold=mode==="thoughts"?Math.ceil(total*.7):cfg.need;
+ const passed=score>=threshold;
+ if(passed){
+   const gained=cfg.bonus+Math.max(0,score-threshold)*2;
+   s.points+=gained;
+   s.best[mode]=Math.max(Number(s.best[mode]||0),score);
+   if(cur<3)s.levels[mode]=cur+1;
+   save(s);
+   const b=badgeFor(s.points);
+   const box=$("gameBadgeBoxV938");
+   if(box){
+     box.hidden=false;box.classList.remove("level-up-v938");void box.offsetWidth;box.classList.add("level-up-v938");
+     box.innerHTML='<strong>🎉 Niveau réussi · +'+gained+' points</strong><small>'+(cur<3?'Niveau '+(cur+1)+' débloqué. ':'Niveau maximum atteint. ')+b.icon+' '+b.name+'</small>';
+   }
+ }else{
+   const box=$("gameBadgeBoxV938");
+   if(box){box.hidden=false;box.innerHTML='<strong>Encore un peu ✨</strong><small>'+score+' / '+threshold+' requis pour passer ce niveau. Tu peux recommencer sans perdre de points.</small>'}
+ }
+ renderLevels();
+}
+document.addEventListener("click",e=>{
+ const m=e.target.closest?.(".game-choice");
+ if(m)setTimeout(()=>{renderMeta();renderLevels()},30);
+},true);
+
+// Hook thought summary
+const obs=new MutationObserver(()=>{
+ const summary=document.querySelector(".thought-summary-v935");
+ if(summary&&!summary.dataset.v938){
+   summary.dataset.v938="1";
+   const txt=summary.textContent||"";
+   const m=txt.match(/(\d+)\s*\/\s*(\d+)/);
+   if(m)award("thoughts",Number(m[1]),Number(m[2]));
+ }
+});
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>{ensureUI();obs.observe(document.body,{childList:true,subtree:true})},{once:true});
+else{ensureUI();obs.observe(document.body,{childList:true,subtree:true})}
+
+window.alloAwardMiniGameV938=award;
 })();
 </script>
 </body>
