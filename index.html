@@ -2390,6 +2390,21 @@ body{font-size:16px}
 .thought-summary-v935 .btn{margin:4px}.thought-transform-v935 label{display:block;text-align:left;font-weight:800;font-size:.78rem;margin:10px 0}.thought-transform-v935 textarea{width:100%;min-height:72px;margin-top:5px;border:1px solid #e5dce1;border-radius:14px;padding:10px;font-size:.95rem}.thought-original-v935,.thought-rewrite-v935{padding:12px 14px;border-radius:16px;border:1px solid #eadfe5;background:#faf7f5;text-align:left}.thought-rewrite-v935{background:#f2f8f2;margin:12px 0}.thought-rewrite-v935 strong,.thought-rewrite-v935 span{display:block}.thought-rewrite-v935 span{margin-top:5px;line-height:1.5}
 @media(max-width:620px){.game-controls:has(.thought-choice-btn-v935),.thought-summary-grid-v935{grid-template-columns:1fr}.thought-choice-btn-v935{min-height:44px}}
 
+
+/* ===== V9.3.6 — + D'OUTILS regroupé par thématiques ===== */
+.tools-theme-nav-v936{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:12px 0}
+.tools-theme-nav-v936 button{border:1px solid #eadfe5;background:#fff;border-radius:17px;padding:12px;text-align:left;color:var(--text);cursor:pointer}
+.tools-theme-nav-v936 strong,.tools-theme-nav-v936 small{display:block}.tools-theme-nav-v936 strong{font-size:.8rem}.tools-theme-nav-v936 small{margin-top:4px;color:var(--soft);font-size:.74rem!important;line-height:1.4}
+.tools-theme-v936{margin:12px 0;border:1px solid #eadfe5;border-radius:22px;background:#faf8f7;overflow:hidden}
+.tools-theme-head-v936{width:100%;border:0;background:transparent;padding:15px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--text);text-align:left;cursor:pointer}
+.tools-theme-head-v936 strong,.tools-theme-head-v936 small{display:block}.tools-theme-head-v936 strong{font-size:.94rem}.tools-theme-head-v936 small{margin-top:4px;color:var(--soft);font-size:.75rem!important}
+.tools-theme-head-v936 b{font-size:1.1rem;transition:.2s}.tools-theme-v936.open .tools-theme-head-v936 b{transform:rotate(180deg)}
+.tools-theme-body-v936{display:none;padding:0 12px 12px}.tools-theme-v936.open .tools-theme-body-v936{display:grid;gap:12px}
+.tools-theme-body-v936>.card{margin:0!important}
+.tools-empty-v936{padding:14px;color:var(--soft);font-size:.78rem}
+@media(max-width:760px){.tools-theme-nav-v936{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.tools-theme-nav-v936{grid-template-columns:1fr}}
+
 </style>
 </head>
 
@@ -9735,6 +9750,168 @@ document.addEventListener("click",e=>{
 },true);
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(loadCandidates,900),{once:true});else setTimeout(loadCandidates,900);
 window.loadAudioCandidatesV934=loadCandidates;
+})();
+</script>
+<script>
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+
+const groups=[
+ {key:"calm",icon:"🌿",title:"Apaisement & régulation",desc:"Respiration, urgence calme, routines et micro-pauses.",match:[
+  el=>el.classList?.contains("capsule-v924"),
+  el=>el.classList?.contains("free-essential-banner"),
+  el=>el.id==="breathingCardV8",
+  el=>el.id==="routineCardV861",
+  el=>el.classList?.contains("hero") && /Respire|ici/i.test(el.textContent||"")
+ ]},
+ {key:"mood",icon:"📈",title:"Humeur & fonctionnement",desc:"Comprendre les variations, repérer les schémas et ce qui revient.",match:[
+  el=>el.id==="innerWeatherV924",
+  el=>el.classList?.contains("manual-v924"),
+  el=>el.classList?.contains("guided-history-v922"),
+  el=>el.classList?.contains("evolution-combined-v73"),
+  el=>el.id==="patternInsightCard"
+ ]},
+ {key:"missions",icon:"👣",title:"Missions & progression",desc:"Petits pas, défis, badges et plan de progression.",match:[
+  el=>el.id==="dailyThreadV923",
+  el=>el.classList?.contains("weekly-challenge-v924"),
+  el=>el.classList?.contains("badge-card-v923"),
+  el=>el.classList?.contains("journey-card"),
+  el=>el.classList?.contains("plan-card")
+ ]},
+ {key:"reviews",icon:"🗓️",title:"Bilans & ressources",desc:"Bilans périodiques, contenus, phrases ressources et outils aidants.",match:[
+  el=>el.classList?.contains("monthly-summary-v924"),
+  el=>el.classList?.contains("season-v923"),
+  el=>!!el.querySelector?.("#resourceListV924"),
+  el=>!!el.querySelector?.("#bestToolsV923")
+ ]},
+ {key:"support",icon:"💬",title:"Accompagnement",desc:"Soutien complémentaire et repères personnalisés.",match:[
+  el=>el.classList?.contains("companion-card")
+ ]}
+];
+
+function build(){
+ const dest=$("moreToolsContentV933"); if(!dest||$("toolsThemeNavV936"))return;
+ const cards=[...dest.children].filter(el=>el.classList?.contains("card"));
+ const nav=document.createElement("div");nav.id="toolsThemeNavV936";nav.className="tools-theme-nav-v936";
+ const wrapper=document.createElement("div");wrapper.id="toolsThemeGroupsV936";
+ dest.prepend(nav);dest.insertBefore(wrapper,nav.nextSibling);
+
+ groups.forEach((g,idx)=>{
+   const section=document.createElement("section");section.className="tools-theme-v936"+(idx===0?" open":"");section.dataset.toolsThemeV936=g.key;
+   section.innerHTML='<button type="button" class="tools-theme-head-v936" aria-expanded="'+(idx===0?'true':'false')+'"><span><strong>'+g.icon+' '+g.title+'</strong><small>'+g.desc+'</small></span><b>⌄</b></button><div class="tools-theme-body-v936"></div>';
+   const body=section.querySelector(".tools-theme-body-v936");
+   const matched=cards.filter(el=>g.match.some(fn=>{try{return fn(el)}catch(_){return false}}));
+   matched.forEach(el=>body.appendChild(el));
+   if(!matched.length)body.innerHTML='<div class="tools-empty-v936">Aucun outil dans cette catégorie pour le moment.</div>';
+   wrapper.appendChild(section);
+
+   const n=document.createElement("button");n.type="button";n.dataset.jumpToolsV936=g.key;n.innerHTML='<strong>'+g.icon+' '+g.title+'</strong><small>'+matched.length+' outil'+(matched.length>1?'s':'')+'</small>';nav.appendChild(n);
+ });
+
+ // any leftover cards go to resources rather than remain loose
+ const placed=new Set([...wrapper.querySelectorAll(".card")]);
+ const leftovers=cards.filter(x=>!placed.has(x));
+ const resourceBody=wrapper.querySelector('[data-tools-theme-v936="reviews"] .tools-theme-body-v936');
+ leftovers.forEach(el=>resourceBody?.appendChild(el));
+
+ function open(key){
+   wrapper.querySelectorAll(".tools-theme-v936").forEach(sec=>{
+     const on=sec.dataset.toolsThemeV936===key;
+     sec.classList.toggle("open",on);
+     sec.querySelector(".tools-theme-head-v936")?.setAttribute("aria-expanded",on?"true":"false");
+   });
+   const sec=wrapper.querySelector('[data-tools-theme-v936="'+key+'"]');
+   sec?.scrollIntoView({behavior:"smooth",block:"start"});
+ }
+ wrapper.querySelectorAll(".tools-theme-head-v936").forEach(btn=>btn.onclick=()=>{
+   const sec=btn.closest(".tools-theme-v936"),will=!sec.classList.contains("open");
+   wrapper.querySelectorAll(".tools-theme-v936").forEach(x=>{x.classList.remove("open");x.querySelector(".tools-theme-head-v936")?.setAttribute("aria-expanded","false")});
+   if(will){sec.classList.add("open");btn.setAttribute("aria-expanded","true")}
+ });
+ nav.querySelectorAll("[data-jump-tools-v936]").forEach(b=>b.onclick=()=>open(b.dataset.jumpToolsV936));
+ window.alloOpenToolsThemeV936=open;
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(build,180),{once:true});else setTimeout(build,180);
+})();
+</script>
+
+<script>
+/* V9.3.6 — centralisation des clics et routes */
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+function page(name){
+ const btn=document.querySelector('.tab[data-page="'+name+'"]');
+ if(btn){btn.click();return true}
+ if(typeof afficherPage==="function"){afficherPage(name);return true}
+ return false;
+}
+function showMoreTheme(key,selector,clickSelector){
+ page("moretools");
+ setTimeout(()=>{
+   window.alloOpenToolsThemeV936?.(key);
+   setTimeout(()=>{
+     const el=selector?document.querySelector(selector):null;
+     el?.scrollIntoView?.({behavior:"smooth",block:"center"});
+     if(clickSelector)document.querySelector(clickSelector)?.click();
+   },120);
+ },120);
+}
+function route(action){
+ if(action==="breathing"){showMoreTheme("calm","#breathingCardV8");return}
+ if(action==="urgent"){showMoreTheme("calm",null,'[data-premium-calm-v83="urgent"]');return}
+ if(action==="audio"){page("moretools");setTimeout(()=>{window.alloOpenToolsThemeV936?.("calm");document.querySelector("#audioButton,#audioPlayBtn")?.scrollIntoView?.({behavior:"smooth",block:"center"})},180);return}
+ if(action==="thoughts"||action==="release"){page("games");setTimeout(()=>document.querySelector('[data-game="'+action+'"]')?.click(),140);return}
+ if(action==="tcc"){page("write");setTimeout(()=>$("tccWizardV72")?.scrollIntoView({behavior:"smooth",block:"start"}),150);return}
+ if(action==="journal"){page("write");setTimeout(()=>$("journalText")?.focus(),120);return}
+ if(action==="chat"){page("chat");setTimeout(()=>$("chatInput")?.focus(),120);return}
+}
+function pathFor(state,need){
+ if(need==="understand"&&state==="angry")return "limits";
+ if(state==="anxious")return "anxiety";
+ if(state==="overload")return "sensitivity";
+ if(state==="reflect")return "rumination";
+ return null;
+}
+function actionFor(state,need){
+ if(need==="calm")return state==="overload"?"urgent":"breathing";
+ if(need==="understand")return "tcc";
+ if(need==="release")return "release";
+ if(need==="act")return state==="sad"?"journal":"tcc";
+ return "chat";
+}
+function openPath(key){
+ if(!key)return;
+ page("premium");
+ setTimeout(()=>{
+   const more=$("premiumMoreV926");if(more)more.hidden=false;
+   const toggle=$("premiumMoreToggleV926");if(toggle){toggle.setAttribute("aria-expanded","true");if(toggle.firstChild)toggle.firstChild.textContent="✨ Masquer les détails Premium"}
+   if(typeof window.alloShowPathV923==="function")window.alloShowPathV923(key);
+   $("pathDetailV7")?.scrollIntoView({behavior:"smooth",block:"start"});
+ },180);
+}
+
+document.addEventListener("click",e=>{
+ const now=e.target.closest?.("#goGuidedNowV922");
+ if(now){
+   e.preventDefault();e.stopImmediatePropagation();
+   const state=localStorage.getItem("alloPsychoLastState")||"",need=localStorage.getItem("alloPsychoLastNeed")||"";
+   route(actionFor(state,need));return;
+ }
+ const p=e.target.closest?.("#goGuidedPathV922,#resumeGuidedPathV922");
+ if(p){
+   e.preventDefault();e.stopImmediatePropagation();
+   const explicit=p.dataset.path||null;
+   openPath(explicit||pathFor(localStorage.getItem("alloPsychoLastState")||"",localStorage.getItem("alloPsychoLastNeed")||""));return;
+ }
+ const ta=e.target.closest?.("[data-theme-action-v927]");
+ if(ta){e.preventDefault();e.stopImmediatePropagation();route(ta.dataset.themeActionV927);return}
+ const tp=e.target.closest?.("[data-theme-path-v927]");
+ if(tp){e.preventDefault();e.stopImmediatePropagation();openPath(tp.dataset.themePathV927);return}
+},true);
+
+window.alloRouteV936=route;window.alloOpenPathV936=openPath;
 })();
 </script>
 </body>
