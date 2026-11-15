@@ -2366,6 +2366,15 @@ body{font-size:16px}
 #page-moretools #moreToolsContentV933{display:grid;gap:12px}
 #page-moretools .progressive-toggle-v926{display:none!important}
 
+
+/* ===== V9.3.4 — validation éditoriale audio Premium ===== */
+.audio-candidate-v934{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding:13px;border:1px solid #eadfe5;border-radius:17px;background:#fff;margin-top:9px}
+.audio-candidate-v934 .meta{flex:1}.audio-candidate-v934 strong,.audio-candidate-v934 small{display:block}.audio-candidate-v934 small{margin-top:4px;color:var(--soft);font-size:.74rem!important;line-height:1.45}
+.audio-candidate-actions-v934{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.audio-status-v934{display:inline-flex;margin-top:7px;padding:5px 8px;border-radius:999px;font-size:.68rem;font-weight:900;background:#fff6df;border:1px solid #edd9a8}
+.audio-status-v934.approved{background:#eef8ef;border-color:#d7e9d9}.audio-status-v934.rejected{background:#fff0f0;border-color:#f0d1d1}
+@media(max-width:720px){.audio-candidate-v934{flex-direction:column}.audio-candidate-actions-v934{justify-content:flex-start}}
+
 </style>
 </head>
 
@@ -3298,11 +3307,20 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
             <input id="adminAudioFile" type="file" accept="audio/mpeg,audio/mp3,.mp3" required>
           </div>
           <label class="consent-row">
-            <input id="adminAudioPublished" type="checkbox" checked>
-            <span><strong>Publier immédiatement</strong><br><small>Le fichier sera visible dans la bibliothèque audio des utilisateurs connectés.</small></span>
+            <input id="adminAudioPublished" type="checkbox">
+            <span><strong>Publier après validation</strong><br><small>Laisse décoché pendant la vérification éditoriale. Publie uniquement après ton accord.</small></span>
           </label>
           <button type="submit" id="adminUploadBtn" class="btn btn-dark" aria-label="Ajouter laudio">⬆️ Ajouter l’audio</button>
         </form>
+      </div>
+
+      <div class="card">
+        <p class="eyebrow">PLANNING AUDIO PREMIUM 2027</p>
+        <h3>🎧 Pistes candidates à valider</h3>
+        <p class="muted">Aucune piste de cette liste n’est publiée automatiquement. Écoute-la chez la source puis valide ou refuse son intégration.</p>
+        <div id="adminAudioCandidatesV934" class="audio-library">
+          <div class="empty">Chargement…</div>
+        </div>
       </div>
 
       <div class="card">
@@ -9524,6 +9542,87 @@ function moveMoreTools(){
 if(document.readyState==="loading"){
   document.addEventListener("DOMContentLoaded",()=>setTimeout(moveMoreTools,80),{once:true});
 }else setTimeout(moveMoreTools,80);
+})();
+</script>
+<script>
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+
+async function loadCandidates(){
+  const box=$("adminAudioCandidatesV934");
+  if(!box || !window.supabaseClient)return;
+  try{
+    const r=await window.supabaseClient
+      .from("audio_candidates")
+      .select("id,title,artist,source_name,source_url,category,planned_release_date,duration_label,license_name,license_url,notes,approval_status")
+      .order("planned_release_date",{ascending:true});
+    if(r.error){box.innerHTML='<div class="empty">Impossible de charger les pistes candidates.</div>';return;}
+    if(!r.data?.length){box.innerHTML='<div class="empty">Aucune piste candidate.</div>';return;}
+    box.innerHTML="";
+    r.data.forEach(item=>{
+      const row=document.createElement("div");
+      row.className="audio-candidate-v934";
+      const meta=document.createElement("div");
+      meta.className="meta";
+      const d=new Date(item.planned_release_date+"T12:00:00").toLocaleDateString("fr-FR",{month:"long",year:"numeric"});
+      meta.innerHTML='<strong>'+item.title+' · '+item.artist+'</strong>'+
+        '<small>'+item.category+' · '+d+(item.duration_label?' · '+item.duration_label:'')+'</small>'+
+        '<small>'+item.notes+'</small>'+
+        '<small>Licence : '+item.license_name+'</small>'+
+        '<span class="audio-status-v934 '+item.approval_status+'">'+
+        (item.approval_status==="approved"?"✓ Validée":item.approval_status==="rejected"?"✕ Refusée":"À valider")+
+        '</span>';
+      const actions=document.createElement("div");
+      actions.className="audio-candidate-actions-v934";
+
+      const listen=document.createElement("button");
+      listen.type="button";listen.className="btn btn-light";listen.textContent="▶ Écouter la source";
+      listen.onclick=()=>window.open(item.source_url,"_blank","noopener,noreferrer");
+
+      const license=document.createElement("button");
+      license.type="button";license.className="btn btn-light";license.textContent="⚖️ Licence";
+      license.onclick=()=>window.open(item.license_url,"_blank","noopener,noreferrer");
+
+      const approve=document.createElement("button");
+      approve.type="button";approve.className="btn btn-dark";approve.textContent="✓ Valider";
+      approve.disabled=item.approval_status==="approved";
+      approve.onclick=async()=>{
+        const user=(await window.supabaseClient.auth.getUser())?.data?.user;
+        const u=await window.supabaseClient.from("audio_candidates")
+          .update({approval_status:"approved",approved_at:new Date().toISOString(),approved_by:user?.id||null,updated_at:new Date().toISOString()})
+          .eq("id",item.id);
+        if(u.error){window.afficherToast?.("⚠️ Validation impossible.");return;}
+        window.afficherToast?.("✅ Piste validée. Elle reste non publiée tant que le MP3 n’est pas ajouté.");
+        loadCandidates();
+      };
+
+      const reject=document.createElement("button");
+      reject.type="button";reject.className="btn btn-light";reject.textContent="✕ Refuser";
+      reject.disabled=item.approval_status==="rejected";
+      reject.onclick=async()=>{
+        const u=await window.supabaseClient.from("audio_candidates")
+          .update({approval_status:"rejected",approved_at:null,approved_by:null,updated_at:new Date().toISOString()})
+          .eq("id",item.id);
+        if(u.error){window.afficherToast?.("⚠️ Refus impossible.");return;}
+        window.afficherToast?.("Piste refusée.");
+        loadCandidates();
+      };
+
+      actions.append(listen,license,approve,reject);
+      row.append(meta,actions);
+      box.appendChild(row);
+    });
+  }catch(_){
+    box.innerHTML='<div class="empty">Impossible de charger les pistes candidates.</div>';
+  }
+}
+document.addEventListener("click",e=>{
+  const tab=e.target.closest?.("#adminTab,[data-page='admin']");
+  if(tab)setTimeout(loadCandidates,250);
+},true);
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(loadCandidates,900),{once:true});else setTimeout(loadCandidates,900);
+window.loadAudioCandidatesV934=loadCandidates;
 })();
 </script>
 </body>
