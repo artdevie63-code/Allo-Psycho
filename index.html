@@ -9837,7 +9837,7 @@ const groups=[
   el=>!!el.querySelector?.("#resourceListV924"),
   el=>!!el.querySelector?.("#bestToolsV923")
  ]},
- {key:"support",icon:"💬",title:"Accompagnement",desc:"Soutien complémentaire et repères personnalisés.",match:[
+ {key:"support",icon:"💬",title:"Mon espace de soutien",desc:"Repères personnels, compagnon IA et ressources de soutien au quotidien.",match:[
   el=>el.classList?.contains("companion-card")
  ]}
 ]
@@ -10112,7 +10112,7 @@ const groupDefsV940=[
  {key:"routines",icon:"☀️",title:"Mes routines",desc:"Routines quotidiennes et plan de progression.",tests:[x=>x.id==="routineCardV861",x=>x.classList?.contains("plan-card")]},
  {key:"missions",icon:"👣",title:"Missions & progression",desc:"Petits pas, défis et badges.",tests:[x=>x.id==="dailyThreadV923",x=>x.classList?.contains("weekly-challenge-v924"),x=>x.classList?.contains("badge-card-v923"),x=>x.classList?.contains("journey-card")]},
  {key:"reviews",icon:"🧰",title:"Ressources & repères",desc:"Contenus et outils qui semblent aider.",tests:[x=>x.classList?.contains("season-v923"),x=>!!x.querySelector?.("#resourceListV924"),x=>!!x.querySelector?.("#bestToolsV923")]},
- {key:"support",icon:"💬",title:"Accompagnement",desc:"Soutien complémentaire.",tests:[x=>x.classList?.contains("companion-card")]}
+ {key:"support",icon:"💬",title:"Mon espace de soutien",desc:"Repères personnels, compagnon IA et ressources de soutien au quotidien.",tests:[x=>x.classList?.contains("companion-card")]}
 ];
 
 function buildGroupsV940(dest){
@@ -10275,8 +10275,8 @@ function ensureSupportV941(){
     card.id="supportAiAccessV941";
     card.className="card";
     card.innerHTML=
-      '<p class="eyebrow">ACCOMPAGNEMENT PERSONNALISÉ</p>'+
-      '<h3>💬 Parler avec mon compagnon</h3>'+
+      '<p class="eyebrow">MON ESPACE DE SOUTIEN</p>'+
+      '<h3>💬 Mon compagnon & mes repères</h3>'+
       '<p class="muted">Un espace pour mettre des mots sur ce qui se passe, comprendre, t’apaiser ou préparer un petit pas. Le compagnon ne remplace pas une consultation et les messages ne sont envoyés à l’IA qu’avec ton autorisation.</p>'+
       '<div class="profile-actions">'+
         '<button type="button" class="btn btn-dark" id="openChatSupportV941">Ouvrir le compagnon IA</button>'+
