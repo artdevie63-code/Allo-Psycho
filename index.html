@@ -10252,5 +10252,65 @@ function init(){
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })();
 </script>
+<script>
+/* V9.4.1 — Accompagnement toujours alimenté */
+(function(){
+"use strict";
+function ensureSupportV941(){
+  const section=document.querySelector('[data-tools-theme-v936="support"]');
+  const body=section?.querySelector(".tools-theme-body-v936");
+  if(!body)return false;
+
+  // Retire l'ancien message vide éventuel.
+  body.querySelectorAll(".tools-empty-v936").forEach(x=>x.remove());
+
+  // La carte compagnon était imbriquée dans .wellness-dashboard :
+  // on la déplace réellement dans la rubrique Accompagnement.
+  const companion=document.querySelector(".companion-card");
+  if(companion && !body.contains(companion)) body.appendChild(companion);
+
+  // Accès direct au compagnon IA, indépendant de la position des anciennes cartes.
+  if(!document.getElementById("supportAiAccessV941")){
+    const card=document.createElement("div");
+    card.id="supportAiAccessV941";
+    card.className="card";
+    card.innerHTML=
+      '<p class="eyebrow">ACCOMPAGNEMENT PERSONNALISÉ</p>'+
+      '<h3>💬 Parler avec mon compagnon</h3>'+
+      '<p class="muted">Un espace pour mettre des mots sur ce qui se passe, comprendre, t’apaiser ou préparer un petit pas. Le compagnon ne remplace pas une consultation et les messages ne sont envoyés à l’IA qu’avec ton autorisation.</p>'+
+      '<div class="profile-actions">'+
+        '<button type="button" class="btn btn-dark" id="openChatSupportV941">Ouvrir le compagnon IA</button>'+
+        '<button type="button" class="btn btn-light" id="openPatternsSupportV941">Voir mes repères personnels</button>'+
+      '</div>';
+    body.appendChild(card);
+
+    card.querySelector("#openChatSupportV941").addEventListener("click",()=>{
+      const tab=document.querySelector('.tab[data-page="chat"]');
+      if(tab)tab.click(); else if(typeof afficherPage==="function")afficherPage("chat");
+    });
+    card.querySelector("#openPatternsSupportV941").addEventListener("click",()=>{
+      const btn=document.getElementById("patternInsightBtn");
+      if(btn)btn.click();
+      if(typeof window.alloOpenToolsThemeV936==="function")window.alloOpenToolsThemeV936("know");
+    });
+  }
+
+  // Met à jour le compteur de la tuile Accompagnement.
+  const nav=document.querySelector('[data-jump-tools-v936="support"] small');
+  if(nav)nav.textContent=body.querySelectorAll(".card").length+" module(s)";
+  return true;
+}
+function boot(){
+  let tries=0;
+  const timer=setInterval(()=>{
+    tries++;
+    if(ensureSupportV941()||tries>20)clearInterval(timer);
+  },150);
+  setTimeout(ensureSupportV941,1200);
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});
+else boot();
+})();
+</script>
 </body>
 </html>
