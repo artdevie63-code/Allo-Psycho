@@ -2425,6 +2425,19 @@ body{font-size:16px}
 .game-badge-v938 strong{display:block;font-size:.84rem}.game-badge-v938 small{display:block;margin-top:4px;color:var(--soft);font-size:.72rem!important}
 .level-up-v938{animation:levelPopV938 .55s ease}@keyframes levelPopV938{0%{transform:scale(.96);opacity:.4}70%{transform:scale(1.03)}100%{transform:scale(1);opacity:1}}
 
+
+/* ===== V9.4.0 — rubriques, consentement IA, playlists Premium ===== */
+.ai-consent-first-v940{position:fixed;inset:0;z-index:1200;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(39,31,36,.48);backdrop-filter:blur(8px)}
+.ai-consent-first-v940.visible{display:flex}.ai-consent-card-v940{width:min(680px,100%);max-height:92vh;overflow:auto;background:#fffaf7;border-radius:26px;padding:22px;box-shadow:0 24px 80px rgba(45,35,40,.25)}
+.ai-consent-card-v940 h2{margin:4px 0 8px}.ai-consent-choice-v940{display:flex;gap:11px;align-items:flex-start;margin:10px 0;padding:13px;border:1px solid #eadfe5;border-radius:17px;background:#fff}
+.ai-consent-choice-v940 input{margin-top:3px;width:20px;height:20px}.ai-consent-actions-v940{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.therapy-audio-hub-v940{background:linear-gradient(145deg,#fff9f4,#f4efff)}.therapy-audio-head-v940{display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap}
+.therapy-audio-cats-v940{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.therapy-audio-cats-v940 button{border:1px solid #eadfe5;background:#fff;border-radius:999px;padding:8px 11px;font-size:.72rem;font-weight:850;color:var(--text)}
+.therapy-audio-cats-v940 button.active{background:#57484f;color:#fff}.therapy-playlist-v940{display:grid;gap:9px;margin-top:10px}.therapy-track-v940{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 13px;border:1px solid #eadfe5;border-radius:16px;background:#fff}
+.therapy-track-v940 strong,.therapy-track-v940 small{display:block}.therapy-track-v940 small{margin-top:3px;color:var(--soft);font-size:.72rem!important}.therapy-track-v940 .btn{white-space:nowrap}
+.section-intro-v940{padding:12px 14px;border-radius:17px;background:#fff;border:1px solid #eadfe5;margin-bottom:4px}.section-intro-v940 strong,.section-intro-v940 small{display:block}.section-intro-v940 small{margin-top:4px;color:var(--soft)}
+@media(max-width:620px){.therapy-track-v940{align-items:flex-start;flex-direction:column}.ai-consent-actions-v940 .btn{width:100%}}
+
 </style>
 </head>
 
@@ -2686,19 +2699,18 @@ body{font-size:16px}
           🌸
         </div>
 
-        <p class="eyebrow">
-          UN MOMENT POUR TOI
-        </p>
-
-        <h2>
-          Respire. Tu es ici. 🌷
-        </h2>
-
-        <p class="muted">
-          Prends quelques minutes pour ralentir,
-          respirer et retrouver un peu de calme.
-          🫶
-        </p>
+        <p class="eyebrow">AUDIOS THÉRAPEUTIQUES · PREMIUM</p>
+        <h2>🎧 Un moment pour toi</h2>
+        <p class="muted">Choisis une séance selon ton besoin : anxiété, surcharge, sommeil, respiration douce ou concentration. Ce module est distinct de la cohérence cardiaque.</p>
+        <div class="therapy-audio-cats-v940" id="therapyAudioCatsV940">
+          <button type="button" data-audio-cat-v940="all" class="active">Toutes</button>
+          <button type="button" data-audio-cat-v940="Anxiété">Anxiété</button>
+          <button type="button" data-audio-cat-v940="Relaxation">Surcharge</button>
+          <button type="button" data-audio-cat-v940="Sommeil">Sommeil</button>
+          <button type="button" data-audio-cat-v940="Respiration">Respiration douce</button>
+          <button type="button" data-audio-cat-v940="Concentration">Concentration</button>
+        </div>
+        <div id="therapyPlaylistV940" class="therapy-playlist-v940"><div class="empty">Chargement des séances Premium…</div></div>
 
         <!-- Lecteur audio invisible -->
 
@@ -5944,8 +5956,8 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
 
     function detecterRisque(texte) {
       const t=(texte||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
-      const suicide=/\b(suicide|suicider|me tuer|mourir|en finir|idee[s]? noire[s]?|plus envie de vivre|ne veux plus vivre|mettre fin a mes jours)\b/.test(t);
-      const mutilation=/\b(mutilation|mutiler|me couper|me taillader|scarifier|scarification|sang|saigne|saigner|blessure grave)\b/.test(t);
+      const suicide=/\b(suicide|suicider|me suicider|me tuer|me buter|me flinguer|me foutre en l air|me foutre en l'air|me jeter|passer a l acte|mourir|crever|disparaitre|en finir|tout arreter|idee[s]? noire[s]?|plus envie de vivre|plus la force de vivre|ne veux plus vivre|je veux mourir|j aimerais mourir|prefererais etre mort|prefererais etre morte|mettre fin a mes jours|ne plus etre la|je serais mieux mort|je serais mieux morte|personne ne me regretterait|ca ne sert plus a rien de vivre)\b/.test(t);
+      const mutilation=/\b(mutilation|mutiler|me couper|me taillader|me faire du mal|me faire mal volontairement|me blesser|scarifier|scarification|sang|saigne|saigner|blessure grave)\b/.test(t);
       const violence=/\b(violence|violent|frapper|tuer quelqu|arme|couteau|etrangler|agression|me menace|danger immediat)\b/.test(t);
       if(suicide) return {type:"suicide"};
       if(mutilation || violence) return {type:"urgence"};
@@ -9795,29 +9807,32 @@ window.loadAudioCandidatesV934=loadCandidates;
 const $=id=>document.getElementById(id);
 
 const groups=[
- {key:"calm",icon:"🌿",title:"Apaisement & régulation",desc:"Respiration, urgence calme, routines et micro-pauses.",match:[
+ {key:"calm",icon:"🌿",title:"Apaisement & régulation",desc:"Respiration, urgence calme et micro-pauses.",match:[
   el=>el.classList?.contains("capsule-v924"),
   el=>el.classList?.contains("free-essential-banner"),
   el=>el.id==="breathingCardV8",
-  el=>el.id==="routineCardV861",
-  el=>el.classList?.contains("hero") && /Respire|ici/i.test(el.textContent||"")
+  el=>el.classList?.contains("hero") && /AUDIOS THÉRAPEUTIQUES|Un moment pour toi/i.test(el.textContent||"")
  ]},
- {key:"mood",icon:"📈",title:"Humeur & fonctionnement",desc:"Comprendre les variations, repérer les schémas et ce qui revient.",match:[
+ {key:"know",icon:"🪞",title:"Mieux se connaître",desc:"Questionnaires, évolution de mon état, tendances et bilans personnels.",match:[
+  el=>el.classList?.contains("selftests-v7"),
   el=>el.id==="innerWeatherV924",
   el=>el.classList?.contains("manual-v924"),
+  el=>el.classList?.contains("monthly-summary-v924"),
   el=>el.classList?.contains("guided-history-v922"),
   el=>el.classList?.contains("evolution-combined-v73"),
   el=>el.id==="patternInsightCard"
  ]},
- {key:"missions",icon:"👣",title:"Missions & progression",desc:"Petits pas, défis, badges et plan de progression.",match:[
+ {key:"routines",icon:"☀️",title:"Mes routines",desc:"Routines quotidiennes, petits rituels et plan de progression.",match:[
+  el=>el.id==="routineCardV861",
+  el=>el.classList?.contains("plan-card")
+ ]},
+ {key:"missions",icon:"👣",title:"Missions & progression",desc:"Petits pas, défis et badges.",match:[
   el=>el.id==="dailyThreadV923",
   el=>el.classList?.contains("weekly-challenge-v924"),
   el=>el.classList?.contains("badge-card-v923"),
-  el=>el.classList?.contains("journey-card"),
-  el=>el.classList?.contains("plan-card")
+  el=>el.classList?.contains("journey-card")
  ]},
- {key:"reviews",icon:"🗓️",title:"Bilans & ressources",desc:"Bilans périodiques, contenus, phrases ressources et outils aidants.",match:[
-  el=>el.classList?.contains("monthly-summary-v924"),
+ {key:"reviews",icon:"🧰",title:"Ressources & repères",desc:"Contenus, phrases ressources et outils qui semblent aider.",match:[
   el=>el.classList?.contains("season-v923"),
   el=>!!el.querySelector?.("#resourceListV924"),
   el=>!!el.querySelector?.("#bestToolsV923")
@@ -9825,7 +9840,7 @@ const groups=[
  {key:"support",icon:"💬",title:"Accompagnement",desc:"Soutien complémentaire et repères personnalisés.",match:[
   el=>el.classList?.contains("companion-card")
  ]}
-];
+]
 
 function build(){
  const dest=$("moreToolsContentV933"); if(!dest||$("toolsThemeNavV936"))return;
@@ -10064,6 +10079,177 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 else{ensureUI();obs.observe(document.body,{childList:true,subtree:true})}
 
 window.alloAwardMiniGameV938=award;
+})();
+</script>
+<script>
+/* ALLO PSYCHO V9.4.0 — structure, sécurité, consentement IA, audios Premium */
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+
+function moveCardsBeforeToolGrouping(){
+  const dest=$("moreToolsContentV933");if(!dest)return;
+  const selftests=document.querySelector("#page-profile .selftests-v7");
+  if(selftests&&!dest.contains(selftests))dest.appendChild(selftests);
+
+  const routine=$("routineCardV861");
+  if(routine&&!dest.contains(routine))dest.appendChild(routine);
+
+  // If grouping already ran, rebuild it once with the newly moved cards.
+  const oldNav=$("toolsThemeNavV936"),oldGroups=$("toolsThemeGroupsV936");
+  if(oldNav||oldGroups){
+    const loose=[...(oldGroups?.querySelectorAll(".card")||[])];
+    loose.forEach(x=>dest.appendChild(x));
+    oldNav?.remove();oldGroups?.remove();
+    // recreate by reloading grouping logic through a lightweight local build
+    buildGroupsV940(dest);
+  }
+}
+
+const groupDefsV940=[
+ {key:"calm",icon:"🌿",title:"Apaisement & régulation",desc:"Respiration, urgence calme et audios thérapeutiques.",tests:[x=>x.id==="breathingCardV8",x=>x.classList?.contains("capsule-v924"),x=>x.classList?.contains("free-essential-banner"),x=>x.classList?.contains("hero")&&/AUDIOS THÉRAPEUTIQUES|Un moment pour toi/i.test(x.textContent||"")]},
+ {key:"know",icon:"🪞",title:"Mieux se connaître",desc:"Questionnaires, évolution de mon état, tendances, bilans et synthèses.",tests:[x=>x.classList?.contains("selftests-v7"),x=>x.id==="innerWeatherV924",x=>x.classList?.contains("manual-v924"),x=>x.classList?.contains("monthly-summary-v924"),x=>x.classList?.contains("guided-history-v922"),x=>x.classList?.contains("evolution-combined-v73"),x=>x.id==="patternInsightCard"]},
+ {key:"routines",icon:"☀️",title:"Mes routines",desc:"Routines quotidiennes et plan de progression.",tests:[x=>x.id==="routineCardV861",x=>x.classList?.contains("plan-card")]},
+ {key:"missions",icon:"👣",title:"Missions & progression",desc:"Petits pas, défis et badges.",tests:[x=>x.id==="dailyThreadV923",x=>x.classList?.contains("weekly-challenge-v924"),x=>x.classList?.contains("badge-card-v923"),x=>x.classList?.contains("journey-card")]},
+ {key:"reviews",icon:"🧰",title:"Ressources & repères",desc:"Contenus et outils qui semblent aider.",tests:[x=>x.classList?.contains("season-v923"),x=>!!x.querySelector?.("#resourceListV924"),x=>!!x.querySelector?.("#bestToolsV923")]},
+ {key:"support",icon:"💬",title:"Accompagnement",desc:"Soutien complémentaire.",tests:[x=>x.classList?.contains("companion-card")]}
+];
+
+function buildGroupsV940(dest){
+  const cards=[...dest.children].filter(x=>x.classList?.contains("card"));
+  if(!cards.length)return;
+  const nav=document.createElement("div");nav.id="toolsThemeNavV936";nav.className="tools-theme-nav-v936";
+  const wrap=document.createElement("div");wrap.id="toolsThemeGroupsV936";
+  dest.prepend(nav);dest.insertBefore(wrap,nav.nextSibling);
+  const placed=new Set();
+  groupDefsV940.forEach((g,i)=>{
+    const sec=document.createElement("section");sec.className="tools-theme-v936"+(i===0?" open":"");sec.dataset.toolsThemeV936=g.key;
+    sec.innerHTML='<button type="button" class="tools-theme-head-v936" aria-expanded="'+(i===0?'true':'false')+'"><span><strong>'+g.icon+' '+g.title+'</strong><small>'+g.desc+'</small></span><b>⌄</b></button><div class="tools-theme-body-v936"></div>';
+    const body=sec.querySelector(".tools-theme-body-v936");
+    cards.filter(x=>g.tests.some(fn=>{try{return fn(x)}catch(_){return false}})).forEach(x=>{placed.add(x);body.appendChild(x)});
+    wrap.appendChild(sec);
+    const b=document.createElement("button");b.type="button";b.dataset.jumpToolsV936=g.key;b.innerHTML='<strong>'+g.icon+' '+g.title+'</strong><small>'+body.querySelectorAll(".card").length+' module(s)</small>';nav.appendChild(b);
+  });
+  const resource=wrap.querySelector('[data-tools-theme-v936="reviews"] .tools-theme-body-v936');
+  cards.filter(x=>!placed.has(x)).forEach(x=>resource?.appendChild(x));
+  function open(key){
+    wrap.querySelectorAll(".tools-theme-v936").forEach(s=>{const on=s.dataset.toolsThemeV936===key;s.classList.toggle("open",on);s.querySelector(".tools-theme-head-v936")?.setAttribute("aria-expanded",on?"true":"false")});
+    wrap.querySelector('[data-tools-theme-v936="'+key+'"]')?.scrollIntoView({behavior:"smooth",block:"start"});
+  }
+  wrap.querySelectorAll(".tools-theme-head-v936").forEach(b=>b.onclick=()=>{const s=b.closest(".tools-theme-v936");const will=!s.classList.contains("open");wrap.querySelectorAll(".tools-theme-v936").forEach(x=>x.classList.remove("open"));if(will)s.classList.add("open")});
+  nav.querySelectorAll("[data-jump-tools-v936]").forEach(b=>b.onclick=()=>open(b.dataset.jumpToolsV936));
+  window.alloOpenToolsThemeV936=open;
+}
+
+function ensureAiConsentModal(){
+ if($("aiConsentFirstV940"))return;
+ const m=document.createElement("div");m.id="aiConsentFirstV940";m.className="ai-consent-first-v940";
+ m.innerHTML='<div class="ai-consent-card-v940" role="dialog" aria-modal="true" aria-labelledby="aiConsentTitleV940">'+
+ '<p class="eyebrow">AVANT D’UTILISER LE COMPAGNON IA</p><h2 id="aiConsentTitleV940">🔒 Tes choix de confidentialité</h2>'+
+ '<p class="muted">Ces choix apparaissent ici lors de la première utilisation afin que tu saches précisément ce qui reste local et ce qui peut être envoyé à l’IA.</p>'+
+ '<label class="ai-consent-choice-v940"><input type="checkbox" id="aiHealthFirstV940"><span><strong>Données de parcours locales</strong><br><small>Je comprends que profil, journal, humeur, TCC, routines et historique restent sur cet appareil et peuvent être perdus si les données du navigateur sont supprimées.</small></span></label>'+
+ '<label class="ai-consent-choice-v940"><input type="checkbox" id="aiAllowFirstV940"><span><strong>Autoriser l’IA quand j’envoie un message</strong><br><small>Seuls mon message, un historique récent limité, quelques préférences et une mémoire thérapeutique minimale peuvent être transmis pour générer la réponse. Mon journal complet et mes fiches TCC complètes ne sont pas envoyés automatiquement.</small></span></label>'+
+ '<div class="ai-consent-actions-v940"><button type="button" class="btn btn-dark" id="aiConsentAcceptV940">Continuer avec l’IA</button><button type="button" class="btn btn-light" id="aiConsentLocalV940">Pas maintenant</button></div>'+
+ '</div>';
+ document.body.appendChild(m);
+ $("aiHealthFirstV940").checked=$("healthConsent")?.checked===true;
+ $("aiAllowFirstV940").checked=$("aiConsent")?.checked===true;
+ $("aiConsentAcceptV940").onclick=()=>{
+   if(!$("aiAllowFirstV940").checked){if(typeof afficherToast==="function")afficherToast("Active l’autorisation IA pour continuer.");return}
+   if($("healthConsent"))$("healthConsent").checked=$("aiHealthFirstV940").checked;
+   if($("aiConsent"))$("aiConsent").checked=true;
+   const p=(()=>{try{return JSON.parse(localStorage.getItem("alloPsychoProfile")||"{}")}catch(_){return {}}})();
+   p.health_consent=$("aiHealthFirstV940").checked;p.ai_consent=true;p.storage_mode="local-only";p.updated_at=new Date().toISOString();
+   localStorage.setItem("alloPsychoProfile",JSON.stringify(p));
+   localStorage.setItem("alloPsychoAiConsentSeenV940","1");
+   m.classList.remove("visible");
+   const form=$("chatForm");if(form?.dataset.pendingV940==="1"){form.dataset.pendingV940="0";setTimeout(()=>form.requestSubmit(),30)}
+ };
+ $("aiConsentLocalV940").onclick=()=>{localStorage.setItem("alloPsychoAiConsentSeenV940","1");m.classList.remove("visible")};
+}
+function openAiConsentFirstUse(){
+ ensureAiConsentModal();
+ $("aiHealthFirstV940").checked=$("healthConsent")?.checked===true;
+ $("aiAllowFirstV940").checked=$("aiConsent")?.checked===true;
+ $("aiConsentFirstV940").classList.add("visible");
+}
+
+// Capture first chat submission before legacy handler to make consent visible.
+document.addEventListener("submit",e=>{
+ const form=e.target.closest?.("#chatForm");if(!form)return;
+ const hasConsent=$("aiConsent")?.checked===true;
+ if(!hasConsent && localStorage.getItem("alloPsychoAiConsentSeenV940")!=="1"){
+   e.preventDefault();e.stopImmediatePropagation();form.dataset.pendingV940="1";openAiConsentFirstUse();
+ }
+},true);
+
+// Safety net: broaden crisis response before any AI call, including colloquial wording and massive self-devaluation.
+function normalizeV940(s){return (s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")}
+function riskV940(s){
+ const t=normalizeV940(s);
+ const direct=/(me suicid|suicide|me tuer|me buter|me flinguer|me foutre en l.?air|en finir|mettre fin a mes jours|je veux mourir|j.?aimerais mourir|plus envie de vivre|ne veux plus vivre|passer a l.?acte|me jeter|prefererais etre mort|prefererais etre morte|je serais mieux mort|je serais mieux morte|personne ne me regretterait|ca ne sert plus a rien de vivre|ne plus etre la)/.test(t);
+ const selfharm=/(me scarifier|me taillader|me couper|me mutiler|me faire du mal|me blesser volontairement)/.test(t);
+ const massive=/(je ne vaux rien|je suis une merde|je suis nul(le)? a chier|je sers a rien|je ne sers a rien|je suis un dechet|je suis une catastrophe|tout le monde serait mieux sans moi|personne n a besoin de moi|je suis un poids|je suis un fardeau)/.test(t);
+ return direct||selfharm? "acute" : massive? "severe" : null;
+}
+document.addEventListener("submit",e=>{
+ const form=e.target.closest?.("#chatForm");if(!form)return;
+ const txt=$("chatInput")?.value?.trim()||"";const r=riskV940(txt);if(!r)return;
+ // direct/self-harm is intercepted; severe devaluation shows support and still allows dialogue
+ if(r==="acute"){
+   e.preventDefault();e.stopImmediatePropagation();
+   const card=$("crisisCard"),title=$("crisisTitle"),text=$("crisisText"),actions=$("crisisActions");
+   if(card&&title&&text&&actions){
+     title.textContent="Ta sécurité compte maintenant.";
+     text.textContent="Ce que tu écris peut signaler un risque suicidaire ou d’auto-agression. En France, tu peux appeler le 3114, gratuitement, 24 h/24 et 7 j/7. Si tu penses pouvoir agir maintenant ou si le danger est immédiat, appelle le 15 ou le 112.";
+     actions.innerHTML='<a class="crisis-link" href="tel:3114">📞 3114</a><a class="crisis-link secondary" href="tel:15">🚑 15</a><a class="crisis-link secondary" href="tel:112">🆘 112</a>';card.classList.add("visible");card.scrollIntoView({behavior:"smooth",block:"center"});
+   }
+   const msg=document.createElement("div");msg.className="message ai";msg.textContent="Je prends ce message au sérieux. Contacte une personne réelle maintenant et utilise les numéros affichés ci-dessus si tu risques de te faire du mal."; $("messages")?.appendChild(msg);
+   return;
+ }
+ if(r==="severe"){
+   const card=$("crisisCard"),title=$("crisisTitle"),text=$("crisisText"),actions=$("crisisActions");
+   if(card&&title&&text&&actions){
+    title.textContent="Ce que tu dis de toi est très dur.";
+    text.textContent="Une dévalorisation très intense peut accompagner une grande détresse. Si elle s’accompagne d’idées de mort, d’envie de disparaître ou de te faire du mal, appelle le 3114. Tu peux aussi continuer à écrire ici ce qui se passe.";
+    actions.innerHTML='<a class="crisis-link secondary" href="tel:3114">📞 3114 si idées suicidaires</a>';card.classList.add("visible");
+   }
+ }
+},true);
+
+async function loadTherapyPlaylists(){
+ const box=$("therapyPlaylistV940");if(!box)return;
+ if(window.alloPremiumActive!==true){box.innerHTML='<div class="program-lock-v73"><strong>✨ Playlists Premium</strong><p>Les séances thérapeutiques sont accessibles pendant les 10 jours d’essai ou avec Premium actif.</p></div>';return}
+ const sb=window.supabaseClient||null;
+ if(!sb){box.innerHTML='<div class="empty">Bibliothèque audio momentanément indisponible.</div>';return}
+ try{
+   const r=await sb.from("audio_library").select("id,title,description,category,storage_path").eq("published",true).order("created_at",{ascending:false});
+   if(r.error||!r.data?.length){box.innerHTML='<div class="empty">Aucune séance publiée pour le moment. Les nouvelles pistes apparaîtront ici après validation éditoriale.</div>';return}
+   window.__therapyTracksV940=r.data;
+   renderTracksV940("all");
+ }catch(_){box.innerHTML='<div class="empty">Bibliothèque audio momentanément indisponible.</div>'}
+}
+function renderTracksV940(cat){
+ const box=$("therapyPlaylistV940"),rows=window.__therapyTracksV940||[];if(!box)return;
+ const list=cat==="all"?rows:rows.filter(x=>(x.category||"").toLowerCase()===cat.toLowerCase());
+ if(!list.length){box.innerHTML='<div class="empty">Aucune séance publiée dans cette catégorie pour le moment.</div>';return}
+ box.innerHTML=list.map(x=>'<div class="therapy-track-v940"><div><strong>'+String(x.title||"Séance").replace(/[<>]/g,"")+'</strong><small>'+String((x.category||"Autre")+(x.description?" · "+x.description:"")).replace(/[<>]/g,"")+'</small></div><button type="button" class="btn btn-light" data-play-therapy-v940="'+x.id+'">▶ Écouter</button></div>').join("");
+ box.querySelectorAll("[data-play-therapy-v940]").forEach(b=>b.onclick=async()=>{
+   const tr=rows.find(x=>String(x.id)===String(b.dataset.playTherapyV940));if(!tr)return;
+   if(window.AlloPsychoV2?.playStorageAudio)await window.AlloPsychoV2.playStorageAudio(tr.storage_path,tr.title);
+ });
+}
+document.addEventListener("click",e=>{
+ const b=e.target.closest?.("[data-audio-cat-v940]");if(!b)return;
+ document.querySelectorAll("[data-audio-cat-v940]").forEach(x=>x.classList.toggle("active",x===b));renderTracksV940(b.dataset.audioCatV940);
+});
+window.addEventListener("allo-premium-change",loadTherapyPlaylists);
+
+function init(){
+ ensureAiConsentModal();
+ setTimeout(()=>{moveCardsBeforeToolGrouping();loadTherapyPlaylists()},350);
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })();
 </script>
 </body>
