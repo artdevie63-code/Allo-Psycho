@@ -10283,17 +10283,21 @@ function renderTracksV940(cat){
  const list=cat==="all"?rows:rows.filter(x=>(x.category||"").toLowerCase()===cat.toLowerCase());
  if(!list.length){box.innerHTML='<div class="empty">Aucune séance disponible dans cette catégorie pour le moment.</div>';return}
  const hasFallback=list.some(x=>x.local_script);
- box.innerHTML=(hasFallback?'<div class="section-intro-v940"><strong>🎙️ Bibliothèque provisoire</strong><small>Les pistes déjà générées utilisent des MP3 français hébergés par Allo Psycho. Les catégories encore en attente utilisent temporairement la voix française de l’appareil.</small></div>':"")
- +list.map(x=>'<div class="therapy-track-v940"><div><strong>'+String(x.title||"Séance").replace(/[<>]/g,"")+'</strong><small>'+String((x.category||"Autre")+(x.description?" · "+x.description:"")).replace(/[<>]/g,"")+'</small></div><button type="button" class="btn btn-light" data-play-therapy-v940="'+x.id+'">▶ Écouter</button></div>').join("");
- box.querySelectorAll("[data-play-therapy-v940]").forEach(b=>b.onclick=async()=>{
-   const tr=rows.find(x=>String(x.id)===String(b.dataset.playTherapyV940));if(!tr)return;
-   if(tr.local_script){
-     if(window.speechSynthesis?.speaking&&window.__therapySpeechV942){window.speechSynthesis.cancel();b.textContent="▶ Écouter";window.__therapySpeechV942=null;return}
-     playLocalTherapyV942(tr,b);return;
+ const publicBase="https://piezzrqryhzvrimeqwgi.supabase.co/storage/v1/object/public/therapeutic-audio/";
+ box.innerHTML=(hasFallback?'<div class="section-intro-v940"><strong>🎙️ Bibliothèque provisoire</strong><small>Les pistes MP3 sont lues directement dans leur propre lecteur. Les catégories encore en attente utilisent temporairement la voix française de l’appareil.</small></div>':"")
+ +list.map(x=>{
+   const title=String(x.title||"Séance").replace(/[<>]/g,"");
+   const meta=String((x.category||"Autre")+(x.description?" · "+x.description:"")).replace(/[<>]/g,"");
+   if(x.local_script){
+     return '<div class="therapy-track-v940"><div><strong>'+title+'</strong><small>'+meta+'</small></div><button type="button" class="btn btn-light" data-play-therapy-v940="'+x.id+'">▶ Écouter</button></div>';
    }
-   const a=document.getElementById("relaxAudio");
-   if(a&&!a.paused&&b.textContent.includes("Pause")){a.pause();b.textContent="▶ Écouter";return}
-   await playTherapeuticStorageV943(tr.storage_path,tr.title,b);
+   const src=publicBase+encodeURIComponent(String(x.storage_path||""));
+   return '<div class="therapy-track-v940"><div style="width:100%"><strong>'+title+'</strong><small>'+meta+'</small><audio controls preload="metadata" playsinline style="width:100%;margin-top:10px" src="'+src+'">Votre navigateur ne permet pas la lecture audio.</audio></div></div>';
+ }).join("");
+ box.querySelectorAll("[data-play-therapy-v940]").forEach(b=>b.onclick=()=>{
+   const tr=rows.find(x=>String(x.id)===String(b.dataset.playTherapyV940));if(!tr||!tr.local_script)return;
+   if(window.speechSynthesis?.speaking&&window.__therapySpeechV942){window.speechSynthesis.cancel();b.textContent="▶ Écouter";window.__therapySpeechV942=null;return}
+   playLocalTherapyV942(tr,b);
  });
 }
 document.addEventListener("click",e=>{
