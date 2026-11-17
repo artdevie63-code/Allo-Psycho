@@ -10217,25 +10217,58 @@ document.addEventListener("submit",e=>{
  }
 },true);
 
+const provisionalTherapyV942=[
+ {id:"local-anxiete",title:"Revenir au calme",category:"Anxiété",description:"Guidage doux · environ 4 min",local_script:"Installe-toi dans une position confortable. Si tu conduis ou fais quelque chose qui demande ton attention, garde cet exercice pour plus tard. Commence simplement par sentir les points de contact de ton corps avec le siège ou le sol. Laisse ton souffle venir sans le forcer. À l'inspiration, remarque que l'air entre. À l'expiration, laisse les épaules descendre un peu. Fais trois expirations légèrement plus longues que les inspirations. Maintenant, regarde autour de toi et repère mentalement trois choses que tu vois. Puis deux sons que tu entends. Puis une sensation physique neutre ou agréable, comme la température de l'air ou le contact d'un vêtement. Tu n'as rien à résoudre maintenant. Reviens seulement à ce qui est présent, ici. Si une pensée inquiétante revient, tu peux la nommer doucement : une pensée est là. Puis ramène ton attention vers l'expiration. Encore une respiration tranquille. Et une autre. Quand tu es prêt, reprends ton activité à ton rythme."},
+ {id:"local-surcharge",title:"Décharger la surcharge",category:"Relaxation",description:"Pause guidée · environ 5 min",local_script:"Prends quelques instants pour interrompre le rythme. Pose les pieds au sol si c'est possible. Commence par relâcher la mâchoire, puis les épaules, puis les mains. Tu n'as pas besoin de faire le vide. Imagine plutôt que tu poses provisoirement ce qui peut attendre. Choisis une seule chose importante pour les prochaines minutes. Tout le reste peut rester en arrière-plan. Inspire tranquillement. Expire un peu plus lentement. À chaque expiration, relâche une petite tension inutile. Observe maintenant ce qui te surcharge : trop de pensées, trop de demandes, trop de bruit, ou simplement de la fatigue. Sans analyser, donne-lui un nom court. Puis demande-toi : de quoi ai-je besoin maintenant, dans les dix prochaines minutes ? Une pause, de l'eau, du silence, une tâche unique, ou demander de l'aide ? Choisis une réponse simple et réaliste. Garde seulement ce petit pas. Respire encore une fois, puis reviens doucement."},
+ {id:"local-sommeil",title:"Préparer l'endormissement",category:"Sommeil",description:"Détente progressive · environ 7 min",local_script:"Cet exercice est prévu au repos, au moment du coucher, jamais pendant la conduite. Installe-toi comme tu es le mieux. Ferme les yeux si cela te convient. Commence par sentir le poids de ta tête sur l'oreiller. Puis le poids des épaules. Puis celui du bassin et des jambes. Tu n'as rien à réussir. À chaque expiration, laisse simplement le corps devenir un peu plus lourd. Porte ton attention sur le front et desserre-le. Relâche les muscles autour des yeux. Desserre la mâchoire. Laisse la langue se poser. Puis relâche les épaules, les bras, les mains et les doigts. Descends vers le ventre. Laisse-le bouger librement avec la respiration. Relâche les cuisses, les mollets, les chevilles et les pieds. Si une pensée arrive, ne cherche pas à la chasser. Dis-toi simplement : j'y reviendrai demain. Puis reviens à la sensation du corps posé. Laisse maintenant le souffle suivre son propre rythme. Tu peux rester ici sans chercher le sommeil. Le repos est déjà utile. Continue simplement à laisser le corps s'alourdir, respiration après respiration."},
+ {id:"local-respiration",title:"Respiration douce 4–6",category:"Respiration",description:"Expiration allongée · environ 3 min",local_script:"Installe-toi confortablement. Si tu ressens une gêne, des vertiges ou un inconfort, reprends simplement ta respiration habituelle. Nous allons inspirer doucement pendant quatre temps et expirer pendant six temps, sans retenir le souffle. Inspire : un, deux, trois, quatre. Expire : un, deux, trois, quatre, cinq, six. Encore. Inspire : un, deux, trois, quatre. Expire : un, deux, trois, quatre, cinq, six. Continue à ton rythme. L'important n'est pas de compter parfaitement, mais de garder une expiration un peu plus longue et confortable. Encore deux cycles. Inspire doucement. Puis expire lentement. Une dernière fois. Inspire. Et expire. Maintenant, laisse le souffle redevenir naturel. Observe simplement comment tu te sens, sans chercher un résultat particulier."},
+ {id:"local-concentration",title:"Recentrage avant une tâche",category:"Concentration",description:"Focus guidé · environ 4 min",local_script:"Avant de commencer, pose ton téléphone ou ferme ce qui n'est pas utile pour la tâche à venir. Prends une respiration tranquille. Regarde ce qui est devant toi. Demande-toi : quelle est la seule tâche que je veux avancer maintenant ? Formule-la en une phrase courte. Puis choisis une première action qui prend moins de cinq minutes. Ouvrir le document. Écrire le titre. Lire le premier paragraphe. Préparer le matériel. Inspire normalement. À l'expiration, relâche ce qui n'a pas besoin d'être traité maintenant. Si une autre pensée arrive, note-la mentalement comme plus tard, puis reviens à la première action. Tu n'as pas besoin de terminer toute la tâche. Tu as seulement besoin de commencer clairement. Encore une respiration. Puis commence par ce premier geste."}
+];
+
+function playLocalTherapyV942(track,button){
+ if(!("speechSynthesis" in window) || typeof SpeechSynthesisUtterance==="undefined"){
+   if(typeof afficherToast==="function")afficherToast("La lecture vocale n’est pas disponible sur cet appareil.");
+   return;
+ }
+ window.speechSynthesis.cancel();
+ document.querySelectorAll("[data-play-therapy-v940]").forEach(x=>x.textContent="▶ Écouter");
+ const u=new SpeechSynthesisUtterance(track.local_script);
+ u.lang="fr-FR";u.rate=.88;u.pitch=1;u.volume=1;
+ const voices=window.speechSynthesis.getVoices();
+ const fr=voices.find(v=>/^fr[-_]/i.test(v.lang)&&/France|French|français/i.test((v.name||"")+" "+(v.lang||"")))||voices.find(v=>/^fr/i.test(v.lang));
+ if(fr)u.voice=fr;
+ button.textContent="⏹ Arrêter";
+ u.onend=u.onerror=()=>{button.textContent="▶ Écouter";window.__therapySpeechV942=null};
+ window.__therapySpeechV942=u;
+ window.speechSynthesis.speak(u);
+}
 async function loadTherapyPlaylists(){
  const box=$("therapyPlaylistV940");if(!box)return;
- if(window.alloPremiumActive!==true){box.innerHTML='<div class="program-lock-v73"><strong>✨ Playlists Premium</strong><p>Les séances thérapeutiques sont accessibles pendant les 10 jours d’essai ou avec Premium actif.</p></div>';return}
+ if(window.alloPremiumActive!==true){box.innerHTML='<div class="program-lock-v73"><strong>✨ Playlists Premium</strong><p>Les séances guidées sont accessibles pendant les 10 jours d’essai ou avec Premium actif.</p></div>';return}
  const sb=window.supabaseClient||null;
- if(!sb){box.innerHTML='<div class="empty">Bibliothèque audio momentanément indisponible.</div>';return}
- try{
-   const r=await sb.from("audio_library").select("id,title,description,category,storage_path").eq("published",true).order("created_at",{ascending:false});
-   if(r.error||!r.data?.length){box.innerHTML='<div class="empty">Aucune séance publiée pour le moment. Les nouvelles pistes apparaîtront ici après validation éditoriale.</div>';return}
-   window.__therapyTracksV940=r.data;
-   renderTracksV940("all");
- }catch(_){box.innerHTML='<div class="empty">Bibliothèque audio momentanément indisponible.</div>'}
+ let rows=[];
+ if(sb){
+   try{
+     const r=await sb.from("audio_library").select("id,title,description,category,storage_path").eq("published",true).order("created_at",{ascending:false});
+     if(!r.error&&r.data?.length)rows=r.data;
+   }catch(_){}
+ }
+ window.__therapyTracksV940=rows.length?rows:provisionalTherapyV942;
+ renderTracksV940("all");
 }
 function renderTracksV940(cat){
  const box=$("therapyPlaylistV940"),rows=window.__therapyTracksV940||[];if(!box)return;
  const list=cat==="all"?rows:rows.filter(x=>(x.category||"").toLowerCase()===cat.toLowerCase());
- if(!list.length){box.innerHTML='<div class="empty">Aucune séance publiée dans cette catégorie pour le moment.</div>';return}
- box.innerHTML=list.map(x=>'<div class="therapy-track-v940"><div><strong>'+String(x.title||"Séance").replace(/[<>]/g,"")+'</strong><small>'+String((x.category||"Autre")+(x.description?" · "+x.description:"")).replace(/[<>]/g,"")+'</small></div><button type="button" class="btn btn-light" data-play-therapy-v940="'+x.id+'">▶ Écouter</button></div>').join("");
+ if(!list.length){box.innerHTML='<div class="empty">Aucune séance disponible dans cette catégorie pour le moment.</div>';return}
+ const provisional=rows.some(x=>x.local_script);
+ box.innerHTML=(provisional?'<div class="section-intro-v940"><strong>🎙️ Séances guidées provisoires</strong><small>Textes Allo Psycho lus par la voix française de ton appareil. Elles seront remplacées progressivement par les futurs audios personnalisés.</small></div>':"")
+ +list.map(x=>'<div class="therapy-track-v940"><div><strong>'+String(x.title||"Séance").replace(/[<>]/g,"")+'</strong><small>'+String((x.category||"Autre")+(x.description?" · "+x.description:"")).replace(/[<>]/g,"")+'</small></div><button type="button" class="btn btn-light" data-play-therapy-v940="'+x.id+'">▶ Écouter</button></div>').join("");
  box.querySelectorAll("[data-play-therapy-v940]").forEach(b=>b.onclick=async()=>{
    const tr=rows.find(x=>String(x.id)===String(b.dataset.playTherapyV940));if(!tr)return;
+   if(tr.local_script){
+     if(window.speechSynthesis?.speaking&&window.__therapySpeechV942){window.speechSynthesis.cancel();b.textContent="▶ Écouter";window.__therapySpeechV942=null;return}
+     playLocalTherapyV942(tr,b);return;
+   }
    if(window.AlloPsychoV2?.playStorageAudio)await window.AlloPsychoV2.playStorageAudio(tr.storage_path,tr.title);
  });
 }
