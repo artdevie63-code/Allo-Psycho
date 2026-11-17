@@ -2710,44 +2710,29 @@ body{font-size:16px}
           <button type="button" data-audio-cat-v940="Respiration">Respiration douce</button>
           <button type="button" data-audio-cat-v940="Concentration">Concentration</button>
         </div>
-        <div id="therapyPlaylistV940" class="therapy-playlist-v940"><div class="empty">Chargement des séances Premium…</div></div>
-
-        <!-- Lecteur audio invisible -->
-
-        <audio
-          id="relaxAudio"
-          preload="metadata"
-        ></audio><div class="audio-now-v8"><span>Lecture :</span> <strong id="audioTitleV8">—</strong></div>
-
-        <button
-          type="button"
-          id="audioButton"
-          class="audio-button"
-          aria-label="Écouter la relaxation guidée"
-        >
-          ▶
-        </button>
-
-        <div id="audioProgressWrap" class="audio-progress-wrap" aria-label="Progression audio">
-          <div id="audioProgress" class="audio-progress"></div>
-        </div>
-        <div id="audioTime" class="audio-time" aria-live="polite">00:00</div>
-        <div
-          id="audioStatus"
-          class="audio-status"
-        >
-          🎵 Appuie pour écouter
-        </div>
-        <div class="audio-inline-controls" aria-label="Contrôles audio">
-          <button type="button" id="audioRestartBtn" class="btn btn-light audio-mini" aria-label="Recommencer">↻ Recommencer</button>
-          <label class="audio-volume-label">🔊 <span class="sr-only">Volume</span><input id="audioVolume" type="range" min="0" max="1" step="0.05" value="0.85" aria-label="Volume"></label>
-          <div class="audio-timer-v7">
-            <button type="button" data-audio-min="5" aria-label="5 min">5 min</button>
-            <button type="button" data-audio-min="10" aria-label="10 min">10 min</button>
-            <button type="button" data-audio-min="20" aria-label="20 min">20 min</button>
-            <button type="button" data-audio-min="0" aria-label="Action">∞</button>
+        <div id="therapyPlaylistV940" class="therapy-playlist-v940">
+          <div class="section-intro-v940"><strong>🎙️ Séances guidées provisoires</strong><small>Voix française générée pour Allo Psycho. Les contenus définitifs seront remplacés ultérieurement.</small></div>
+          <div class="therapy-track-v940" data-static-therapy-cat="Anxiété">
+            <div style="width:100%"><strong>Revenir au calme</strong><small>Anxiété · guidage doux provisoire</small>
+              <audio controls preload="metadata" playsinline style="width:100%;margin-top:10px" src="https://piezzrqryhzvrimeqwgi.supabase.co/storage/v1/object/public/therapeutic-audio/anxiete.mp3"></audio>
+            </div>
           </div>
-          <small id="audioTimerV7" class="muted">Minuterie inactive</small>
+          <div class="therapy-track-v940" data-static-therapy-cat="Relaxation">
+            <div style="width:100%"><strong>Décharger la surcharge</strong><small>Surcharge · pause guidée provisoire</small>
+              <audio controls preload="metadata" playsinline style="width:100%;margin-top:10px" src="https://piezzrqryhzvrimeqwgi.supabase.co/storage/v1/object/public/therapeutic-audio/surcharge.mp3"></audio>
+            </div>
+          </div>
+          <div class="therapy-track-v940" data-static-therapy-cat="Sommeil">
+            <div style="width:100%"><strong>Préparer l’endormissement</strong><small>Sommeil · détente progressive provisoire</small>
+              <audio controls preload="metadata" playsinline style="width:100%;margin-top:10px" src="https://piezzrqryhzvrimeqwgi.supabase.co/storage/v1/object/public/therapeutic-audio/sommeil.mp3"></audio>
+            </div>
+          </div>
+          <div class="therapy-track-v940" data-static-therapy-cat="Respiration">
+            <div><strong>Respiration douce 4–6</strong><small>MP3 naturel en préparation</small></div>
+          </div>
+          <div class="therapy-track-v940" data-static-therapy-cat="Concentration">
+            <div><strong>Recentrage avant une tâche</strong><small>MP3 naturel en préparation</small></div>
+          </div>
         </div>
 
       </div>
@@ -10247,19 +10232,7 @@ function playLocalTherapyV942(track,button){
 }
 async function loadTherapyPlaylists(){
  const box=$("therapyPlaylistV940");if(!box)return;
- if(window.alloPremiumActive!==true){box.innerHTML='<div class="program-lock-v73"><strong>✨ Playlists Premium</strong><p>Les séances guidées sont accessibles pendant les 10 jours d’essai ou avec Premium actif.</p></div>';return}
- const sb=(typeof supabaseClient!=="undefined"&&supabaseClient)||window.supabaseClient||null;
- let rows=[];
- if(sb){
-   try{
-     const r=await sb.from("audio_library").select("id,title,description,category,storage_path").eq("published",true).order("created_at",{ascending:false});
-     if(!r.error&&r.data?.length)rows=r.data;
-   }catch(_){}
- }
- const covered=new Set(rows.map(x=>(x.category||"").toLowerCase()));
- const fallbacks=provisionalTherapyV942.filter(x=>!covered.has((x.category||"").toLowerCase()));
- window.__therapyTracksV940=[...rows,...fallbacks];
- renderTracksV940("all");
+ // Provisional library is rendered statically so it cannot be hidden by auth timing or Supabase loading.
 }
 async function playTherapeuticStorageV943(path,title,button){
  const sb=(typeof supabaseClient!=="undefined"&&supabaseClient)||window.supabaseClient||null;
@@ -10302,7 +10275,9 @@ function renderTracksV940(cat){
 }
 document.addEventListener("click",e=>{
  const b=e.target.closest?.("[data-audio-cat-v940]");if(!b)return;
- document.querySelectorAll("[data-audio-cat-v940]").forEach(x=>x.classList.toggle("active",x===b));renderTracksV940(b.dataset.audioCatV940);
+ document.querySelectorAll("[data-audio-cat-v940]").forEach(x=>x.classList.toggle("active",x===b));
+ const cat=b.dataset.audioCatV940;
+ document.querySelectorAll("[data-static-therapy-cat]").forEach(x=>{x.style.display=(cat==="all"||x.dataset.staticTherapyCat===cat)?"":"none";});
 });
 window.addEventListener("allo-premium-change",loadTherapyPlaylists);
 
