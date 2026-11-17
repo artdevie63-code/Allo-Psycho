@@ -10253,15 +10253,34 @@ async function loadTherapyPlaylists(){
      if(!r.error&&r.data?.length)rows=r.data;
    }catch(_){}
  }
- window.__therapyTracksV940=rows.length?rows:provisionalTherapyV942;
+ const covered=new Set(rows.map(x=>(x.category||"").toLowerCase()));
+ const fallbacks=provisionalTherapyV942.filter(x=>!covered.has((x.category||"").toLowerCase()));
+ window.__therapyTracksV940=[...rows,...fallbacks];
  renderTracksV940("all");
+}
+async function playTherapeuticStorageV943(path,title,button){
+ const sb=window.supabaseClient||null;
+ if(!sb){if(typeof afficherToast==="function")afficherToast("Bibliothèque audio momentanément indisponible.");return}
+ const p=sb.storage.from("therapeutic-audio").getPublicUrl(path);
+ const url=p?.data?.publicUrl||null;
+ const a=document.getElementById("relaxAudio");
+ if(!url||!a){if(typeof afficherToast==="function")afficherToast("Lecture audio non disponible.");return}
+ try{
+   window.speechSynthesis?.cancel();
+   document.querySelectorAll("[data-play-therapy-v940]").forEach(x=>x.textContent="▶ Écouter");
+   a.pause();a.src=url;a.preload="metadata";
+   await a.play();
+   button.textContent="⏸ Pause";
+   const st=document.getElementById("audioStatus");if(st)st.textContent="🎵 "+title;
+   a.onended=()=>{button.textContent="▶ Écouter"};
+ }catch(e){console.warn(e);if(typeof afficherToast==="function")afficherToast("Lecture audio non disponible.")}
 }
 function renderTracksV940(cat){
  const box=$("therapyPlaylistV940"),rows=window.__therapyTracksV940||[];if(!box)return;
  const list=cat==="all"?rows:rows.filter(x=>(x.category||"").toLowerCase()===cat.toLowerCase());
  if(!list.length){box.innerHTML='<div class="empty">Aucune séance disponible dans cette catégorie pour le moment.</div>';return}
- const provisional=rows.some(x=>x.local_script);
- box.innerHTML=(provisional?'<div class="section-intro-v940"><strong>🎙️ Séances guidées provisoires</strong><small>Textes Allo Psycho lus par la voix française de ton appareil. Elles seront remplacées progressivement par les futurs audios personnalisés.</small></div>':"")
+ const hasFallback=list.some(x=>x.local_script);
+ box.innerHTML=(hasFallback?'<div class="section-intro-v940"><strong>🎙️ Bibliothèque provisoire</strong><small>Les pistes déjà générées utilisent des MP3 français hébergés par Allo Psycho. Les catégories encore en attente utilisent temporairement la voix française de l’appareil.</small></div>':"")
  +list.map(x=>'<div class="therapy-track-v940"><div><strong>'+String(x.title||"Séance").replace(/[<>]/g,"")+'</strong><small>'+String((x.category||"Autre")+(x.description?" · "+x.description:"")).replace(/[<>]/g,"")+'</small></div><button type="button" class="btn btn-light" data-play-therapy-v940="'+x.id+'">▶ Écouter</button></div>').join("");
  box.querySelectorAll("[data-play-therapy-v940]").forEach(b=>b.onclick=async()=>{
    const tr=rows.find(x=>String(x.id)===String(b.dataset.playTherapyV940));if(!tr)return;
@@ -10269,7 +10288,9 @@ function renderTracksV940(cat){
      if(window.speechSynthesis?.speaking&&window.__therapySpeechV942){window.speechSynthesis.cancel();b.textContent="▶ Écouter";window.__therapySpeechV942=null;return}
      playLocalTherapyV942(tr,b);return;
    }
-   if(window.AlloPsychoV2?.playStorageAudio)await window.AlloPsychoV2.playStorageAudio(tr.storage_path,tr.title);
+   const a=document.getElementById("relaxAudio");
+   if(a&&!a.paused&&b.textContent.includes("Pause")){a.pause();b.textContent="▶ Écouter";return}
+   await playTherapeuticStorageV943(tr.storage_path,tr.title,b);
  });
 }
 document.addEventListener("click",e=>{
