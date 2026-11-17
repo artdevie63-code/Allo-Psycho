@@ -1,4 +1,4 @@
-const CACHE = 'allo-psycho-shell-v9.2.0';
+const CACHE = 'allo-psycho-shell-v9.4.4-audiofix';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png', './assets/audio/seance1.mp3'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => Promise.all(SHELL.map(async u => { const r = await fetch(u, {cache:'reload'}); if (r.ok) await cache.put(u, r); }))).then(() => self.skipWaiting()));
@@ -24,4 +24,4 @@ self.addEventListener('fetch', event => {
   })));
 });
 
-self.addEventListener('me¶»§q«^
+// cache version bump for therapeutic audio fix
