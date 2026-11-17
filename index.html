@@ -3832,6 +3832,9 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
             SUPABASE_ANON_KEY
           );
 
+        // Expose the shared client for later feature modules (audio V9.4+, etc.)
+        window.supabaseClient = supabaseClient;
+
         supabaseDisponible = true;
 
         const texte =
@@ -10245,7 +10248,7 @@ function playLocalTherapyV942(track,button){
 async function loadTherapyPlaylists(){
  const box=$("therapyPlaylistV940");if(!box)return;
  if(window.alloPremiumActive!==true){box.innerHTML='<div class="program-lock-v73"><strong>✨ Playlists Premium</strong><p>Les séances guidées sont accessibles pendant les 10 jours d’essai ou avec Premium actif.</p></div>';return}
- const sb=window.supabaseClient||null;
+ const sb=(typeof supabaseClient!=="undefined"&&supabaseClient)||window.supabaseClient||null;
  let rows=[];
  if(sb){
    try{
@@ -10259,7 +10262,7 @@ async function loadTherapyPlaylists(){
  renderTracksV940("all");
 }
 async function playTherapeuticStorageV943(path,title,button){
- const sb=window.supabaseClient||null;
+ const sb=(typeof supabaseClient!=="undefined"&&supabaseClient)||window.supabaseClient||null;
  if(!sb){if(typeof afficherToast==="function")afficherToast("Bibliothèque audio momentanément indisponible.");return}
  const p=sb.storage.from("therapeutic-audio").getPublicUrl(path);
  const url=p?.data?.publicUrl||null;
