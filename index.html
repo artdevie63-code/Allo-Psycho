@@ -2485,6 +2485,14 @@ body{font-size:16px}
 .reminder-status-v952{margin-top:8px;color:var(--soft);font-size:.7rem;line-height:1.45}
 @media(max-width:620px){.reminder-grid-v952,.reminder-options-v953{grid-template-columns:1fr}.reminder-permission-v952{align-items:flex-start;flex-direction:column}}
 </style>
+
+<style>
+/* ===== V9.5.4 — raccourci Mes rappels ===== */
+.reminder-shortcut-v954{display:inline-flex!important;align-items:center;gap:8px;position:relative}
+.reminder-bell-v954{font-size:1.15rem;line-height:1}
+.reminder-dot-v954{width:9px;height:9px;border-radius:50%;background:#b9adb3;box-shadow:0 0 0 2px #fff}
+.reminder-shortcut-v954.active .reminder-dot-v954{background:#64a46b}
+</style>
 </head>
 
 <body>
@@ -2497,16 +2505,16 @@ body{font-size:16px}
 
   
   <div id="updateV7" class="update-v7"><span>✨ Nouvelle version disponible</span><button type="button" id="updateBtnV7" aria-label="Mettre à jour">Mettre à jour</button></div>
-  <div id="lockV7" class="lock-v7"><div class="lock-card-v7"><h2>🧠 Allo Psycho</h2><p>Entre ton PIN local.</p><input id="unlockPinV7" type="password" inputmode="numeric" maxlength="8"><button type="button" class="btn btn-dark full" id="unlockV7" aria-label="Ouvrir">Ouvrir</button><small id="unlockErrV7"></small></div></div>
+  <div id="lockV7" class="lock-v7"><div class="lock-card-v7"><h2>🧠 Allo Psycho</h2><p>Entrez votre PIN local.</p><input id="unlockPinV7" type="password" inputmode="numeric" maxlength="8"><button type="button" class="btn btn-dark full" id="unlockV7" aria-label="Ouvrir">Ouvrir</button><small id="unlockErrV7"></small></div></div>
 
   <div id="onboardingV921" class="onboarding-v921" role="dialog" aria-modal="true" aria-labelledby="onboardingTitleV921">
     <div class="onboarding-card-v921">
       <p class="eyebrow">PREMIÈRE CONNEXION</p>
-      <h2 id="onboardingTitleV921">🌷 Personnalise ton espace</h2>
-      <p class="muted">Ces préférences sont enregistrées sur cet appareil. Tu pourras les modifier ensuite dans <strong>Options</strong>.</p>
-      <div class="onboarding-note-v921">L’année de naissance est facultative. Tu peux utiliser un prénom ou simplement un pseudo.</div>
+      <h2 id="onboardingTitleV921">🌷 Personnalisez votre espace</h2>
+      <p class="muted">Ces préférences sont enregistrées sur cet appareil. Vous pourrez les modifier ensuite dans <strong>Options</strong>.</p>
+      <div class="onboarding-note-v921">L’année de naissance est facultative. Vous pouvez utiliser un prénom ou simplement un pseudo.</div>
       <form id="onboardingFormV921" class="form">
-        <div><label for="onboardingNameV921">Prénom ou pseudo</label><input id="onboardingNameV921" type="text" maxlength="80" placeholder="Comment souhaites-tu être appelé·e ?"></div>
+        <div><label for="onboardingNameV921">Prénom ou pseudo</label><input id="onboardingNameV921" type="text" maxlength="80" placeholder="Comment souhaitez-vous être appelé·e ?"></div>
         <div><label for="onboardingBirthV921">Année de naissance (facultatif)</label><input id="onboardingBirthV921" type="text" inputmode="numeric" maxlength="4" placeholder="AAAA"></div>
         <div><label for="onboardingToneV921">Style de réponse préféré</label><select id="onboardingToneV921" style="width:100%;min-height:46px;border:1px solid #eee5e2;border-radius:16px;padding:11px;background:#faf7f5;color:var(--text)"><option value="doux">Doux et rassurant</option><option value="direct">Clair et concret</option><option value="court">Très court</option></select></div>
         <div><label for="onboardingGoalV921">Mon objectif principal</label><select id="onboardingGoalV921" style="width:100%;min-height:46px;border:1px solid #eee5e2;border-radius:16px;padding:11px;background:#faf7f5;color:var(--text)"><option value="apaisement">Réduire le stress et m’apaiser</option><option value="confiance">Renforcer ma confiance</option><option value="sommeil">Améliorer mon sommeil</option><option value="motivation">Retrouver motivation et énergie</option><option value="habitudes">Créer de meilleures habitudes</option><option value="relations">Mieux vivre mes relations</option></select></div>
@@ -2526,7 +2534,7 @@ body{font-size:16px}
         <div>
           <h1>Allo Psycho 🌸</h1>
           <p style="margin:2px 0 0;font-weight:900;letter-spacing:.01em">Respirer, écrire, converser</p>
-          <p>Ton petit espace pour souffler 💕</p>
+          <p>Un espace pour souffler 💕</p>
         </div>
       </div>
 
@@ -2539,7 +2547,7 @@ body{font-size:16px}
     <section id="installPwaV903" class="install-pwa-v903" hidden aria-label="Installer Allo Psycho">
       <div>
         <strong>📲 Installer Allo Psycho</strong>
-        <small id="installPwaHintV903">Accès direct depuis ton écran d’accueil.</small>
+        <small id="installPwaHintV903">Accès direct depuis votre écran d’accueil.</small>
       </div>
       <button type="button" id="installPwaBtnV903" class="btn btn-dark">Installer</button>
       <button type="button" id="installPwaCloseV903" class="install-pwa-close-v903" aria-label="Masquer">×</button>
@@ -2580,10 +2588,10 @@ body{font-size:16px}
       <div class="card smart-home-v7 guided-home-v922">
         <p class="eyebrow">MON POINT DE DÉPART</p>
         <h2>🌈 Comment je me sens et de quoi ai-je besoin ?</h2>
-        <p class="muted">Deux choix simples pour t’orienter vers l’outil ou le parcours le plus utile maintenant. Tout ce suivi reste sur cet appareil.</p>
+        <p class="muted">Deux choix simples pour vous orienter vers l’outil ou le parcours le plus utile maintenant. Tout ce suivi reste sur cet appareil.</p>
 
         <div class="guided-step-v922">
-          <div class="guided-step-head-v922"><span>1</span><div><strong>Comment je me sens ?</strong><small>Choisis ce qui se rapproche le plus de ton état actuel.</small></div></div>
+          <div class="guided-step-head-v922"><span>1</span><div><strong>Comment je me sens ?</strong><small>Choisissez ce qui se rapproche le plus de votre état actuel.</small></div></div>
           <div class="state-grid-v7 guided-grid-v922" id="feelingGridV922">
             <button type="button" data-feeling="anxious">😰<strong>Anxieux·se</strong><small>Ça tourne dans ma tête</small></button>
             <button type="button" data-feeling="angry">😤<strong>Tendu·e</strong><small>Ça monte ou ça déborde</small></button>
@@ -2605,7 +2613,7 @@ body{font-size:16px}
           </div>
         </div>
 
-        <div id="smartRecoV7" class="smart-reco-v7 guided-reco-v922">Commence par choisir comment tu te sens.</div>
+        <div id="smartRecoV7" class="smart-reco-v7 guided-reco-v922">Commencez par choisir comment vous vous sentez.</div>
         <div id="guidedResumeV922" class="guided-resume-v922" hidden></div>
       </div>      <div class="card daily-thread-v923" id="dailyThreadV923">
         <p class="eyebrow">MON FIL DU JOUR</p>
@@ -2650,7 +2658,7 @@ body{font-size:16px}
         <p class="muted">Une synthèse prudente construite à partir de tes propres retours, sans diagnostic.</p>
         <div class="manual-grid-v924">
           <div class="manual-item-v924"><strong>Quand ça monte</strong><span id="manualTriggerV924">Pas encore assez de recul.</span></div>
-          <div class="manual-item-v924"><strong>Ce qui m’aide</strong><span id="manualHelpfulV924">Tes retours apparaîtront ici.</span></div>
+          <div class="manual-item-v924"><strong>Ce qui m’aide</strong><span id="manualHelpfulV924">Vos retours apparaîtront ici.</span></div>
           <div class="manual-item-v924"><strong>Mon premier réflexe utile</strong><span id="manualReflexV924">À construire progressivement.</span></div>
         </div>
         <button type="button" class="btn btn-light" id="replayHelpfulV924" hidden>🔁 Rejouer ce qui a marché</button>
@@ -2698,22 +2706,22 @@ body{font-size:16px}
       <div class="card">
         <p class="eyebrow">MON KIT RAPIDE · LOCAL</p>
         <h3>⭐ Mes outils qui m’aident</h3>
-        <p class="muted">Les trois raccourcis évoluent selon tes retours. Au départ, l’app propose des essentiels.</p>
+        <p class="muted">Les trois raccourcis évoluent selon vos retours. Au départ, l’app propose des essentiels.</p>
         <div id="quickKitV923" class="quick-kit-v923"></div>
-        <div id="bestToolsV923" class="tool-help-v923">🌱 Après quelques utilisations, l’app pourra te rappeler les outils qui semblent réellement t’aider.</div>
+        <div id="bestToolsV923" class="tool-help-v923">🌱 Après quelques utilisations, l’app pourra vous rappeler les outils qui semblent réellement vous aider.</div>
       </div>
 
       <div class="card guided-history-v922">
         <p class="eyebrow">MON SUIVI · LOCAL</p>
         <h3>💕 Mes derniers états</h3>
-        <p class="muted">L’état choisi à l’accueil alimente ce suivi local pour t’aider à observer ton évolution, sans diagnostic.</p>
+        <p class="muted">L’état choisi à l’accueil alimente ce suivi local pour vous aider à observer votre évolution, sans diagnostic.</p>
         <div id="moodHistory" class="history-list"><div class="empty">Aucun état enregistré. 🌸</div></div>
       </div>
 
       <div class="card evolution-combined-v73">
         <p class="eyebrow">MON ÉVOLUTION · LOCAL</p>
         <h2>📈 Humeur & progression</h2>
-        <p class="muted">Ces tendances sont calculées sur cet appareil à partir de tes propres enregistrements. Elles ne constituent pas un diagnostic.</p>
+        <p class="muted">Ces tendances sont calculées sur cet appareil à partir de vos propres enregistrements. Elles ne constituent pas un diagnostic.</p>
         <div class="progress-stats-v7">
           <div><strong id="trendMoodV7">—</strong><small>tendance humeur</small></div>
           <div><strong id="activeDaysV7">0</strong><small>jours actifs / 7</small></div>
@@ -2730,7 +2738,7 @@ body{font-size:16px}
         <div id="helpInsightV7" class="smart-reco-v7">🌱 Les tendances se préciseront au fil de l’utilisation.</div>
         <div id="evoInsightsV923" class="evo-insights-v923">
           <div class="evo-insight-v923"><strong>🔁 Ce qui revient</strong><span id="evoThemeV923">Pas encore assez de recul.</span></div>
-          <div class="evo-insight-v923"><strong>🌿 Ce qui semble m’aider</strong><span id="evoHelpfulV923">Tes retours apparaîtront ici.</span></div>
+          <div class="evo-insight-v923"><strong>🌿 Ce qui semble m’aider</strong><span id="evoHelpfulV923">Vos retours apparaîtront ici.</span></div>
           <div class="evo-insight-v923"><strong>👣 Mon prochain petit pas</strong><span id="evoStepV923">Aucun petit pas enregistré.</span></div>
           <div class="evo-insight-v923"><strong>🧭 Parcours en cours</strong><span id="evoPathV923">Aucun parcours démarré.</span></div>
         </div>
@@ -2746,8 +2754,8 @@ body{font-size:16px}
         </div>
 
         <p class="eyebrow">AUDIOS THÉRAPEUTIQUES · PREMIUM</p>
-        <h2>🎧 Un moment pour toi</h2>
-        <p class="muted">Choisis une séance selon ton besoin : anxiété, surcharge, sommeil, respiration douce, concentration ou sophrologie. Ce module est distinct de la cohérence cardiaque.</p>
+        <h2>🎧 Un moment pour vous</h2>
+        <p class="muted">Choisissez une séance selon votre besoin : anxiété, surcharge, sommeil, respiration douce, concentration ou sophrologie. Ce module est distinct de la cohérence cardiaque.</p>
         <div class="therapy-audio-cats-v940" id="therapyAudioCatsV940">
           <button type="button" data-audio-cat-v940="all" class="active">Toutes</button>
           <button type="button" data-audio-cat-v940="Anxiété">Anxiété</button>
@@ -2836,7 +2844,7 @@ body{font-size:16px}
 
         <div class="urgent-calm-v82" id="urgentCalmV82" hidden>
           <strong>🕊️ Urgence Calme</strong>
-          <p>Choisis un protocole court selon ce dont tu as besoin maintenant.</p>
+          <p>Choisissez un protocole court selon ce dont vous avez besoin maintenant.</p>
 
           <div class="urgent-picker-v84" id="urgentPickerV84">
             <button type="button" data-urgent-mode="ground">🪨 Ancrage</button>
@@ -2874,8 +2882,8 @@ body{font-size:16px}
 
       <div class="card journey-card" data-premium-feature="Parcours personnalisé">
         <p class="eyebrow">MON PARCOURS</p>
-        <h3 id="journeyGreeting">🌷 Un petit pas pour toi</h3>
-        <p id="journeyText" class="muted">Ton parcours se construit doucement à partir de tes préférences et de tes ressentis.</p>
+        <h3 id="journeyGreeting">🌷 Un petit pas pour vous</h3>
+        <p id="journeyText" class="muted">Mon parcours se construit progressivement à partir de mes préférences et de vos ressentis.</p>
         <div class="journey-actions">
           <button type="button" id="journeyRecommendBtn" class="btn btn-dark" aria-label="Mon idée du moment">✨ Mon idée du moment</button>
           <button type="button" id="journeyRefreshBtn" class="btn btn-light" aria-label="Actualiser">↻ Actualiser</button>
@@ -2889,7 +2897,7 @@ body{font-size:16px}
         <div class="card today-card" id="routineCardV861">
           <p class="eyebrow">AUJOURD'HUI</p>
           <h3>☀️ Ma routine douce</h3>
-          <p class="muted">Un parcours léger, ajustable. Tu peux faire moins : la régularité compte plus que la perfection.</p>
+          <p class="muted">Un parcours léger, ajustable. Vous pouvez en faire moins : la régularité compte plus que la perfection.</p>
           <div class="journey-progress"><span id="routineProgress"></span></div>
           <div id="routineProgressText" class="audio-status">0 / 3 petits pas</div>
           <div class="routine-list" id="routineList">
@@ -2906,9 +2914,9 @@ body{font-size:16px}
         <div class="card companion-card">
           <div class="companion-blob" aria-hidden="true"><span class="companion-face"></span><span class="companion-spark">✨</span></div>
           <div>
-            <p class="eyebrow">TON COMPAGNON</p>
-            <h3>Un coach qui apprend ton rythme</h3>
-            <p class="muted">Il repère des tendances dans tes propres notes et échanges, sans poser de diagnostic, puis varie ses propositions pour éviter les redites.</p>
+            <p class="eyebrow">VOTRE COMPAGNON</p>
+            <h3>Un compagnon qui s’adapte à votre rythme</h3>
+            <p class="muted">Il repère des tendances dans vos propres notes et échanges, sans poser de diagnostic, puis varie ses propositions pour éviter les redites.</p>
             <button type="button" id="patternInsightBtn" class="btn btn-light" aria-label="Voir mes tendances">🧭 Voir mes tendances</button>
           </div>
         </div>
@@ -2917,18 +2925,18 @@ body{font-size:16px}
       <div class="card plan-card" data-premium-feature="Plan de progression">
         <p class="eyebrow">PLAN PERSONNALISÉ</p>
         <h3>🗺️ Mon plan de progression</h3>
-        <p class="muted">Un plan court, ajusté à ton objectif et à ton rythme. Il évolue avec tes retours, sans te faire recommencer les mêmes conseils.</p>
+        <p class="muted">Un plan court, ajusté à votre objectif et à votre rythme. Il évolue avec vos retours, sans vous faire recommencer les mêmes conseils.</p>
         <div class="journey-actions">
           <button type="button" id="buildPlanBtn" class="btn btn-dark" aria-label="Construire mon plan">✨ Construire mon plan</button>
           <button type="button" id="adaptPlanBtn" class="btn btn-light" aria-label="Adapter à aujourdhui">↻ Adapter à aujourd’hui</button>
         </div>
-        <div id="personalPlan" class="plan-grid"><div class="empty">Ton plan apparaîtra ici.</div></div>
+        <div id="personalPlan" class="plan-grid"><div class="empty">Mon plan apparaîtra ici.</div></div>
       </div>
 
       <div class="card insight-card" data-premium-feature="Analyse des schémas" id="patternInsightCard" hidden>
         <p class="eyebrow">TENDANCES PERSONNELLES</p>
-        <h3>🧩 Ce qui revient dans ton parcours</h3>
-        <p class="muted">Des observations prudentes à partir de tes données privées. Ce ne sont ni un diagnostic ni une vérité définitive.</p>
+        <h3>🧩 Ce qui revient dans votre parcours</h3>
+        <p class="muted">Des observations prudentes à partir de vos données privées. Ce ne sont ni un diagnostic ni une vérité définitive.</p>
         <div id="patternInsights" class="insight-list"><div class="empty">Demande une analyse pour faire émerger des pistes.</div></div>
       </div>
 
@@ -2949,7 +2957,7 @@ body{font-size:16px}
       <div class="card reminder-settings-v952" id="reminderSettingsV952">
         <p class="eyebrow">RAPPELS PERSONNALISÉS · OPTIONNELS</p>
         <h3>🔔 Mes rappels Allo Psycho</h3>
-        <p class="muted">Allo Psycho peut te proposer des interactions différentes selon ton parcours, ton avancement et ce qui t’a été utile. Rien ne s’active sans ton accord.</p>
+        <p class="muted">Allo Psycho peut vous proposer des interactions différentes selon votre parcours, votre avancement et ce qui vous a été utile. Rien ne s’active sans votre accord.</p>
 
         <div class="reminder-permission-v952">
           <div><strong>Notifications système</strong><small id="reminderPermissionTextV952">Non demandées</small></div>
@@ -2993,7 +3001,7 @@ body{font-size:16px}
           </label>
         </div>
 
-        <div class="reminder-suggest-v952" id="reminderSuggestionV952">Le prochain rappel sera choisi en fonction de ton parcours et de ton avancement.</div>
+        <div class="reminder-suggest-v952" id="reminderSuggestionV952">Le prochain rappel sera choisi en fonction de votre parcours et de votre avancement.</div>
         <div class="reminder-preview-v953" id="reminderPreviewV953">Aperçu : aucun rappel prioritaire pour le moment.</div>
         <div class="reminder-status-v952" id="reminderStatusV952">Les préférences et l’analyse d’avancement restent sur cet appareil. Les notifications système dépendent aussi des capacités du navigateur/PWA.</div>
       </div>
@@ -3004,7 +3012,7 @@ body{font-size:16px}
         <div class="hero-emoji">🎮</div>
         <p class="eyebrow">MA BULLE ANTI-STRESS</p>
         <h2>60 secondes pour changer de rythme</h2>
-        <p class="muted">Choisis ce qui te ressemble maintenant. Aucun score n'est envoyé à Supabase ou à l'IA : ces jeux restent dans ton navigateur.</p>
+        <p class="muted">Choisissez ce qui vous ressemble maintenant. Aucun score n'est envoyé à Supabase ou à l'IA : ces jeux restent dans votre navigateur.</p>
       </div>
       <div class="game-picker">
         <button type="button" class="game-choice active" data-game="thoughts" aria-label="AttrapepenséesSwipe gauche   droite">🗑️ <strong>Attrape-pensées</strong><small>Swipe gauche 🗑️ · droite ❤️</small></button>
@@ -3017,7 +3025,7 @@ body{font-size:16px}
         <div id="gameArena" class="game-arena" role="group" aria-label="Zone de mini-jeu"></div>
         <div id="gameControls" class="game-controls" aria-live="polite"></div>
         <div class="game-actions"><button type="button" id="gameStart" class="btn btn-dark" aria-label="Commencer">▶ Commencer</button><button type="button" id="gameStop" class="btn btn-light" aria-label="Terminer">■ Terminer</button></div>
-        <div id="gameReflection" class="game-reflection" aria-live="polite">🌱 Pas besoin de gagner. Le but est seulement de déplacer un peu ton attention.</div>
+        <div id="gameReflection" class="game-reflection" aria-live="polite">🌱 Il n’est pas nécessaire de gagner. Le but est simplement de déplacer un peu votre attention.</div>
       </div>
     </section>
 
@@ -3045,7 +3053,7 @@ body{font-size:16px}
           </h2>
 
           <p class="muted">
-            Écris librement. Cet espace est pour toi.
+            Écrivez librement. Cet espace est pour vous.
             💕
           </p>
 
@@ -3061,7 +3069,7 @@ body{font-size:16px}
 
               <textarea
                 id="journalText"
-                placeholder="Comment s'est passée ta journée ? Qu'est-ce qui te traverse l'esprit ? 🌷"
+                placeholder="Comment s'est passée votre journée ? Qu'est-ce qui vous traverse l'esprit ? 🌷"
                 required
               ></textarea>
             </div>
@@ -3129,7 +3137,7 @@ body{font-size:16px}
               <button type="button" class="btn btn-dark" id="tccNextV741" aria-label="Continuer">Continuer →</button>
             </div>
             <button type="button" class="btn btn-light full" id="tccAiV741" aria-label="Éclairage IA sur cette étape">✨ Éclairage IA sur cette étape</button>
-            <small class="privacy-mini-v7">L’IA reçoit uniquement le contenu de l’étape affichée lorsque tu appuies sur ce bouton. La fiche complète reste locale tant que tu ne choisis pas de l’envoyer.</small>
+            <small class="privacy-mini-v7">L’IA reçoit uniquement le contenu de l’étape affichée lorsque vous appuyez sur ce bouton. La fiche complète reste locale tant que vous ne choisissez pas de l’envoyer.</small>
           </div>
           <div id="tccSheetV71" class="tcc-sheet-v71" hidden>
             <div class="tcc-sheet-head-v71">
@@ -3233,7 +3241,7 @@ body{font-size:16px}
 
         <div class="tcc-mode-bar">
           <button type="button" id="tccModeBtn" class="btn btn-light">🧠 Mode TCC guidé : auto</button>
-          <small id="tccModeHelp">En auto, l’IA privilégie la TCC quand le problème s’y prête. Tu peux la forcer pour travailler une pensée étape par étape.</small>
+          <small id="tccModeHelp">En auto, l’IA privilégie la TCC quand le problème s’y prête. Vous pouvez la forcer pour travailler une pensée étape par étape.</small>
         </div>
 
         <div class="chat-tools-v7">
@@ -3268,16 +3276,16 @@ body{font-size:16px}
         <div id="messages" class="messages" aria-live="polite">
           <div class="message ai">🌸 Bonjour, je suis là avec toi.
 
-Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕</div>
+Vous pouvez me raconter ce qui vous traverse l'esprit aujourd'hui, sans jugement. 💕</div>
         </div>
 
         <div id="typing" class="typing" aria-live="polite">Allo Psycho réfléchit…</div>
 
         <form id="chatForm" class="chat-composer-v85">
-          <textarea id="chatInput" rows="3" maxlength="3000" placeholder="Écris ce que tu ressens, ce qui s’est passé, ou ce que tu aimerais comprendre…" aria-label="Message à Allo Psycho"></textarea>
+          <textarea id="chatInput" rows="3" maxlength="3000" placeholder="Écris ce que vous ressentez, ce qui s’est passé, ou ce que tu aimerais comprendre…" aria-label="Message à Allo Psycho"></textarea>
           <button type="submit" id="sendButton" class="btn btn-dark" aria-label="Envoyer mon message">Envoyer ↑</button>
         </form>
-        <small class="chat-privacy-v85">Le message est transmis à l’IA seulement lorsque tu choisis de l’envoyer. Le compagnon ne remplace pas une consultation ou une évaluation clinique.</small>
+        <small class="chat-privacy-v85">Le message est transmis à l’IA seulement lorsque vous choisissez de l’envoyer. Le compagnon ne remplace pas une consultation ou une évaluation clinique.</small>
       </div>
 
       <div class="card">
@@ -3302,14 +3310,19 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
         <div class="hero-emoji">👤</div>
         <p class="eyebrow">ESPACE PERSONNEL</p>
         <h2>👤 Mon espace personnel</h2>
-        <p class="muted">Un profil minimaliste pour personnaliser ton accompagnement, sans adresse e-mail et sans identité réelle.</p>
+        <p class="muted">Un profil minimaliste pour personnaliser votre accompagnement, sans adresse e-mail et sans identité réelle.</p>
         <div id="authStatus" class="status-warn">🔐 Non connecté</div>
         <div id="ownerAccessV862" class="owner-access-v862" hidden>
           <div id="ownerBadgeV862" class="owner-badge-v862" hidden>👑 Propriétaire · Admin · Premium permanent</div>
           <div id="testerBadgeV90" class="owner-badge-v862" hidden>🧪 Testeur · Premium permanent</div>
         </div>
         <div class="options-shortcuts-v921">
-          <button type="button" class="btn btn-dark" id="openPremiumV921">✨ Premium & abonnement</button>
+          <button type="button" class="btn btn-dark" id="openPremiumV921">✨ Mon accès Premium</button>
+          <button type="button" class="btn btn-light reminder-shortcut-v954" id="openRemindersV954" aria-label="Ouvrir mes rappels">
+            <span class="reminder-bell-v954">🔔</span>
+            <span>Mes rappels</span>
+            <span class="reminder-dot-v954" id="reminderDotV954" aria-hidden="true"></span>
+          </button>
           <button type="button" class="btn btn-light" id="openAboutV921">🌷 À propos & contact</button>
         </div>
       </div>
@@ -3321,7 +3334,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
           <form id="profileForm" class="form">
             <div>
               <label for="profileName">Prénom ou pseudo</label>
-              <input id="profileName" type="text" maxlength="80" autocomplete="name" placeholder="Comment souhaites-tu être appelé·e ?">
+              <input id="profileName" type="text" maxlength="80" autocomplete="name" placeholder="Comment souhaitez-vous être appelé·e ?">
             </div>
             <div>
               <label for="profileBirthYear">Année de naissance (facultatif)</label>
@@ -3361,8 +3374,8 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
         <div class="card">
           <p class="eyebrow">ESPACE PRIVÉ</p>
           <h3>Profil anonyme et personnel</h3>
-          <p id="authEmailText" class="muted">Ton profil, ton journal, tes humeurs, tes routines et tes exercices restent sur cet appareil. Aucun e-mail n'est nécessaire.</p>
-          <div class="privacy-box">🔒 Mode Privacy First : les données personnelles de ton parcours ne sont pas synchronisées vers Supabase. Un identifiant anonyme peut uniquement servir de jeton technique pour les fonctions IA et Admin.</div>
+          <p id="authEmailText" class="muted">Mon profil, votre journal, vos humeurs, vos routines et vos exercices restent sur cet appareil. Aucun e-mail n'est nécessaire.</p>
+          <div class="privacy-box">🔒 Mode Privacy First : les données personnelles de votre parcours ne sont pas synchronisées vers Supabase. Un identifiant anonyme peut uniquement servir de jeton technique pour les fonctions IA et Admin.</div>
           <div class="profile-actions">
             <button type="button" id="signInBtn" class="btn btn-dark" aria-label="Activer mon espace privé">✨ Activer mon espace privé</button>
             <button type="button" id="signOutBtn" class="btn btn-light" style="display:none" aria-label="Quitter cet espace">Quitter cet espace</button>
@@ -3396,7 +3409,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
         <p class="eyebrow">CONFIDENTIALITÉ</p>
         <h3>Mes choix de données</h3>
         <div class="privacy-box">
-          <strong>Privacy First :</strong> profil, journal, humeur, TCC, routines et historique restent sur cet appareil. Ils ne sont pas enregistrés dans les tables patient Supabase. Le consentement IA est séparé : lorsque tu envoies volontairement un message, ce message, un historique récent limité, quelques préférences minimales et la mémoire thérapeutique locale minimale peuvent être transmis au fournisseur IA uniquement pour générer la réponse.
+          <strong>Privacy First :</strong> profil, journal, humeur, TCC, routines et historique restent sur cet appareil. Ils ne sont pas enregistrés dans les tables patient Supabase. Le consentement IA est séparé : lorsque vous envoyez volontairement un message, ce message, un historique récent limité, quelques préférences minimales et la mémoire thérapeutique locale minimale peuvent être transmis au fournisseur IA uniquement pour générer la réponse.
         </div>
         <div style="height:10px"></div>
         <label class="consent-row">
@@ -3490,8 +3503,8 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
     <section id="page-premium" class="page">
       <div class="card paths-v7">
         <p class="eyebrow">PARCOURS PREMIUM</p>
-        <h2>🧭 7 étapes, à ton rythme</h2>
-        <p class="muted">Une seule nouvelle étape se déverrouille à la fois. Tu peux relire les précédentes quand tu veux. Progression stockée localement.</p>
+        <h2>🧭 7 étapes, à votre rythme</h2>
+        <p class="muted">Une seule nouvelle étape se déverrouille à la fois. Vous pouvez relire les précédentes quand vous le souhaitez. Progression stockée localement.</p>
         <div id="pathGridV7" class="path-grid-v7"></div>
         <div id="pathDetailV7"></div>
       </div>
@@ -3500,7 +3513,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
         <div class="hero-emoji">✨</div><p class="eyebrow">PREMIUM</p>
         <h2>Des outils structurés pour avancer entre les séances</h2>
         <div class="premium-price">10 jours d’essai gratuit <small>· puis Premium à 9,99 € / mois ou 84,99 € / an</small></div>
-        <p class="muted">Pendant 10 jours d’essai gratuit, explore le compagnon IA avancé, les programmes guidés en 7 étapes, les fiches TCC enrichies, les audios thérapeutiques et les outils locaux de progression. Ensuite, tu choisis librement de continuer en mensuel ou en annuel. La confidentialité reste la même en gratuit et en Premium.</p>
+        <p class="muted">Pendant 10 jours d’essai gratuit, explore le compagnon IA avancé, les programmes guidés en 7 étapes, les fiches TCC enrichies, les audios thérapeutiques et les outils locaux de progression. Ensuite, vous choisissez librement de continuer en mensuel ou en annuel. La confidentialité reste la même en gratuit et en Premium.</p>
         <div id="premiumStatus" class="premium-status">Vérification de ton accès…</div>
         <div class="profile-actions" style="justify-content:center;margin-top:10px">
           <button type="button" id="verifyPremiumBtnV85" class="btn btn-dark" aria-label="Vérifier mon accès">Vérifier mon accès</button>
@@ -3520,7 +3533,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
       <div class="card stripe-box">
         <p class="eyebrow">ABONNEMENT PREMIUM</p>
         <h3>💳 Continuer avec Stripe</h3>
-        <p class="muted">Après les 10 jours d’essai gratuit : 9,99 € / mois ou 84,99 € / an. Le paiement et le renouvellement sont gérés par Stripe. Ton accès Premium est activé côté serveur après confirmation du paiement.</p>
+        <p class="muted">Après les 10 jours d’essai gratuit : 9,99 € / mois ou 84,99 € / an. Le paiement et le renouvellement sont gérés par Stripe. Mon accès Premium est activé côté serveur après confirmation du paiement.</p>
         <div class="stripe-actions">
           <button type="button" id="stripeSubscribeMonthlyBtn" class="btn btn-dark" aria-label="S’abonner à Premium mensuel">S’abonner · 9,99 € / mois</button><button type="button" id="stripeSubscribeAnnualBtn" class="btn btn-light" aria-label="S’abonner à Premium annuel">S’abonner · 84,99 € / an</button>
           <button type="button" id="stripePortalBtn" class="btn btn-light" aria-label="Gérer mon abonnement">Gérer mon abonnement</button>
@@ -4466,7 +4479,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
 
           afficherJournaux();
           champ.value = "";
-          afficherToast("📖 Ton journal a été enregistré.");
+          afficherToast("📖 Votre journal a été enregistré.");
 
           await enregistrerSupabase(
             "journal",
@@ -4848,7 +4861,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
               true;
 
             afficherToast(
-              "💕 Ton humeur a été enregistrée."
+              "💕 Votre humeur a été enregistrée."
             );
 
             await enregistrerSupabase(
@@ -5016,7 +5029,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
             "Inspire doucement pendant 5 secondes, " +
             "puis expire pendant 5 secondes. " +
             "Fais-le trois fois. Ensuite, dis-moi ce " +
-            "que tu ressens dans ton corps."
+            "que vous ressentez dans votre corps."
           );
         }
 
@@ -5042,9 +5055,9 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
 
         return (
           "🫶 Restons dans le moment présent. " +
-          "Peux-tu me dire une chose que tu vois, " +
-          "une chose que tu entends et une chose " +
-          "que tu ressens physiquement maintenant ?"
+          "Peux-tu me dire une chose que vous voyez, " +
+          "une chose que vous entendez et une chose " +
+          "que vous ressentez physiquement maintenant ?"
         );
       }
 
@@ -5103,7 +5116,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
 
         return (
           "🧠 Si tu devais identifier la pensée principale " +
-          "derrière ce que tu ressens, quelle serait-elle ?"
+          "derrière ce que vous ressentez, quelle serait-elle ?"
         );
       }
 
@@ -5555,7 +5568,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
         }
         const result = await supabaseClient.auth.signInAnonymously();
         if (result.error) { afficherToast("🔐 Impossible d'activer l'espace privé : " + result.error.message); return false; }
-        afficherToast("🌸 Ton espace privé est prêt.");
+        afficherToast("🌸 Mon espace privé est prêt.");
         await this.refreshAuth();
         return true;
       },
@@ -5935,7 +5948,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
           if(result.data?.daily_limit_reached){
             const q=document.getElementById("aiQuotaV922");
             if(q)q.textContent="✨ Premium · 0 message IA restant aujourd’hui sur 12";
-            return result.data.reply||"Tu as atteint la limite de 12 messages IA pour aujourd’hui. Le compteur sera réinitialisé demain.";
+            return result.data.reply||"Vous avez atteint la limite de 12 messages IA pour aujourd’hui. Le compteur sera réinitialisé demain.";
           }
 
           if(result.error||!result.data){
@@ -5975,7 +5988,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
               :result.data.reply;
 
           if(typeof reply!=="string"||!reply.trim()){
-            return "Je n’ai pas réussi à produire une réponse suffisamment claire. Reformule simplement ton dernier message.";
+            return "Je n’ai pas réussi à produire une réponse suffisamment claire. Reformulez simplement votre dernier message.";
           }
 
           return reply.trim();
@@ -6011,16 +6024,16 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
       let ideeIndex = Number(sessionStorage.getItem("alloPsychoIdeeIndex") || "0");
       const ideesLocales = [
         "🧠 Exercice · Le détective des pensées : choisis une pensée qui tourne en boucle et trouve un fait qui la soutient, puis un fait qui la nuance.",
-        "🌿 Exercice · 5-4-3-2-1 : repère 5 choses que tu vois, 4 que tu touches, 3 que tu entends, 2 que tu sens et 1 que tu goûtes.",
-        "🎯 Mini-défi · Choisis une tâche qui prend moins de 5 minutes et termine-la avant de négocier avec ta motivation.",
+        "🌿 Exercice · 5-4-3-2-1 : repérez 5 choses que vous voyez, 4 que vous touchez, 3 que vous entendez, 2 que vous sentez et 1 que vous goûtez.",
+        "🎯 Mini-défi · Choisissez une tâche qui prend moins de 5 minutes et terminez-la avant de négocier avec votre motivation.",
         "💬 Relation · Écris une phrase en trois morceaux : « Quand…, je ressens…, j’aurais besoin de… ».",
         "🪴 Habitude · Rends une bonne action ridiculement facile : une page, deux minutes, un verre d’eau, un seul rangement.",
         "🧭 Valeurs · Demande-toi : « Si je ne cherchais pas à être parfait·e, quelle direction compterait vraiment aujourd’hui ? »",
         "😌 Corps · Desserre volontairement mâchoire, épaules et mains pendant 30 secondes, puis observe ce qui change sans forcer.",
         "✍️ Journal · Termine trois fois la phrase « Ce que j’essaie peut-être de protéger en moi, c’est… ».",
-        "🌙 Soir · Fais une liste « pas maintenant » : dépose sur papier trois problèmes que ton cerveau n’a pas besoin de résoudre au lit.",
+        "🌙 Soir · Fais une liste « pas maintenant » : dépose sur papier trois problèmes que votre cerveau n’a pas besoin de résoudre au lit.",
         "☀️ Activation · Va chercher 5 minutes de lumière et de mouvement. Pas pour performer : juste pour remettre un peu d’élan dans le système.",
-        "🧩 Perspective · Imagine le conseil que tu donnerais à quelqu’un que tu apprécies s’il vivait exactement la même situation.",
+        "🧩 Perspective · Imaginez le conseil que vous donneriez à quelqu’un que vous appréciez s’il vivait exactement la même situation.",
         "🎈 Défusion · Ajoute devant une pensée difficile : « Mon cerveau me raconte que… ». Ça ne la nie pas, ça crée juste un peu d’espace."
       ];
       const citationsTherapeutiques = [
@@ -6066,12 +6079,12 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
       actions.innerHTML=""; card.classList.add("visible");
       const add=(label,href,secondary=false)=>{const a=document.createElement("a");a.className="crisis-link"+(secondary?" secondary":"");a.href=href;a.textContent=label;actions.appendChild(a);};
       if(risque.type==="suicide"){
-        title.textContent="Tu n'as pas à rester seul·e avec ça.";
-        text.textContent="Si tu as des idées noires, des pensées suicidaires ou crains de passer à l’acte, appelle maintenant le 3114. Si le danger est immédiat, s’il y a blessure, sang ou mutilation, appelle le SAMU (15) ou le 112.";
+        title.textContent="Vous n'avez pas à rester seul·e avec cela.";
+        text.textContent="Si vous avez des idées noires, des pensées suicidaires ou craignez de passer à l’acte, appelez maintenant le 3114. Si le danger est immédiat, s’il y a blessure, sang ou mutilation, appelle le SAMU (15) ou le 112.";
         add("📞 3114 — prévention suicide","tel:3114"); add("🚑 SAMU 15","tel:15",true); add("🆘 Urgence 112","tel:112",true);
       } else {
         title.textContent="Ta sécurité passe avant la conversation.";
-        text.textContent="S’il y a violence, menace, mutilation, sang, blessure ou danger immédiat, éloigne-toi du danger seulement si tu peux le faire sans risque et contacte les secours : SAMU 15 / 112 pour urgence médicale, Police ou gendarmerie 17 si une intervention de sécurité est nécessaire.";
+        text.textContent="S’il y a violence, menace, mutilation, sang, blessure ou danger immédiat, éloignez-vous du danger seulement si vous pouvez le faire sans risque et contactez les secours : SAMU 15 / 112 pour urgence médicale, Police ou gendarmerie 17 si une intervention de sécurité est nécessaire.";
         add("🚑 SAMU 15","tel:15"); add("🚓 Police / gendarmerie 17","tel:17",true); add("🆘 Urgence 112","tel:112",true);
       }
       card.scrollIntoView({behavior:"smooth",block:"nearest"});
@@ -6121,8 +6134,8 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
       const text=journals.slice(-10).map(x=>x.text||x.content||"").join(" ").toLowerCase();
       const themes=[['travail',['travail','boulot','collègue','manager']],['sommeil',['dormir','sommeil','nuit','fatigue']],['relations',['couple','famille','ami','relation']],['pression',['pression','dois','falloir','urgent']],['anxiété',['anxiété','angoisse','peur','stress']]];
       const hits=themes.map(([name,words])=>[name,words.reduce((n,w)=>n+(text.split(w).length-1),0)]).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]);
-      if(hits[0])insights.push("Thème récurrent repéré dans tes notes récentes : « "+hits[0][0]+" ». Tu peux observer quand il apparaît, ce qui le précède et ce qui aide ensuite.");
-      if(tcc.length>=2)insights.push("Tu as déjà utilisé la restructuration cognitive plusieurs fois. Compare les pensées automatiques qui se ressemblent : y a-t-il un même mot comme « toujours », « jamais », « forcément » ou « je dois » ?");
+      if(hits[0])insights.push("Thème récurrent repéré dans vos notes récentes : « "+hits[0][0]+" ». Vous pouvez observer quand il apparaît, ce qui le précède et ce qui aide ensuite.");
+      if(tcc.length>=2)insights.push("Vous avez déjà utilisé la restructuration cognitive plusieurs fois. Compare les pensées automatiques qui se ressemblent : y a-t-il un même mot comme « toujours », « jamais », « forcément » ou « je dois » ?");
       if(!insights.length)insights.push("Pas encore assez d’éléments locaux pour dégager une tendance utile. Quelques humeurs ou notes supplémentaires suffiront.");
       insights.slice(0,4).forEach(x=>{const d=document.createElement("div");d.className="insight-item";d.textContent=x;box.appendChild(d)});
     }
@@ -6281,7 +6294,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
     const thoughtDeck=[
       {text:'Je dois tout réussir sinon ce sera un échec',answer:'rigid',type:'Tout ou rien',why:'Cette pensée transforme une situation nuancée en réussite totale ou échec total.',rewrite:'Je peux viser suffisamment bien et apprendre de ce qui ne fonctionne pas.'},
       {text:'Cette personne ne répond pas : elle doit être fâchée contre moi',answer:'check',type:'Lecture de pensée',why:'Il existe plusieurs explications possibles. Il manque des faits avant de conclure.',rewrite:'Je remarque mon interprétation. Je n’ai pas encore assez d’informations pour savoir.'},
-      {text:'Je suis anxieux·se, donc quelque chose de grave va arriver',answer:'rigid',type:'Raisonnement émotionnel',why:'Une émotion donne une information sur ton état, pas une preuve sur ce qui va arriver.',rewrite:'Mon anxiété est réelle, mais elle ne prédit pas à elle seule ce qui va se passer.'},
+      {text:'Je suis anxieux·se, donc quelque chose de grave va arriver',answer:'rigid',type:'Raisonnement émotionnel',why:'Une émotion donne une information sur votre état, pas une preuve sur ce qui va arriver.',rewrite:'Mon anxiété est réelle, mais elle ne prédit pas à elle seule ce qui va se passer.'},
       {text:'Je peux être inquiet·ète et quand même faire un petit pas',answer:'useful',type:'Pensée flexible',why:'Elle reconnaît l’émotion sans en faire une interdiction d’agir.',rewrite:'Je peux être inquiet·ète et quand même faire un petit pas.'},
       {text:'Mon responsable a dit « on en reparle demain » : ça va forcément mal se passer',answer:'check',type:'Prédiction',why:'La situation mérite peut-être une préparation, mais le résultat n’est pas encore connu.',rewrite:'Je peux préparer ce que je veux dire sans décider à l’avance de l’issue.'},
       {text:'Une erreur prouve que je suis incapable',answer:'rigid',type:'Étiquetage',why:'Une action ou une erreur ne résume pas une personne entière.',rewrite:'J’ai fait une erreur dans cette situation ; cela ne définit pas toutes mes capacités.'},
@@ -6822,7 +6835,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
     senses:{
       name:'5-4-3-2-1',
       steps:[
-        'Repère 5 choses que tu peux voir autour de toi.',
+        'Repérez 5 choses que vous pouvez voir autour de vous.',
         'Repère 4 sensations de contact : vêtements, siège, sol, air sur la peau.',
         'Repère 3 sons, proches ou lointains.',
         'Repère 2 odeurs — ou simplement deux qualités de l’air si aucune odeur ne vient.',
@@ -6832,7 +6845,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
     visual:{
       name:'Visualisation apaisante',
       steps:[
-        'Choisis mentalement un lieu réel ou imaginaire où tu te sens suffisamment en sécurité.',
+        'Choisissez mentalement un lieu réel ou imaginaire où vous vous sentez suffisamment en sécurité.',
         'Observe dans ton imagination les couleurs, la lumière et les formes de ce lieu.',
         'Ajoute un son agréable ou neutre : eau, vent, silence, oiseaux, feu qui crépite.',
         'Imagine un endroit précis où t’asseoir ou t’allonger dans ce lieu.',
@@ -6855,8 +6868,8 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
         'Tourne lentement la tête et regarde l’espace autour de toi.',
         'Repère une porte, une fenêtre ou une sortie.',
         'Repère ensuite trois objets ordinaires et familiers.',
-        'Dis-toi mentalement où tu es, quel jour nous sommes et ce que tu es en train de faire.',
-        'Choisis maintenant un objet ou un point fixe sur lequel poser le regard quelques secondes.'
+        'Dites-vous mentalement où vous êtes, quel jour nous sommes et ce que vous êtes en train de faire.',
+        'Choisissez maintenant un objet ou un point fixe sur lequel poser le regard quelques secondes.'
       ]
     },
     defuse:{
@@ -6866,7 +6879,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
         'Ajoute devant elle : « J’observe que j’ai la pensée que… »',
         'Imagine cette phrase écrite sur une feuille qui passe doucement devant toi.',
         'Laisse la feuille s’éloigner. La pensée peut rester présente sans que tu aies à la suivre.',
-        'Ramène ensuite ton attention sur un contact réel : pieds, siège, mains ou respiration naturelle.'
+        'Ramène ensuite votre attention sur un contact réel : pieds, siège, mains ou respiration naturelle.'
       ]
     }
   };
@@ -7055,7 +7068,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
       return {title:'🌿 Respiration 5 · 5',text:'Un premier temps court pour revenir au présent et faire baisser l’activation.',action:'breathing',path};
     }
     if(need==='understand'){
-      return {title:'🧠 TCC guidée',text:'Sépare la situation, la pensée, l’émotion et les faits avant de choisir ton prochain pas.',action:'tcc',path:path|| (feeling==='angry'?'limits':null)};
+      return {title:'🧠 TCC guidée',text:'Sépare la situation, la pensée, l’émotion et les faits avant de choisir votre prochain pas.',action:'tcc',path:path|| (feeling==='angry'?'limits':null)};
     }
     if(need==='release'){
       return {title:'⚡ Décharge',text:'Fais sortir une partie de la tension avant de réfléchir ou décider.',action:'release',path:feeling==='overload'?'sensitivity':null};
@@ -7103,7 +7116,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
     document.querySelectorAll('[data-feeling]').forEach(x=>x.classList.toggle('active',x.dataset.feeling===selectedFeeling));
     document.querySelectorAll('[data-need]').forEach(x=>x.classList.toggle('active',x.dataset.need===selectedNeed));
 
-    if(!selectedFeeling){reco.textContent='Commence par choisir comment tu te sens.';return}
+    if(!selectedFeeling){reco.textContent='Commencez par choisir comment vous vous sentez.';return}
     if(!selectedNeed){reco.innerHTML='<strong>Étape 2</strong> · De quoi aurais-tu le plus besoin maintenant ?';return}
 
     const r=guidedChoice(selectedFeeling,selectedNeed);
@@ -7287,7 +7300,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
       {title:'Repérer la boucle',content:'Observe une situation anxiogène récente et distingue les faits, la prédiction et la réaction corporelle.',exercise:'Écris : situation / ce que je redoute / ce que je fais pour me rassurer.'},
       {title:'La prédiction redoutée',content:'L’anxiété transforme souvent une possibilité en quasi-certitude.',exercise:'Écris la prédiction exacte puis estime : probabilité 0–100 %, gravité 0–100 %, capacité à faire face 0–100 %.'},
       {title:'Comportements de sécurité',content:'Certaines stratégies rassurent à court terme mais entretiennent la peur.',exercise:'Repère un comportement de sécurité et réduis-le légèrement aujourd’hui.'},
-      {title:'Tolérer l’incertitude',content:'Chercher une certitude totale entretient souvent l’alarme.',exercise:'Choisis une petite situation où tu acceptes volontairement un peu plus d’incertitude.'},
+      {title:'Tolérer l’incertitude',content:'Chercher une certitude totale entretient souvent l’alarme.',exercise:'Choisissez une petite situation où vous acceptez volontairement un peu plus d’incertitude.'},
       {title:'Tester une prédiction',content:'Une expérience comportementale permet d’obtenir de vraies données.',exercise:'Note : prédiction / test / résultat observé / ce que j’en retiens.'},
       {title:'Récupérer après la tension',content:'Après une activation forte, le corps a besoin d’un vrai temps de récupération.',exercise:'Prévois 10 minutes de récupération réelle : marche lente, musique, silence ou étirements doux.'},
       {title:'Mon plan personnel',content:'Consolide quelques stratégies réellement utiles.',exercise:'Note 3 signes précoces, 2 outils qui t’aident, 1 personne ressource et 1 comportement à éviter.'}
@@ -7306,12 +7319,12 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
       {title:'Charge sensorielle',content:'Bruit, lumière, foule ou interruptions peuvent s’additionner.',exercise:'Choisis une réduction concrète de stimulation pour aujourd’hui.'},
       {title:'Charge émotionnelle',content:'Certaines interactions continuent à résonner longtemps.',exercise:'Distingue : ce qui m’appartient / ce qui appartient à l’autre / ce que je peux laisser.'},
       {title:'Récupération',content:'Après une forte stimulation, la récupération devient une nécessité.',exercise:'Planifie un sas de 15 minutes sans écran ni demande extérieure.'},
-      {title:'Limites',content:'Une limite protège l’énergie avant l’épuisement.',exercise:'Écris une phrase simple de limite que tu pourrais réellement utiliser.'},
-      {title:'Environnement soutenant',content:'Il s’agit d’ajuster certaines conditions, pas d’éviter le monde.',exercise:'Change un élément concret de ton espace ou de ton agenda.'},
-      {title:'Ma notice personnelle',content:'Tes besoins de régulation peuvent être différents de ceux des autres.',exercise:'Écris : ce qui me surcharge / ce qui m’aide / comment récupérer / comment prévenir la surcharge.'}
+      {title:'Limites',content:'Une limite protège l’énergie avant l’épuisement.',exercise:'Écrivez une phrase simple de limite que vous pourriez réellement utiliser.'},
+      {title:'Environnement soutenant',content:'Il s’agit d’ajuster certaines conditions, pas d’éviter le monde.',exercise:'Changez un élément concret de votre espace ou de votre agenda.'},
+      {title:'Ma notice personnelle',content:'Vos besoins de régulation peuvent être différents de ceux des autres.',exercise:'Écris : ce qui me surcharge / ce qui m’aide / comment récupérer / comment prévenir la surcharge.'}
     ]},
     limits:{icon:'🧱',name:'Poser mes limites',days:[
-      {title:'Ce qui m’épuise',content:'Une limite devient plus claire quand on identifie précisément ce qui coûte.',exercise:'Liste 3 situations où tu dis oui alors que tu voudrais dire non.'},
+      {title:'Ce qui m’épuise',content:'Une limite devient plus claire quand on identifie précisément ce qui coûte.',exercise:'Listez 3 situations où vous dites oui alors que vous voudriez dire non.'},
       {title:'Faits et interprétations',content:'Séparer ce qui s’est passé de ce que l’on imagine réduit la confusion.',exercise:'Écris : fait observable / interprétation / émotion.'},
       {title:'Identifier le besoin',content:'Une limite protège souvent un besoin légitime.',exercise:'Complète : “J’ai besoin de…” sans parler de ce que l’autre devrait faire.'},
       {title:'Dire non',content:'Une limite courte est souvent plus claire qu’une longue justification.',exercise:'Prépare un refus en une ou deux phrases.'},
@@ -7472,7 +7485,7 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
   function renderTest(name){
     const t=tests[name];if(!$('testAreaV7'))return;
     $('testAreaV7').innerHTML='<h3>'+t.title+'</h3><p class="muted">Pour chaque phrase : 1 = pas du tout, 5 = tout à fait.</p><form id="testFormV7">'+t.items.map((it,i)=>'<div class="test-question-v7"><p>'+(i+1)+'. '+it[1]+'</p><div class="scale-v7">'+[1,2,3,4,5].map(n=>'<label><input required type="radio" name="q'+i+'" value="'+n+'">'+n+'</label>').join('')+'</div></div>').join('')+'<button class="btn btn-dark full" type="submit" aria-label="Voir mes résultats">Voir mes résultats</button></form>';
-    $('testFormV7').onsubmit=e=>{e.preventDefault();const fd=new FormData(e.target),scores={};Object.keys(t.dims).forEach(k=>scores[k]=[]);t.items.forEach((it,i)=>scores[it[0]].push(Number(fd.get('q'+i))));const av={};Object.entries(scores).forEach(([k,a])=>av[k]=a.reduce((x,y)=>x+y,0)/a.length);write('alloPsychoSelfTestsV7',{...(read('alloPsychoSelfTestsV7',{})),[name]:{date:new Date().toISOString(),scores:av}});const interpret=v=>v<2.4?'plutôt faible':v<3.6?'intermédiaire':'plutôt marqué';$('testAreaV7').innerHTML='<h3>'+t.title+' · résultat</h3>'+Object.entries(av).map(([k,v])=>'<div class="test-result-v7"><strong>'+t.dims[k]+' · '+v.toFixed(1)+'/5</strong><div class="result-bar-v7"><i style="width:'+(v/5*100)+'%"></i></div><p>'+interpret(v)+'. '+(name==='sensitivity'&&v>=3.6?'Cette dimension semble importante dans ton vécu : elle peut être utile à prendre en compte dans ton organisation et tes temps de récupération.':'Ce score décrit une tendance déclarée, pas une étiquette.')+'</p></div>').join('')+'<p class="muted">Ces scores ne permettent pas de diagnostiquer une hypersensibilité, un trouble ou un type de personnalité. Ils servent à l’auto-observation.</p>'}
+    $('testFormV7').onsubmit=e=>{e.preventDefault();const fd=new FormData(e.target),scores={};Object.keys(t.dims).forEach(k=>scores[k]=[]);t.items.forEach((it,i)=>scores[it[0]].push(Number(fd.get('q'+i))));const av={};Object.entries(scores).forEach(([k,a])=>av[k]=a.reduce((x,y)=>x+y,0)/a.length);write('alloPsychoSelfTestsV7',{...(read('alloPsychoSelfTestsV7',{})),[name]:{date:new Date().toISOString(),scores:av}});const interpret=v=>v<2.4?'plutôt faible':v<3.6?'intermédiaire':'plutôt marqué';$('testAreaV7').innerHTML='<h3>'+t.title+' · résultat</h3>'+Object.entries(av).map(([k,v])=>'<div class="test-result-v7"><strong>'+t.dims[k]+' · '+v.toFixed(1)+'/5</strong><div class="result-bar-v7"><i style="width:'+(v/5*100)+'%"></i></div><p>'+interpret(v)+'. '+(name==='sensitivity'&&v>=3.6?'Cette dimension semble importante dans votre vécu : elle peut être utile à prendre en compte dans votre organisation et vos temps de récupération.':'Ce score décrit une tendance déclarée, pas une étiquette.')+'</p></div>').join('')+'<p class="muted">Ces scores ne permettent pas de diagnostiquer une hypersensibilité, un trouble ou un type de personnalité. Ils servent à l’auto-observation.</p>'}
   }
   document.querySelectorAll('[data-test-v7]').forEach(b=>b.onclick=()=>renderTest(b.dataset.testV7));
 
@@ -7509,9 +7522,9 @@ Tu peux me raconter ce qui te traverse l'esprit aujourd'hui, sans jugement. 💕
 
   const steps=[
     {title:"Situation",help:"Que s’est-il passé, concrètement et de façon observable ? Décris le contexte sans interprétation : où, quand, avec qui, et ce qui s’est réellement produit."},
-    {title:"Pensée automatique",help:"Quelle phrase exacte a traversé ton esprit à ce moment-là ? Essaie de l’écrire telle qu’elle est apparue, même si elle te semble excessive."},
-    {title:"Émotion / intensité",help:"Quelle émotion as-tu ressentie ? Donne-lui un nom et estime son intensité de 0 à 100."},
-    {title:"Faits pour",help:"Quels faits observables semblent soutenir cette pensée ? Garde seulement ce que tu pourrais décrire à quelqu’un d’extérieur."},
+    {title:"Pensée automatique",help:"Quelle phrase exacte a traversé votre esprit à ce moment-là ? Essayez de l’écrire telle qu’elle est apparue, même si elle vous semble excessive."},
+    {title:"Émotion / intensité",help:"Quelle émotion avez-vous ressentie ? Donnez-lui un nom et estimez son intensité de 0 à 100."},
+    {title:"Faits pour",help:"Quels faits observables semblent soutenir cette pensée ? Gardez seulement ce que vous pourriez décrire à quelqu’un d’extérieur."},
     {title:"Faits qui nuancent",help:"Quels contre-exemples, informations manquantes ou autres explications montrent que cette pensée n’est peut-être pas toute l’histoire ?"},
     {title:"Pensée alternative équilibrée",help:"Quelle formulation serait plus nuancée, crédible et réaliste ? Elle n’a pas besoin d’être positive : seulement plus juste."},
     {title:"Action / expérience",help:"Quel petit test concret pourrait t’apporter une nouvelle information ? Choisis une action faisable, observable et suffisamment petite."}
@@ -7835,7 +7848,7 @@ window.addEventListener("unhandledrejection",function(e){
   // Urgence Calme — outil distinct de la respiration guidée
   const urgentSteps=[
     ['Ancrage','Pose les deux pieds au sol. Sens le contact avec le sol et laisse les épaules descendre.'],
-    ['Orientation','Regarde autour de toi et nomme mentalement trois choses que tu vois.'],
+    ['Orientation','Regardez autour de vous et nommez mentalement trois choses que vous voyez.'],
     ['Retour aux sens','Repère deux sons, puis une sensation corporelle neutre : température, tissu, appui.'],
     ['Relâchement','Expire lentement comme si tu soufflais dans une paille. Pas besoin de compter.']
   ];
@@ -8076,7 +8089,7 @@ window.addEventListener("unhandledrejection",function(e){
   $("verifyPremiumBtnV85")?.addEventListener("click",()=>verifyPremium(true));
 
   $("previewFreeBtn")?.addEventListener("click",()=>{
-    if(!window.alloPremiumEntitled) return toast("Ton accès Premium n’est pas actif.");
+    if(!window.alloPremiumEntitled) return toast("Mon accès Premium n’est pas actif.");
     window.alloPremiumPreviewFree=true;
     sessionStorage.setItem("alloPsychoPreviewFreeV85","1");
     applyPremiumState(true,"preview",null);
@@ -8176,7 +8189,7 @@ window.addEventListener("unhandledrejection",function(e){
     }catch(e){
       console.warn("Stripe Checkout:",e);
       if(e?.code==="ST-PERMANENT"){
-        toast("Ton accès permanent est déjà actif : aucun abonnement payant n’est nécessaire.");
+        toast("Votre accès permanent est déjà actif : aucun abonnement payant n’est nécessaire.");
       }else if(e?.code==="ST-ALREADY"){
         toast("Un abonnement Stripe existe déjà. Utilise « Gérer mon abonnement ».");
       }else if(e?.code==="ST-CFG"){
@@ -8260,7 +8273,7 @@ window.addEventListener("unhandledrejection",function(e){
       const original=window.AlloPsychoV2.callAI.bind(window.AlloPsychoV2);
       window.AlloPsychoV2.callAI=async function(message){
         if(window.alloPremiumPreviewFree){
-          return "✨ Le compagnon IA avancé fait partie de Premium. Tu testes actuellement la version gratuite.";
+          return "✨ Le compagnon IA avancé fait partie de Premium. Vous testez actuellement la version gratuite.";
         }
         return original(message);
       };
@@ -8376,14 +8389,14 @@ window.addEventListener("unhandledrejection",function(e){
       "Regarde un objet stable autour de toi et décris mentalement sa forme et sa couleur."
     ]},
     senses:{name:"5-4-3-2-1",steps:[
-      "Repère 5 choses que tu peux voir autour de toi.",
+      "Repérez 5 choses que vous pouvez voir autour de vous.",
       "Repère 4 sensations de contact : vêtements, siège, sol, air sur la peau.",
       "Repère 3 sons, proches ou lointains.",
       "Repère 2 odeurs, ou deux qualités de l’air.",
       "Repère 1 goût ou une sensation dans la bouche, puis regarde à nouveau autour de toi."
     ]},
     visual:{name:"Visualisation apaisante",steps:[
-      "Choisis mentalement un lieu réel ou imaginaire où tu te sens suffisamment en sécurité.",
+      "Choisissez mentalement un lieu réel ou imaginaire où vous vous sentez suffisamment en sécurité.",
       "Observe les couleurs, la lumière et les formes de ce lieu.",
       "Ajoute un son agréable ou neutre : eau, vent, silence, oiseaux ou feu qui crépite.",
       "Imagine un endroit précis où t’asseoir ou t’allonger.",
@@ -8400,7 +8413,7 @@ window.addEventListener("unhandledrejection",function(e){
       "Tourne lentement la tête et regarde l’espace autour de toi.",
       "Repère une porte, une fenêtre ou une sortie.",
       "Repère ensuite trois objets ordinaires et familiers.",
-      "Dis-toi mentalement où tu es, quel jour nous sommes et ce que tu es en train de faire.",
+      "Dites-vous mentalement où vous êtes, quel jour nous sommes et ce que vous êtes en train de faire.",
       "Choisis un objet ou un point fixe sur lequel poser le regard quelques secondes."
     ]},
     defuse:{name:"Défusion",steps:[
@@ -8408,7 +8421,7 @@ window.addEventListener("unhandledrejection",function(e){
       "Ajoute devant elle : « J’observe que j’ai la pensée que… »",
       "Imagine cette phrase écrite sur une feuille qui passe doucement devant toi.",
       "Laisse la feuille s’éloigner. La pensée peut rester présente sans que tu aies à la suivre.",
-      "Ramène ton attention sur un contact réel : pieds, siège, mains ou respiration naturelle."
+      "Ramène votre attention sur un contact réel : pieds, siège, mains ou respiration naturelle."
     ]}
   };
   let urgentMode="ground",urgentIndex=0,orbTimer=null,orbPhase="inspire",orbLeft=4;
@@ -8517,7 +8530,7 @@ window.addEventListener("unhandledrejection",function(e){
       }else{
         hint.textContent=deferredInstallPromptV903
           ?"Installation directe disponible."
-          :"Tu peux installer l’application depuis ton navigateur.";
+          :"Tu peux installer l’application depuis votre navigateur.";
       }
     }
 
@@ -8541,9 +8554,9 @@ window.addEventListener("unhandledrejection",function(e){
       box.innerHTML=
         '<div class="install-step-v903"><strong>Sur iPhone ou iPad</strong></div>'+
         '<ol>'+
-        '<li>Ouvre Allo Psycho dans ton navigateur.</li>'+
-        '<li>Appuie sur <strong>Partager</strong> (le carré avec la flèche vers le haut).</li>'+
-        '<li>Choisis <strong>Sur l’écran d’accueil</strong>.</li>'+
+        '<li>Ouvrez Allo Psycho dans votre navigateur.</li>'+
+        '<li>Appuyez sur <strong>Partager</strong> (le carré avec la flèche vers le haut).</li>'+
+        '<li>Choisissez <strong>Sur l’écran d’accueil</strong>.</li>'+
         '<li>Appuie sur <strong>Ajouter</strong>.</li>'+
         '</ol>'+
         '<p class="muted">L’icône Allo Psycho apparaîtra ensuite sur l’écran d’accueil et l’application s’ouvrira en mode autonome.</p>';
@@ -8812,12 +8825,12 @@ function renderKit(){
  const r=rankedTools(),p=[...r.map(x=>x.tool),"breathing","tcc","journal"].filter((x,i,a)=>a.indexOf(x)===i).slice(0,3);
  if($("quickKitV923"))$("quickKitV923").innerHTML=p.map(k=>'<button class="quick-tool-v923" data-kit="'+k+'"><strong>'+label(k)+'</strong><small>'+(r.some(x=>x.tool===k)?"D’après tes retours locaux":"Raccourci essentiel")+'</small></button>').join("");
  document.querySelectorAll("[data-kit]").forEach(x=>x.onclick=()=>{beginTool(x.dataset.kit);route(x.dataset.kit)});
- if($("bestToolsV923"))$("bestToolsV923").textContent=r.length?"🌿 "+r.slice(0,2).map(x=>label(x.tool)).join(" et ")+" semblent les plus utiles pour toi actuellement.":"🌱 Après quelques utilisations, l’app pourra te rappeler les outils qui semblent réellement t’aider.";
+ if($("bestToolsV923"))$("bestToolsV923").textContent=r.length?"🌿 "+r.slice(0,2).map(x=>label(x.tool)).join(" et ")+" semblent les plus utiles pour toi actuellement.":"🌱 Après quelques utilisations, l’app pourra vous rappeler les outils qui semblent réellement vous aider.";
 }
 function renderEvolution(){
  const m=memory(),r=rankedTools(),p=activePath();
  if($("evoThemeV923"))$("evoThemeV923").textContent=m.recurring_theme||"Pas encore assez de recul.";
- if($("evoHelpfulV923"))$("evoHelpfulV923").textContent=m.helpful||(r[0]?label(r[0].tool):"Tes retours apparaîtront ici.");
+ if($("evoHelpfulV923"))$("evoHelpfulV923").textContent=m.helpful||(r[0]?label(r[0].tool):"Vos retours apparaîtront ici.");
  if($("evoStepV923"))$("evoStepV923").textContent=m.next_small_step||"Aucun petit pas enregistré.";
  if($("evoPathV923"))$("evoPathV923").textContent=p?((window.alloPathsV923?.[p.key]?.name||p.key)+" · "+p.done+"/7 étapes"):"Aucun parcours démarré.";
 }
@@ -9048,7 +9061,7 @@ function renderManual(){
   const count={};moods.slice(-20).forEach(x=>count[x.mood]=(count[x.mood]||0)+1);return Object.entries(count).sort((a,b)=>b[1]-a[1])[0]?.[0]||null
  })();
  if($("manualTriggerV924"))$("manualTriggerV924").textContent=dominant?("Tendance récente : "+dominant+". À considérer comme un repère, pas une conclusion."):"Pas encore assez de recul.";
- if($("manualHelpfulV924"))$("manualHelpfulV924").textContent=m.helpful||(r[0]?labels[r[0].tool]||r[0].tool:"Tes retours apparaîtront ici.");
+ if($("manualHelpfulV924"))$("manualHelpfulV924").textContent=m.helpful||(r[0]?labels[r[0].tool]||r[0].tool:"Vos retours apparaîtront ici.");
  if($("manualReflexV924"))$("manualReflexV924").textContent=r[0]?("Commencer par "+(labels[r[0].tool]||r[0].tool).toLowerCase()+"."):(m.next_small_step||"À construire progressivement.");
  const b=$("replayHelpfulV924");if(b){b.hidden=!r[0];b.onclick=()=>route(r[0].tool)}
 }
@@ -9162,7 +9175,7 @@ function setupHome(){
   const children=[...page.children].filter(x=>x!==lead);
   children.forEach(x=>group.appendChild(x));
 
-  const toggle=makeToggle("＋ Voir mes autres outils","Ils restent disponibles, mais ne s’affichent que si tu en as besoin.");
+  const toggle=makeToggle("＋ Voir mes autres outils","Ils restent disponibles, mais ne s’affichent que si vous en avez besoin.");
   toggle.id="homeMoreToggleV926";
   page.appendChild(toggle);
   page.appendChild(group);
@@ -9468,12 +9481,12 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 "use strict";
 const $=id=>document.getElementById(id),read=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(d))}catch(_){return d}},write=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 const C={
-anxiety:{s:["Un message reste sans réponse","Tu as envoyé un message important. Deux heures passent sans réponse.",[["Relancer tout de suite","Je cherche à réduire l’incertitude immédiatement.","Soulagement rapide, mais le besoin de vérification peut être renforcé."],["Attendre en observant l’alarme","Je laisse une part d’incertitude sans agir tout de suite.","L’inconfort peut monter puis redescendre sans nouvelle vérification."],["Imaginer le pire","Je déroule mentalement tous les scénarios possibles.","La sensation de préparation augmente, mais l’alarme reste active."]]],sim:"Ce que je sais / ce que je ne sais pas / ce que je choisis de faire maintenant.",m:"Laisse aujourd’hui une petite incertitude non résolue 10 minutes de plus que d’habitude.",map:[["Déclencheurs","incertitude, attente, symptômes"],["Réflexes","vérifier, anticiper, éviter"],["Ressources","respiration, exposition graduée, faits"],["Signal d’alerte","je cherche une certitude impossible"]],r:"Qu’est-ce qui a réellement changé quand tu as moins vérifié ou moins évité ?"},
-rumination:{s:["Après une conversation, tu rejoues chaque phrase","La discussion est terminée mais ton esprit cherche encore ce que tu aurais dû dire.",[["Analyser encore","Je cherche la bonne interprétation jusqu’à être certain·e.","Plus de détails apparaissent, mais pas forcément plus de réponse."],["Nommer la boucle","Je remarque : « je suis en train de ruminer ».","La pensée reste présente mais devient moins confondue avec une tâche à résoudre."],["Faire une action concrète","Je reviens à une tâche courte dans le présent.","La boucle perd momentanément son monopole."]]],sim:"Transforme la pensée qui tourne en une question soluble aujourd’hui — ou classe-la « sans réponse disponible maintenant ».",m:"Repousse volontairement une rumination vers un créneau de 15 minutes prévu plus tard.",map:[["Déclencheurs","fatigue, conflit, erreur, solitude"],["Réflexes","rejouer, comparer, chercher le sens"],["Ressources","défusion, action, créneau de rumination"],["Signal d’alerte","je répète sans nouvelle information"]],r:"Ai-je obtenu une information nouvelle, ou seulement répété la même question ?"},
-sensitivity:{s:["La journée déborde de sollicitations","Bruit, messages, demandes et fatigue s’accumulent.",[["Continuer sans pause","Je tiens jusqu’au bout.","La récupération nécessaire risque d’augmenter."],["Créer un sas","Je réduis les stimulations quelques minutes.","Une courte coupure peut éviter la saturation."],["Tout annuler","Je coupe toutes les sollicitations.","Soulagement fort, avec risque d’évitement si cela devient la seule stratégie."]]],sim:"Prépare ton sas de récupération : durée, endroit, stimulation à réduire, phrase à dire si on te sollicite.",m:"Protège aujourd’hui un sas de 10 à 15 minutes avant d’être à saturation.",map:[["Déclencheurs","bruit, foule, interruptions, charge émotionnelle"],["Réflexes","tenir, absorber, s’isoler tardivement"],["Ressources","sas, limites, environnement adapté"],["Signal d’alerte","tout devient trop fort en même temps"]],r:"Qu’aurais-tu pu réduire plus tôt, avant d’arriver au point de saturation ?"},
-limits:{s:["On te demande encore un service","Tu n’as pas l’énergie mais tu crains de paraître égoïste si tu refuses.",[["Dire oui automatiquement","Je protège la relation à court terme.","Le conflit est évité, mais ton propre coût augmente."],["Dire non avec une phrase courte","Je donne une limite sans longue justification.","L’inconfort est possible, mais la limite devient claire."],["Me justifier longuement","J’essaie de rendre mon refus incontestable.","Plus d’arguments peuvent ouvrir plus de négociation."]]],sim:"Écris une réponse en 3 morceaux : fait / limite / éventuelle alternative.",m:"Pose une petite limite réelle aujourd’hui sans plus de deux phrases de justification.",map:[["Déclencheurs","demande, critique, peur de décevoir"],["Réflexes","dire oui, se justifier, éviter"],["Ressources","phrase courte, besoin, répétition calme"],["Signal d’alerte","je me sens responsable de l’émotion de l’autre"]],r:"La culpabilité prouve-t-elle que la limite était injuste, ou seulement inhabituelle ?"},
-procrastination:{s:["Une tâche importante reste devant toi","Tu sais qu’elle compte, mais tu ne démarres pas.",[["Attendre d’être motivé·e","Je démarre quand je me sentirai prêt·e.","L’attente peut devenir une condition de démarrage difficile."],["Faire 5 minutes","Je réduis l’objectif au premier geste visible.","Le cerveau obtient une expérience de démarrage."],["Préparer encore","Je cherche le plan parfait avant de commencer.","La préparation rassure, mais peut remplacer l’action."]]],sim:"Décris uniquement le premier geste de moins de 5 minutes. Pas le projet complet.",m:"Démarre une tâche 5 minutes, avec permission explicite d’arrêter ensuite.",map:[["Déclencheurs","flou, peur de l’échec, ennui, perfectionnisme"],["Réflexes","préparer, attendre, distraire"],["Ressources","micro-action, environnement, temps limité"],["Signal d’alerte","je pense à toute la tâche au lieu du prochain geste"]],r:"Qu’est-ce qui était réellement difficile : la tâche entière ou le démarrage ?"},
-sleep:{s:["Au lit, le cerveau recommence à résoudre la journée","Tu es fatigué·e, mais les problèmes deviennent urgents.",[["Résoudre maintenant","Je réfléchis jusqu’au bout.","Le lit peut devenir associé à l’effort mental."],["Déposer sur papier","Je note ce qui doit être repris demain.","Le cerveau reçoit un repère externe."],["Scroller pour décrocher","Je cherche à me distraire.","La distraction peut maintenir l’éveil et la stimulation."]]],sim:"Écris une liste « pas maintenant » : problème / prochaine action / moment prévu demain.",m:"Fais ce soir un sas de 15 minutes sans résolution de problème dans le lit.",map:[["Déclencheurs","fatigue, écrans, ruminations, horaires variables"],["Réflexes","résoudre, scroller, surveiller l’heure"],["Ressources","décharge écrite, routine, lumière du jour"],["Signal d’alerte","le lit devient un lieu de travail mental"]],r:"Qu’est-ce qui aide davantage ton sommeil : résoudre plus ou préparer une reprise pour demain ?"}
+anxiety:{s:["Un message reste sans réponse","Tu as envoyé un message important. Deux heures passent sans réponse.",[["Relancer tout de suite","Je cherche à réduire l’incertitude immédiatement.","Soulagement rapide, mais le besoin de vérification peut être renforcé."],["Attendre en observant l’alarme","Je laisse une part d’incertitude sans agir tout de suite.","L’inconfort peut monter puis redescendre sans nouvelle vérification."],["Imaginer le pire","Je déroule mentalement tous les scénarios possibles.","La sensation de préparation augmente, mais l’alarme reste active."]]],sim:"Ce que je sais / ce que je ne sais pas / ce que je choisis de faire maintenant.",m:"Laisse aujourd’hui une petite incertitude non résolue 10 minutes de plus que d’habitude.",map:[["Déclencheurs","incertitude, attente, symptômes"],["Réflexes","vérifier, anticiper, éviter"],["Ressources","respiration, exposition graduée, faits"],["Signal d’alerte","je cherche une certitude impossible"]],r:"Qu’est-ce qui a réellement changé lorsque vous avez moins vérifié ou moins évité ?"},
+rumination:{s:["Après une conversation, vous rejouez chaque phrase","La discussion est terminée mais votre esprit cherche encore ce que vous auriez dû dire.",[["Analyser encore","Je cherche la bonne interprétation jusqu’à être certain·e.","Plus de détails apparaissent, mais pas forcément plus de réponse."],["Nommer la boucle","Je remarque : « je suis en train de ruminer ».","La pensée reste présente mais devient moins confondue avec une tâche à résoudre."],["Faire une action concrète","Je reviens à une tâche courte dans le présent.","La boucle perd momentanément son monopole."]]],sim:"Transforme la pensée qui tourne en une question soluble aujourd’hui — ou classe-la « sans réponse disponible maintenant ».",m:"Repousse volontairement une rumination vers un créneau de 15 minutes prévu plus tard.",map:[["Déclencheurs","fatigue, conflit, erreur, solitude"],["Réflexes","rejouer, comparer, chercher le sens"],["Ressources","défusion, action, créneau de rumination"],["Signal d’alerte","je répète sans nouvelle information"]],r:"Ai-je obtenu une information nouvelle, ou seulement répété la même question ?"},
+sensitivity:{s:["La journée déborde de sollicitations","Bruit, messages, demandes et fatigue s’accumulent.",[["Continuer sans pause","Je tiens jusqu’au bout.","La récupération nécessaire risque d’augmenter."],["Créer un sas","Je réduis les stimulations quelques minutes.","Une courte coupure peut éviter la saturation."],["Tout annuler","Je coupe toutes les sollicitations.","Soulagement fort, avec risque d’évitement si cela devient la seule stratégie."]]],sim:"Prépare ton sas de récupération : durée, endroit, stimulation à réduire, phrase à dire si on te sollicite.",m:"Protège aujourd’hui un sas de 10 à 15 minutes avant d’être à saturation.",map:[["Déclencheurs","bruit, foule, interruptions, charge émotionnelle"],["Réflexes","tenir, absorber, s’isoler tardivement"],["Ressources","sas, limites, environnement adapté"],["Signal d’alerte","tout devient trop fort en même temps"]],r:"Qu’auriez-vous pu réduire plus tôt, avant d’arriver au point de saturation ?"},
+limits:{s:["On vous demande encore un service","Vous n’avez pas l’énergie mais vous craignez de paraître égoïste si vous refusez.",[["Dire oui automatiquement","Je protège la relation à court terme.","Le conflit est évité, mais votre propre coût augmente."],["Dire non avec une phrase courte","Je donne une limite sans longue justification.","L’inconfort est possible, mais la limite devient claire."],["Me justifier longuement","J’essaie de rendre mon refus incontestable.","Plus d’arguments peuvent ouvrir plus de négociation."]]],sim:"Écris une réponse en 3 morceaux : fait / limite / éventuelle alternative.",m:"Pose une petite limite réelle aujourd’hui sans plus de deux phrases de justification.",map:[["Déclencheurs","demande, critique, peur de décevoir"],["Réflexes","dire oui, se justifier, éviter"],["Ressources","phrase courte, besoin, répétition calme"],["Signal d’alerte","je me sens responsable de l’émotion de l’autre"]],r:"La culpabilité prouve-t-elle que la limite était injuste, ou seulement inhabituelle ?"},
+procrastination:{s:["Une tâche importante reste devant vous","Vous savez qu’elle compte, mais vous ne démarrez pas.",[["Attendre d’être motivé·e","Je démarre quand je me sentirai prêt·e.","L’attente peut devenir une condition de démarrage difficile."],["Faire 5 minutes","Je réduis l’objectif au premier geste visible.","Le cerveau obtient une expérience de démarrage."],["Préparer encore","Je cherche le plan parfait avant de commencer.","La préparation rassure, mais peut remplacer l’action."]]],sim:"Décris uniquement le premier geste de moins de 5 minutes. Pas le projet complet.",m:"Démarre une tâche 5 minutes, avec permission explicite d’arrêter ensuite.",map:[["Déclencheurs","flou, peur de l’échec, ennui, perfectionnisme"],["Réflexes","préparer, attendre, distraire"],["Ressources","micro-action, environnement, temps limité"],["Signal d’alerte","je pense à toute la tâche au lieu du prochain geste"]],r:"Qu’est-ce qui était réellement difficile : la tâche entière ou le démarrage ?"},
+sleep:{s:["Au lit, le cerveau recommence à résoudre la journée","Vous êtes fatigué·e, mais les problèmes deviennent urgents.",[["Résoudre maintenant","Je réfléchis jusqu’au bout.","Le lit peut devenir associé à l’effort mental."],["Déposer sur papier","Je note ce qui doit être repris demain.","Le cerveau reçoit un repère externe."],["Scroller pour décrocher","Je cherche à me distraire.","La distraction peut maintenir l’éveil et la stimulation."]]],sim:"Écris une liste « pas maintenant » : problème / prochaine action / moment prévu demain.",m:"Fais ce soir un sas de 15 minutes sans résolution de problème dans le lit.",map:[["Déclencheurs","fatigue, écrans, ruminations, horaires variables"],["Réflexes","résoudre, scroller, surveiller l’heure"],["Ressources","décharge écrite, routine, lumière du jour"],["Signal d’alerte","le lit devient un lieu de travail mental"]],r:"Qu’est-ce qui aide davantage ton sommeil : résoudre plus ou préparer une reprise pour demain ?"}
 };
 function state(k){return read("alloPsychoThemeProgressV928",{})[k]||{}}function save(k,p){const a=read("alloPsychoThemeProgressV928",{});a[k]={...(a[k]||{}),...p};write("alloPsychoThemeProgressV928",a)}
 function prog(k){const s=state(k),steps=[["scenario","Explorer"],["simulator","Préparer"],["mission","Tester"],["functioning","Comprendre"],["review","Consolider"]];let cur=false;return steps.map(([x,l])=>{let cl=s[x]?"done":"";if(!s[x]&&!cur){cl+=" current";cur=true}return '<span class="'+cl.trim()+'">'+(s[x]?"✓ ":"")+l+'</span>'}).join("")}
@@ -10296,8 +10309,8 @@ document.addEventListener("submit",e=>{
    e.preventDefault();e.stopImmediatePropagation();
    const card=$("crisisCard"),title=$("crisisTitle"),text=$("crisisText"),actions=$("crisisActions");
    if(card&&title&&text&&actions){
-     title.textContent="Ta sécurité compte maintenant.";
-     text.textContent="Ce que tu écris peut signaler un risque suicidaire ou d’auto-agression. En France, tu peux appeler le 3114, gratuitement, 24 h/24 et 7 j/7. Si tu penses pouvoir agir maintenant ou si le danger est immédiat, appelle le 15 ou le 112.";
+     title.textContent="Votre sécurité compte maintenant.";
+     text.textContent="Ce que vous écrivez peut signaler un risque suicidaire ou d’auto-agression. En France, vous pouvez appeler le 3114, gratuitement, 24 h/24 et 7 j/7. Si vous pensez pouvoir agir maintenant ou si le danger est immédiat, appelez le 15 ou le 112.";
      actions.innerHTML='<a class="crisis-link" href="tel:3114">📞 3114</a><a class="crisis-link secondary" href="tel:15">🚑 15</a><a class="crisis-link secondary" href="tel:112">🆘 112</a>';card.classList.add("visible");card.scrollIntoView({behavior:"smooth",block:"center"});
    }
    const msg=document.createElement("div");msg.className="message ai";msg.textContent="Je prends ce message au sérieux. Contacte une personne réelle maintenant et utilise les numéros affichés ci-dessus si tu risques de te faire du mal."; $("messages")?.appendChild(msg);
@@ -10306,18 +10319,18 @@ document.addEventListener("submit",e=>{
  if(r==="severe"){
    const card=$("crisisCard"),title=$("crisisTitle"),text=$("crisisText"),actions=$("crisisActions");
    if(card&&title&&text&&actions){
-    title.textContent="Ce que tu dis de toi est très dur.";
-    text.textContent="Une dévalorisation très intense peut accompagner une grande détresse. Si elle s’accompagne d’idées de mort, d’envie de disparaître ou de te faire du mal, appelle le 3114. Tu peux aussi continuer à écrire ici ce qui se passe.";
+    title.textContent="Ce que vous dites de vous est très dur.";
+    text.textContent="Une dévalorisation très intense peut accompagner une grande détresse. Si elle s’accompagne d’idées de mort, d’envie de disparaître ou de vous faire du mal, appelez le 3114. Vous pouvez aussi continuer à écrire ici ce qui se passe.";
     actions.innerHTML='<a class="crisis-link secondary" href="tel:3114">📞 3114 si idées suicidaires</a>';card.classList.add("visible");
    }
  }
 },true);
 
 const provisionalTherapyV942=[
- {id:"local-anxiete",title:"Revenir au calme",category:"Anxiété",description:"Guidage doux · environ 4 min",local_script:"Installe-toi dans une position confortable. Si tu conduis ou fais quelque chose qui demande ton attention, garde cet exercice pour plus tard. Commence simplement par sentir les points de contact de ton corps avec le siège ou le sol. Laisse ton souffle venir sans le forcer. À l'inspiration, remarque que l'air entre. À l'expiration, laisse les épaules descendre un peu. Fais trois expirations légèrement plus longues que les inspirations. Maintenant, regarde autour de toi et repère mentalement trois choses que tu vois. Puis deux sons que tu entends. Puis une sensation physique neutre ou agréable, comme la température de l'air ou le contact d'un vêtement. Tu n'as rien à résoudre maintenant. Reviens seulement à ce qui est présent, ici. Si une pensée inquiétante revient, tu peux la nommer doucement : une pensée est là. Puis ramène ton attention vers l'expiration. Encore une respiration tranquille. Et une autre. Quand tu es prêt, reprends ton activité à ton rythme."},
- {id:"local-surcharge",title:"Décharger la surcharge",category:"Relaxation",description:"Pause guidée · environ 5 min",local_script:"Prends quelques instants pour interrompre le rythme. Pose les pieds au sol si c'est possible. Commence par relâcher la mâchoire, puis les épaules, puis les mains. Tu n'as pas besoin de faire le vide. Imagine plutôt que tu poses provisoirement ce qui peut attendre. Choisis une seule chose importante pour les prochaines minutes. Tout le reste peut rester en arrière-plan. Inspire tranquillement. Expire un peu plus lentement. À chaque expiration, relâche une petite tension inutile. Observe maintenant ce qui te surcharge : trop de pensées, trop de demandes, trop de bruit, ou simplement de la fatigue. Sans analyser, donne-lui un nom court. Puis demande-toi : de quoi ai-je besoin maintenant, dans les dix prochaines minutes ? Une pause, de l'eau, du silence, une tâche unique, ou demander de l'aide ? Choisis une réponse simple et réaliste. Garde seulement ce petit pas. Respire encore une fois, puis reviens doucement."},
- {id:"local-sommeil",title:"Préparer l'endormissement",category:"Sommeil",description:"Détente progressive · environ 7 min",local_script:"Cet exercice est prévu au repos, au moment du coucher, jamais pendant la conduite. Installe-toi comme tu es le mieux. Ferme les yeux si cela te convient. Commence par sentir le poids de ta tête sur l'oreiller. Puis le poids des épaules. Puis celui du bassin et des jambes. Tu n'as rien à réussir. À chaque expiration, laisse simplement le corps devenir un peu plus lourd. Porte ton attention sur le front et desserre-le. Relâche les muscles autour des yeux. Desserre la mâchoire. Laisse la langue se poser. Puis relâche les épaules, les bras, les mains et les doigts. Descends vers le ventre. Laisse-le bouger librement avec la respiration. Relâche les cuisses, les mollets, les chevilles et les pieds. Si une pensée arrive, ne cherche pas à la chasser. Dis-toi simplement : j'y reviendrai demain. Puis reviens à la sensation du corps posé. Laisse maintenant le souffle suivre son propre rythme. Tu peux rester ici sans chercher le sommeil. Le repos est déjà utile. Continue simplement à laisser le corps s'alourdir, respiration après respiration."},
- {id:"local-respiration",title:"Respiration douce 4–6",category:"Respiration",description:"Expiration allongée · environ 3 min",local_script:"Installe-toi confortablement. Si tu ressens une gêne, des vertiges ou un inconfort, reprends simplement ta respiration habituelle. Nous allons inspirer doucement pendant quatre temps et expirer pendant six temps, sans retenir le souffle. Inspire : un, deux, trois, quatre. Expire : un, deux, trois, quatre, cinq, six. Encore. Inspire : un, deux, trois, quatre. Expire : un, deux, trois, quatre, cinq, six. Continue à ton rythme. L'important n'est pas de compter parfaitement, mais de garder une expiration un peu plus longue et confortable. Encore deux cycles. Inspire doucement. Puis expire lentement. Une dernière fois. Inspire. Et expire. Maintenant, laisse le souffle redevenir naturel. Observe simplement comment tu te sens, sans chercher un résultat particulier."},
+ {id:"local-anxiete",title:"Revenir au calme",category:"Anxiété",description:"Guidage doux · environ 4 min",local_script:"Installez-vous dans une position confortable. Si vous conduisez ou fais quelque chose qui demande votre attention, gardez cet exercice pour plus tard. Commence simplement par sentir les points de contact de votre corps avec le siège ou le sol. Laisse votre souffle venir sans le forcer. À l'inspiration, remarque que l'air entre. À l'expiration, laisse les épaules descendre un peu. Fais trois expirations légèrement plus longues que les inspirations. Maintenant, regarde autour de toi et repère mentalement trois choses que vous voyez. Puis deux sons que vous entendez. Puis une sensation physique neutre ou agréable, comme la température de l'air ou le contact d'un vêtement. Vous n'avez rien à résoudre maintenant. Reviens seulement à ce qui est présent, ici. Si une pensée inquiétante revient, vous pouvez la nommer doucement : une pensée est là. Puis ramène votre attention vers l'expiration. Encore une respiration tranquille. Et une autre. Lorsque vous êtes prêt·e, reprenez votre activité à ton rythme."},
+ {id:"local-surcharge",title:"Décharger la surcharge",category:"Relaxation",description:"Pause guidée · environ 5 min",local_script:"Prenez quelques instants pour interrompre le rythme. Pose les pieds au sol si c'est possible. Commence par relâcher la mâchoire, puis les épaules, puis les mains. Tu n'as pas besoin de faire le vide. Imagine plutôt que tu poses provisoirement ce qui peut attendre. Choisissez une seule chose importante pour les prochaines minutes. Tout le reste peut rester en arrière-plan. Inspire tranquillement. Expire un peu plus lentement. À chaque expiration, relâche une petite tension inutile. Observe maintenant ce qui te surcharge : trop de pensées, trop de demandes, trop de bruit, ou simplement de la fatigue. Sans analyser, donne-lui un nom court. Puis demande-toi : de quoi ai-je besoin maintenant, dans les dix prochaines minutes ? Une pause, de l'eau, du silence, une tâche unique, ou demander de l'aide ? Choisis une réponse simple et réaliste. Garde seulement ce petit pas. Respire encore une fois, puis reviens doucement."},
+ {id:"local-sommeil",title:"Préparer l'endormissement",category:"Sommeil",description:"Détente progressive · environ 7 min",local_script:"Cet exercice est prévu au repos, au moment du coucher, jamais pendant la conduite. Installez-vous comme vous êtes le mieux. Fermez les yeux si cela vous convient. Commence par sentir le poids de votre tête sur l'oreiller. Puis le poids des épaules. Puis celui du bassin et des jambes. Vous n'avez rien à réussir. À chaque expiration, laisse simplement le corps devenir un peu plus lourd. Porte votre attention sur le front et desserre-le. Relâche les muscles autour des yeux. Desserre la mâchoire. Laisse la langue se poser. Puis relâche les épaules, les bras, les mains et les doigts. Descends vers le ventre. Laisse-le bouger librement avec la respiration. Relâche les cuisses, les mollets, les chevilles et les pieds. Si une pensée arrive, ne cherche pas à la chasser. Dis-toi simplement : j'y reviendrai demain. Puis reviens à la sensation du corps posé. Laisse maintenant le souffle suivre son propre rythme. Vous pouvez rester ici sans chercher le sommeil. Le repos est déjà utile. Continue simplement à laisser le corps s'alourdir, respiration après respiration."},
+ {id:"local-respiration",title:"Respiration douce 4–6",category:"Respiration",description:"Expiration allongée · environ 3 min",local_script:"Installez-vous confortablement. Si vous ressentez une gêne, des vertiges ou un inconfort, reprends simplement votre respiration habituelle. Nous allons inspirer doucement pendant quatre temps et expirer pendant six temps, sans retenir le souffle. Inspire : un, deux, trois, quatre. Expire : un, deux, trois, quatre, cinq, six. Encore. Inspire : un, deux, trois, quatre. Expire : un, deux, trois, quatre, cinq, six. Continue à ton rythme. L'important n'est pas de compter parfaitement, mais de garder une expiration un peu plus longue et confortable. Encore deux cycles. Inspire doucement. Puis expire lentement. Une dernière fois. Inspire. Et expire. Maintenant, laisse le souffle redevenir naturel. Observez simplement comment vous vous sentez, sans chercher un résultat particulier."},
  {id:"local-concentration",title:"Recentrage avant une tâche",category:"Concentration",description:"Focus guidé · environ 4 min",local_script:"Avant de commencer, pose ton téléphone ou ferme ce qui n'est pas utile pour la tâche à venir. Prends une respiration tranquille. Regarde ce qui est devant toi. Demande-toi : quelle est la seule tâche que je veux avancer maintenant ? Formule-la en une phrase courte. Puis choisis une première action qui prend moins de cinq minutes. Ouvrir le document. Écrire le titre. Lire le premier paragraphe. Préparer le matériel. Inspire normalement. À l'expiration, relâche ce qui n'a pas besoin d'être traité maintenant. Si une autre pensée arrive, note-la mentalement comme plus tard, puis reviens à la première action. Tu n'as pas besoin de terminer toute la tâche. Tu as seulement besoin de commencer clairement. Encore une respiration. Puis commence par ce premier geste."}
 ];
 
@@ -10477,7 +10490,7 @@ const profiles={
  sensitivity:{
   dims:{Sens:"Réactivité sensorielle",Emo:"Réactivité émotionnelle",Depth:"Profondeur de traitement",Rec:"Besoin de récupération"},
   explain:{
-   Sens:"Tu sembles plus ou moins sensible aux bruits, lumières, odeurs et environnements chargés. Quand cette dimension est élevée, réduire les stimulations avant la saturation peut être particulièrement utile.",
+   Sens:"Vous semblez plus ou moins sensible aux bruits, lumières, odeurs et environnements chargés. Quand cette dimension est élevée, réduire les stimulations avant la saturation peut être particulièrement utile.",
    Emo:"Cette dimension indique à quel point les ambiances, remarques et émotions ont tendance à résonner. Une intensité élevée peut être une ressource d’empathie, mais aussi augmenter la fatigue émotionnelle.",
    Depth:"Elle décrit la tendance à analyser, nuancer et faire des liens. Élevée, elle peut favoriser la compréhension fine, mais aussi entretenir la rumination lorsque l’esprit reste trop longtemps mobilisé.",
    Rec:"Elle renseigne sur le besoin de calme et de décompression après des sollicitations. Un score élevé suggère que la récupération n’est pas accessoire : elle fait partie de ton équilibre."
@@ -10495,16 +10508,16 @@ function practical(name,key,v){
  if(name==="personality"){
   if(key==="C"&&v<2.4)return "Réduire les tâches en premiers gestes très courts plutôt que compter uniquement sur la motivation.";
   if(key==="S"&&v<2.4)return "Repérer plus tôt les signes de tension et utiliser une stratégie d’apaisement avant le débordement.";
-  if(key==="A"&&v>=3.6)return "Vérifier régulièrement si tu aides par choix ou si tu t’oublies pour éviter le désaccord.";
+  if(key==="A"&&v>=3.6)return "Vérifier régulièrement si vous aidez par choix ou si vous vous oubliez pour éviter le désaccord.";
   if(key==="E"&&v<2.4)return "Préserver des temps sans interaction après les périodes sociales chargées.";
  }
- return "Observe surtout dans quelles situations cette tendance t’aide et dans lesquelles elle te coûte.";
+ return "Observez surtout dans quelles situations cette tendance vous aide et dans lesquelles elle vous coûte.";
 }
 function summary(name,scores){
  const entries=Object.entries(scores).sort((a,b)=>b[1]-a[1]);
  const top=entries[0],second=entries[1],low=[...entries].sort((a,b)=>a[1]-b[1])[0];
  if(name==="sensitivity"){
-  return "Ton profil ne se résume pas à un niveau global de « sensibilité ». Ce qui compte surtout est la combinaison de tes dimensions. Ici, "+profiles[name].dims[top[0]].toLowerCase()+" ressort le plus"+(second&&second[1]>=3.6?" avec "+profiles[name].dims[second[0]].toLowerCase():"")+". "+(low[1]<2.4?"À l’inverse, "+profiles[name].dims[low[0]].toLowerCase()+" paraît moins centrale dans tes réponses.":"Les autres dimensions sont plus intermédiaires.");
+  return "Mon profil ne se résume pas à un niveau global de « sensibilité ». Ce qui compte surtout est la combinaison de tes dimensions. Ici, "+profiles[name].dims[top[0]].toLowerCase()+" ressort le plus"+(second&&second[1]>=3.6?" avec "+profiles[name].dims[second[0]].toLowerCase():"")+". "+(low[1]<2.4?"À l’inverse, "+profiles[name].dims[low[0]].toLowerCase()+" paraît moins centrale dans tes réponses.":"Les autres dimensions sont plus intermédiaires.");
  }
  return "Il ne s’agit pas d’un « type de personnalité », mais d’un profil de tendances. "+profiles[name].dims[top[0]]+" ressort davantage dans tes réponses"+(second?" ; "+profiles[name].dims[second[0]].toLowerCase()+" arrive ensuite.":"")+(low[1]<2.4?" "+profiles[name].dims[low[0]]+" semble actuellement moins marquée.":"");
 }
@@ -10604,7 +10617,7 @@ function pick(arr,key){
 function candidates(s){
  const out=[],p=pathState(),mem=memory(),age=lastMoodAgeDays(),best=bestTool(),themeTool=themeSuggestedTool(),day=dayKey();
  if(s.path&&p){
-   const title=pick(["🌱 Une étape disponible aujourd’hui","🧭 Votre parcours peut être repris","✨ Une étape de votre parcours est disponible"],"path"+day);
+   const title=pick(["🌱 Une étape disponible aujourd’hui","🧭 Mon parcours peut être repris","✨ Une étape de votre parcours est disponible"],"path"+day);
    const body=pick([
     pathName(p.key)+" · "+p.done+"/7 étapes déjà faites. Une nouvelle étape est disponible, à votre rythme.",
     "Tu as déjà avancé dans "+pathName(p.key)+". La prochaine étape est disponible, sans contrainte de rythme.",
@@ -10639,7 +10652,7 @@ function candidates(s){
  if(s.tools&&themeTool&&!best){
    out.push({id:"theme",priority:76,title:pick(["🌿 Une suggestion pour maintenant","✨ Un outil adapté à votre parcours","🧩 Une suggestion ciblée"],"theme"+day),
    body:pick([
-    "Pour ton parcours actuel, "+toolLabel(themeTool)+" peut être une bonne option. Vous pouvez le tester si cela vous semble pertinent.",
+    "Pour votre parcours actuel, "+toolLabel(themeTool)+" peut être une bonne option. Vous pouvez le tester si cela vous semble pertinent.",
     "Aujourd’hui, Allo Psycho vous propose "+toolLabel(themeTool)+". Quelques minutes peuvent suffire.",
     "Un outil simple et adapté peut être essayé : "+toolLabel(themeTool)+", sans obligation."
    ],"themeb"+day),action:"tool",tool:themeTool});
@@ -10766,5 +10779,116 @@ function boot(){
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
 })();
 </script>
+
+<script>
+/* V9.5.4 — accès direct aux rappels */
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+function syncReminderShortcut(){
+ const b=$("openRemindersV954");if(!b)return;
+ let enabled=false;
+ try{enabled=!!JSON.parse(localStorage.getItem("alloPsychoReminderSettingsV953")||"{}").enabled}catch(_){}
+ b.classList.toggle("active",enabled);
+ b.title=enabled?"Rappels personnalisés activés":"Rappels personnalisés désactivés";
+}
+function boot(){
+ const b=$("openRemindersV954");
+ if(b)b.addEventListener("click",()=>{$("reminderSettingsV952")?.scrollIntoView({behavior:"smooth",block:"start"});setTimeout(()=>$("reminderMasterV953")?.focus?.(),300)});
+ document.addEventListener("change",e=>{if(e.target?.id==="reminderMasterV953")setTimeout(syncReminderShortcut,0)},true);
+ window.addEventListener("storage",syncReminderShortcut);
+ syncReminderShortcut();
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
+})();
+</script>
+
+<!-- ALLO_PUBLIC_RESOURCES_V954 -->
+<style>
+.public-resources-v954{margin:14px 0}
+.public-resources-v954 .pr-head-v954{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.public-resources-v954 .pr-count-v954{padding:7px 10px;border-radius:999px;background:#f4eef7;font-size:.7rem;font-weight:900;white-space:nowrap}
+.public-resources-v954 .pr-note-v954{margin:10px 0 13px;padding:11px 13px;border-radius:15px;background:#faf7f5;border:1px solid #eee5e2;font-size:.72rem;line-height:1.5;color:var(--soft)}
+.public-resources-v954 .pr-controls-v954{display:grid;grid-template-columns:2fr repeat(3,1fr);gap:8px;margin:12px 0}
+.public-resources-v954 .pr-controls-v954 input,.public-resources-v954 .pr-controls-v954 select{min-height:44px;border:1px solid #e6dce2;border-radius:14px;background:#fff;padding:9px 11px;color:var(--text)}
+.public-resources-v954 .pr-list-v954{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.public-resources-v954 .pr-item-v954{padding:13px;border:1px solid #eadfe5;border-radius:17px;background:#fff;display:flex;flex-direction:column;gap:7px}
+.public-resources-v954 .pr-item-v954 strong{font-size:.8rem;line-height:1.35}
+.public-resources-v954 .pr-item-v954 p{margin:0;font-size:.7rem;line-height:1.45;color:var(--soft)}
+.public-resources-v954 .pr-meta-v954{display:flex;gap:6px;flex-wrap:wrap}
+.public-resources-v954 .pr-meta-v954 span{padding:5px 7px;border-radius:999px;background:#f7f3f5;font-size:.61rem;font-weight:850}
+.public-resources-v954 .pr-external-v954{background:#edf6ef!important}
+.public-resources-v954 .pr-open-v954{margin-top:auto;width:100%;min-height:40px;border:1px solid #ddd2d8;border-radius:13px;background:#faf7f5;color:var(--text);font-weight:900}
+.public-resources-v954 .pr-empty-v954{grid-column:1/-1;padding:18px;text-align:center;color:var(--soft)}
+.public-resources-v954 .pr-more-v954{margin-top:10px;width:100%}
+@media(max-width:760px){
+ .public-resources-v954 .pr-controls-v954{grid-template-columns:1fr 1fr}
+ .public-resources-v954 .pr-controls-v954 input{grid-column:1/-1}
+ .public-resources-v954 .pr-list-v954{grid-template-columns:1fr}
+}
+@media(max-width:430px){.public-resources-v954 .pr-controls-v954{grid-template-columns:1fr}.public-resources-v954 .pr-controls-v954 input{grid-column:auto}}
+</style>
+<script>
+(function(){
+"use strict";
+const DATA=[["Comprendre la santé mentale","Article","Adultes","Psycom","Comprendre la santé mentale et ses déterminants.","https://www.psycom.org/"],["Comprendre la santé mentale","Guide","Adultes","Santé publique France","Repères fiables sur la santé mentale et la prévention.","https://www.santepubliquefrance.fr/"],["Comprendre la santé mentale","Portail","Adultes","Ministère de la Santé","Informations publiques sur la santé mentale en France.","https://sante.gouv.fr/"],["Comprendre la santé mentale","Article","Adultes","Assurance Maladie","Informations de santé et parcours de soins.","https://www.ameli.fr/"],["Comprendre la santé mentale","Application","Adultes","Mon journal mental · Assurance Maladie","Application publique de suivi de la santé mentale, anciennement Jardin Mental.","https://apps.apple.com/fr/app/jardin-mental/id1540061393"],["Comprendre la santé mentale","Guide","Adultes","OMS","Repères internationaux sur la santé mentale et le bien-être.","https://www.who.int/fr/health-topics/mental-health"],["Comprendre la santé mentale","Portail","Adultes","Santé.fr","Portail public d’information en santé.","https://www.sante.fr/"],["Comprendre la santé mentale","Guide","Adultes","UNAFAM","Comprendre les troubles psychiques et les ressources disponibles.","https://www.unafam.org/"],["Comprendre la santé mentale","Article","Adultes","Psycom","Droits, soins et accompagnements en santé mentale.","https://www.psycom.org/"],["Anxiété & stress","Article","Adultes","Psycom","Repères pour comprendre l’anxiété et distinguer stress, peur et trouble anxieux.","https://www.psycom.org/"],["Anxiété & stress","Guide","Adultes","Assurance Maladie","Informations sur les troubles anxieux et les possibilités de prise en charge.","https://www.ameli.fr/"],["Anxiété & stress","Exercice","Adultes","Mon journal mental · Assurance Maladie","Suivre ses ressentis, son anxiété et ses facteurs associés dans le temps.","https://apps.apple.com/fr/app/jardin-mental/id1540061393"],["Anxiété & stress","Article","Adultes","OMS","Informations générales sur les troubles anxieux.","https://www.who.int/fr/health-topics/mental-health"],["Anxiété & stress","Guide","Adultes","Psycom","Conseils pour agir face à l’anxiété et savoir quand demander de l’aide.","https://www.psycom.org/"],["Anxiété & stress","Portail","Adultes","Mon soutien psy · Assurance Maladie","Repères sur le dispositif de soutien psychologique conventionné.","https://www.ameli.fr/assure/remboursements/rembourse/remboursement-seance-psychologue-mon-soutien-psy"],["Anxiété & stress","Article","Adultes","Santé publique France","Prévention, facteurs de risque et ressources en santé mentale.","https://www.santepubliquefrance.fr/"],["Émotions & humeur","Article","Adultes","Psycom","Comprendre les variations d’humeur et les émotions difficiles.","https://www.psycom.org/"],["Émotions & humeur","Guide","Adultes","Assurance Maladie","Repères sur la dépression et les signes qui doivent conduire à consulter.","https://www.ameli.fr/"],["Émotions & humeur","Application","Adultes","Mon journal mental · Assurance Maladie","Observer l’humeur, l’énergie, le sommeil et leur évolution.","https://apps.apple.com/fr/app/jardin-mental/id1540061393"],["Émotions & humeur","Article","Adultes","OMS","Informations générales sur la dépression.","https://www.who.int/fr/news-room/fact-sheets/detail/depression"],["Émotions & humeur","Guide","Adultes","Psycom","Repérer ce qui aide à préserver ou restaurer son équilibre psychique.","https://www.psycom.org/"],["Émotions & humeur","Portail","Adultes","Santé.fr","Trouver des informations et ressources publiques en santé.","https://www.sante.fr/"],["Émotions & humeur","Guide","Adultes","UNAFAM","Ressources pour mieux comprendre les troubles de l’humeur.","https://www.unafam.org/"],["Émotions & humeur","Article","Adultes","Santé publique France","Données et ressources de prévention sur la santé mentale.","https://www.santepubliquefrance.fr/"],["Sommeil & énergie","Guide","Adultes","Institut National du Sommeil et de la Vigilance","Conseils et repères pour améliorer la qualité du sommeil.","https://institut-sommeil-vigilance.org/"],["Sommeil & énergie","Guide","Adultes","Réseau Morphée","Informations et outils sur les troubles du sommeil.","https://reseau-morphee.fr/"],["Sommeil & énergie","Article","Adultes","Assurance Maladie","Informations sur le sommeil, l’insomnie et les habitudes favorables.","https://www.ameli.fr/"],["Sommeil & énergie","Application","Adultes","Mon journal mental · Assurance Maladie","Suivre le sommeil et son lien avec l’état mental au quotidien.","https://apps.apple.com/fr/app/jardin-mental/id1540061393"],["Sommeil & énergie","Guide","Adultes","Ministère de la Santé","Repères publics issus de la politique nationale sur le sommeil.","https://sante.gouv.fr/"],["Sommeil & énergie","Article","Adultes","Psycom","Comprendre le lien entre rythmes de vie, fatigue et santé mentale.","https://www.psycom.org/"],["Sommeil & énergie","Guide","Adultes","Manger Bouger","Repères d’activité physique utiles au sommeil et au bien-être.","https://www.mangerbouger.fr/"],["Sommeil & énergie","Article","Adultes","OMS","Repères sur l’activité physique et la santé globale.","https://www.who.int/fr/health-topics/physical-activity"],["Addictions & habitudes","Portail","Adultes","Addict’AIDE","Ressources d’information et d’aide sur les addictions.","https://www.addictaide.fr/"],["Addictions & habitudes","Portail","Adultes","Drogues Info Service","Informations, aide et orientation concernant les drogues.","https://www.drogues-info-service.fr/"],["Addictions & habitudes","Portail","Adultes","Alcool Info Service","Informations et aide autour de la consommation d’alcool.","https://www.alcool-info-service.fr/"],["Addictions & habitudes","Portail","Adultes","Tabac Info Service","Accompagnement et outils pour réduire ou arrêter le tabac.","https://www.tabac-info-service.fr/"],["Addictions & habitudes","Article","Adultes","Assurance Maladie","Informations sur les conduites addictives et les prises en charge.","https://www.ameli.fr/"],["Addictions & habitudes","Guide","Adultes","Santé publique France","Prévention et réduction des risques liés aux consommations.","https://www.santepubliquefrance.fr/"],["Addictions & habitudes","Guide","Adultes","Psycom","Repères sur les liens entre addictions et santé mentale.","https://www.psycom.org/"],["Addictions & habitudes","Portail","Adultes","Joueurs Info Service","Information et soutien concernant les pratiques de jeu problématiques.","https://www.joueurs-info-service.fr/"],["Crise & demander de l’aide","Urgence","Adultes","3114","Numéro national de prévention du suicide, gratuit, 24h/24 et 7j/7.","https://3114.fr/"],["Crise & demander de l’aide","Écoute","Adultes","SOS Amitié","Service d’écoute pour les personnes en souffrance ou en situation d’isolement.","https://www.sos-amitie.com/"],["Crise & demander de l’aide","Guide","Adultes","Psycom","Repères pour demander de l’aide et s’orienter vers les bons interlocuteurs.","https://www.psycom.org/"],["Crise & demander de l’aide","Portail","Adultes","Santé.fr","Annuaire et informations pour trouver une offre de soins.","https://www.sante.fr/"],["Crise & demander de l’aide","Portail","Adultes","Mon soutien psy · Assurance Maladie","Accéder aux informations sur le dispositif Mon soutien psy.","https://www.ameli.fr/assure/remboursements/rembourse/remboursement-seance-psychologue-mon-soutien-psy"],["Crise & demander de l’aide","Écoute","Jeunes adultes","Fil Santé Jeunes","Écoute et informations pour les 12–25 ans.","https://www.filsantejeunes.com/"],["Crise & demander de l’aide","Écoute","Étudiants","Nightline France","Écoute et ressources de santé mentale pour les étudiants et jeunes adultes.","https://www.nightline.fr/"],["Crise & demander de l’aide","Guide","Adultes","Service-Public.fr","Informations officielles sur les numéros d’urgence et démarches utiles.","https://www.service-public.fr/"],["Équilibre & rétablissement","Guide","Adultes","Psycom","Ressources sur le rétablissement, l’autonomie et la qualité de vie.","https://www.psycom.org/"],["Équilibre & rétablissement","Application","Adultes","Mon journal mental · Assurance Maladie","Observer ses tendances et préparer un échange avec un professionnel.","https://apps.apple.com/fr/app/jardin-mental/id1540061393"],["Équilibre & rétablissement","Guide","Adultes","UNAFAM","Ressources d’accompagnement et de rétablissement en santé psychique.","https://www.unafam.org/"],["Équilibre & rétablissement","Article","Adultes","OMS","Promouvoir le bien-être mental et l’inclusion.","https://www.who.int/fr/health-topics/mental-health"],["Équilibre & rétablissement","Guide","Adultes","Santé publique France","Prévention et promotion de la santé mentale.","https://www.santepubliquefrance.fr/"],["Équilibre & rétablissement","Guide","Adultes","Manger Bouger","Bouger régulièrement et prendre soin de son équilibre quotidien.","https://www.mangerbouger.fr/"],["Équilibre & rétablissement","Portail","Adultes","Santé.fr","S’informer et s’orienter dans le système de santé.","https://www.sante.fr/"],["Équilibre & rétablissement","Guide","Adultes","Psycom","Ressources pour lutter contre la stigmatisation et favoriser le pouvoir d’agir.","https://www.psycom.org/"],["Proches & soutien","Guide","Proches","UNAFAM","Information, entraide et accompagnement des proches de personnes vivant avec des troubles psychiques.","https://www.unafam.org/"],["Proches & soutien","Guide","Proches","Psycom","Repères pour accompagner un proche tout en préservant sa propre santé mentale.","https://www.psycom.org/"],["Proches & soutien","Portail","Proches","Santé.fr","Trouver des structures et professionnels adaptés.","https://www.sante.fr/"],["Proches & soutien","Écoute","Proches","SOS Amitié","Écoute anonyme pour toute personne traversant une période difficile.","https://www.sos-amitie.com/"],["Proches & soutien","Guide","Proches","3114","Informations pour aider une personne ayant des idées suicidaires ou en crise.","https://3114.fr/"],["Proches & soutien","Guide","Proches","Assurance Maladie","Informations sur les parcours de soins et dispositifs d’accompagnement.","https://www.ameli.fr/"],["Proches & soutien","Guide","Proches","Psycom","Comprendre la santé mentale et mieux parler de souffrance psychique.","https://www.psycom.org/"],["Proches & soutien","Portail","Proches","Service-Public.fr","Droits, démarches et dispositifs d’aide officiels.","https://www.service-public.fr/"],["Proches & soutien","Guide","Proches","OMS","Informations générales sur la santé mentale et le soutien communautaire.","https://www.who.int/fr/health-topics/mental-health"],["Proches & soutien","Portail","Proches","Santé publique France","Ressources publiques de prévention et promotion de la santé.","https://www.santepubliquefrance.fr/"]];
+const MARK="ALLO_PUBLIC_RESOURCES_V954";
+function esc(x){return String(x||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
+function init(){
+ if(document.getElementById("publicResourcesV954"))return;
+ const page=document.getElementById("page-moretools");
+ if(!page)return;
+ const card=document.createElement("section");
+ card.id="publicResourcesV954";
+ card.className="card public-resources-v954";
+ card.dataset.regressionGuard=MARK;
+ card.innerHTML=
+ '<div class="pr-head-v954"><div><p class="eyebrow">RESSOURCES PUBLIQUES & COMPLÉMENTAIRES · GRATUIT</p><h3>🌐 Bibliothèque de ressources publiques</h3><p class="muted">Des ressources externes fiables, séparées des outils Allo Psycho. Elles s’ouvrent sur leur site d’origine.</p></div><span class="pr-count-v954" id="prCountV954">66 ressources</span></div>'+
+ '<div class="pr-note-v954"><strong>Indépendance éditoriale :</strong> cette sélection ne constitue ni un partenariat ni une validation d’Allo Psycho par les organismes cités. Les contenus externes restent sous la responsabilité de leurs éditeurs.</div>'+
+ '<div class="pr-controls-v954"><input id="prSearchV954" type="search" placeholder="🔎 Rechercher une ressource…"><select id="prThemeV954"><option value="">Toutes les thématiques</option></select><select id="prFormatV954"><option value="">Tous les formats</option></select><select id="prPublicV954"><option value="">Tous les publics</option></select></div>'+
+ '<div class="pr-list-v954" id="prListV954"></div><button class="btn btn-light pr-more-v954" id="prMoreV954" type="button">Afficher davantage</button>';
+ const reminder=document.getElementById("reminderSettingsV952");
+ page.insertBefore(card,reminder||null);
+
+ const q=document.getElementById("prSearchV954"),theme=document.getElementById("prThemeV954"),format=document.getElementById("prFormatV954"),pub=document.getElementById("prPublicV954"),list=document.getElementById("prListV954"),more=document.getElementById("prMoreV954"),count=document.getElementById("prCountV954");
+ function fill(sel,vals){vals.forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;sel.appendChild(o)})}
+ fill(theme,[...new Set(DATA.map(x=>x[0]))]);
+ fill(format,[...new Set(DATA.map(x=>x[1]))]);
+ fill(pub,[...new Set(DATA.map(x=>x[2]))]);
+ let limit=12;
+ function filtered(){
+   const needle=(q.value||"").trim().toLowerCase();
+   return DATA.filter(x=>(!theme.value||x[0]===theme.value)&&(!format.value||x[1]===format.value)&&(!pub.value||x[2]===pub.value)&&(!needle||x.join(" ").toLowerCase().includes(needle)));
+ }
+ function render(reset){
+   if(reset)limit=12;
+   const rows=filtered();count.textContent=rows.length+" ressource"+(rows.length>1?"s":"");
+   list.innerHTML="";
+   rows.slice(0,limit).forEach((x,i)=>{
+     const el=document.createElement("article");el.className="pr-item-v954";
+     el.innerHTML='<div class="pr-meta-v954"><span class="pr-external-v954">Ressource publique externe</span><span>'+esc(x[0])+'</span><span>'+esc(x[1])+'</span><span>'+esc(x[2])+'</span></div><strong>'+esc(x[4])+'</strong><p><b>'+esc(x[3])+'</b> · '+esc(x[4])+'</p><button type="button" class="pr-open-v954" data-pr-index="'+DATA.indexOf(x)+'">Voir la ressource ↗</button>';
+     list.appendChild(el);
+   });
+   if(!rows.length)list.innerHTML='<div class="pr-empty-v954">Aucune ressource ne correspond à ces filtres.</div>';
+   more.hidden=rows.length<=limit;more.textContent="Afficher davantage ("+Math.min(12,Math.max(0,rows.length-limit))+")";
+ }
+ [q,theme,format,pub].forEach(el=>el.addEventListener(el===q?"input":"change",()=>render(true)));
+ more.onclick=()=>{limit+=12;render(false)};
+ list.addEventListener("click",e=>{
+   const b=e.target.closest("[data-pr-index]");if(!b)return;
+   const x=DATA[Number(b.dataset.prIndex)];if(!x)return;
+   const ok=confirm("Ressource publique externe — "+x[3]+"\n\nVous allez quitter Allo Psycho et ouvrir le site d’origine dans un nouvel onglet.\n\nContinuer ?");
+   if(ok)window.open(x[5],"_blank","noopener,noreferrer");
+ });
+ render(true);
+
+ // Garde-fou anti-régression : si une réorganisation déplace/supprime le bloc pendant la session, on le rattache à + d'outils.
+ const obs=new MutationObserver(()=>{if(!document.getElementById("publicResourcesV954"))init()});
+ obs.observe(page,{childList:true});
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(init,350),{once:true});else setTimeout(init,350);
+})();
+</script>
+
 </body>
 </html>
