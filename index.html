@@ -2792,10 +2792,12 @@ body{font-size:16px}
               <audio controls preload="metadata" playsinline style="width:100%;margin-top:10px" src="https://piezzrqryhzvrimeqwgi.supabase.co/storage/v1/object/public/therapeutic-audio/concentration.mp3"></audio>
             </div>
           </div>
-          <div class="therapy-track-v940" data-static-therapy-cat="Sophrologie">
-            <div style="width:100%"><strong>Détente & projection positive</strong><small>Sophrologie · relaxation, tension-détente et visualisation positive · 2 min 15</small>
-              <audio controls preload="metadata" playsinline style="width:100%;margin-top:10px" src="https://piezzrqryhzvrimeqwgi.supabase.co/storage/v1/object/public/therapeutic-audio/sophrologie-detente-projection.mp3"></audio>
-              <small style="display:block;margin-top:8px">Voix française SIWIS / Piper · CC BY 4.0</small>
+          <div class="therapy-track-v940" data-static-therapy-cat="Sophrologie" id="sophrologyTrackV956">
+            <div style="width:100%">
+              <strong>Détente corporelle & projection positive</strong>
+              <small>Sophrologie · tension-détente, respiration, visualisation et retour progressif · environ 8 à 10 min</small>
+              <button type="button" class="btn btn-light full" id="playSophrologyV956" style="margin-top:10px">▶ Commencer la séance</button>
+              <small id="sophrologyVoiceV956" style="display:block;margin-top:8px">Voix française naturelle de votre appareil · aucune voix Piper utilisée</small>
             </div>
           </div>
         </div>
@@ -10956,5 +10958,107 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 })();
 </script>
 
+
+<script>
+/* V9.5.6 — sophrologie longue, voix française native améliorée */
+(function(){
+"use strict";
+const SOPHRO_V956=["Installez-vous dans une position suffisamment confortable, sans chercher une posture parfaite. Si vous le souhaitez, laissez les yeux se fermer, ou gardez simplement le regard posé devant vous. Prenez quelques secondes pour sentir les points d'appui du corps. Le poids du bassin. Le contact du dos. Les pieds au sol. Rien à réussir ici. Il s'agit seulement de revenir progressivement vers des sensations simples et présentes.","Commencez par observer votre respiration telle qu'elle est. Sans l'allonger tout de suite. Sans la corriger. Remarquez simplement l'air qui entre, puis l'air qui ressort. À chaque expiration, imaginez que vous pouvez déposer un peu de ce qui n'a pas besoin d'être porté maintenant. Pas tout. Juste un peu. Laissez les épaules descendre légèrement. Desserrez la mâchoire. Laissez les mains devenir plus lourdes.","Nous allons maintenant faire une courte tension-détente. Inspirez tranquillement par le nez. Pendant deux ou trois secondes, serrez doucement les poings et remontez légèrement les épaules. Sans douleur, sans forcer. Puis expirez par la bouche et relâchez d'un seul coup. Observez la différence entre la tension et le relâchement. Reprenez une respiration naturelle.","Une deuxième fois. Inspirez. Contractez doucement les mains, les bras et les épaules. Gardez juste le temps qui vous convient. Puis expirez et relâchez. Laissez le poids des bras revenir. Peut-être percevez-vous de la chaleur, des picotements, une sensation de lourdeur, ou simplement rien de particulier. Tout cela convient.","Une dernière fois, plus globale si cela reste confortable. À l'inspiration, tonifiez doucement les jambes, les mains et les épaules. Gardez le visage souple. Puis expirez longuement et relâchez. Prenez quelques secondes pour sentir le corps après l'effort. Le but n'est pas d'être totalement détendu. Le but est de remarquer qu'il est possible de moduler un peu son niveau de tension.","Ramenez maintenant l'attention vers le visage. Le front peut s'élargir. Les paupières peuvent devenir plus lourdes. Les muscles autour des yeux n'ont rien à faire. Laissez la langue se déposer dans la bouche. Puis descendez vers la nuque et les épaules. À chaque expiration, autorisez quelques millimètres de relâchement supplémentaire, seulement si cela vient naturellement.","Portez ensuite l'attention vers la poitrine et le ventre. Vous n'avez pas besoin de respirer profondément. Une respiration confortable suffit. Imaginez que l'expiration crée un peu plus d'espace à l'intérieur. Comme si le corps pouvait cesser, pendant quelques instants, de se préparer à tout gérer en même temps. Ce qui est important pourra être repris plus tard.","Nous allons maintenant utiliser une projection positive, mais sans nous obliger à penser que tout ira parfaitement. Choisissez une situation concrète à venir : un moment de la journée, un rendez-vous, une tâche, un échange, ou simplement votre prochaine heure. Prenez une scène réaliste. Pas un idéal. Une scène que vous pouvez réellement traverser.","Imaginez-vous au début de cette situation. Observez le lieu, la lumière, quelques détails autour de vous. Puis imaginez surtout votre manière d'y entrer. Peut-être un peu plus lentement. Peut-être en respirant avant de répondre. Peut-être en gardant les épaules moins crispées. Choisissez un seul signe corporel qui représenterait pour vous davantage de stabilité.","Dans cette scène, il peut y avoir de l'inconfort, de l'incertitude ou de la fatigue. Vous n'avez pas besoin de les effacer. Imaginez plutôt que vous pouvez les remarquer et continuer avec un peu plus de marge. Vous pouvez vous dire intérieurement : je peux avancer une étape à la fois. Ou : je n'ai pas besoin de tout résoudre maintenant. Choisissez la phrase qui vous semble la plus crédible.","Voyez-vous accomplir un premier geste simple dans cette situation. Vous asseoir. Ouvrir un document. Dire bonjour. Poser une question. Commencer une tâche. Faire une pause avant de répondre. Restez sur quelque chose de petit et observable. Plus l'image est simple, plus elle peut devenir un repère utile.","Puis imaginez un petit obstacle réaliste. Une pensée qui revient. Une tension dans le ventre. Une hésitation. Quelqu'un qui vous interrompt. Et observez-vous en train de revenir à votre repère : les pieds au sol, une expiration un peu plus longue, une phrase intérieure simple, puis le prochain geste utile. Il ne s'agit pas de tout contrôler. Il s'agit de retrouver une direction.","Prenez maintenant quelques instants pour laisser cette scène se terminer. Imaginez non pas une réussite parfaite, mais le sentiment d'avoir traversé le moment avec un peu plus de présence. Remarquez ce que cela change dans votre posture ou dans votre respiration lorsque vous vous représentez cette possibilité.","Revenez doucement aux sensations réelles. Le contact du corps avec le siège ou le lit. Les pieds. Les mains. Les sons autour de vous. Inspirez un peu plus amplement si c'est agréable, puis expirez sans forcer. Faites bouger les doigts, les orteils, éventuellement les épaules.","Avant d'ouvrir complètement les yeux, choisissez un seul élément à garder avec vous : une sensation d'appui, une phrase courte, une respiration, ou le premier petit geste de votre projection. Prenez votre temps. Puis revenez à votre rythme, en gardant seulement ce qui vous est utile."];
+let sophroStateV956={playing:false,index:0,utterance:null,timer:null};
+
+function bestFrenchVoiceV956(){
+ const voices=(window.speechSynthesis?.getVoices?.()||[]).filter(v=>/^fr([_-]|$)/i.test(v.lang||""));
+ if(!voices.length)return null;
+ const preferred=[
+  /audrey/i,/thomas/i,/am[eé]lie/i,/aur[eé]lie/i,/denise/i,/henri/i,
+  /google.*fran[cç]ais/i,/microsoft.*french/i,/enhanced/i,/premium/i
+ ];
+ for(const rx of preferred){
+   const hit=voices.find(v=>rx.test((v.name||"")+" "+(v.lang||"")));
+   if(hit)return hit;
+ }
+ return voices.find(v=>v.localService) || voices[0];
+}
+
+function setSophroLabelV956(text){
+ const b=document.getElementById("playSophrologyV956");if(b)b.textContent=text;
+}
+
+function setVoiceLabelV956(voice){
+ const el=document.getElementById("sophrologyVoiceV956");if(!el)return;
+ el.textContent=voice
+  ? "Voix utilisée : "+voice.name+" · française native de l’appareil"
+  : "Voix française naturelle de votre appareil · aucune voix Piper utilisée";
+}
+
+function stopSophrologyV956(){
+ if(sophroStateV956.timer)clearTimeout(sophroStateV956.timer);
+ sophroStateV956.timer=null;
+ try{window.speechSynthesis?.cancel?.()}catch(_){}
+ sophroStateV956.playing=false;
+ sophroStateV956.index=0;
+ sophroStateV956.utterance=null;
+ setSophroLabelV956("▶ Commencer la séance");
+}
+
+function speakNextSophroV956(){
+ if(!sophroStateV956.playing)return;
+ if(sophroStateV956.index>=SOPHRO_V956.length){
+   stopSophrologyV956();
+   if(typeof afficherToast==="function")afficherToast("🌿 Séance de sophrologie terminée.");
+   return;
+ }
+ const text=SOPHRO_V956[sophroStateV956.index];
+ const u=new SpeechSynthesisUtterance(text);
+ const voice=bestFrenchVoiceV956();
+ if(voice)u.voice=voice;
+ u.lang=voice?.lang||"fr-FR";
+ u.rate=.82;
+ u.pitch=.98;
+ u.volume=1;
+ sophroStateV956.utterance=u;
+ setVoiceLabelV956(voice);
+ setSophroLabelV956("■ Arrêter · étape "+(sophroStateV956.index+1)+"/"+SOPHRO_V956.length);
+
+ u.onend=()=>{
+   if(!sophroStateV956.playing)return;
+   sophroStateV956.index++;
+   const pause=(sophroStateV956.index===3||sophroStateV956.index===5||sophroStateV956.index===8||sophroStateV956.index===12)?4200:2600;
+   sophroStateV956.timer=setTimeout(speakNextSophroV956,pause);
+ };
+ u.onerror=()=>{
+   stopSophrologyV956();
+   if(typeof afficherToast==="function")afficherToast("La voix française de l’appareil n’a pas pu démarrer.");
+ };
+ window.speechSynthesis.speak(u);
+}
+
+function startSophrologyV956(){
+ if(!("speechSynthesis" in window)||typeof SpeechSynthesisUtterance==="undefined"){
+   if(typeof afficherToast==="function")afficherToast("La lecture vocale n’est pas disponible sur cet appareil.");
+   return;
+ }
+ if(sophroStateV956.playing){stopSophrologyV956();return}
+ try{window.speechSynthesis.cancel()}catch(_){}
+ document.querySelectorAll("audio").forEach(a=>{try{a.pause()}catch(_){}});
+ sophroStateV956={playing:true,index:0,utterance:null,timer:null};
+ speakNextSophroV956();
+}
+
+function bindSophroV956(){
+ const b=document.getElementById("playSophrologyV956");
+ if(!b||b.dataset.boundV956==="1")return;
+ b.dataset.boundV956="1";
+ b.addEventListener("click",startSophrologyV956);
+ // Les voix peuvent arriver après le chargement sur Safari/Chrome.
+ window.speechSynthesis?.addEventListener?.("voiceschanged",()=>{
+   if(!sophroStateV956.playing)setVoiceLabelV956(bestFrenchVoiceV956());
+ });
+ setTimeout(()=>setVoiceLabelV956(bestFrenchVoiceV956()),300);
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",bindSophroV956,{once:true});
+else bindSophroV956();
+})();
+</script>
 </body>
 </html>
