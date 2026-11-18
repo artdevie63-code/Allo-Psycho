@@ -3520,7 +3520,7 @@ Vous pouvez me raconter ce qui vous traverse l'esprit aujourd'hui, sans jugement
       <div class="card stripe-box">
         <p class="eyebrow">ABONNEMENT PREMIUM</p>
         <h3>💳 Continuer avec Stripe</h3>
-        <p class="muted">Après les 10 jours d’essai gratuit : 9,99 € / mois ou 84,99 € / an. Le paiement et le renouvellement sont gérés par Stripe. Ton accès Premium est activé côté serveur après confirmation du paiement.</p>
+        <p class="muted">Après les 10 jours d’essai gratuit : 9,99 € / mois ou 84,99 € / an. Le paiement et le renouvellement sont gérés par Stripe. Votre accès Premium est activé côté serveur après confirmation du paiement.</p>
         <div class="stripe-actions">
           <button type="button" id="stripeSubscribeMonthlyBtn" class="btn btn-dark" aria-label="S’abonner à Premium mensuel">S’abonner · 9,99 € / mois</button><button type="button" id="stripeSubscribeAnnualBtn" class="btn btn-light" aria-label="S’abonner à Premium annuel">S’abonner · 84,99 € / an</button>
           <button type="button" id="stripePortalBtn" class="btn btn-light" aria-label="Gérer mon abonnement">Gérer mon abonnement</button>
@@ -8517,7 +8517,7 @@ window.addEventListener("unhandledrejection",function(e){
       }else{
         hint.textContent=deferredInstallPromptV903
           ?"Installation directe disponible."
-          :"Tu peux installer l’application depuis ton navigateur.";
+          :"Tu peux installer l’application depuis votre navigateur.";
       }
     }
 
@@ -10504,7 +10504,7 @@ function summary(name,scores){
  const entries=Object.entries(scores).sort((a,b)=>b[1]-a[1]);
  const top=entries[0],second=entries[1],low=[...entries].sort((a,b)=>a[1]-b[1])[0];
  if(name==="sensitivity"){
-  return "Ton profil ne se résume pas à un niveau global de « sensibilité ». Ce qui compte surtout est la combinaison de tes dimensions. Ici, "+profiles[name].dims[top[0]].toLowerCase()+" ressort le plus"+(second&&second[1]>=3.6?" avec "+profiles[name].dims[second[0]].toLowerCase():"")+". "+(low[1]<2.4?"À l’inverse, "+profiles[name].dims[low[0]].toLowerCase()+" paraît moins centrale dans tes réponses.":"Les autres dimensions sont plus intermédiaires.");
+  return "Votre profil ne se résume pas à un niveau global de « sensibilité ». Ce qui compte surtout est la combinaison de tes dimensions. Ici, "+profiles[name].dims[top[0]].toLowerCase()+" ressort le plus"+(second&&second[1]>=3.6?" avec "+profiles[name].dims[second[0]].toLowerCase():"")+". "+(low[1]<2.4?"À l’inverse, "+profiles[name].dims[low[0]].toLowerCase()+" paraît moins centrale dans tes réponses.":"Les autres dimensions sont plus intermédiaires.");
  }
  return "Il ne s’agit pas d’un « type de personnalité », mais d’un profil de tendances. "+profiles[name].dims[top[0]]+" ressort davantage dans tes réponses"+(second?" ; "+profiles[name].dims[second[0]].toLowerCase()+" arrive ensuite.":"")+(low[1]<2.4?" "+profiles[name].dims[low[0]]+" semble actuellement moins marquée.":"");
 }
@@ -10639,7 +10639,7 @@ function candidates(s){
  if(s.tools&&themeTool&&!best){
    out.push({id:"theme",priority:76,title:pick(["🌿 Une suggestion pour maintenant","✨ Un outil adapté à votre parcours","🧩 Une suggestion ciblée"],"theme"+day),
    body:pick([
-    "Pour ton parcours actuel, "+toolLabel(themeTool)+" peut être une bonne option. Vous pouvez le tester si cela vous semble pertinent.",
+    "Pour votre parcours actuel, "+toolLabel(themeTool)+" peut être une bonne option. Vous pouvez le tester si cela vous semble pertinent.",
     "Aujourd’hui, Allo Psycho vous propose "+toolLabel(themeTool)+". Quelques minutes peuvent suffire.",
     "Un outil simple et adapté peut être essayé : "+toolLabel(themeTool)+", sans obligation."
    ],"themeb"+day),action:"tool",tool:themeTool});
