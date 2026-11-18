@@ -2439,6 +2439,32 @@ body{font-size:16px}
 @media(max-width:620px){.therapy-track-v940{align-items:flex-start;flex-direction:column}.ai-consent-actions-v940 .btn{width:100%}}
 
 </style>
+
+<style>
+/* ===== V9.5.1 — résultats Mieux se connaître par paliers ===== */
+.selftests-v7{overflow:hidden}
+.selftests-v7 .test-picker-v7{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.selftests-v7 .test-picker-v7 .btn{flex:0 0 auto;max-width:260px}
+.selftest-result-v951{display:grid;gap:12px;margin-top:14px}
+.selftest-hero-v951{padding:17px;border-radius:20px;background:linear-gradient(145deg,#fffaf7,#f5eff9);border:1px solid #e7dce3}
+.selftest-hero-v951 h3{margin:4px 0 8px}.selftest-hero-v951 p{margin:0;line-height:1.55}
+.selftest-highlight-v951{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.selftest-highlight-v951>div{padding:13px;border:1px solid #eadfe5;border-radius:17px;background:#fff}
+.selftest-highlight-v951 strong,.selftest-highlight-v951 small{display:block}.selftest-highlight-v951 small{margin-top:5px;color:var(--soft);font-size:.73rem!important;line-height:1.45}
+.selftest-level-v951{display:inline-flex;margin-top:8px;padding:5px 8px;border-radius:999px;background:#f2edf1;font-size:.67rem;font-weight:900}
+.selftest-meaning-v951{padding:14px;border-radius:18px;background:#fff;border:1px solid #eadfe5}
+.selftest-meaning-v951 strong{display:block;margin-bottom:5px}.selftest-meaning-v951 p{margin:0;font-size:.8rem;line-height:1.55}
+.selftest-next-v951{padding:14px;border-radius:18px;background:#f1f7f1;border:1px solid #dce9dd}
+.selftest-next-v951 strong,.selftest-next-v951 span{display:block}.selftest-next-v951 span{margin-top:5px;font-size:.78rem;line-height:1.5}
+.selftest-details-v951{border:1px solid #eadfe5;border-radius:18px;background:#faf8f7;overflow:hidden}
+.selftest-details-v951>button{width:100%;border:0;background:transparent;padding:13px 14px;display:flex;justify-content:space-between;align-items:center;text-align:left;color:var(--text);font-weight:900;cursor:pointer}
+.selftest-details-body-v951{display:none;padding:0 12px 12px}.selftest-details-v951.open .selftest-details-body-v951{display:grid;gap:9px}
+.selftest-dim-v951{padding:12px;border-radius:15px;background:#fff;border:1px solid #eadfe5}
+.selftest-dim-v951 strong,.selftest-dim-v951 small{display:block}.selftest-dim-v951 small{margin-top:5px;color:var(--soft);font-size:.72rem!important;line-height:1.45}
+.selftest-bar-v951{height:7px;background:#eee7eb;border-radius:999px;overflow:hidden;margin-top:8px}.selftest-bar-v951 i{display:block;height:100%;background:#6b5962;border-radius:999px}
+.selftest-note-v951{font-size:.72rem;color:var(--soft);line-height:1.5}
+@media(max-width:620px){.selftest-highlight-v951{grid-template-columns:1fr}.selftests-v7 .test-picker-v7 .btn{max-width:220px}}
+</style>
 </head>
 
 <body>
@@ -10357,6 +10383,91 @@ function boot(){
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});
 else boot();
+})();
+</script>
+
+<script>
+/* V9.5.1 — résultats Mieux se connaître par paliers */
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const read=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(d))}catch(_){return d}};
+const profiles={
+ personality:{
+  dims:{O:"Ouverture / curiosité",C:"Organisation / persévérance",E:"Énergie sociale",A:"Coopération / empathie",S:"Stabilité émotionnelle"},
+  explain:{
+   O:"Un score élevé suggère que la nouveauté, les idées et l’exploration occupent une place importante. Un score plus bas peut simplement indiquer une préférence pour ce qui est familier, concret ou prévisible.",
+   C:"Cette dimension reflète la facilité à structurer, poursuivre et terminer. Un score plus bas ne signifie pas un manque de volonté : le contexte, l’énergie et la charge mentale peuvent fortement intervenir.",
+   E:"Elle renseigne sur la façon dont les interactions et les environnements stimulants influencent ton énergie. Un score bas peut correspondre à un besoin plus marqué de calme ou de récupération sociale.",
+   A:"Elle décrit l’attention portée à la coopération, à l’empathie et à l’impact sur autrui. Très élevée, elle peut parfois s’accompagner d’une tendance à trop s’adapter.",
+   S:"Elle reflète la capacité déclarée à retrouver un équilibre après une contrariété ou sous pression. Un score plus bas peut signaler une réactivité plus forte, sans constituer un trouble."
+  }
+ },
+ sensitivity:{
+  dims:{Sens:"Réactivité sensorielle",Emo:"Réactivité émotionnelle",Depth:"Profondeur de traitement",Rec:"Besoin de récupération"},
+  explain:{
+   Sens:"Tu sembles plus ou moins sensible aux bruits, lumières, odeurs et environnements chargés. Quand cette dimension est élevée, réduire les stimulations avant la saturation peut être particulièrement utile.",
+   Emo:"Cette dimension indique à quel point les ambiances, remarques et émotions ont tendance à résonner. Une intensité élevée peut être une ressource d’empathie, mais aussi augmenter la fatigue émotionnelle.",
+   Depth:"Elle décrit la tendance à analyser, nuancer et faire des liens. Élevée, elle peut favoriser la compréhension fine, mais aussi entretenir la rumination lorsque l’esprit reste trop longtemps mobilisé.",
+   Rec:"Elle renseigne sur le besoin de calme et de décompression après des sollicitations. Un score élevé suggère que la récupération n’est pas accessoire : elle fait partie de ton équilibre."
+  }
+ }
+};
+function level(v){return v<2.4?["Peu marqué","Cette tendance apparaît peu présente dans tes réponses."]:v<3.6?["Modéré","Cette tendance est présente de façon intermédiaire et peut varier selon les situations."]:["Marqué","Cette tendance ressort nettement dans tes réponses."]}
+function practical(name,key,v){
+ if(name==="sensitivity"){
+  if(key==="Sens"&&v>=3.6)return "Prévoir des pauses sensorielles avant d’être saturé·e, plutôt qu’après.";
+  if(key==="Emo"&&v>=3.6)return "Après une interaction intense, différer les décisions importantes le temps que l’activation redescende.";
+  if(key==="Depth"&&v>=3.6)return "Donner une limite de temps à l’analyse quand elle ne produit plus d’information nouvelle.";
+  if(key==="Rec"&&v>=3.6)return "Planifier le temps de récupération comme un besoin régulier, pas comme une récompense.";
+ }
+ if(name==="personality"){
+  if(key==="C"&&v<2.4)return "Réduire les tâches en premiers gestes très courts plutôt que compter uniquement sur la motivation.";
+  if(key==="S"&&v<2.4)return "Repérer plus tôt les signes de tension et utiliser une stratégie d’apaisement avant le débordement.";
+  if(key==="A"&&v>=3.6)return "Vérifier régulièrement si tu aides par choix ou si tu t’oublies pour éviter le désaccord.";
+  if(key==="E"&&v<2.4)return "Préserver des temps sans interaction après les périodes sociales chargées.";
+ }
+ return "Observe surtout dans quelles situations cette tendance t’aide et dans lesquelles elle te coûte.";
+}
+function summary(name,scores){
+ const entries=Object.entries(scores).sort((a,b)=>b[1]-a[1]);
+ const top=entries[0],second=entries[1],low=[...entries].sort((a,b)=>a[1]-b[1])[0];
+ if(name==="sensitivity"){
+  return "Ton profil ne se résume pas à un niveau global de « sensibilité ». Ce qui compte surtout est la combinaison de tes dimensions. Ici, "+profiles[name].dims[top[0]].toLowerCase()+" ressort le plus"+(second&&second[1]>=3.6?" avec "+profiles[name].dims[second[0]].toLowerCase():"")+". "+(low[1]<2.4?"À l’inverse, "+profiles[name].dims[low[0]].toLowerCase()+" paraît moins centrale dans tes réponses.":"Les autres dimensions sont plus intermédiaires.");
+ }
+ return "Il ne s’agit pas d’un « type de personnalité », mais d’un profil de tendances. "+profiles[name].dims[top[0]]+" ressort davantage dans tes réponses"+(second?" ; "+profiles[name].dims[second[0]].toLowerCase()+" arrive ensuite.":"")+(low[1]<2.4?" "+profiles[name].dims[low[0]]+" semble actuellement moins marquée.":"");
+}
+function enhance(){
+ const area=$("testAreaV7");if(!area||area.dataset.v951==="1"||!/résultat/i.test(area.textContent||""))return;
+ const saved=read("alloPsychoSelfTestsV7",{});
+ const title=area.querySelector("h3")?.textContent||"";
+ const name=/sensibilité/i.test(title)?"sensitivity":/personnalité/i.test(title)?"personality":null;
+ const scores=name&&saved[name]?.scores;if(!name||!scores)return;
+ const p=profiles[name],entries=Object.entries(scores).sort((a,b)=>b[1]-a[1]),top2=entries.slice(0,2);
+ area.dataset.v951="1";
+ area.innerHTML=
+  '<div class="selftest-result-v951">'+
+   '<div class="selftest-hero-v951"><p class="eyebrow">TON RÉSULTAT EN BREF</p><h3>'+(/sensitivity/.test(name)?"🌿 Sensibilité & surcharge":"🌈 Profil de personnalité")+'</h3><p>'+summary(name,scores)+'</p></div>'+
+   '<div class="selftest-highlight-v951">'+top2.map(([k,v])=>{const l=level(v);return '<div><strong>'+p.dims[k]+' · '+v.toFixed(1)+'/5</strong><span class="selftest-level-v951">'+l[0]+'</span><small>'+l[1]+'</small></div>'}).join("")+'</div>'+
+   '<div class="selftest-meaning-v951"><strong>🧭 Ce que cela peut vouloir dire au quotidien</strong><p>'+p.explain[top2[0][0]]+'</p></div>'+
+   '<div class="selftest-next-v951"><strong>👣 Un repère concret à tester</strong><span>'+practical(name,top2[0][0],top2[0][1])+'</span></div>'+
+   '<div class="selftest-details-v951" id="selftestDetailsV951"><button type="button" id="selftestDetailsBtnV951" aria-expanded="false"><span>Voir le détail de toutes les dimensions</span><b>⌄</b></button><div class="selftest-details-body-v951">'+
+    entries.map(([k,v])=>{const l=level(v);return '<div class="selftest-dim-v951"><strong>'+p.dims[k]+' · '+v.toFixed(1)+'/5 · '+l[0]+'</strong><div class="selftest-bar-v951"><i style="width:'+(v/5*100)+'%"></i></div><small>'+p.explain[k]+'</small></div>'}).join("")+
+   '</div></div>'+
+   '<div class="selftest-note-v951">Ces résultats sont indicatifs et non diagnostiques. Ils décrivent tes réponses actuelles et peuvent varier selon le contexte, la fatigue, le stress ou les périodes de vie.</div>'+
+   '<button type="button" class="btn btn-light" id="redoTestV951">↻ Refaire ce questionnaire</button>'+
+  '</div>';
+ const detail=$("selftestDetailsV951"),btn=$("selftestDetailsBtnV951");
+ btn.onclick=()=>{const open=detail.classList.toggle("open");btn.setAttribute("aria-expanded",open?"true":"false");btn.querySelector("b").textContent=open?"⌃":"⌄";};
+ $("redoTestV951").onclick=()=>document.querySelector('[data-test-v7="'+name+'"]')?.click();
+ area.scrollIntoView({behavior:"smooth",block:"start"});
+}
+function boot(){
+ const area=$("testAreaV7");if(!area)return;
+ const obs=new MutationObserver(()=>setTimeout(enhance,0));obs.observe(area,{childList:true,subtree:true});
+ setTimeout(enhance,100);
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
 })();
 </script>
 </body>
