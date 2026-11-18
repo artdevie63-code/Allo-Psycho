@@ -10802,5 +10802,93 @@ function boot(){
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
 })();
 </script>
+
+<!-- ALLO_PUBLIC_RESOURCES_V954 -->
+<style>
+.public-resources-v954{margin:14px 0}
+.public-resources-v954 .pr-head-v954{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.public-resources-v954 .pr-count-v954{padding:7px 10px;border-radius:999px;background:#f4eef7;font-size:.7rem;font-weight:900;white-space:nowrap}
+.public-resources-v954 .pr-note-v954{margin:10px 0 13px;padding:11px 13px;border-radius:15px;background:#faf7f5;border:1px solid #eee5e2;font-size:.72rem;line-height:1.5;color:var(--soft)}
+.public-resources-v954 .pr-controls-v954{display:grid;grid-template-columns:2fr repeat(3,1fr);gap:8px;margin:12px 0}
+.public-resources-v954 .pr-controls-v954 input,.public-resources-v954 .pr-controls-v954 select{min-height:44px;border:1px solid #e6dce2;border-radius:14px;background:#fff;padding:9px 11px;color:var(--text)}
+.public-resources-v954 .pr-list-v954{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.public-resources-v954 .pr-item-v954{padding:13px;border:1px solid #eadfe5;border-radius:17px;background:#fff;display:flex;flex-direction:column;gap:7px}
+.public-resources-v954 .pr-item-v954 strong{font-size:.8rem;line-height:1.35}
+.public-resources-v954 .pr-item-v954 p{margin:0;font-size:.7rem;line-height:1.45;color:var(--soft)}
+.public-resources-v954 .pr-meta-v954{display:flex;gap:6px;flex-wrap:wrap}
+.public-resources-v954 .pr-meta-v954 span{padding:5px 7px;border-radius:999px;background:#f7f3f5;font-size:.61rem;font-weight:850}
+.public-resources-v954 .pr-external-v954{background:#edf6ef!important}
+.public-resources-v954 .pr-open-v954{margin-top:auto;width:100%;min-height:40px;border:1px solid #ddd2d8;border-radius:13px;background:#faf7f5;color:var(--text);font-weight:900}
+.public-resources-v954 .pr-empty-v954{grid-column:1/-1;padding:18px;text-align:center;color:var(--soft)}
+.public-resources-v954 .pr-more-v954{margin-top:10px;width:100%}
+@media(max-width:760px){
+ .public-resources-v954 .pr-controls-v954{grid-template-columns:1fr 1fr}
+ .public-resources-v954 .pr-controls-v954 input{grid-column:1/-1}
+ .public-resources-v954 .pr-list-v954{grid-template-columns:1fr}
+}
+@media(max-width:430px){.public-resources-v954 .pr-controls-v954{grid-template-columns:1fr}.public-resources-v954 .pr-controls-v954 input{grid-column:auto}}
+</style>
+<script>
+(function(){
+"use strict";
+const DATA=[["Comprendre la santé mentale","Article","Adultes","Psycom","Comprendre la santé mentale et ses déterminants.","https://www.psycom.org/"],["Comprendre la santé mentale","Guide","Adultes","Santé publique France","Repères fiables sur la santé mentale et la prévention.","https://www.santepubliquefrance.fr/"],["Comprendre la santé mentale","Portail","Adultes","Ministère de la Santé","Informations publiques sur la santé mentale en France.","https://sante.gouv.fr/"],["Comprendre la santé mentale","Article","Adultes","Assurance Maladie","Informations de santé et parcours de soins.","https://www.ameli.fr/"],["Comprendre la santé mentale","Application","Adultes","Mon journal mental · Assurance Maladie","Application publique de suivi de la santé mentale, anciennement Jardin Mental.","https://apps.apple.com/fr/app/jardin-mental/id1540061393"],["Comprendre la santé mentale","Guide","Adultes","OMS","Repères internationaux sur la santé mentale et le bien-être.","https://www.who.int/fr/health-topics/mental-health"],["Comprendre la santé mentale","Portail","Adultes","Santé.fr","Portail public d’information en santé.","https://www.sante.fr/"],["Comprendre la santé mentale","Guide","Adultes","UNAFAM","Comprendre les troubles psychiques et les ressources disponibles.","https://www.unafam.org/"],["Comprendre la santé mentale","Article","Adultes","Psycom","Droits, soins et accompagnements en santé mentale.","https://www.psycom.org/"],["Anxiété & stress","Article","Adultes","Psycom","Repères pour comprendre l’anxiété et distinguer stress, peur et trouble anxieux.","https://www.psycom.org/"],["Anxiété & stress","Guide","Adultes","Assurance Maladie","Informations sur les troubles anxieux et les possibilités de prise en charge.","https://www.ameli.fr/"],["Anxiété & stress","Exercice","Adultes","Mon journal mental · Assurance Maladie","Suivre ses ressentis, son anxiété et ses facteurs associés dans le temps.","https://apps.apple.com/fr/app/jardin-mental/id1540061393"],["Anxiété & stress","Article","Adultes","OMS","Informations générales sur les troubles anxieux.","https://www.who.int/fr/health-topics/mental-health"],["Anxiété & stress","Guide","Adultes","Psycom","Conseils pour agir face à l’anxiété et savoir quand demander de l’aide.","https://www.psycom.org/"],["Anxiété & stress","Portail","Adultes","Mon soutien psy · Assurance Maladie","Repères sur le dispositif de soutien psychologique conventionné.","https://www.ameli.fr/assure/remboursements/rembourse/remboursement-seance-psychologue-mon-soutien-psy"],["Anxiété & stress","Article","Adultes","Santé publique France","Prévention, facteurs de risque et ressources en santé mentale.","https://www.santepubliquefrance.fr/"],["Émotions & humeur","Article","Adultes","Psycom","Comprendre les variations d’humeur et les émotions difficiles.","https://www.psycom.org/"],["Émotions & humeur","Guide","Adultes","Assurance Maladie","Repères sur la dépression et les signes qui doivent conduire à consulter.","https://www.ameli.fr/"],["Émotions & humeur","Application","Adultes","Mon journal mental · Assurance Maladie","Observer l’humeur, l’énergie, le sommeil et leur évolution.","https://apps.apple.com/fr/app/jardin-mental/id1540061393"],["Émotions & humeur","Article","Adultes","OMS","Informations générales sur la dépression.","https://www.who.int/fr/news-room/fact-sheets/detail/depression"],["Émotions & humeur","Guide","Adultes","Psycom","Repérer ce qui aide à préserver ou restaurer son équilibre psychique.","https://www.psycom.org/"],["Émotions & humeur","Portail","Adultes","Santé.fr","Trouver des informations et ressources publiques en santé.","https://www.sante.fr/"],["Émotions & humeur","Guide","Adultes","UNAFAM","Ressources pour mieux comprendre les troubles de l’humeur.","https://www.unafam.org/"],["Émotions & humeur","Article","Adultes","Santé publique France","Données et ressources de prévention sur la santé mentale.","https://www.santepubliquefrance.fr/"],["Sommeil & énergie","Guide","Adultes","Institut National du Sommeil et de la Vigilance","Conseils et repères pour améliorer la qualité du sommeil.","https://institut-sommeil-vigilance.org/"],["Sommeil & énergie","Guide","Adultes","Réseau Morphée","Informations et outils sur les troubles du sommeil.","https://reseau-morphee.fr/"],["Sommeil & énergie","Article","Adultes","Assurance Maladie","Informations sur le sommeil, l’insomnie et les habitudes favorables.","https://www.ameli.fr/"],["Sommeil & énergie","Application","Adultes","Mon journal mental · Assurance Maladie","Suivre le sommeil et son lien avec l’état mental au quotidien.","https://apps.apple.com/fr/app/jardin-mental/id1540061393"],["Sommeil & énergie","Guide","Adultes","Ministère de la Santé","Repères publics issus de la politique nationale sur le sommeil.","https://sante.gouv.fr/"],["Sommeil & énergie","Article","Adultes","Psycom","Comprendre le lien entre rythmes de vie, fatigue et santé mentale.","https://www.psycom.org/"],["Sommeil & énergie","Guide","Adultes","Manger Bouger","Repères d’activité physique utiles au sommeil et au bien-être.","https://www.mangerbouger.fr/"],["Sommeil & énergie","Article","Adultes","OMS","Repères sur l’activité physique et la santé globale.","https://www.who.int/fr/health-topics/physical-activity"],["Addictions & habitudes","Portail","Adultes","Addict’AIDE","Ressources d’information et d’aide sur les addictions.","https://www.addictaide.fr/"],["Addictions & habitudes","Portail","Adultes","Drogues Info Service","Informations, aide et orientation concernant les drogues.","https://www.drogues-info-service.fr/"],["Addictions & habitudes","Portail","Adultes","Alcool Info Service","Informations et aide autour de la consommation d’alcool.","https://www.alcool-info-service.fr/"],["Addictions & habitudes","Portail","Adultes","Tabac Info Service","Accompagnement et outils pour réduire ou arrêter le tabac.","https://www.tabac-info-service.fr/"],["Addictions & habitudes","Article","Adultes","Assurance Maladie","Informations sur les conduites addictives et les prises en charge.","https://www.ameli.fr/"],["Addictions & habitudes","Guide","Adultes","Santé publique France","Prévention et réduction des risques liés aux consommations.","https://www.santepubliquefrance.fr/"],["Addictions & habitudes","Guide","Adultes","Psycom","Repères sur les liens entre addictions et santé mentale.","https://www.psycom.org/"],["Addictions & habitudes","Portail","Adultes","Joueurs Info Service","Information et soutien concernant les pratiques de jeu problématiques.","https://www.joueurs-info-service.fr/"],["Crise & demander de l’aide","Urgence","Adultes","3114","Numéro national de prévention du suicide, gratuit, 24h/24 et 7j/7.","https://3114.fr/"],["Crise & demander de l’aide","Écoute","Adultes","SOS Amitié","Service d’écoute pour les personnes en souffrance ou en situation d’isolement.","https://www.sos-amitie.com/"],["Crise & demander de l’aide","Guide","Adultes","Psycom","Repères pour demander de l’aide et s’orienter vers les bons interlocuteurs.","https://www.psycom.org/"],["Crise & demander de l’aide","Portail","Adultes","Santé.fr","Annuaire et informations pour trouver une offre de soins.","https://www.sante.fr/"],["Crise & demander de l’aide","Portail","Adultes","Mon soutien psy · Assurance Maladie","Accéder aux informations sur le dispositif Mon soutien psy.","https://www.ameli.fr/assure/remboursements/rembourse/remboursement-seance-psychologue-mon-soutien-psy"],["Crise & demander de l’aide","Écoute","Jeunes adultes","Fil Santé Jeunes","Écoute et informations pour les 12–25 ans.","https://www.filsantejeunes.com/"],["Crise & demander de l’aide","Écoute","Étudiants","Nightline France","Écoute et ressources de santé mentale pour les étudiants et jeunes adultes.","https://www.nightline.fr/"],["Crise & demander de l’aide","Guide","Adultes","Service-Public.fr","Informations officielles sur les numéros d’urgence et démarches utiles.","https://www.service-public.fr/"],["Équilibre & rétablissement","Guide","Adultes","Psycom","Ressources sur le rétablissement, l’autonomie et la qualité de vie.","https://www.psycom.org/"],["Équilibre & rétablissement","Application","Adultes","Mon journal mental · Assurance Maladie","Observer ses tendances et préparer un échange avec un professionnel.","https://apps.apple.com/fr/app/jardin-mental/id1540061393"],["Équilibre & rétablissement","Guide","Adultes","UNAFAM","Ressources d’accompagnement et de rétablissement en santé psychique.","https://www.unafam.org/"],["Équilibre & rétablissement","Article","Adultes","OMS","Promouvoir le bien-être mental et l’inclusion.","https://www.who.int/fr/health-topics/mental-health"],["Équilibre & rétablissement","Guide","Adultes","Santé publique France","Prévention et promotion de la santé mentale.","https://www.santepubliquefrance.fr/"],["Équilibre & rétablissement","Guide","Adultes","Manger Bouger","Bouger régulièrement et prendre soin de son équilibre quotidien.","https://www.mangerbouger.fr/"],["Équilibre & rétablissement","Portail","Adultes","Santé.fr","S’informer et s’orienter dans le système de santé.","https://www.sante.fr/"],["Équilibre & rétablissement","Guide","Adultes","Psycom","Ressources pour lutter contre la stigmatisation et favoriser le pouvoir d’agir.","https://www.psycom.org/"],["Proches & soutien","Guide","Proches","UNAFAM","Information, entraide et accompagnement des proches de personnes vivant avec des troubles psychiques.","https://www.unafam.org/"],["Proches & soutien","Guide","Proches","Psycom","Repères pour accompagner un proche tout en préservant sa propre santé mentale.","https://www.psycom.org/"],["Proches & soutien","Portail","Proches","Santé.fr","Trouver des structures et professionnels adaptés.","https://www.sante.fr/"],["Proches & soutien","Écoute","Proches","SOS Amitié","Écoute anonyme pour toute personne traversant une période difficile.","https://www.sos-amitie.com/"],["Proches & soutien","Guide","Proches","3114","Informations pour aider une personne ayant des idées suicidaires ou en crise.","https://3114.fr/"],["Proches & soutien","Guide","Proches","Assurance Maladie","Informations sur les parcours de soins et dispositifs d’accompagnement.","https://www.ameli.fr/"],["Proches & soutien","Guide","Proches","Psycom","Comprendre la santé mentale et mieux parler de souffrance psychique.","https://www.psycom.org/"],["Proches & soutien","Portail","Proches","Service-Public.fr","Droits, démarches et dispositifs d’aide officiels.","https://www.service-public.fr/"],["Proches & soutien","Guide","Proches","OMS","Informations générales sur la santé mentale et le soutien communautaire.","https://www.who.int/fr/health-topics/mental-health"],["Proches & soutien","Portail","Proches","Santé publique France","Ressources publiques de prévention et promotion de la santé.","https://www.santepubliquefrance.fr/"]];
+const MARK="ALLO_PUBLIC_RESOURCES_V954";
+function esc(x){return String(x||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
+function init(){
+ if(document.getElementById("publicResourcesV954"))return;
+ const page=document.getElementById("page-moretools");
+ if(!page)return;
+ const card=document.createElement("section");
+ card.id="publicResourcesV954";
+ card.className="card public-resources-v954";
+ card.dataset.regressionGuard=MARK;
+ card.innerHTML=
+ '<div class="pr-head-v954"><div><p class="eyebrow">RESSOURCES PUBLIQUES & COMPLÉMENTAIRES · GRATUIT</p><h3>🌐 Bibliothèque de ressources publiques</h3><p class="muted">Des ressources externes fiables, séparées des outils Allo Psycho. Elles s’ouvrent sur leur site d’origine.</p></div><span class="pr-count-v954" id="prCountV954">66 ressources</span></div>'+
+ '<div class="pr-note-v954"><strong>Indépendance éditoriale :</strong> cette sélection ne constitue ni un partenariat ni une validation d’Allo Psycho par les organismes cités. Les contenus externes restent sous la responsabilité de leurs éditeurs.</div>'+
+ '<div class="pr-controls-v954"><input id="prSearchV954" type="search" placeholder="🔎 Rechercher une ressource…"><select id="prThemeV954"><option value="">Toutes les thématiques</option></select><select id="prFormatV954"><option value="">Tous les formats</option></select><select id="prPublicV954"><option value="">Tous les publics</option></select></div>'+
+ '<div class="pr-list-v954" id="prListV954"></div><button class="btn btn-light pr-more-v954" id="prMoreV954" type="button">Afficher davantage</button>';
+ const reminder=document.getElementById("reminderSettingsV952");
+ page.insertBefore(card,reminder||null);
+
+ const q=document.getElementById("prSearchV954"),theme=document.getElementById("prThemeV954"),format=document.getElementById("prFormatV954"),pub=document.getElementById("prPublicV954"),list=document.getElementById("prListV954"),more=document.getElementById("prMoreV954"),count=document.getElementById("prCountV954");
+ function fill(sel,vals){vals.forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;sel.appendChild(o)})}
+ fill(theme,[...new Set(DATA.map(x=>x[0]))]);
+ fill(format,[...new Set(DATA.map(x=>x[1]))]);
+ fill(pub,[...new Set(DATA.map(x=>x[2]))]);
+ let limit=12;
+ function filtered(){
+   const needle=(q.value||"").trim().toLowerCase();
+   return DATA.filter(x=>(!theme.value||x[0]===theme.value)&&(!format.value||x[1]===format.value)&&(!pub.value||x[2]===pub.value)&&(!needle||x.join(" ").toLowerCase().includes(needle)));
+ }
+ function render(reset){
+   if(reset)limit=12;
+   const rows=filtered();count.textContent=rows.length+" ressource"+(rows.length>1?"s":"");
+   list.innerHTML="";
+   rows.slice(0,limit).forEach((x,i)=>{
+     const el=document.createElement("article");el.className="pr-item-v954";
+     el.innerHTML='<div class="pr-meta-v954"><span class="pr-external-v954">Ressource publique externe</span><span>'+esc(x[0])+'</span><span>'+esc(x[1])+'</span><span>'+esc(x[2])+'</span></div><strong>'+esc(x[4])+'</strong><p><b>'+esc(x[3])+'</b> · '+esc(x[4])+'</p><button type="button" class="pr-open-v954" data-pr-index="'+DATA.indexOf(x)+'">Voir la ressource ↗</button>';
+     list.appendChild(el);
+   });
+   if(!rows.length)list.innerHTML='<div class="pr-empty-v954">Aucune ressource ne correspond à ces filtres.</div>';
+   more.hidden=rows.length<=limit;more.textContent="Afficher davantage ("+Math.min(12,Math.max(0,rows.length-limit))+")";
+ }
+ [q,theme,format,pub].forEach(el=>el.addEventListener(el===q?"input":"change",()=>render(true)));
+ more.onclick=()=>{limit+=12;render(false)};
+ list.addEventListener("click",e=>{
+   const b=e.target.closest("[data-pr-index]");if(!b)return;
+   const x=DATA[Number(b.dataset.prIndex)];if(!x)return;
+   const ok=confirm("Ressource publique externe — "+x[3]+"\n\nVous allez quitter Allo Psycho et ouvrir le site d’origine dans un nouvel onglet.\n\nContinuer ?");
+   if(ok)window.open(x[5],"_blank","noopener,noreferrer");
+ });
+ render(true);
+
+ // Garde-fou anti-régression : si une réorganisation déplace/supprime le bloc pendant la session, on le rattache à + d'outils.
+ const obs=new MutationObserver(()=>{if(!document.getElementById("publicResourcesV954"))init()});
+ obs.observe(page,{childList:true});
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(init,350),{once:true});else setTimeout(init,350);
+})();
+</script>
+
 </body>
 </html>
