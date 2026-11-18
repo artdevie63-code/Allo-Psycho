@@ -10781,32 +10781,11 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 </script>
 
 <script>
-/* V9.5.4 — accès direct aux rappels */
+/* V9.5.5 — Mes rappels réellement dans Options + accès robuste */
 (function(){
 "use strict";
 const $=id=>document.getElementById(id);
-function openReminderSettings(){
- const settings=$("reminderSettingsV952");
- const page=settings?.closest(".page");
- if(!page)return;
- const pageName=page.id.slice("page-".length);
- if(typeof afficherPage==="function")afficherPage(pageName);
- else {
-   document.querySelectorAll(".page").forEach(section=>{section.style.display=section===page?"flex":"none"});
- }
- for(let parent=settings.parentElement;parent;parent=parent.parentElement){
-   if(parent.tagName==="DETAILS")parent.open=true;
-   if(parent===page)break;
- }
- requestAnimationFrame(()=>{
-   const heading=settings.querySelector("h3");
-   if(heading){
-     heading.tabIndex=-1;
-     heading.focus({preventScroll:true});
-   }
-   settings.scrollIntoView({behavior:"instant",block:"start"});
- });
-}
+
 function syncReminderShortcut(){
  const b=$("openRemindersV954");if(!b)return;
  let enabled=false;
@@ -10814,14 +10793,79 @@ function syncReminderShortcut(){
  b.classList.toggle("active",enabled);
  b.title=enabled?"Rappels personnalisés activés":"Rappels personnalisés désactivés";
 }
+
+function moveRemindersIntoOptions(){
+ const block=$("reminderSettingsV952");
+ const profile=$("page-profile");
+ if(!block||!profile)return false;
+ if(block.parentElement===profile)return true;
+
+ const hero=profile.querySelector(".card.hero");
+ if(hero && hero.nextSibling) profile.insertBefore(block,hero.nextSibling);
+ else if(hero) profile.appendChild(block);
+ else profile.insertBefore(block,profile.firstChild);
+ return true;
+}
+
+function openReminders(){
+ moveRemindersIntoOptions();
+
+ // Ouvre Options par le mécanisme natif, avec repli manuel si nécessaire.
+ try{
+   if(typeof afficherPage==="function") afficherPage("profile");
+   else {
+     document.querySelectorAll(".page").forEach(p=>p.style.display="none");
+     const p=$("page-profile"); if(p)p.style.display="flex";
+     document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.page==="profile"));
+   }
+ }catch(_){
+   const tab=document.querySelector('.tab[data-page="profile"]');
+   if(tab)tab.click();
+ }
+
+ setTimeout(()=>{
+   const block=$("reminderSettingsV952");
+   if(!block)return;
+   block.scrollIntoView({behavior:"smooth",block:"start"});
+   block.classList.add("reminder-highlight-v955");
+   setTimeout(()=>block.classList.remove("reminder-highlight-v955"),1400);
+   $("reminderMasterV953")?.focus?.();
+ },120);
+}
+
 function boot(){
+ moveRemindersIntoOptions();
+
  const b=$("openRemindersV954");
- if(b)b.addEventListener("click",openReminderSettings);
- document.addEventListener("change",e=>{if(e.target?.id==="reminderMasterV953")setTimeout(syncReminderShortcut,0)},true);
+ if(b && b.dataset.reminderBoundV955!=="1"){
+   b.dataset.reminderBoundV955="1";
+   b.addEventListener("click",function(e){
+     e.preventDefault();
+     e.stopPropagation();
+     openReminders();
+   },true);
+ }
+
+ // Délégation de secours, utile si l'interface reconstruit le bouton.
+ document.addEventListener("click",function(e){
+   const target=e.target?.closest?.("#openRemindersV954");
+   if(!target)return;
+   e.preventDefault();
+   e.stopPropagation();
+   openReminders();
+ },true);
+
+ document.addEventListener("change",e=>{
+   if(e.target?.id==="reminderMasterV953")setTimeout(syncReminderShortcut,0);
+ },true);
  window.addEventListener("storage",syncReminderShortcut);
  syncReminderShortcut();
+
+ window.alloOpenRemindersV955=openReminders;
 }
-if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
+
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});
+else boot();
 })();
 </script>
 
