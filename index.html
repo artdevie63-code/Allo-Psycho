@@ -2485,6 +2485,14 @@ body{font-size:16px}
 .reminder-status-v952{margin-top:8px;color:var(--soft);font-size:.7rem;line-height:1.45}
 @media(max-width:620px){.reminder-grid-v952,.reminder-options-v953{grid-template-columns:1fr}.reminder-permission-v952{align-items:flex-start;flex-direction:column}}
 </style>
+
+<style>
+/* ===== V9.5.4 — raccourci Mes rappels ===== */
+.reminder-shortcut-v954{display:inline-flex!important;align-items:center;gap:8px;position:relative}
+.reminder-bell-v954{font-size:1.15rem;line-height:1}
+.reminder-dot-v954{width:9px;height:9px;border-radius:50%;background:#b9adb3;box-shadow:0 0 0 2px #fff}
+.reminder-shortcut-v954.active .reminder-dot-v954{background:#64a46b}
+</style>
 </head>
 
 <body>
@@ -3309,7 +3317,12 @@ Vous pouvez me raconter ce qui vous traverse l'esprit aujourd'hui, sans jugement
           <div id="testerBadgeV90" class="owner-badge-v862" hidden>🧪 Testeur · Premium permanent</div>
         </div>
         <div class="options-shortcuts-v921">
-          <button type="button" class="btn btn-dark" id="openPremiumV921">✨ Premium & abonnement</button>
+          <button type="button" class="btn btn-dark" id="openPremiumV921">✨ Mon accès Premium</button>
+          <button type="button" class="btn btn-light reminder-shortcut-v954" id="openRemindersV954" aria-label="Ouvrir mes rappels">
+            <span class="reminder-bell-v954">🔔</span>
+            <span>Mes rappels</span>
+            <span class="reminder-dot-v954" id="reminderDotV954" aria-hidden="true"></span>
+          </button>
           <button type="button" class="btn btn-light" id="openAboutV921">🌷 À propos & contact</button>
         </div>
       </div>
@@ -10762,6 +10775,29 @@ function boot(){
  document.addEventListener("click",e=>{if(e.target.closest("[data-complete-step],[data-h],#saveMoodButton,#tccNextV741,#journalForm,#challengeDoneV924"))setTimeout(renderPreview,200)},true);
  window.alloReminderCandidateV953=currentCandidate;
  window.alloOpenReminderCandidateV953=()=>routeCandidate(currentCandidate());
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
+})();
+</script>
+
+<script>
+/* V9.5.4 — accès direct aux rappels */
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+function syncReminderShortcut(){
+ const b=$("openRemindersV954");if(!b)return;
+ let enabled=false;
+ try{enabled=!!JSON.parse(localStorage.getItem("alloPsychoReminderSettingsV953")||"{}").enabled}catch(_){}
+ b.classList.toggle("active",enabled);
+ b.title=enabled?"Rappels personnalisés activés":"Rappels personnalisés désactivés";
+}
+function boot(){
+ const b=$("openRemindersV954");
+ if(b)b.addEventListener("click",()=>{$("reminderSettingsV952")?.scrollIntoView({behavior:"smooth",block:"start"});setTimeout(()=>$("reminderMasterV953")?.focus?.(),300)});
+ document.addEventListener("change",e=>{if(e.target?.id==="reminderMasterV953")setTimeout(syncReminderShortcut,0)},true);
+ window.addEventListener("storage",syncReminderShortcut);
+ syncReminderShortcut();
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
 })();
