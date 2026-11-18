@@ -2875,7 +2875,7 @@ body{font-size:16px}
       <div class="card journey-card" data-premium-feature="Parcours personnalisé">
         <p class="eyebrow">MON PARCOURS</p>
         <h3 id="journeyGreeting">🌷 Un petit pas pour vous</h3>
-        <p id="journeyText" class="muted">Votre parcours se construit progressivement à partir de vos préférences et de vos ressentis.</p>
+        <p id="journeyText" class="muted">Mon parcours se construit progressivement à partir de mes préférences et de vos ressentis.</p>
         <div class="journey-actions">
           <button type="button" id="journeyRecommendBtn" class="btn btn-dark" aria-label="Mon idée du moment">✨ Mon idée du moment</button>
           <button type="button" id="journeyRefreshBtn" class="btn btn-light" aria-label="Actualiser">↻ Actualiser</button>
@@ -2922,7 +2922,7 @@ body{font-size:16px}
           <button type="button" id="buildPlanBtn" class="btn btn-dark" aria-label="Construire mon plan">✨ Construire mon plan</button>
           <button type="button" id="adaptPlanBtn" class="btn btn-light" aria-label="Adapter à aujourdhui">↻ Adapter à aujourd’hui</button>
         </div>
-        <div id="personalPlan" class="plan-grid"><div class="empty">Votre plan apparaîtra ici.</div></div>
+        <div id="personalPlan" class="plan-grid"><div class="empty">Mon plan apparaîtra ici.</div></div>
       </div>
 
       <div class="card insight-card" data-premium-feature="Analyse des schémas" id="patternInsightCard" hidden>
@@ -3361,7 +3361,7 @@ Vous pouvez me raconter ce qui vous traverse l'esprit aujourd'hui, sans jugement
         <div class="card">
           <p class="eyebrow">ESPACE PRIVÉ</p>
           <h3>Profil anonyme et personnel</h3>
-          <p id="authEmailText" class="muted">Votre profil, votre journal, vos humeurs, vos routines et vos exercices restent sur cet appareil. Aucun e-mail n'est nécessaire.</p>
+          <p id="authEmailText" class="muted">Mon profil, votre journal, vos humeurs, vos routines et vos exercices restent sur cet appareil. Aucun e-mail n'est nécessaire.</p>
           <div class="privacy-box">🔒 Mode Privacy First : les données personnelles de votre parcours ne sont pas synchronisées vers Supabase. Un identifiant anonyme peut uniquement servir de jeton technique pour les fonctions IA et Admin.</div>
           <div class="profile-actions">
             <button type="button" id="signInBtn" class="btn btn-dark" aria-label="Activer mon espace privé">✨ Activer mon espace privé</button>
@@ -3520,7 +3520,7 @@ Vous pouvez me raconter ce qui vous traverse l'esprit aujourd'hui, sans jugement
       <div class="card stripe-box">
         <p class="eyebrow">ABONNEMENT PREMIUM</p>
         <h3>💳 Continuer avec Stripe</h3>
-        <p class="muted">Après les 10 jours d’essai gratuit : 9,99 € / mois ou 84,99 € / an. Le paiement et le renouvellement sont gérés par Stripe. Votre accès Premium est activé côté serveur après confirmation du paiement.</p>
+        <p class="muted">Après les 10 jours d’essai gratuit : 9,99 € / mois ou 84,99 € / an. Le paiement et le renouvellement sont gérés par Stripe. Mon accès Premium est activé côté serveur après confirmation du paiement.</p>
         <div class="stripe-actions">
           <button type="button" id="stripeSubscribeMonthlyBtn" class="btn btn-dark" aria-label="S’abonner à Premium mensuel">S’abonner · 9,99 € / mois</button><button type="button" id="stripeSubscribeAnnualBtn" class="btn btn-light" aria-label="S’abonner à Premium annuel">S’abonner · 84,99 € / an</button>
           <button type="button" id="stripePortalBtn" class="btn btn-light" aria-label="Gérer mon abonnement">Gérer mon abonnement</button>
@@ -5555,7 +5555,7 @@ Vous pouvez me raconter ce qui vous traverse l'esprit aujourd'hui, sans jugement
         }
         const result = await supabaseClient.auth.signInAnonymously();
         if (result.error) { afficherToast("🔐 Impossible d'activer l'espace privé : " + result.error.message); return false; }
-        afficherToast("🌸 Votre espace privé est prêt.");
+        afficherToast("🌸 Mon espace privé est prêt.");
         await this.refreshAuth();
         return true;
       },
@@ -8076,7 +8076,7 @@ window.addEventListener("unhandledrejection",function(e){
   $("verifyPremiumBtnV85")?.addEventListener("click",()=>verifyPremium(true));
 
   $("previewFreeBtn")?.addEventListener("click",()=>{
-    if(!window.alloPremiumEntitled) return toast("Votre accès Premium n’est pas actif.");
+    if(!window.alloPremiumEntitled) return toast("Mon accès Premium n’est pas actif.");
     window.alloPremiumPreviewFree=true;
     sessionStorage.setItem("alloPsychoPreviewFreeV85","1");
     applyPremiumState(true,"preview",null);
@@ -10504,7 +10504,7 @@ function summary(name,scores){
  const entries=Object.entries(scores).sort((a,b)=>b[1]-a[1]);
  const top=entries[0],second=entries[1],low=[...entries].sort((a,b)=>a[1]-b[1])[0];
  if(name==="sensitivity"){
-  return "Votre profil ne se résume pas à un niveau global de « sensibilité ». Ce qui compte surtout est la combinaison de tes dimensions. Ici, "+profiles[name].dims[top[0]].toLowerCase()+" ressort le plus"+(second&&second[1]>=3.6?" avec "+profiles[name].dims[second[0]].toLowerCase():"")+". "+(low[1]<2.4?"À l’inverse, "+profiles[name].dims[low[0]].toLowerCase()+" paraît moins centrale dans tes réponses.":"Les autres dimensions sont plus intermédiaires.");
+  return "Mon profil ne se résume pas à un niveau global de « sensibilité ». Ce qui compte surtout est la combinaison de tes dimensions. Ici, "+profiles[name].dims[top[0]].toLowerCase()+" ressort le plus"+(second&&second[1]>=3.6?" avec "+profiles[name].dims[second[0]].toLowerCase():"")+". "+(low[1]<2.4?"À l’inverse, "+profiles[name].dims[low[0]].toLowerCase()+" paraît moins centrale dans tes réponses.":"Les autres dimensions sont plus intermédiaires.");
  }
  return "Il ne s’agit pas d’un « type de personnalité », mais d’un profil de tendances. "+profiles[name].dims[top[0]]+" ressort davantage dans tes réponses"+(second?" ; "+profiles[name].dims[second[0]].toLowerCase()+" arrive ensuite.":"")+(low[1]<2.4?" "+profiles[name].dims[low[0]]+" semble actuellement moins marquée.":"");
 }
@@ -10604,7 +10604,7 @@ function pick(arr,key){
 function candidates(s){
  const out=[],p=pathState(),mem=memory(),age=lastMoodAgeDays(),best=bestTool(),themeTool=themeSuggestedTool(),day=dayKey();
  if(s.path&&p){
-   const title=pick(["🌱 Une étape disponible aujourd’hui","🧭 Votre parcours peut être repris","✨ Une étape de votre parcours est disponible"],"path"+day);
+   const title=pick(["🌱 Une étape disponible aujourd’hui","🧭 Mon parcours peut être repris","✨ Une étape de votre parcours est disponible"],"path"+day);
    const body=pick([
     pathName(p.key)+" · "+p.done+"/7 étapes déjà faites. Une nouvelle étape est disponible, à votre rythme.",
     "Tu as déjà avancé dans "+pathName(p.key)+". La prochaine étape est disponible, sans contrainte de rythme.",
