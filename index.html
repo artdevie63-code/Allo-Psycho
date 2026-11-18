@@ -10785,6 +10785,28 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 (function(){
 "use strict";
 const $=id=>document.getElementById(id);
+function openReminderSettings(){
+ const settings=$("reminderSettingsV952");
+ const page=settings?.closest(".page");
+ if(!page)return;
+ const pageName=page.id.slice("page-".length);
+ if(typeof afficherPage==="function")afficherPage(pageName);
+ else {
+   document.querySelectorAll(".page").forEach(section=>{section.style.display=section===page?"flex":"none"});
+ }
+ for(let parent=settings.parentElement;parent;parent=parent.parentElement){
+   if(parent.tagName==="DETAILS")parent.open=true;
+   if(parent===page)break;
+ }
+ requestAnimationFrame(()=>{
+   const heading=settings.querySelector("h3");
+   if(heading){
+     heading.tabIndex=-1;
+     heading.focus({preventScroll:true});
+   }
+   settings.scrollIntoView({behavior:"instant",block:"start"});
+ });
+}
 function syncReminderShortcut(){
  const b=$("openRemindersV954");if(!b)return;
  let enabled=false;
@@ -10794,7 +10816,7 @@ function syncReminderShortcut(){
 }
 function boot(){
  const b=$("openRemindersV954");
- if(b)b.addEventListener("click",()=>{const tab=document.querySelector('.tab[data-page="moretools"]');if(tab)tab.click();else if(typeof afficherPage==="function")afficherPage("moretools");setTimeout(()=>{$("reminderSettingsV952")?.scrollIntoView({behavior:"smooth",block:"start"});$("reminderMasterV953")?.focus?.()},180)});
+ if(b)b.addEventListener("click",openReminderSettings);
  document.addEventListener("change",e=>{if(e.target?.id==="reminderMasterV953")setTimeout(syncReminderShortcut,0)},true);
  window.addEventListener("storage",syncReminderShortcut);
  syncReminderShortcut();
