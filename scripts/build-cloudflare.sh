@@ -30,5 +30,7 @@ cat > dist/_headers <<'HEADERS'
   Cache-Control: no-cache
 HEADERS
 
+bash scripts/verify-cloudflare.sh
+
 echo "Cloudflare static bundle ready in dist/"
 find dist -type f | sort
