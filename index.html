@@ -2467,20 +2467,23 @@ body{font-size:16px}
 </style>
 
 <style>
-/* ===== V9.5.2 — notifications rappels respiration et émotions ===== */
+/* ===== V9.5.3 — rappels personnalisés selon parcours et avancement ===== */
 .reminder-settings-v952{margin-top:14px;padding:16px;border:1px solid #eadfe5;border-radius:20px;background:#fff}
 .reminder-settings-v952 h3{margin:0 0 5px}.reminder-settings-v952>.muted{margin-bottom:12px}
 .reminder-permission-v952{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:11px 12px;border-radius:15px;background:#faf7f5;border:1px solid #eadfe5;margin-bottom:10px}
 .reminder-permission-v952 small{display:block;color:var(--soft);margin-top:3px}
+.reminder-master-v953{padding:13px;border:1px solid #dfd3da;border-radius:17px;background:#fff;margin-bottom:10px}
+.reminder-master-v953 label,.reminder-item-v952 label{display:flex;gap:9px;align-items:flex-start;font-weight:850}
+.reminder-master-v953 input,.reminder-item-v952 label input{width:auto!important;margin-top:3px}
+.reminder-master-v953 small,.reminder-item-v952 small{display:block;color:var(--soft);font-size:.72rem!important;line-height:1.45;margin:5px 0 0}
 .reminder-grid-v952{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .reminder-item-v952{padding:13px;border:1px solid #eadfe5;border-radius:17px;background:#fff}
-.reminder-item-v952 label{display:flex;gap:9px;align-items:flex-start;font-weight:850}
-.reminder-item-v952 label input{width:auto!important;margin-top:3px}
-.reminder-item-v952 small{display:block;color:var(--soft);font-size:.72rem!important;line-height:1.45;margin:6px 0 10px}
-.reminder-time-v952{display:flex;gap:8px;align-items:center}.reminder-time-v952 input{max-width:120px}
-.reminder-suggest-v952{margin-top:10px;padding:10px 12px;border-radius:15px;background:#f1f7f1;border:1px solid #dce9dd;font-size:.75rem;line-height:1.5}
-.reminder-status-v952{margin-top:8px;color:var(--soft);font-size:.7rem}
-@media(max-width:620px){.reminder-grid-v952{grid-template-columns:1fr}.reminder-permission-v952{align-items:flex-start;flex-direction:column}}
+.reminder-options-v953{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:10px}
+.reminder-options-v953 label{display:grid;gap:5px;font-size:.74rem;font-weight:800}.reminder-options-v953 select,.reminder-options-v953 input{min-height:42px}
+.reminder-suggest-v952{margin-top:10px;padding:12px;border-radius:15px;background:#f1f7f1;border:1px solid #dce9dd;font-size:.75rem;line-height:1.5}
+.reminder-preview-v953{margin-top:8px;padding:10px 12px;border-radius:15px;background:#faf7f5;border:1px solid #eadfe5;font-size:.73rem;line-height:1.5}
+.reminder-status-v952{margin-top:8px;color:var(--soft);font-size:.7rem;line-height:1.45}
+@media(max-width:620px){.reminder-grid-v952,.reminder-options-v953{grid-template-columns:1fr}.reminder-permission-v952{align-items:flex-start;flex-direction:column}}
 </style>
 </head>
 
@@ -2944,27 +2947,54 @@ body{font-size:16px}
       </div>
       <div id="moreToolsContentV933"></div>
       <div class="card reminder-settings-v952" id="reminderSettingsV952">
-        <p class="eyebrow">RAPPELS · OPTIONNELS</p>
-        <h3>🔔 Mes rappels respiration & émotions</h3>
-        <p class="muted">Tu choisis ce que tu veux recevoir. Les rappels ne s’activent jamais automatiquement.</p>
+        <p class="eyebrow">RAPPELS PERSONNALISÉS · OPTIONNELS</p>
+        <h3>🔔 Mes rappels Allo Psycho</h3>
+        <p class="muted">Allo Psycho peut te proposer des interactions différentes selon ton parcours, ton avancement et ce qui t’a été utile. Rien ne s’active sans ton accord.</p>
+
         <div class="reminder-permission-v952">
-          <div><strong>Autorisation des notifications</strong><small id="reminderPermissionTextV952">Non demandée</small></div>
+          <div><strong>Notifications système</strong><small id="reminderPermissionTextV952">Non demandées</small></div>
           <button type="button" class="btn btn-light" id="requestNotificationsV952">Autoriser</button>
         </div>
+
+        <div class="reminder-master-v953">
+          <label><input type="checkbox" id="reminderMasterV953"> <span>Activer mes rappels personnalisés</span></label>
+          <small>Le moteur choisit un rappel pertinent au lieu d’envoyer toujours le même exercice.</small>
+        </div>
+
         <div class="reminder-grid-v952">
           <div class="reminder-item-v952">
-            <label><input type="checkbox" id="reminderBreathingV952"> <span>🌿 Rappel respiration</span></label>
-            <small>Une invitation courte à faire 1 à 3 minutes de respiration, particulièrement utile dans les parcours anxiété ou surcharge.</small>
-            <div class="reminder-time-v952"><span>Heure</span><input type="time" id="reminderBreathingTimeV952" value="10:30"></div>
+            <label><input type="checkbox" id="reminderPathV953"> <span>🧭 Parcours & étapes</span></label>
+            <small>Reprendre une étape disponible, poursuivre un parcours commencé ou revenir sur une mission.</small>
           </div>
           <div class="reminder-item-v952">
-            <label><input type="checkbox" id="reminderEmotionV952"> <span>💗 Rappel émotions</span></label>
-            <small>Un rappel pour identifier ce que tu ressens et noter brièvement ton état, utile dans les parcours humeur, rumination ou relations.</small>
-            <div class="reminder-time-v952"><span>Heure</span><input type="time" id="reminderEmotionTimeV952" value="19:00"></div>
+            <label><input type="checkbox" id="reminderCheckinV953"> <span>💗 État & émotions</span></label>
+            <small>Faire un point bref sur l’état du moment lorsque les données récentes sont anciennes ou qu’un suivi est utile.</small>
+          </div>
+          <div class="reminder-item-v952">
+            <label><input type="checkbox" id="reminderToolsV953"> <span>🌿 Outils & exercices adaptés</span></label>
+            <small>Respiration, TCC, journal, décharge ou autre outil selon le thème actuel et les retours précédents.</small>
+          </div>
+          <div class="reminder-item-v952">
+            <label><input type="checkbox" id="reminderProgressV953"> <span>👣 Petit pas & bilan</span></label>
+            <small>Revenir sur un petit pas, consolider ce qui a aidé ou consulter un bilan lorsque cela devient pertinent.</small>
           </div>
         </div>
-        <div class="reminder-suggest-v952" id="reminderSuggestionV952">Aucune suggestion particulière pour le moment.</div>
-        <div class="reminder-status-v952" id="reminderStatusV952">Les réglages sont enregistrés uniquement sur cet appareil.</div>
+
+        <div class="reminder-options-v953">
+          <label>Fréquence maximale
+            <select id="reminderCadenceV953">
+              <option value="light">Légère · env. 3 rappels/semaine</option>
+              <option value="daily">Régulière · max. 1/jour</option>
+            </select>
+          </label>
+          <label>À partir de
+            <input type="time" id="reminderStartTimeV953" value="10:00">
+          </label>
+        </div>
+
+        <div class="reminder-suggest-v952" id="reminderSuggestionV952">Le prochain rappel sera choisi en fonction de ton parcours et de ton avancement.</div>
+        <div class="reminder-preview-v953" id="reminderPreviewV953">Aperçu : aucun rappel prioritaire pour le moment.</div>
+        <div class="reminder-status-v952" id="reminderStatusV952">Les préférences et l’analyse d’avancement restent sur cet appareil. Les notifications système dépendent aussi des capacités du navigateur/PWA.</div>
       </div>
     </section>
 
@@ -10512,99 +10542,167 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 </script>
 
 <script>
-/* V9.5.2 — notifications rappels respiration et émotions */
+/* V9.5.3 — rappels contextuels selon parcours, avancement et usage */
 (function(){
 "use strict";
 const $=id=>document.getElementById(id);
-const KEY="alloPsychoReminderSettingsV952";
-const read=()=>{try{return JSON.parse(localStorage.getItem(KEY)||"{}")}catch(_){return {}}};
-const save=v=>localStorage.setItem(KEY,JSON.stringify(v));
+const KEY="alloPsychoReminderSettingsV953";
+const LEGACY="alloPsychoReminderSettingsV952";
+const readJson=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(d))}catch(_){return d}};
+const writeJson=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 function settings(){
- const s=read();
+ let s=readJson(KEY,null);
+ if(!s){
+   const old=readJson(LEGACY,{});
+   s={enabled:false,path:true,checkin:true,tools:true,progress:true,cadence:"light",startTime:"10:00",sent:old.sent||{}};
+ }
  return {
-  breathing:!!s.breathing,
-  emotion:!!s.emotion,
-  breathingTime:s.breathingTime||"10:30",
-  emotionTime:s.emotionTime||"19:00",
-  sent:s.sent||{}
+  enabled:!!s.enabled,path:s.path!==false,checkin:s.checkin!==false,tools:s.tools!==false,progress:s.progress!==false,
+  cadence:s.cadence==="daily"?"daily":"light",startTime:s.startTime||"10:00",sent:s.sent||{}
  };
 }
+function save(s){writeJson(KEY,s)}
+function pathState(){
+ const all=readJson("alloPsychoPathsV7",{});
+ for(const [key,v] of Object.entries(all)){
+   const done=Array.isArray(v)?v:(v?.done||[]);
+   if(done.length>0&&done.length<7)return {key,done:done.length,total:7};
+ }
+ return null;
+}
+function pathName(key){
+ return window.alloPathsV923?.[key]?.name||({anxiety:"Anxiété & incertitude",rumination:"Rumination",sensitivity:"Surcharge & sensibilité",limits:"Relations & limites",procrastination:"Motivation & procrastination",sleep:"Sommeil & récupération"})[key]||key;
+}
+function memory(){return readJson("alloPsychoTherapyMemory",{})||{}}
+function lastMoodAgeDays(){
+ const arr=readJson("alloPsychoHumeurs",[]);
+ if(!arr.length)return 99;
+ const x=arr[arr.length-1],raw=x.at||x.date||x.created_at;
+ const t=raw?new Date(raw).getTime():NaN;
+ return Number.isFinite(t)?Math.max(0,(Date.now()-t)/86400000):99;
+}
+function bestTool(){
+ const arr=readJson("alloPsychoToolFeedbackV923",[]),m={};
+ arr.forEach(x=>{const z=m[x.tool]||(m[x.tool]={n:0,score:0});z.n++;z.score+=Number(x.help||0)+(Number.isFinite(Number(x.before))&&Number.isFinite(Number(x.after))?Math.max(0,Number(x.before)-Number(x.after))/2:0)});
+ return Object.entries(m).sort((a,b)=>(b[1].score/(b[1].n||1))-(a[1].score/(a[1].n||1)))[0]?.[0]||null;
+}
+function toolLabel(k){return ({breathing:"une respiration guidée",urgent:"Urgence Calme",tcc:"une fiche TCC",release:"un exercice de décharge",journal:"un court temps de journal",capsule90:"une capsule de 90 secondes",chat:"un échange guidé"})[k]||"un outil qui t’a aidé"}
+function themeSuggestedTool(){
+ const k=localStorage.getItem("alloPsychoThemeV927")||"";
+ return ({anxiety:"breathing",sensitivity:"urgent",rumination:"tcc",limits:"tcc",procrastination:"journal",sleep:"breathing"})[k]||null;
+}
+function weeklyChallengePending(){
+ const d=new Date(),week=Math.floor((d-new Date(d.getFullYear(),0,1))/604800000),key=d.getFullYear()+"-"+week;
+ return !readJson("alloPsychoWeeklyChallengeDoneV924",{})[key];
+}
+function candidates(s){
+ const out=[],p=pathState(),mem=memory(),age=lastMoodAgeDays(),best=bestTool(),themeTool=themeSuggestedTool();
+ if(s.path&&p)out.push({id:"path",priority:100,title:"Reprendre ton parcours",body:pathName(p.key)+" · "+p.done+"/7 étapes terminées. La prochaine étape peut être reprise quand tu veux.",action:"path"});
+ if(s.progress&&mem.next_small_step)out.push({id:"step",priority:92,title:"Ton petit pas",body:"Tu avais choisi : « "+String(mem.next_small_step).slice(0,120)+" ». Veux-tu faire un point rapide ?",action:"step"});
+ if(s.checkin&&age>=2)out.push({id:"checkin",priority:88,title:"Petit point émotionnel",body:"Cela fait un moment que tu n’as pas noté ton état. Comment ça va aujourd’hui, en quelques secondes ?",action:"checkin"});
+ if(s.tools&&best)out.push({id:"best",priority:82,title:"Rejouer ce qui t’a aidé",body:"D’après tes retours, "+toolLabel(best)+" semble t’avoir été utile. Tu peux le reprendre sans refaire tout un parcours.",action:"tool",tool:best});
+ if(s.tools&&themeTool&&!best)out.push({id:"theme",priority:76,title:"Un outil adapté à ton parcours",body:"Pour ton thème actuel, Allo Psycho te propose "+toolLabel(themeTool)+".",action:"tool",tool:themeTool});
+ if(s.progress&&weeklyChallengePending())out.push({id:"mission",priority:65,title:"Mission de la semaine",body:"Ta mission thérapeutique de la semaine est encore disponible. Un petit test suffit.",action:"mission"});
+ const tcc=readJson("alloPsychoTCC",[]),journals=readJson("alloPsychoJournaux",[]);
+ if(s.progress&&(tcc.length+journals.length)>=3)out.push({id:"review",priority:55,title:"Regarder ton évolution",body:"Tu as déjà plusieurs traces de travail. Un bref bilan peut aider à voir ce qui revient et ce qui aide.",action:"review"});
+ return out.sort((a,b)=>b.priority-a.priority);
+}
+function currentCandidate(){const s=settings();return candidates(s)[0]||null}
 function permissionLabel(){
  const el=$("reminderPermissionTextV952"),btn=$("requestNotificationsV952");if(!el||!btn)return;
- if(!("Notification" in window)){el.textContent="Notifications non prises en charge par ce navigateur";btn.disabled=true;return}
+ if(!("Notification" in window)){el.textContent="Non prises en charge par ce navigateur";btn.disabled=true;return}
  const p=Notification.permission;
  el.textContent=p==="granted"?"Autorisées sur cet appareil":p==="denied"?"Refusées dans le navigateur":"Pas encore autorisées";
  btn.textContent=p==="granted"?"✓ Autorisées":p==="denied"?"Modifier dans le navigateur":"Autoriser";
  btn.disabled=p==="granted";
 }
-function suggestion(){
- const el=$("reminderSuggestionV952");if(!el)return;
- const path=localStorage.getItem("alloPsychoThemeV927")||"";
- const lastState=localStorage.getItem("alloPsychoLastState")||"";
- const breathing=["anxiety","sensitivity","sleep"].includes(path)||["anxious","overload"].includes(lastState);
- const emotion=["rumination","limits","procrastination"].includes(path)||["sad","angry","reflect"].includes(lastState);
- if(breathing&&emotion)el.textContent="💡 Selon ton parcours actuel, un rappel respiration et un rappel émotions pourraient être utiles. Tu restes libre d’activer l’un, les deux ou aucun.";
- else if(breathing)el.textContent="💡 Selon ton parcours actuel, le rappel respiration peut être particulièrement pertinent. Il reste facultatif.";
- else if(emotion)el.textContent="💡 Selon ton parcours actuel, le rappel émotions peut être utile pour repérer plus tôt ce qui monte. Il reste facultatif.";
- else el.textContent="💡 Tu peux activer les rappels qui te semblent utiles, indépendamment du parcours.";
-}
 function fill(){
  const s=settings();
- if($("reminderBreathingV952"))$("reminderBreathingV952").checked=s.breathing;
- if($("reminderEmotionV952"))$("reminderEmotionV952").checked=s.emotion;
- if($("reminderBreathingTimeV952"))$("reminderBreathingTimeV952").value=s.breathingTime;
- if($("reminderEmotionTimeV952"))$("reminderEmotionTimeV952").value=s.emotionTime;
- permissionLabel();suggestion();
+ if($("reminderMasterV953"))$("reminderMasterV953").checked=s.enabled;
+ if($("reminderPathV953"))$("reminderPathV953").checked=s.path;
+ if($("reminderCheckinV953"))$("reminderCheckinV953").checked=s.checkin;
+ if($("reminderToolsV953"))$("reminderToolsV953").checked=s.tools;
+ if($("reminderProgressV953"))$("reminderProgressV953").checked=s.progress;
+ if($("reminderCadenceV953"))$("reminderCadenceV953").value=s.cadence;
+ if($("reminderStartTimeV953"))$("reminderStartTimeV953").value=s.startTime;
+ permissionLabel();renderPreview();
 }
 function persist(){
  const s=settings();
- s.breathing=$("reminderBreathingV952")?.checked===true;
- s.emotion=$("reminderEmotionV952")?.checked===true;
- s.breathingTime=$("reminderBreathingTimeV952")?.value||"10:30";
- s.emotionTime=$("reminderEmotionTimeV952")?.value||"19:00";
- save(s);
- if($("reminderStatusV952"))$("reminderStatusV952").textContent="✓ Réglages enregistrés sur cet appareil.";
+ s.enabled=$("reminderMasterV953")?.checked===true;
+ s.path=$("reminderPathV953")?.checked!==false;
+ s.checkin=$("reminderCheckinV953")?.checked!==false;
+ s.tools=$("reminderToolsV953")?.checked!==false;
+ s.progress=$("reminderProgressV953")?.checked!==false;
+ s.cadence=$("reminderCadenceV953")?.value||"light";
+ s.startTime=$("reminderStartTimeV953")?.value||"10:00";
+ save(s);renderPreview();
+ if($("reminderStatusV952"))$("reminderStatusV952").textContent=s.enabled?"✓ Rappels personnalisés activés selon tes choix.":"Rappels désactivés. Tes préférences restent enregistrées.";
+}
+function renderPreview(){
+ const s=settings(),c=currentCandidate(),box=$("reminderPreviewV953"),hint=$("reminderSuggestionV952");
+ if(hint)hint.textContent=s.enabled?"💡 Le contenu des rappels évoluera automatiquement avec le parcours et l’utilisation de l’app.":"💡 Active les rappels seulement si tu souhaites être sollicité·e par Allo Psycho.";
+ if(!box)return;
+ box.innerHTML=c?'<strong>Prochain rappel pertinent :</strong><br>'+c.title+' — '+c.body:'<strong>Aperçu :</strong> aucun rappel prioritaire pour le moment.';
 }
 async function ask(){
  if(!("Notification" in window))return;
- try{
-  const p=await Notification.requestPermission();
-  permissionLabel();
-  if(p==="granted"&&$("reminderStatusV952"))$("reminderStatusV952").textContent="✓ Notifications autorisées. Active ensuite les rappels souhaités.";
- }catch(_){}
+ try{await Notification.requestPermission();permissionLabel()}catch(_){}
 }
-function todayKey(){return new Date().toISOString().slice(0,10)}
-function due(now,time){
- const [h,m]=String(time||"00:00").split(":").map(Number);
+function afterStart(now,time){
+ const [h,m]=String(time||"10:00").split(":").map(Number);
  return now.getHours()>h||(now.getHours()===h&&now.getMinutes()>=m);
 }
-async function notify(kind,title,body){
- if(Notification.permission!=="granted")return;
+function dayKey(d=new Date()){return d.toISOString().slice(0,10)}
+function allowedByCadence(s){
+ const sent=s.sent||{},now=new Date(),today=dayKey(now);
+ if(sent.lastDay===today)return false;
+ if(s.cadence==="daily")return true;
+ const last=sent.lastAt?new Date(sent.lastAt).getTime():0;
+ return !last||Date.now()-last>=48*3600000;
+}
+async function notify(c){
+ if(!c||!("Notification" in window)||Notification.permission!=="granted")return false;
  try{
    const reg=await navigator.serviceWorker?.getRegistration?.();
-   if(reg?.showNotification)await reg.showNotification(title,{body,icon:"icon-192.png",badge:"icon-192.png",tag:"allo-"+kind,renotify:false});
-   else new Notification(title,{body,tag:"allo-"+kind});
- }catch(_){}
+   const opts={body:c.body,icon:"icon-192.png",badge:"icon-192.png",tag:"allo-personal-"+c.id,renotify:false,data:{action:c.action,tool:c.tool||null}};
+   if(reg?.showNotification)await reg.showNotification("Allo Psycho · "+c.title,opts);
+   else new Notification("Allo Psycho · "+c.title,opts);
+   return true;
+ }catch(_){return false}
 }
 async function check(){
- const s=settings();if(!("Notification" in window)||Notification.permission!=="granted")return;
- const now=new Date(),day=todayKey(),sent=s.sent||{};
- if(s.breathing&&due(now,s.breathingTime)&&sent.breathing!==day){
-   await notify("breathing","Allo Psycho · Respiration","Une minute pour ralentir : inspire doucement, puis allonge un peu l’expiration.");
-   sent.breathing=day;
+ const s=settings(),now=new Date();
+ renderPreview();
+ if(!s.enabled||!afterStart(now,s.startTime)||!allowedByCadence(s))return;
+ const c=currentCandidate();if(!c)return;
+ const ok=await notify(c);if(!ok)return;
+ s.sent={...(s.sent||{}),lastAt:new Date().toISOString(),lastDay:dayKey(),lastId:c.id};
+ save(s);
+}
+function routeCandidate(c){
+ if(!c)return;
+ if(c.action==="path"){
+   const p=pathState();document.querySelector('[data-page="premium"]')?.click();
+   setTimeout(()=>{if(p)window.alloShowPathV923?.(p.key);$("pathDetailV7")?.scrollIntoView?.({behavior:"smooth",block:"start"})},250);return;
  }
- if(s.emotion&&due(now,s.emotionTime)&&sent.emotion!==day){
-   await notify("emotion","Allo Psycho · Émotions","Petit point avec toi-même : qu’est-ce que tu ressens maintenant, et de quoi aurais-tu besoin ?");
-   sent.emotion=day;
+ if(c.action==="checkin"){document.querySelector('[data-page="relax"]')?.click();setTimeout(()=>$("guidedFeelingsV922")?.scrollIntoView?.({behavior:"smooth",block:"start"}),200);return}
+ if(c.action==="step"){document.querySelector('[data-page="chat"]')?.click();setTimeout(()=>{const i=$("chatInput");if(i){i.value="Je veux faire le point sur mon petit pas : "+(memory().next_small_step||"");i.focus()}},220);return}
+ if(c.action==="tool"){
+   if(typeof window.alloRouteV936==="function")window.alloRouteV936(c.tool||themeSuggestedTool()||"breathing");return;
  }
- s.sent=sent;save(s);
+ if(c.action==="mission"){document.querySelector('[data-page="moretools"]')?.click();setTimeout(()=>window.alloOpenToolsThemeV936?.("missions"),220);return}
+ if(c.action==="review"){document.querySelector('[data-page="moretools"]')?.click();setTimeout(()=>window.alloOpenToolsThemeV936?.("know"),220)}
 }
 function boot(){
  fill();
  $("requestNotificationsV952")?.addEventListener("click",ask);
- ["reminderBreathingV952","reminderEmotionV952","reminderBreathingTimeV952","reminderEmotionTimeV952"].forEach(id=>$(id)?.addEventListener("change",persist));
+ ["reminderMasterV953","reminderPathV953","reminderCheckinV953","reminderToolsV953","reminderProgressV953","reminderCadenceV953","reminderStartTimeV953"].forEach(id=>$(id)?.addEventListener("change",persist));
  setTimeout(check,1500);setInterval(check,60000);
- window.addEventListener("focus",()=>{suggestion();check()});
+ window.addEventListener("focus",()=>{renderPreview();check()});
+ document.addEventListener("click",e=>{if(e.target.closest("[data-complete-step],[data-h],#saveMoodButton,#tccNextV741,#journalForm,#challengeDoneV924"))setTimeout(renderPreview,200)},true);
+ window.alloReminderCandidateV953=currentCandidate;
+ window.alloOpenReminderCandidateV953=()=>routeCandidate(currentCandidate());
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
 })();
