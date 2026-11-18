@@ -10794,7 +10794,7 @@ function syncReminderShortcut(){
 }
 function boot(){
  const b=$("openRemindersV954");
- if(b)b.addEventListener("click",()=>{$("reminderSettingsV952")?.scrollIntoView({behavior:"smooth",block:"start"});setTimeout(()=>$("reminderMasterV953")?.focus?.(),300)});
+ if(b)b.addEventListener("click",()=>{const tab=document.querySelector('.tab[data-page="moretools"]');if(tab)tab.click();else if(typeof afficherPage==="function")afficherPage("moretools");setTimeout(()=>{$("reminderSettingsV952")?.scrollIntoView({behavior:"smooth",block:"start"});$("reminderMasterV953")?.focus?.()},180)});
  document.addEventListener("change",e=>{if(e.target?.id==="reminderMasterV953")setTimeout(syncReminderShortcut,0)},true);
  window.addEventListener("storage",syncReminderShortcut);
  syncReminderShortcut();
