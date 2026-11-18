@@ -2983,8 +2983,9 @@ body{font-size:16px}
         <div class="reminder-options-v953">
           <label>Fréquence maximale
             <select id="reminderCadenceV953">
-              <option value="light">Légère · env. 3 rappels/semaine</option>
-              <option value="daily">Régulière · max. 1/jour</option>
+              <option value="light">Légère · env. 2 à 3 rappels/semaine</option>
+              <option value="medium">Moyenne · env. 4 à 5 rappels/semaine</option>
+              <option value="regular">Régulière · max. 1 rappel/jour</option>
             </select>
           </label>
           <label>À partir de
@@ -10603,61 +10604,61 @@ function pick(arr,key){
 function candidates(s){
  const out=[],p=pathState(),mem=memory(),age=lastMoodAgeDays(),best=bestTool(),themeTool=themeSuggestedTool(),day=dayKey();
  if(s.path&&p){
-   const title=pick(["🌱 Une petite étape aujourd’hui ?","🧭 Ton parcours t’attend tranquillement","✨ On reprend là où tu en étais ?"],"path"+day);
+   const title=pick(["🌱 Une étape disponible aujourd’hui","🧭 Votre parcours peut être repris","✨ Une étape de votre parcours est disponible"],"path"+day);
    const body=pick([
-    pathName(p.key)+" · "+p.done+"/7 étapes déjà faites. Une petite suite, quand tu veux 💛",
-    "Tu as déjà avancé dans "+pathName(p.key)+". La prochaine étape est prête, sans pression 🌿",
-    "Pas besoin de tout faire : une seule étape peut suffire aujourd’hui ✨"
+    pathName(p.key)+" · "+p.done+"/7 étapes déjà faites. Une nouvelle étape est disponible, à votre rythme.",
+    "Tu as déjà avancé dans "+pathName(p.key)+". La prochaine étape est disponible, sans contrainte de rythme.",
+    "Une seule étape peut suffire pour aujourd’hui."
    ],"pathb"+day);
    out.push({id:"path",priority:100,title,body,action:"path"});
  }
  if(s.progress&&mem.next_small_step){
-   out.push({id:"step",priority:92,title:pick(["👣 Et ton petit pas ?","🌼 Un mini point avec toi-même","✨ Petit pas, pas perfection"],"step"+day),
+   out.push({id:"step",priority:92,title:pick(["👣 Faire le point sur votre petit pas","🌼 Un bref point personnel","✨ Avancer par petites étapes"],"step"+day),
    body:pick([
-    "Tu avais choisi : « "+String(mem.next_small_step).slice(0,100)+" ». On regarde où tu en es ?",
-    "Ton petit pas est toujours là si tu veux le reprendre. Même 2 minutes comptent 💛",
-    "Envie de vérifier si ce petit pas te convient encore ? Tu peux l’ajuster, pas besoin de réussir parfaitement."
+    "Tu avais choisi : « "+String(mem.next_small_step).slice(0,100)+" ». Vous pouvez faire un point rapide sur son avancement.",
+    "Votre petit pas reste disponible. Quelques minutes peuvent suffire.",
+    "Vous pouvez vérifier si ce petit pas reste adapté et l’ajuster si nécessaire."
    ],"stepb"+day),action:"step"});
  }
  if(s.checkin&&age>=2){
-   out.push({id:"checkin",priority:88,title:pick(["💗 Météo intérieure express","🌦️ Comment ça va, vraiment ?","🫶 Petit check-in sans jugement"],"check"+day),
+   out.push({id:"checkin",priority:88,title:pick(["💗 Point émotionnel express","💗 Un point sur votre état","🌿 Un moment pour faire le point"],"check"+day),
    body:pick([
-    "En 10 secondes : quelle émotion prend le plus de place aujourd’hui ?",
-    "Pas besoin d’aller bien. Juste un mot pour dire comment tu te sens maintenant 🌷",
-    "Mini pause : qu’est-ce que tu ressens, et de quoi aurais-tu besoin là tout de suite ?"
+    "En quelques secondes : quelle émotion est la plus présente aujourd’hui ?",
+    "Un mot suffit pour identifier ce que vous ressentez maintenant 🌷",
+    "Une courte pause peut aider à identifier ce que vous ressentez et ce dont vous avez besoin maintenant."
    ],"checkb"+day),action:"checkin"});
  }
  if(s.tools&&best){
-   out.push({id:"best",priority:82,title:pick(["⭐ On ressort un outil qui marche ?","🌿 Ton petit raccourci bien-être","🎯 Un outil déjà utile pour toi"],"best"+day),
+   out.push({id:"best",priority:82,title:pick(["⭐ Reprendre un outil utile","🌿 Un outil déjà utile","🎯 Un outil qui vous a déjà aidé"],"best"+day),
    body:pick([
-    "D’après tes retours, "+toolLabel(best)+" t’a déjà aidé. On le rejoue en version courte ?",
-    "Ton historique dit que "+toolLabel(best)+" te réussit plutôt bien. Ça te dit de le refaire ?",
-    "Pas besoin de chercher loin : "+toolLabel(best)+" a déjà été utile. Une petite reprise peut suffire ✨"
+    "D’après tes retours, "+toolLabel(best)+" t’a déjà aidé. Vous pouvez le reprendre en version courte.",
+    "Vos retours indiquent que "+toolLabel(best)+" semble vous avoir été utile. Vous pouvez le reprendre aujourd’hui.",
+    "Un outil déjà utile peut être repris : "+toolLabel(best)+" a déjà montré un intérêt. Quelques minutes peuvent suffire."
    ],"bestb"+day),action:"tool",tool:best});
  }
  if(s.tools&&themeTool&&!best){
-   out.push({id:"theme",priority:76,title:pick(["🌿 Une idée pour maintenant","✨ Un outil qui colle à ton parcours","🧩 Petit coup de pouce"],"theme"+day),
+   out.push({id:"theme",priority:76,title:pick(["🌿 Une suggestion pour maintenant","✨ Un outil adapté à votre parcours","🧩 Une suggestion ciblée"],"theme"+day),
    body:pick([
-    "Pour ton parcours actuel, "+toolLabel(themeTool)+" peut être une bonne option. Tu veux tester ?",
-    "Aujourd’hui, Allo Psycho te propose "+toolLabel(themeTool)+". Quelques minutes peuvent suffire 🌱",
-    "Envie d’un outil simple et adapté ? Essaie "+toolLabel(themeTool)+", sans obligation."
+    "Pour ton parcours actuel, "+toolLabel(themeTool)+" peut être une bonne option. Vous pouvez le tester si cela vous semble pertinent.",
+    "Aujourd’hui, Allo Psycho vous propose "+toolLabel(themeTool)+". Quelques minutes peuvent suffire.",
+    "Un outil simple et adapté peut être essayé : "+toolLabel(themeTool)+", sans obligation."
    ],"themeb"+day),action:"tool",tool:themeTool});
  }
  if(s.progress&&weeklyChallengePending()){
-   out.push({id:"mission",priority:65,title:pick(["🎲 Mini mission du moment","🌟 Petit défi, zéro pression","👣 Une mission douce pour aujourd’hui"],"mission"+day),
+   out.push({id:"mission",priority:65,title:pick(["🎲 Mission du moment","🌟 Un défi léger","👣 Une mission pour aujourd’hui"],"mission"+day),
    body:pick([
-    "Ta mission de la semaine est dispo. Tu peux la faire en version mini 😉",
-    "Pas besoin d’un grand effort : un petit test suffit pour valider ta mission ✨",
-    "Une micro-expérience aujourd’hui ? Ta mission t’attend si tu en as envie 🌿"
+    "Votre mission de la semaine est disponible. Une version courte suffit.",
+    "Un petit test suffit pour avancer dans cette mission.",
+    "Une courte expérimentation peut être réalisée aujourd’hui, si cela vous convient."
    ],"missionb"+day),action:"mission"});
  }
  const tcc=readJson("alloPsychoTCC",[]),journals=readJson("alloPsychoJournaux",[]);
  if(s.progress&&(tcc.length+journals.length)>=3){
-   out.push({id:"review",priority:55,title:pick(["🔎 Regarder le chemin parcouru","🌱 Et si on regardait ce qui change ?","✨ Petit bilan, grands repères"],"review"+day),
+   out.push({id:"review",priority:55,title:pick(["🔎 Observer votre progression","🌱 Faire un point sur les évolutions","✨ Un bref bilan pour mieux se repérer"],"review"+day),
    body:pick([
-    "Tu as déjà quelques traces de ton parcours. On regarde ce qui revient et ce qui t’aide le plus ?",
-    "Un mini bilan peut parfois montrer des progrès qu’on ne remarque pas au quotidien 💛",
-    "Tu as accumulé assez de repères pour faire un point simple sur ton évolution."
+    "Vous disposez déjà de plusieurs repères. Un bref bilan peut aider à identifier ce qui revient et ce qui vous aide le plus.",
+    "Un bref bilan peut faire apparaître des évolutions peu visibles au quotidien.",
+    "Vous avez désormais suffisamment de repères pour faire un point simple sur votre évolution."
    ],"reviewb"+day),action:"review"});
  }
  return out.sort((a,b)=>b.priority-a.priority);
@@ -10696,7 +10697,7 @@ function persist(){
 }
 function renderPreview(){
  const s=settings(),c=currentCandidate(),box=$("reminderPreviewV953"),hint=$("reminderSuggestionV952");
- if(hint)hint.textContent=s.enabled?"🌷 Les rappels changent avec ton parcours et ton rythme, sans culpabiliser si tu ne les ouvres pas.":"💡 Active-les seulement si tu as envie qu’Allo Psycho te fasse de petits coucous de temps en temps.";
+ if(hint)hint.textContent=s.enabled?"🌷 Les rappels évoluent selon votre parcours et votre rythme. Ils restent facultatifs et peuvent être ignorés sans conséquence.":"💡 Activez les rappels uniquement si vous souhaitez recevoir des suggestions ponctuelles d’Allo Psycho.";
  if(!box)return;
  box.innerHTML=c?'<strong>Prochain rappel pertinent :</strong><br>'+c.title+' — '+c.body:'<strong>Aperçu :</strong> aucun rappel prioritaire pour le moment.';
 }
@@ -10712,9 +10713,12 @@ function dayKey(d=new Date()){return d.toISOString().slice(0,10)}
 function allowedByCadence(s){
  const sent=s.sent||{},now=new Date(),today=dayKey(now);
  if(sent.lastDay===today)return false;
- if(s.cadence==="daily")return true;
  const last=sent.lastAt?new Date(sent.lastAt).getTime():0;
- return !last||Date.now()-last>=48*3600000;
+ if(!last)return true;
+ const elapsed=Date.now()-last;
+ if(s.cadence==="regular")return elapsed>=20*3600000;
+ if(s.cadence==="medium")return elapsed>=32*3600000;
+ return elapsed>=56*3600000;
 }
 async function notify(c){
  if(!c||!("Notification" in window)||Notification.permission!=="granted")return false;
