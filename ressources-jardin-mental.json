@@ -1,0 +1,1156 @@
+{
+  "origin": "Jardin Mental / Mon journal mental",
+  "source": "https://github.com/SocialGouv/jardinmental/blob/master/app/src/scenes/tools/toolsData.tsx",
+  "sourceLicense": "Apache-2.0 pour le code source ; les ressources liées sont éditées par leurs auteurs respectifs",
+  "updated": "2026-11-18",
+  "items": [
+    {
+      "id": 1,
+      "title": "Agenda du sommeil",
+      "source": "Reseau Morphée",
+      "themes": [
+        "Sommeil"
+      ],
+      "types": [
+        "Fichier"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.reseau-morphee.fr/wp-content/uploads/2009/01/agenda_2p.pdf"
+    },
+    {
+      "id": 2,
+      "title": "Identifier le professionnel de santé adapté",
+      "source": "Sante Psy Jeunes",
+      "themes": [
+        "Obtenir de l'aide",
+        "Émotions & pensées"
+      ],
+      "types": [
+        "Questionnaire"
+      ],
+      "audience": [
+        "child"
+      ],
+      "url": "https://primo.santepsyjeunes.fr/0"
+    },
+    {
+      "id": 3,
+      "title": "Évaluez la gravité d'une addiction",
+      "source": "Addict'AIDE",
+      "themes": [
+        "Addictions"
+      ],
+      "types": [
+        "Questionnaire"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.addictaide.fr/parcours/gravite/"
+    },
+    {
+      "id": 4,
+      "title": "Repérez les usages nocifs de substances psychoactives chez les adolescents et jeunes adultes (Test ADOSPA)",
+      "source": "Addict'AIDE",
+      "themes": [
+        "Addictions"
+      ],
+      "types": [
+        "Questionnaire"
+      ],
+      "audience": [
+        "child",
+        "parent"
+      ],
+      "url": "https://www.addictaide.fr/parcours/craft/"
+    },
+    {
+      "id": 5,
+      "title": "Évaluez votre niveau de dépendance aux jeux d’argent et de hasard (Test ICJE)",
+      "source": "Addict'AIDE",
+      "themes": [
+        "Addictions"
+      ],
+      "types": [
+        "Questionnaire"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.addictaide.fr/parcours/icje/"
+    },
+    {
+      "id": 6,
+      "title": "Évaluez votre usage d’internet (Internet - Test IAT)",
+      "source": "Addict'AIDE",
+      "themes": [
+        "Addictions"
+      ],
+      "types": [
+        "Questionnaire"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.addictaide.fr/parcours/internet/"
+    },
+    {
+      "id": 7,
+      "title": "Mesurez votre dépendance aux jeux vidéo (Game Addiction Scale)",
+      "source": "Addict'AIDE",
+      "themes": [
+        "Addictions"
+      ],
+      "types": [
+        "Questionnaire"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.addictaide.fr/parcours/gas/"
+    },
+    {
+      "id": 8,
+      "title": "Mesurez votre consommation de cannabis (Questionnaire CAST)",
+      "source": "Addict'AIDE",
+      "themes": [
+        "Addictions"
+      ],
+      "types": [
+        "Questionnaire"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.addictaide.fr/parcours/cast/"
+    },
+    {
+      "id": 9,
+      "title": "Évaluez un usage nocif de cannabis (Test ALAC)",
+      "source": "Addict'AIDE",
+      "themes": [
+        "Addictions"
+      ],
+      "types": [
+        "Questionnaire"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.addictaide.fr/parcours/alac/"
+    },
+    {
+      "id": 10,
+      "title": "Mesurez vos chances de réussite du sevrage tabagique (Test Demaria-Grimaldi-Lagrue)",
+      "source": "Addict'AIDE",
+      "themes": [
+        "Addictions"
+      ],
+      "types": [
+        "Questionnaire"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.addictaide.fr/parcours/demaria/"
+    },
+    {
+      "id": 11,
+      "title": "Évaluez votre motivation à arrêter de fumer (Test de Lagrue et Légeron)",
+      "source": "Addict'AIDE",
+      "themes": [
+        "Addictions"
+      ],
+      "types": [
+        "Questionnaire"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.addictaide.fr/parcours/lagrue/"
+    },
+    {
+      "id": 12,
+      "title": "Quantifiez votre niveau de dépendance au tabac (Test de Fagerström)",
+      "source": "Addict'AIDE",
+      "themes": [
+        "Addictions"
+      ],
+      "types": [
+        "Questionnaire"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.addictaide.fr/parcours/fagerstrom/"
+    },
+    {
+      "id": 13,
+      "title": "Évaluez votre risque d’addiction à l’alcool (Questionnaire AUDIT)",
+      "source": "Addict'AIDE",
+      "themes": [
+        "Addictions"
+      ],
+      "types": [
+        "Questionnaire"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.addictaide.fr/parcours/audit/"
+    },
+    {
+      "id": 14,
+      "title": "Workaholisme (dépendance au travail) - Test WART",
+      "source": "Addict'AIDE",
+      "themes": [
+        "Addictions"
+      ],
+      "types": [
+        "Questionnaire"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.addictaide.fr/parcours/wart/"
+    },
+    {
+      "id": 15,
+      "title": "Réseau des centres du sommeil",
+      "source": "INSV",
+      "themes": [
+        "Sommeil",
+        "Obtenir de l'aide"
+      ],
+      "types": [
+        "Carte"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://institut-sommeil-vigilance.org/ou-consulter-reseau-sommeil-france/"
+    },
+    {
+      "id": 16,
+      "title": "Poser ses maux",
+      "source": "Nightline",
+      "themes": [
+        "Émotions & pensées"
+      ],
+      "types": [
+        "Jeu"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.nightline.fr/kit-de-vie/poser-ses-maux"
+    },
+    {
+      "id": 17,
+      "title": "Body Scan",
+      "source": "Nightline",
+      "themes": [
+        "Gérer le stress"
+      ],
+      "types": [
+        "Vidéo"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.youtube.com/watch?v=D89hIkSRvnY"
+    },
+    {
+      "id": 18,
+      "title": "Crise de calme",
+      "source": "Nightline",
+      "themes": [
+        "Gérer le stress",
+        "Gérer une crise"
+      ],
+      "types": [
+        "Vidéo"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.youtube.com/watch?v=9VUp582KRH8"
+    },
+    {
+      "id": 19,
+      "title": "Découvrir la méditation",
+      "source": "Nightline",
+      "themes": [
+        "Gérer le stress"
+      ],
+      "types": [
+        "Vidéo"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.youtube.com/watch?v=rlKe8dGsEko&embeds_referring_euri=https%3A%2F%2Fwww.nightline.fr%2F&source_ve_path=MjM4NTE"
+    },
+    {
+      "id": 20,
+      "title": "Agir sur mes comportements",
+      "source": "Nightline",
+      "themes": [
+        "Bien-être & vie quotidienne"
+      ],
+      "types": [
+        "Article",
+        "Jeu"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.nightline.fr/kit-de-vie/agir-sur-mes-comportements"
+    },
+    {
+      "id": 21,
+      "title": "MyClepsy",
+      "source": "CléPsy",
+      "themes": [
+        "Obtenir de l'aide"
+      ],
+      "types": [
+        "Chatbot"
+      ],
+      "audience": [
+        "parent"
+      ],
+      "url": "https://www.clepsy.fr/"
+    },
+    {
+      "id": 22,
+      "title": "Plan personnel de gestion de crise",
+      "source": "Centre Ressources de Réhabilitation Psychosociale",
+      "themes": [
+        "Obtenir de l'aide",
+        "Gérer une crise"
+      ],
+      "types": [
+        "Fichier"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://ateliers-rehab.ch/docs/revim/REVIM_Mon-plan-de-gestion-de-crise-2025.pdf"
+    },
+    {
+      "id": 23,
+      "title": "Les livrets d’auto-soin du CCR",
+      "source": "Centre Ressources de Réhabilitation Psychosociale",
+      "themes": [
+        "Émotions & pensées",
+        "Bien-être & vie quotidienne",
+        "Gérer une crise",
+        "Sommeil",
+        "Obtenir de l'aide"
+      ],
+      "types": [
+        "Article"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://centre-ressource-rehabilitation.org/outil-livrets-d-auto-soin"
+    },
+    {
+      "id": 24,
+      "title": "Les activités individuelles créatives de l’Etonnant Periple",
+      "source": "Etonnant Périple",
+      "themes": [
+        "Bien-être & vie quotidienne"
+      ],
+      "types": [
+        "Article"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://etonnant-periple.fr/activites-individuelles/"
+    },
+    {
+      "id": 25,
+      "title": "Hop Ma Liste ",
+      "source": "CHU Angers",
+      "themes": [
+        "Obtenir de l'aide",
+        "Gérer une crise"
+      ],
+      "types": [
+        "App"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.chu-angers.fr/offre-de-soins/acteur-de-sante-publique/hop-ma-liste-134448.kjsp?"
+    },
+    {
+      "id": 26,
+      "title": "Respirelax ",
+      "source": "Thermes Allevard",
+      "themes": [
+        "Gérer le stress"
+      ],
+      "types": [
+        "App"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.thermes-allevard.com/content/respirelax-0"
+    },
+    {
+      "id": 27,
+      "title": "Carte des lieux pour trouver de l’aide ",
+      "source": "Santé.fr",
+      "themes": [
+        "Obtenir de l'aide"
+      ],
+      "types": [
+        "Carte"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.sante.fr/sante-mentale-2/ou-trouver-de-laide"
+    },
+    {
+      "id": 28,
+      "title": "Se former au secourisme en santé mentale",
+      "source": "PSSM",
+      "themes": [
+        "Obtenir de l'aide"
+      ],
+      "types": [
+        "Formation"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.pssmformation.fr/"
+    },
+    {
+      "id": 29,
+      "title": "Consommation d’alcool : Questionnaire FACE",
+      "source": "Addict'AIDE",
+      "themes": [
+        "Addictions"
+      ],
+      "types": [
+        "Questionnaire"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.addictaide.fr/parcours/face/?quest=true#/face"
+    },
+    {
+      "id": 30,
+      "title": "Relaxation musculaire",
+      "source": "Santé Mentale Info Service",
+      "themes": [
+        "Gérer le stress"
+      ],
+      "types": [
+        "Audio",
+        "Exercice"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.santementale-info-service.fr/en-prendre-soin/tous-les-exercices/relaxation-musculaire"
+    },
+    {
+      "id": 31,
+      "title": "Cohérence cardiaque",
+      "source": "Santé Mentale Info Service",
+      "themes": [
+        "Gérer le stress",
+        "Gérer une crise"
+      ],
+      "types": [
+        "Vidéo",
+        "Exercice"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.santementale-info-service.fr/en-prendre-soin/tous-les-exercices/coherence-cardiaque"
+    },
+    {
+      "id": 32,
+      "title": "Journal du sommeil",
+      "source": "Santé Mentale Info Service",
+      "themes": [
+        "Sommeil"
+      ],
+      "types": [
+        "Fichier",
+        "Exercice",
+        "Observation"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.santementale-info-service.fr/sites/default/files/2025-05/Santementale_Journal-du-sommeil_0.pdf"
+    },
+    {
+      "id": 33,
+      "title": "Journal de gratitude",
+      "source": "Santé Mentale Info Service",
+      "themes": [
+        "Bien-être & vie quotidienne"
+      ],
+      "types": [
+        "Fichier",
+        "Exercice",
+        "Observation"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.santementale-info-service.fr/sites/default/files/2025-05/Santementale_Journal-de-gratitude_0.pdf"
+    },
+    {
+      "id": 34,
+      "title": "Lettre de gratitude",
+      "source": "Santé Mentale Info Service",
+      "themes": [
+        "Bien-être & vie quotidienne"
+      ],
+      "types": [
+        "Fichier",
+        "Exercice",
+        "Observation"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.santementale-info-service.fr/sites/default/files/2025-05/Santementale_Lettre-de-gratitude_0.pdf"
+    },
+    {
+      "id": 35,
+      "title": "Activités pour prendre soin de sa santé mentale",
+      "source": "Santé Mentale Info Service",
+      "themes": [
+        "Bien-être & vie quotidienne"
+      ],
+      "types": [
+        "Fichier",
+        "Exercice"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.santementale-info-service.fr/sites/default/files/2025-05/Santementale_Activite%CC%81-qui-me-font-du-bien_0.pdf"
+    },
+    {
+      "id": 36,
+      "title": "Le questionnaire du sommeil",
+      "source": "Reseau Morphée",
+      "themes": [
+        "Sommeil"
+      ],
+      "types": [
+        "Questionnaire"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://questionnaire.reseau-morphee.fr/"
+    },
+    {
+      "id": 37,
+      "title": "Résoudre ses problèmes avec la méthode PROPS",
+      "source": "Promotion Santé Normandie",
+      "themes": [
+        "Bien-être & vie quotidienne"
+      ],
+      "types": [
+        "Vidéo"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.youtube.com/watch?v=z5QsLht3MIY&list=PLUGg132D8DUzv2H04p0-AWB_L5aplMtbo&index=12"
+    },
+    {
+      "id": 38,
+      "title": "Comprendre mes biais de pensée : prendre de la distance",
+      "source": "Nightline",
+      "themes": [
+        "Émotions & pensées"
+      ],
+      "types": [
+        "Article",
+        "Jeu",
+        "Quizz"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.nightline.fr/kit-de-vie/comprendre-mes-biais-de-pensee"
+    },
+    {
+      "id": 39,
+      "title": "Décrocher des pensées négatives sur soi même",
+      "source": "Organisation Mondiale de la Santé (OMS)",
+      "themes": [
+        "Émotions & pensées"
+      ],
+      "types": [
+        "Audio",
+        "Exercice"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://terrance.who.int/mediacentre/audio/MSD/Doing_What_Matters_French/WHO-AUDIO_Stress_Management_Unhooking_from_Unkind_Thoughts_FRENCH_22OCT2020.mp3"
+    },
+    {
+      "id": 40,
+      "title": "Remarquer et nommer une pensée difficile",
+      "source": "Organisation Mondiale de la Santé (OMS)",
+      "themes": [
+        "Émotions & pensées"
+      ],
+      "types": [
+        "Audio",
+        "Exercice"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://terrance.who.int/mediacentre/audio/MSD/Doing_What_Matters_French/WHO-AUDIO_Stress_Management_Notice_and_Name_FRENCH_22OCT2020.mp3"
+    },
+    {
+      "id": 41,
+      "title": "Apprendre à faire le tri dans ses pensées",
+      "source": "Fondation Jeunes en Tête",
+      "themes": [
+        "Émotions & pensées"
+      ],
+      "types": [
+        "Article"
+      ],
+      "audience": [
+        "child"
+      ],
+      "url": "https://fondationjeunesentete.org/ressource/anxiete-apprendre-a-faire-le-tri-dans-mes-pensees-pour-me-sentir-mieux/"
+    },
+    {
+      "id": 42,
+      "title": "S’ancrer dans le présent - 11 min",
+      "source": "Organisation Mondiale de la Santé (OMS)",
+      "themes": [
+        "Émotions & pensées",
+        "Gérer le stress"
+      ],
+      "types": [
+        "Audio",
+        "Exercice"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://terrance.who.int/mediacentre/audio/MSD/Doing_What_Matters_French/WHO-AUDIO_Stress_Management_Grounding_Exercise_3_10_minutes_FRENCH_22OCT2020.mp3"
+    },
+    {
+      "id": 43,
+      "title": "S’ancrer dans le présent -  6 min",
+      "source": "Organisation Mondiale de la Santé (OMS)",
+      "themes": [
+        "Émotions & pensées",
+        "Gérer le stress"
+      ],
+      "types": [
+        "Audio",
+        "Exercice"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://terrance.who.int/mediacentre/audio/MSD/Doing_What_Matters_French/WHO-AUDIO_Stress_Management_Grounding_Exercise_2_2_minutes_FRENCH_22OCT2020.mp3"
+    },
+    {
+      "id": 44,
+      "title": "S’ancrer dans le présent - 2 min",
+      "source": "Organisation Mondiale de la Santé (OMS)",
+      "themes": [
+        "Émotions & pensées",
+        "Gérer le stress"
+      ],
+      "types": [
+        "Audio",
+        "Exercice"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://terrance.who.int/mediacentre/audio/MSD/Doing_What_Matters_French/WHO-AUDIO_Stress_Management_Grounding_Exercise_1__5_minutes_FRENCH_22OCT2020.mp3"
+    },
+    {
+      "id": 45,
+      "title": "Maintenir son attention sur le présent : Exercice “Conscience de boire”",
+      "source": "Organisation Mondiale de la Santé (OMS)",
+      "themes": [
+        "Émotions & pensées",
+        "Gérer le stress"
+      ],
+      "types": [
+        "Audio",
+        "Exercice"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://terrance.who.int/mediacentre/audio/MSD/Doing_What_Matters_French/WHO-AUDIO_Stress_Management_Awareness_of_Drinking_FRENCH_22OCT2020.mp3"
+    },
+    {
+      "id": 46,
+      "title": "Réguler ses émotions, mini jeu de l’action opposée",
+      "source": "Nightline",
+      "themes": [
+        "Émotions & pensées"
+      ],
+      "types": [
+        "Jeu"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.nightline.fr/kitdevie/fais-l-action-opposee/"
+    },
+    {
+      "id": 47,
+      "title": "La stratégie parapluie en cas de crise",
+      "source": "Fondation Jeunes en Tête",
+      "themes": [
+        "Gérer une crise"
+      ],
+      "types": [
+        "Fichier"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://cdn.fondationjeunesentete.org/wp-content/uploads/2020/11/09141604/FJET-FICHE-JEUNESSE_PARAPLUIE.pdf"
+    },
+    {
+      "id": 48,
+      "title": "Gérer ses émotions",
+      "source": "Promotion Santé Normandie",
+      "themes": [
+        "Émotions & pensées"
+      ],
+      "types": [
+        "Vidéo",
+        "Exercice"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.youtube.com/watch?v=JqYJE6NEOms&list=PLUGg132D8DUzv2H04p0-AWB_L5aplMtbo&index=9"
+    },
+    {
+      "id": 49,
+      "title": "Exercice audio : faire de la place à ses émotions",
+      "source": "Organisation Mondiale de la Santé (OMS)",
+      "themes": [
+        "Émotions & pensées"
+      ],
+      "types": [
+        "Audio"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://terrance.who.int/mediacentre/audio/MSD/Doing_What_Matters_French/WHO-AUDIO_Stress_Management_Making_Room_FRENCH_22OCT2020.mp3"
+    },
+    {
+      "id": 50,
+      "title": "Prendre du recul sur ses émotions",
+      "source": "Fondation Jeunes en Tête",
+      "themes": [
+        "Émotions & pensées"
+      ],
+      "types": [
+        "Article"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://fondationjeunesentete.org/ressource/mes-emotions/"
+    },
+    {
+      "id": 51,
+      "title": "Mini jeu : identifier ses émotions",
+      "source": "Nightline",
+      "themes": [
+        "Émotions & pensées"
+      ],
+      "types": [
+        "Jeu"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.nightline.fr/kitdevie/que-ressens-tu/"
+    },
+    {
+      "id": 52,
+      "title": "Fiche mémo - Valeurs",
+      "source": "Fondation Jeunes en Tête",
+      "themes": [
+        "Émotions & pensées"
+      ],
+      "types": [
+        "Fichier"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://fondationjeunesentete.org/wp-content/uploads/2020/09/FJET-FICHE-JEUNESSE_MES-VALEURS.pdf"
+    },
+    {
+      "id": 53,
+      "title": "Vidéo d’animation - Les émotions",
+      "source": "Promotion Santé Normandie",
+      "themes": [
+        "Émotions & pensées"
+      ],
+      "types": [
+        "Vidéo"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://youtube.com/watch?v=GzPuTLhQR2I&list=PLUGg132D8DUzv2H04p0-AWB_L5aplMtbo&index=4"
+    },
+    {
+      "id": 54,
+      "title": "l’application Wecare",
+      "source": "Promotion Santé Bourgogne Franche-Comté",
+      "themes": [
+        "Émotions & pensées",
+        "Bien-être & vie quotidienne"
+      ],
+      "types": [
+        "App"
+      ],
+      "audience": [
+        "child"
+      ],
+      "url": "https://www.promotion-sante-bfc.org/projets/wecare"
+    },
+    {
+      "id": 55,
+      "title": "Quizz du lutteur",
+      "source": "Fondation Jeunes en Tête",
+      "themes": [
+        "Émotions & pensées"
+      ],
+      "types": [
+        "Fichier",
+        "Quizz"
+      ],
+      "audience": [
+        "child"
+      ],
+      "url": "https://fondationjeunesentete.org/wp-content/uploads/2020/09/FJET-FICHE-JEUNESSE_QUIZ-DU-LUTTEUR.pdf"
+    },
+    {
+      "id": 56,
+      "title": "Vidéo d’animation “mieux se connaitre”",
+      "source": "Promotion Santé Normandie",
+      "themes": [
+        "Émotions & pensées"
+      ],
+      "types": [
+        "Vidéo"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.youtube.com/watch?v=dB8w52M7H-c&list=PLUGg132D8DUzv2H04p0-AWB_L5aplMtbo&index=10"
+    },
+    {
+      "id": 57,
+      "title": "L’exercice audio de 8 mn pour être bienveillant envers vous-même",
+      "source": "Organisation Mondiale de la Santé (OMS)",
+      "themes": [
+        "Bien-être & vie quotidienne",
+        "Émotions & pensées"
+      ],
+      "types": [
+        "Audio"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "http://terrance.who.int/mediacentre/audio/MSD/Doing_What_Matters_French/WHO-AUDIO_Stress_Management_Being_kind_to_yourself_FRENCH_22OCT2020.mp3"
+    },
+    {
+      "id": 58,
+      "title": "L'auto-évaluation positive",
+      "source": "Promotion Santé Normandie",
+      "themes": [
+        "Bien-être & vie quotidienne"
+      ],
+      "types": [
+        "Vidéo"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.youtube.com/watch?v=dc1Kh5cmL5M&list=PLUGg132D8DUzv2H04p0-AWB_L5aplMtbo&index=6"
+    },
+    {
+      "id": 59,
+      "title": "Mon GPS (version impression)",
+      "source": "Psycom",
+      "themes": [
+        "Gérer une crise",
+        "Obtenir de l'aide"
+      ],
+      "types": [
+        "Fichier"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.psycom.org/wp-content/uploads/2024/04/PSYCOM_GPS_VF_IMPRESSION_MAI2022.pdf"
+    },
+    {
+      "id": 60,
+      "title": "Mon GPS (version interactive)",
+      "source": "Psycom",
+      "themes": [
+        "Gérer une crise",
+        "Obtenir de l'aide"
+      ],
+      "types": [
+        "Fichier"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": "https://www.psycom.org/wp-content/uploads/2023/11/PSYCOM_GPS_VF_INTERACTIF_2023.pdf"
+    },
+    {
+      "id": 61,
+      "title": "Mon GPS Ado/Jeune adulte (version impression)",
+      "source": "Psycom",
+      "themes": [
+        "Gérer une crise",
+        "Obtenir de l'aide"
+      ],
+      "types": [
+        "Fichier"
+      ],
+      "audience": [
+        "child"
+      ],
+      "url": "https://www.psycom.org/wp-content/uploads/2023/11/PSYCOM_GPS_ADOS_A-IMPRIMER_2023.pdf"
+    },
+    {
+      "id": 62,
+      "title": "Mon GPS Ado/Jeune adulte (version interactive)",
+      "source": "Psycom",
+      "themes": [
+        "Gérer une crise",
+        "Obtenir de l'aide"
+      ],
+      "types": [
+        "Fichier"
+      ],
+      "audience": [
+        "child"
+      ],
+      "url": "https://www.psycom.org/wp-content/uploads/2023/11/PSYCOM_GPS_ADOS_INTERACTIF_2023.pdf"
+    },
+    {
+      "id": 63,
+      "title": "Mon GPS Parents (version impression)",
+      "source": "Psycom",
+      "themes": [
+        "Gérer une crise",
+        "Obtenir de l'aide"
+      ],
+      "types": [
+        "Fichier"
+      ],
+      "audience": [
+        "parent"
+      ],
+      "url": "https://www.psycom.org/wp-content/uploads/2024/04/PSYCOM_GPS_PARENTS_IMPRESSION_DEF.pdf"
+    },
+    {
+      "id": 64,
+      "title": "Mon GPS Parents (version interactive)",
+      "source": "Psycom",
+      "themes": [
+        "Gérer une crise",
+        "Obtenir de l'aide"
+      ],
+      "types": [
+        "Fichier"
+      ],
+      "audience": [
+        "parent"
+      ],
+      "url": "https://www.psycom.org/wp-content/uploads/2023/11/PSYCOM_GPS_PARENTS_INTERACTIF.pdf"
+    },
+    {
+      "id": 65,
+      "title": "Colonnes de Beck",
+      "source": "Jardin Mental",
+      "themes": [
+        "Émotions & pensées"
+      ],
+      "types": [
+        "Exercice"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": null
+    },
+    {
+      "id": 66,
+      "title": "Plan de crise par Hop ma liste",
+      "source": "CHU Angers",
+      "themes": [
+        "Obtenir de l'aide",
+        "Gérer une crise"
+      ],
+      "types": [
+        "Questionnaire"
+      ],
+      "audience": [
+        "child",
+        "parent",
+        "student"
+      ],
+      "url": null
+    }
+  ],
+  "integratedIn": "Allo Psycho — Ressources complémentaires",
+  "licenseNotice": "Références sourcées dans Jardin Mental (SocialGouv, Apache-2.0 pour le code) ; contenus tiers accessibles uniquement sur leurs sites d'origine."
+}
