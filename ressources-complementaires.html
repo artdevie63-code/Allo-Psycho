@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f8dce7"><meta name="referrer" content="no-referrer">
+<title>Ressources complémentaires · Allo Psycho</title>
+<style>
+:root{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:#393746;background:#fcf9fb}
+*{box-sizing:border-box}body{margin:0}a{color:#9d2666}button,input,select{font:inherit}header{background:white;border-bottom:1px solid #eedfe7;padding:17px max(18px,4vw)}.top{max-width:1130px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}header b{font-size:18px}header a{font-size:14px;text-decoration:none;font-weight:650}
+main{max-width:1130px;padding:27px max(18px,4vw) 64px;margin:auto}h1{font-size:clamp(25px,4vw,34px);margin:5px 0 12px}h2{font-size:18px}p{line-height:1.55}.lead{color:#666371;max-width:840px}.disclaimer{border:1px solid #eadbe3;border-radius:14px;background:#fff;padding:16px 19px;max-width:960px;margin:20px 0;color:#504756}.disclaimer strong{color:#7e2857}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0 12px}.controls input,.controls select{border:1px solid #ddd1dc;border-radius:12px;background:white;color:#393746;padding:11px 13px;min-height:44px}.controls input{flex:2;min-width:220px}.controls select{flex:1;min-width:160px}
+.themes{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 20px}.themes button{border:1px solid #e8d7e0;background:#fff;border-radius:20px;padding:9px 13px;cursor:pointer;color:#6b4259;font-weight:650}.themes button[aria-pressed="true"]{background:#9b336a;border-color:#9b336a;color:white}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #dc8db8;outline-offset:2px}
+.count{color:#74717d;font-size:14px;margin-bottom:15px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:13px}.tool{background:white;border:1px solid #eee3e9;border-radius:17px;padding:18px;display:flex;flex-direction:column;gap:11px}.tool h2{font-size:17px;line-height:1.4;margin:0}.tool p{font-size:13px;color:#686575;margin:0}.tool a{font-size:14px;font-weight:700;margin-top:auto}.labels{display:flex;gap:5px;flex-wrap:wrap}.pill{background:#f7e8f1;color:#854368;border-radius:7px;font-size:11px;padding:5px 8px}.note{font-size:12px!important;color:#867887!important}.empty{padding:25px;background:white;border-radius:13px}footer{margin-top:32px;border-top:1px solid #eadfe6;padding-top:20px;color:#77717a;font-size:12px}
+</style></head><body>
+<header><div class="top"><b>🌿 Allo Psycho · Ressources complémentaires</b><a href="/">← Retour à Allo Psycho</a></div></header>
+<main><h1>Ressources complémentaires gratuites</h1>
+<p class="lead">Des documents, exercices, vidéos et questionnaires pour approfondir un thème à votre rythme. Les 66 références proviennent du catalogue public Jardin Mental. Ces ressources externes restent disponibles gratuitement, sans abonnement Premium.</p>
+<div class="disclaimer">
+<strong>Information sur les sources et l'indépendance</strong>
+<p>Allo Psycho est une application indépendante, sans affiliation, parrainage ni approbation officielle de l'Assurance Maladie, des CPAM ou des organismes éditeurs des ressources présentées. Les références sont notamment issues du catalogue Jardin Mental et leurs contenus appartiennent à leurs auteurs respectifs. Les liens ouvrent des sites externes, soumis à leurs propres conditions d'utilisation et de confidentialité.</p>
+<p>Ces supports sont informatifs et ne remplacent ni un avis professionnel ni un accompagnement adapté. Les questionnaires ne posent pas de diagnostic. En cas de danger immédiat, appelez le 15 ou le 112 ; en France, le 3114 est disponible pour les situations de crise suicidaire.</p>
+</div>
+<div class="controls"><input id="q" type="search" aria-label="Rechercher une ressource" placeholder="Rechercher une ressource ou un organisme…"><select id="format" aria-label="Filtrer par format"><option value="">Tous les formats</option></select></div>
+<div class="themes" id="themes" aria-label="Choisir une thématique"></div>
+<p class="count" id="count" role="status">Chargement des ressources…</p><div id="tools" class="grid"></div>
+<footer>Références du catalogue <a target="_blank" rel="noopener noreferrer" href="https://jardinmental.fabrique.social.gouv.fr/">Jardin Mental</a> (code source ouvert sous licence Apache-2.0). Liens externes et crédits d'auteur conservés. Aucun contenu clinique, identité ou historique d'utilisation n'est transféré d'Allo Psycho aux ressources externes par cette page avant l'ouverture volontaire d'un lien.</footer>
+</main>
+<script>
+(async()=>{
+ const $=id=>document.getElementById(id),types=$('format'),themeButtons=$('themes'),results=$('tools'),count=$('count');
+ const categories=['Émotions & pensées','Gérer le stress','Gérer une crise','Sommeil','Bien-être & vie quotidienne','Addictions',"Obtenir de l'aide"];
+ const safeUrl=x=>{try{const u=new URL(x);return ['https:','http:'].includes(u.protocol)?u.href:null}catch{return null}};
+ const make=(t,v,cl)=>{const e=document.createElement(t);if(v!==undefined)e.textContent=v;if(cl)e.className=cl;return e};
+ let current=categories[0],items=[];
+ function render(){
+  themeButtons.replaceChildren(...categories.map(cat=>{const b=make('button',cat);b.type='button';b.setAttribute('aria-pressed',String(current===cat));b.onclick=()=>{current=cat;render()};return b}));
+  const q=$('q').value.trim().toLocaleLowerCase('fr');
+  const matches=items.filter(x=>x.themes.includes(current)&&(!types.value||x.types.includes(types.value))&&(!q||[x.title,x.source,...x.themes,...x.types].join(' ').toLocaleLowerCase('fr').includes(q)));
+  count.textContent=matches.length+' ressource'+(matches.length===1?'':'s')+' dans cette thématique · 66 dans la bibliothèque';
+  results.replaceChildren();
+  if(!matches.length){results.append(make('p','Aucune ressource ne correspond à cette recherche.','empty'));return}
+  for(const x of matches){
+   const card=make('article',undefined,'tool'),labels=make('div',undefined,'labels');
+   x.types.forEach(t=>labels.append(make('span',t,'pill')));
+   card.append(labels,make('h2',x.title),make('p','Source : '+x.source));
+   const a=make('a',x.url?'Consulter la ressource externe ↗':'Ouvrir Jardin Mental ↗');
+   a.target='_blank';a.rel='noopener noreferrer';a.href=safeUrl(x.url)||'https://jardinmental.fabrique.social.gouv.fr/';
+   card.append(a);
+   if(!x.url)card.append(make('p',"Exercice propre à Jardin Mental, non reproduit dans Allo Psycho.",'note'));
+   results.append(card);
+  }
+ }
+ try{
+  const r=await fetch('ressources-jardin-mental.json',{cache:'no-store'});if(!r.ok)throw Error('Catalogue indisponible.');
+  const doc=await r.json();if(!Array.isArray(doc.items)||doc.items.length!==66)throw Error('Catalogue incomplet.');
+  items=doc.items;
+  [...new Set(items.flatMap(x=>x.types))].sort((a,b)=>a.localeCompare(b,'fr')).forEach(t=>{const o=make('option',t);o.value=t;types.append(o)});
+  $('q').addEventListener('input',render);types.addEventListener('change',render);render();
+ }catch(e){count.textContent='La bibliothèque ne peut pas être affichée pour le moment.';results.append(make('p',e.message,'empty'))}
+})();
+</script></body></html>
