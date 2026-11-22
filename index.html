@@ -2392,8 +2392,10 @@ body{font-size:16px}
 
 
 /* ===== V9.3.6 — + D'OUTILS regroupé par thématiques ===== */
-.tools-theme-nav-v936{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:12px 0}
-.tools-theme-nav-v936 button{border:1px solid #eadfe5;background:#fff;border-radius:17px;padding:12px;text-align:left;color:var(--text);cursor:pointer}
+.tools-theme-nav-v936{display:flex;gap:8px;margin:10px 0 14px;overflow-x:auto;padding:2px 1px 7px;scrollbar-width:thin}
+.tools-theme-nav-v936 button{flex:0 0 auto;min-width:150px;max-width:190px;border:1px solid #eadfe5;background:#fff;border-radius:16px;padding:10px 11px;text-align:left;color:var(--text);cursor:pointer;box-shadow:0 5px 16px rgba(64,48,57,.05)}
+.tools-theme-nav-v936 button.active{background:#57484f;color:#fff;border-color:#57484f}
+.tools-theme-nav-v936 button.active small{color:#f4eef1!important}
 .tools-theme-nav-v936 strong,.tools-theme-nav-v936 small{display:block}.tools-theme-nav-v936 strong{font-size:.8rem}.tools-theme-nav-v936 small{margin-top:4px;color:var(--soft);font-size:.74rem!important;line-height:1.4}
 .tools-theme-v936{margin:12px 0;border:1px solid #eadfe5;border-radius:22px;background:#faf8f7;overflow:hidden}
 .tools-theme-head-v936{width:100%;border:0;background:transparent;padding:15px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--text);text-align:left;cursor:pointer}
@@ -2402,8 +2404,8 @@ body{font-size:16px}
 .tools-theme-body-v936{display:none;padding:0 12px 12px}.tools-theme-v936.open .tools-theme-body-v936{display:grid;gap:12px}
 .tools-theme-body-v936>.card{margin:0!important}
 .tools-empty-v936{padding:14px;color:var(--soft);font-size:.78rem}
-@media(max-width:760px){.tools-theme-nav-v936{grid-template-columns:1fr 1fr}}
-@media(max-width:480px){.tools-theme-nav-v936{grid-template-columns:1fr}}
+@media(max-width:760px){.tools-theme-nav-v936 button{min-width:145px}}
+@media(max-width:480px){.tools-theme-nav-v936{margin-left:-2px;margin-right:-2px}.tools-theme-nav-v936 button{min-width:138px}}
 
 
 /* ===== V9.3.7 — bilan Attrape-pensées interactif ===== */
@@ -2492,6 +2494,19 @@ body{font-size:16px}
 .reminder-bell-v954{font-size:1.15rem;line-height:1}
 .reminder-dot-v954{width:9px;height:9px;border-radius:50%;background:#b9adb3;box-shadow:0 0 0 2px #fff}
 .reminder-shortcut-v954.active .reminder-dot-v954{background:#64a46b}
+</style>
+
+<style>
+/* V9.5.7 — navigation compacte en tiroirs */
+#page-moretools>.hero{padding-bottom:14px}
+#page-moretools>.hero .muted{max-width:760px}
+.tools-theme-v936{margin:8px 0}
+.tools-theme-head-v936{min-height:62px}
+.tools-theme-body-v936{animation:drawerInV957 .2s ease}
+@keyframes drawerInV957{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.public-resources-v954{margin:0!important;border:0!important;box-shadow:none!important;background:transparent!important;padding:4px!important}
+.public-resources-v954 .pr-list-v954{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:700px){.public-resources-v954 .pr-list-v954{grid-template-columns:1fr}}
 </style>
 </head>
 
@@ -2953,7 +2968,7 @@ body{font-size:16px}
         <div class="hero-emoji">🧰</div>
         <p class="eyebrow">PLUS D’OUTILS</p>
         <h2>Mes outils complémentaires</h2>
-        <p class="muted">Retrouve ici les outils libres, bilans, ressources et fonctions complémentaires, sans alourdir l’accueil.</p>
+        <p class="muted">Retrouvez ici les outils, bilans, ressources et fonctions complémentaires, organisés en tiroirs pour alléger l’écran.</p>
       </div>
       <div id="moreToolsContentV933"></div>
       <div class="card reminder-settings-v952" id="reminderSettingsV952">
@@ -10222,7 +10237,8 @@ const groupDefsV940=[
  {key:"know",icon:"🪞",title:"Mieux se connaître",desc:"Questionnaires, évolution de mon état, tendances, bilans et synthèses.",tests:[x=>x.classList?.contains("selftests-v7"),x=>x.id==="innerWeatherV924",x=>x.classList?.contains("manual-v924"),x=>x.classList?.contains("monthly-summary-v924"),x=>x.classList?.contains("guided-history-v922"),x=>x.classList?.contains("evolution-combined-v73"),x=>x.id==="patternInsightCard"]},
  {key:"routines",icon:"☀️",title:"Mes routines",desc:"Routines quotidiennes et plan de progression.",tests:[x=>x.id==="routineCardV861",x=>x.classList?.contains("plan-card")]},
  {key:"missions",icon:"👣",title:"Missions & progression",desc:"Petits pas, défis et badges.",tests:[x=>x.id==="dailyThreadV923",x=>x.classList?.contains("weekly-challenge-v924"),x=>x.classList?.contains("badge-card-v923"),x=>x.classList?.contains("journey-card")]},
- {key:"reviews",icon:"🧰",title:"Ressources & repères",desc:"Contenus et outils qui semblent aider.",tests:[x=>x.classList?.contains("season-v923"),x=>!!x.querySelector?.("#resourceListV924"),x=>!!x.querySelector?.("#bestToolsV923")]},
+ {key:"reviews",icon:"🧰",title:"Ressources & repères",desc:"Contenus et outils Allo Psycho qui semblent aider.",tests:[x=>x.classList?.contains("season-v923"),x=>!!x.querySelector?.("#resourceListV924"),x=>!!x.querySelector?.("#bestToolsV923")]},
+ {key:"public",icon:"🌐",title:"Ressources publiques · 66",desc:"Bibliothèque externe gratuite, filtrable et clairement séparée d’Allo Psycho.",tests:[x=>x.id==="publicResourcesV954"]},
  {key:"support",icon:"💬",title:"Mon espace de soutien",desc:"Repères personnels, compagnon IA et ressources de soutien au quotidien.",tests:[x=>x.classList?.contains("companion-card")]}
 ];
 
@@ -10234,8 +10250,8 @@ function buildGroupsV940(dest){
   dest.prepend(nav);dest.insertBefore(wrap,nav.nextSibling);
   const placed=new Set();
   groupDefsV940.forEach((g,i)=>{
-    const sec=document.createElement("section");sec.className="tools-theme-v936"+(i===0?" open":"");sec.dataset.toolsThemeV936=g.key;
-    sec.innerHTML='<button type="button" class="tools-theme-head-v936" aria-expanded="'+(i===0?'true':'false')+'"><span><strong>'+g.icon+' '+g.title+'</strong><small>'+g.desc+'</small></span><b>⌄</b></button><div class="tools-theme-body-v936"></div>';
+    const sec=document.createElement("section");sec.className="tools-theme-v936";sec.dataset.toolsThemeV936=g.key;
+    sec.innerHTML='<button type="button" class="tools-theme-head-v936" aria-expanded="false"><span><strong>'+g.icon+' '+g.title+'</strong><small>'+g.desc+'</small></span><b>⌄</b></button><div class="tools-theme-body-v936"></div>';
     const body=sec.querySelector(".tools-theme-body-v936");
     cards.filter(x=>g.tests.some(fn=>{try{return fn(x)}catch(_){return false}})).forEach(x=>{placed.add(x);body.appendChild(x)});
     wrap.appendChild(sec);
@@ -10243,12 +10259,16 @@ function buildGroupsV940(dest){
   });
   const resource=wrap.querySelector('[data-tools-theme-v936="reviews"] .tools-theme-body-v936');
   cards.filter(x=>!placed.has(x)).forEach(x=>resource?.appendChild(x));
+  function syncNav(key){
+    nav.querySelectorAll("[data-jump-tools-v936]").forEach(b=>b.classList.toggle("active",b.dataset.jumpToolsV936===key));
+  }
   function open(key){
     wrap.querySelectorAll(".tools-theme-v936").forEach(s=>{const on=s.dataset.toolsThemeV936===key;s.classList.toggle("open",on);s.querySelector(".tools-theme-head-v936")?.setAttribute("aria-expanded",on?"true":"false")});
+    syncNav(key);
     wrap.querySelector('[data-tools-theme-v936="'+key+'"]')?.scrollIntoView({behavior:"smooth",block:"start"});
   }
-  wrap.querySelectorAll(".tools-theme-head-v936").forEach(b=>b.onclick=()=>{const s=b.closest(".tools-theme-v936");const will=!s.classList.contains("open");wrap.querySelectorAll(".tools-theme-v936").forEach(x=>x.classList.remove("open"));if(will)s.classList.add("open")});
-  nav.querySelectorAll("[data-jump-tools-v936]").forEach(b=>b.onclick=()=>open(b.dataset.jumpToolsV936));
+  wrap.querySelectorAll(".tools-theme-head-v936").forEach(b=>b.onclick=()=>{const sec=b.closest(".tools-theme-v936");const will=!sec.classList.contains("open");wrap.querySelectorAll(".tools-theme-v936").forEach(x=>{x.classList.remove("open");x.querySelector(".tools-theme-head-v936")?.setAttribute("aria-expanded","false")});if(will){sec.classList.add("open");b.setAttribute("aria-expanded","true");syncNav(sec.dataset.toolsThemeV936)}else syncNav("")});
+  nav.querySelectorAll("[data-jump-tools-v936]").forEach(b=>b.onclick=()=>{const key=b.dataset.jumpToolsV936;const sec=wrap.querySelector('[data-tools-theme-v936="'+key+'"]');if(sec?.classList.contains("open")){sec.classList.remove("open");sec.querySelector(".tools-theme-head-v936")?.setAttribute("aria-expanded","false");syncNav("")}else open(key)});
   window.alloOpenToolsThemeV936=open;
 }
 
@@ -10905,7 +10925,8 @@ function esc(x){return String(x||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&l
 function init(){
  if(document.getElementById("publicResourcesV954"))return;
  const page=document.getElementById("page-moretools");
- if(!page)return;
+ const dest=document.getElementById("moreToolsContentV933");
+ if(!page||!dest)return;
  const card=document.createElement("section");
  card.id="publicResourcesV954";
  card.className="card public-resources-v954";
@@ -10915,21 +10936,33 @@ function init(){
  '<div class="pr-note-v954"><strong>Indépendance éditoriale :</strong> cette sélection ne constitue ni un partenariat ni une validation d’Allo Psycho par les organismes cités. Les contenus externes restent sous la responsabilité de leurs éditeurs.</div>'+
  '<div class="pr-controls-v954"><input id="prSearchV954" type="search" placeholder="🔎 Rechercher une ressource…"><select id="prThemeV954"><option value="">Toutes les thématiques</option></select><select id="prFormatV954"><option value="">Tous les formats</option></select><select id="prPublicV954"><option value="">Tous les publics</option></select></div>'+
  '<div class="pr-list-v954" id="prListV954"></div><button class="btn btn-light pr-more-v954" id="prMoreV954" type="button">Afficher davantage</button>';
- const reminder=document.getElementById("reminderSettingsV952");
- page.insertBefore(card,reminder||null);
+ const publicBody=document.querySelector('[data-tools-theme-v936="public"] .tools-theme-body-v936');
+ if(publicBody) publicBody.appendChild(card);
+ else {
+   dest.appendChild(card);
+   if(typeof buildGroupsV940==="function"){
+     const oldNav=document.getElementById("toolsThemeNavV936"),oldGroups=document.getElementById("toolsThemeGroupsV936");
+     if(oldNav||oldGroups){
+       const loose=[...(oldGroups?.querySelectorAll(".card")||[])];
+       loose.forEach(x=>dest.appendChild(x));
+       oldNav?.remove();oldGroups?.remove();
+     }
+     buildGroupsV940(dest);
+   }
+ }
 
  const q=document.getElementById("prSearchV954"),theme=document.getElementById("prThemeV954"),format=document.getElementById("prFormatV954"),pub=document.getElementById("prPublicV954"),list=document.getElementById("prListV954"),more=document.getElementById("prMoreV954"),count=document.getElementById("prCountV954");
  function fill(sel,vals){vals.forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;sel.appendChild(o)})}
  fill(theme,[...new Set(DATA.map(x=>x[0]))]);
  fill(format,[...new Set(DATA.map(x=>x[1]))]);
  fill(pub,[...new Set(DATA.map(x=>x[2]))]);
- let limit=12;
+ let limit=6;
  function filtered(){
    const needle=(q.value||"").trim().toLowerCase();
    return DATA.filter(x=>(!theme.value||x[0]===theme.value)&&(!format.value||x[1]===format.value)&&(!pub.value||x[2]===pub.value)&&(!needle||x.join(" ").toLowerCase().includes(needle)));
  }
  function render(reset){
-   if(reset)limit=12;
+   if(reset)limit=6;
    const rows=filtered();count.textContent=rows.length+" ressource"+(rows.length>1?"s":"");
    list.innerHTML="";
    rows.slice(0,limit).forEach((x,i)=>{
@@ -10938,10 +10971,10 @@ function init(){
      list.appendChild(el);
    });
    if(!rows.length)list.innerHTML='<div class="pr-empty-v954">Aucune ressource ne correspond à ces filtres.</div>';
-   more.hidden=rows.length<=limit;more.textContent="Afficher davantage ("+Math.min(12,Math.max(0,rows.length-limit))+")";
+   more.hidden=rows.length<=limit;more.textContent="Afficher 6 ressources de plus ("+Math.min(6,Math.max(0,rows.length-limit))+")";
  }
  [q,theme,format,pub].forEach(el=>el.addEventListener(el===q?"input":"change",()=>render(true)));
- more.onclick=()=>{limit+=12;render(false)};
+ more.onclick=()=>{limit+=6;render(false)};
  list.addEventListener("click",e=>{
    const b=e.target.closest("[data-pr-index]");if(!b)return;
    const x=DATA[Number(b.dataset.prIndex)];if(!x)return;
