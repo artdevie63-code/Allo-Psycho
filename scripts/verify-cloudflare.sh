@@ -56,3 +56,17 @@ if ! grep -q '66 ressources' dist/index.html; then
   echo "ERROR: expected 66 public resources marker missing from Cloudflare bundle" >&2
   exit 1
 fi
+
+# V9.5.8 production release markers.
+if ! grep -q 'V9.5.8 — reconstruction canonique de + d.outils' dist/index.html; then
+  echo "ERROR: V9.5.8 compact navigation missing from Cloudflare bundle" >&2
+  exit 1
+fi
+if ! grep -q 'Ressources publiques · 66' dist/index.html; then
+  echo "ERROR: 66 public resources drawer missing from Cloudflare bundle" >&2
+  exit 1
+fi
+if ! grep -q 'allo-psycho-shell-v9.5.8-navfix-20261122' dist/sw.js; then
+  echo "ERROR: PWA cache version is stale" >&2
+  exit 1
+fi
