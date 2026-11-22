@@ -6,8 +6,6 @@ set -euo pipefail
 rm -rf dist
 mkdir -p dist/icons dist/assets/audio
 cp index.html privacy.html manifest.webmanifest sw.js dist/
-# Public reference catalog (only links and credits, no clinical data).
-cp ressources-complementaires.html ressources-jardin-mental.json dist/
 cp icons/icon-192.png icons/icon-512.png dist/icons/
 cp assets/audio/*.mp3 dist/assets/audio/
 
