@@ -1,10 +1,16 @@
 # Cloudflare deployment verification
 
-This file was added to trigger a new GitHub push on `migration-cloudflare-pages`.
+Production target: **app.allopsycho.fr**
 
-The Cloudflare build must check out the `migration-cloudflare-pages` branch, not `main`. The file `scripts/build-cloudflare.sh` exists only on the migration branch.
+Source branch: `migration-cloudflare-pages`
+Build command: `bash scripts/build-cloudflare.sh`
+Build output: `dist`
 
-Build: `bash scripts/build-cloudflare.sh`
-Deploy: `npx wrangler deploy --assets ./dist --name allo-psycho-test`
+Required release markers:
+- V9.5.8 single-window navigation
+- 66 public resources library
+- Mes rappels kept in Options
+- Long sophrology session
+- PWA cache `allo-psycho-shell-v9.5.8-navfix-20261122`
 
-Do not change Vercel or app.allopsycho.fr during this test.
+This commit is intended to trigger a fresh Cloudflare build from the production branch.
