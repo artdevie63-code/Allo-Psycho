@@ -1,0 +1,61 @@
+name: Generate long sophrology audio
+
+on:
+  push:
+    branches:
+      - migration-cloudflare-pages
+    paths:
+      - ".github/workflows/generate-sophro-long.yml"
+      - "scripts/sophrologie-visualisation-longue.txt"
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: migration-cloudflare-pages
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y espeak-ng ffmpeg wget
+
+      - name: Install Kokoro TTS
+        run: |
+          python -m pip install --upgrade pip
+          pip install kokoro-tts
+
+      - name: Download Kokoro model and voices
+        run: |
+          wget -q https://github.com/nazdridoy/kokoro-tts/releases/download/v1.0.0/voices-v1.0.bin
+          wget -q https://github.com/nazdridoy/kokoro-tts/releases/download/v1.0.0/kokoro-v1.0.onnx
+
+      - name: Generate French long sophrology MP3
+        run: |
+          mkdir -p assets/audio
+          kokoro-tts scripts/sophrologie-visualisation-longue.txt assets/audio/sophrologie-visualisation-longue.mp3 \
+            --lang fr-fr \
+            --voice ff_siwis \
+            --speed 0.90 \
+            --format mp3
+          test -s assets/audio/sophrologie-visualisation-longue.mp3
+          ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 assets/audio/sophrologie-visualisation-longue.mp3
+
+      - name: Commit generated audio
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/audio/sophrologie-visualisation-longue.mp3
+          git diff --cached --quiet && exit 0
+          git commit -m "Generate long sophrology audio with Kokoro ff_siwis"
+          git push origin HEAD:migration-cloudflare-pages
