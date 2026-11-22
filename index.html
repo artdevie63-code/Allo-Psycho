@@ -2508,7 +2508,38 @@ body{font-size:16px}
 .public-resources-v954 .pr-list-v954{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(max-width:700px){.public-resources-v954 .pr-list-v954{grid-template-columns:1fr}}
 </style>
-</head>
+
+<style>
+/* V9.5.8 — navigation + d'outils en fenêtres, sans empilement vertical */
+#page-moretools #moreToolsContentV933{display:block!important}
+.tools-home-v958{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:12px 0 16px}
+.tools-home-v958 button{min-height:92px;border:1px solid #eadfe5;background:#fff;border-radius:18px;padding:13px;text-align:left;color:var(--text);cursor:pointer;box-shadow:0 7px 20px rgba(64,48,57,.05)}
+.tools-home-v958 button.active{background:#57484f;color:#fff;border-color:#57484f}
+.tools-home-v958 button strong,.tools-home-v958 button small{display:block}
+.tools-home-v958 button strong{font-size:.84rem;line-height:1.3}
+.tools-home-v958 button small{margin-top:5px;color:var(--soft);font-size:.7rem!important;line-height:1.35}
+.tools-home-v958 button.active small{color:#f7eef2!important}
+.tools-window-v958{display:none;border:1px solid #eadfe5;border-radius:22px;background:#faf8f7;padding:12px;margin:0 0 14px}
+.tools-window-v958.open{display:block;animation:drawerInV957 .2s ease}
+.tools-window-head-v958{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:5px 4px 12px}
+.tools-window-head-v958 strong,.tools-window-head-v958 small{display:block}
+.tools-window-head-v958 strong{font-size:1rem}
+.tools-window-head-v958 small{margin-top:4px;color:var(--soft);font-size:.74rem!important}
+.tools-window-close-v958{border:1px solid #e4d8df;background:#fff;border-radius:12px;width:38px;height:38px;font-size:1.05rem;cursor:pointer}
+.tools-module-v958{border:1px solid #e7dde2;border-radius:16px;background:#fff;margin:8px 0;overflow:hidden}
+.tools-module-toggle-v958{width:100%;border:0;background:#fff;padding:13px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px;text-align:left;color:var(--text);cursor:pointer}
+.tools-module-toggle-v958 strong{font-size:.82rem;line-height:1.35}
+.tools-module-toggle-v958 span:last-child{font-size:1rem}
+.tools-module-body-v958{display:none;padding:0 10px 10px}
+.tools-module-v958.open .tools-module-body-v958{display:block}
+.tools-module-v958.open .tools-module-toggle-v958 span:last-child{transform:rotate(180deg)}
+.tools-module-body-v958>.card{margin:0!important;border:0!important;box-shadow:none!important;padding:8px!important;background:transparent!important}
+.tools-window-v958[data-key="public"] .tools-module-toggle-v958{display:none}
+.tools-window-v958[data-key="public"] .tools-module-body-v958{display:block;padding:0}
+#complementaryResources2026{display:none!important}
+@media(max-width:900px){.tools-home-v958{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){.tools-home-v958{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.tools-home-v958 button{min-height:82px;padding:11px}}
+</style></head>
 
 <body>
 
@@ -11102,5 +11133,132 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 else bindSophroV956();
 })();
 </script>
-</body>
+
+<script>
+/* V9.5.8 — reconstruction canonique de + d'outils */
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const GROUPS=[
+ {key:"calm",icon:"🌿",title:"Apaisement",desc:"Respiration, urgence calme et audios.",tests:[x=>x.id==="breathingCardV8",x=>x.classList?.contains("capsule-v924"),x=>x.classList?.contains("free-essential-banner"),x=>x.classList?.contains("hero")&&/AUDIOS THÉRAPEUTIQUES|Un moment pour/i.test(x.textContent||"")]},
+ {key:"know",icon:"🪞",title:"Mieux me connaître",desc:"Questionnaires, évolution et bilans.",tests:[x=>x.classList?.contains("selftests-v7"),x=>x.id==="innerWeatherV924",x=>x.classList?.contains("manual-v924"),x=>x.classList?.contains("monthly-summary-v924"),x=>x.classList?.contains("guided-history-v922"),x=>x.classList?.contains("evolution-combined-v73"),x=>x.id==="patternInsightCard"]},
+ {key:"routines",icon:"☀️",title:"Mes routines",desc:"Rituels et plan quotidien.",tests:[x=>x.id==="routineCardV861",x=>x.classList?.contains("plan-card")]},
+ {key:"missions",icon:"👣",title:"Progression",desc:"Petits pas, défis et badges.",tests:[x=>x.id==="dailyThreadV923",x=>x.classList?.contains("weekly-challenge-v924"),x=>x.classList?.contains("badge-card-v923"),x=>x.classList?.contains("journey-card")]},
+ {key:"reviews",icon:"🧰",title:"Mes repères utiles",desc:"Ce qui m’aide dans Allo Psycho.",tests:[x=>x.classList?.contains("season-v923"),x=>!!x.querySelector?.("#resourceListV924"),x=>!!x.querySelector?.("#bestToolsV923")]},
+ {key:"public",icon:"🌐",title:"Ressources publiques · 66",desc:"Bibliothèque externe gratuite.",tests:[x=>x.id==="publicResourcesV954"]},
+ {key:"support",icon:"💬",title:"Mon espace de soutien",desc:"Compagnon IA et repères personnels.",tests:[x=>x.classList?.contains("companion-card"),x=>x.id==="supportAiAccessV941"]}
+];
+
+function titleFor(card){
+ const h=card.querySelector("h2,h3,strong");
+ const t=(h?.textContent||"").replace(/\s+/g," ").trim();
+ return t || "Ouvrir le module";
+}
+
+function rebuildV958(){
+ const dest=$("moreToolsContentV933"),page=$("page-moretools");
+ if(!dest||!page)return false;
+
+ // Les rappels appartiennent uniquement à Options.
+ const reminders=$("reminderSettingsV952"),profile=$("page-profile");
+ if(reminders&&profile&&!profile.contains(reminders))profile.appendChild(reminders);
+
+ // L'ancien bloc séparé des 66 ressources est redondant.
+ $("complementaryResources2026")?.setAttribute("hidden","");
+
+ // Collecte toutes les cartes existantes, y compris celles enfermées par les anciens regroupements.
+ const cards=[];
+ const seen=new Set();
+ [...dest.querySelectorAll(".card")].forEach(c=>{if(!seen.has(c)){seen.add(c);cards.push(c)}});
+ const publicCard=$("publicResourcesV954");
+ if(publicCard&&!seen.has(publicCard)){seen.add(publicCard);cards.push(publicCard)}
+
+ // Supprime uniquement les conteneurs de navigation générés, jamais les cartes métier.
+ [...cards].forEach(c=>dest.appendChild(c));
+ $("toolsThemeNavV936")?.remove();
+ $("toolsThemeGroupsV936")?.remove();
+ dest.querySelector(".tools-home-v958")?.remove();
+ dest.querySelector(".tools-windows-v958")?.remove();
+
+ const home=document.createElement("div");home.className="tools-home-v958";home.id="toolsHomeV958";
+ const windows=document.createElement("div");windows.className="tools-windows-v958";windows.id="toolsWindowsV958";
+ const placed=new Set();
+
+ function closeAll(){
+   windows.querySelectorAll(".tools-window-v958").forEach(w=>w.classList.remove("open"));
+   home.querySelectorAll("button").forEach(b=>b.classList.remove("active"));
+ }
+
+ function open(key){
+   closeAll();
+   const w=windows.querySelector('[data-key="'+key+'"]');
+   const b=home.querySelector('[data-open-tools-v958="'+key+'"]');
+   if(!w)return;
+   w.classList.add("open");b?.classList.add("active");
+   w.scrollIntoView({behavior:"smooth",block:"start"});
+ }
+
+ GROUPS.forEach(g=>{
+   const b=document.createElement("button");b.type="button";b.dataset.openToolsV958=g.key;
+   b.innerHTML='<strong>'+g.icon+' '+g.title+'</strong><small>'+g.desc+'</small>';
+   b.onclick=()=>{const w=windows.querySelector('[data-key="'+g.key+'"]');if(w?.classList.contains("open"))closeAll();else open(g.key)};
+   home.appendChild(b);
+
+   const w=document.createElement("section");w.className="tools-window-v958";w.dataset.key=g.key;
+   w.innerHTML='<div class="tools-window-head-v958"><div><strong>'+g.icon+' '+g.title+'</strong><small>'+g.desc+'</small></div><button type="button" class="tools-window-close-v958" aria-label="Fermer">×</button></div><div class="tools-window-content-v958"></div>';
+   w.querySelector(".tools-window-close-v958").onclick=closeAll;
+   const content=w.querySelector(".tools-window-content-v958");
+
+   const matches=cards.filter(c=>!placed.has(c)&&g.tests.some(fn=>{try{return fn(c)}catch(_){return false}}));
+   matches.forEach(card=>{
+     placed.add(card);
+     const module=document.createElement("div");module.className="tools-module-v958";
+     const toggle=document.createElement("button");toggle.type="button";toggle.className="tools-module-toggle-v958";
+     toggle.innerHTML='<strong>'+titleFor(card)+'</strong><span>⌄</span>';
+     const body=document.createElement("div");body.className="tools-module-body-v958";
+     body.appendChild(card);
+     module.append(toggle,body);
+     toggle.onclick=()=>{
+       const will=!module.classList.contains("open");
+       content.querySelectorAll(".tools-module-v958").forEach(m=>m.classList.remove("open"));
+       if(will)module.classList.add("open");
+     };
+     content.appendChild(module);
+   });
+   if(!matches.length)content.innerHTML='<div class="tools-empty-v936">Aucun module dans cette rubrique pour le moment.</div>';
+   windows.appendChild(w);
+ });
+
+ // Les cartes non reconnues restent accessibles, mais uniquement dans Mes repères utiles.
+ const review=windows.querySelector('[data-key="reviews"] .tools-window-content-v958');
+ cards.filter(c=>!placed.has(c)&&c.id!=="reminderSettingsV952").forEach(card=>{
+   placed.add(card);
+   const module=document.createElement("div");module.className="tools-module-v958";
+   module.innerHTML='<button type="button" class="tools-module-toggle-v958"><strong>'+titleFor(card)+'</strong><span>⌄</span></button><div class="tools-module-body-v958"></div>';
+   module.querySelector(".tools-module-body-v958").appendChild(card);
+   module.querySelector(".tools-module-toggle-v958").onclick=()=>{
+     const will=!module.classList.contains("open");
+     review.querySelectorAll(".tools-module-v958").forEach(m=>m.classList.remove("open"));
+     if(will)module.classList.add("open");
+   };
+   review?.appendChild(module);
+ });
+
+ dest.append(home,windows);
+ window.alloOpenToolsThemeV936=open;
+ window.alloOpenToolsWindowV958=open;
+ return true;
+}
+
+function init(){
+ let tries=0;
+ const timer=setInterval(()=>{
+   tries++;
+   const publicReady=!!$("publicResourcesV954");
+   if((publicReady&&rebuildV958())||tries>12)clearInterval(timer);
+ },250);
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
+})();
+</script></body>
 </html>
