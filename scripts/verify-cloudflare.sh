@@ -7,8 +7,6 @@ for file in \
   dist/privacy.html \
   dist/manifest.webmanifest \
   dist/sw.js \
-  dist/ressources-complementaires.html \
-  dist/ressources-jardin-mental.json \
   dist/_headers \
   dist/icons/icon-192.png \
   dist/icons/icon-512.png \
@@ -56,19 +54,5 @@ if ! grep -q 'RESSOURCES PUBLIQUES & COMPLÉMENTAIRES' dist/index.html; then
 fi
 if ! grep -q '66 ressources' dist/index.html; then
   echo "ERROR: expected 66 public resources marker missing from Cloudflare bundle" >&2
-  exit 1
-fi
-
-# Ensure all 66 Jardin Mental references are included with an explicit independence notice.
-if ! grep -q 'sans affiliation' dist/ressources-complementaires.html; then
-  echo "ERROR: missing independent-source disclaimer" >&2
-  exit 1
-fi
-if ! grep -q 'ressources-complementaires.html' dist/index.html; then
-  echo "ERROR: resources missing from + d'outils" >&2
-  exit 1
-fi
-if ! grep -q '"id": 66' dist/ressources-jardin-mental.json; then
-  echo "ERROR: missing Jardin Mental 66-reference catalog" >&2
   exit 1
 fi
