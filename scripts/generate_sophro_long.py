@@ -6,8 +6,7 @@ from kokoro_onnx import Kokoro
 
 text = Path("scripts/sophrologie-visualisation-longue.txt").read_text(encoding="utf-8")
 
-fallback = espeak.EspeakFallback(british=False)
-g2p = EspeakG2P(language="fr-fr", fallback=fallback)
+g2p = EspeakG2P(language="fr-fr")
 
 phonemes, _ = g2p(text)
 
