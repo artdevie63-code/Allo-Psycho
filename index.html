@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f8dce7">
-  <meta name="description" content="Allo Psycho — outil numérique d’accompagnement psychologique conçu par une psychologue clinicienne et psychothérapeute, avec données locales et espace privé.">
+  <meta name="description" content="Allo Psycho — outil numérique d’accompagnement psychologique conçu par une psychologue clinicienne et psychothérapeute, avec données personnelles conservées localement.">
   <meta name="application-name" content="Allo Psycho">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -3419,16 +3419,6 @@ Vous pouvez me raconter ce qui vous traverse l'esprit aujourd'hui, sans jugement
           </form>
         </div>
 
-        <div class="card">
-          <p class="eyebrow">ESPACE PRIVÉ</p>
-          <h3>Profil anonyme et personnel</h3>
-          <p id="authEmailText" class="muted">Mon profil, votre journal, vos humeurs, vos routines et vos exercices restent sur cet appareil. Aucun e-mail n'est nécessaire.</p>
-          <div class="privacy-box">🔒 Mode Privacy First : les données personnelles de votre parcours ne sont pas synchronisées vers Supabase. Un identifiant anonyme peut uniquement servir de jeton technique pour les fonctions IA et Admin.</div>
-          <div class="profile-actions">
-            <button type="button" id="signInBtn" class="btn btn-dark" aria-label="Activer mon espace privé">✨ Activer mon espace privé</button>
-            <button type="button" id="signOutBtn" class="btn btn-light" style="display:none" aria-label="Quitter cet espace">Quitter cet espace</button>
-          </div>
-        </div>
       </div>
 
       
@@ -9301,7 +9291,7 @@ function setupProfile(){
   group.hidden=true;
   [...page.children].filter(x=>x!==hero).forEach(x=>group.appendChild(x));
 
-  const toggle=makeToggle("⚙️ Ouvrir mes réglages","Préférences, espace privé, questionnaires, audio et protection.");
+  const toggle=makeToggle("⚙️ Ouvrir mes réglages","Préférences, questionnaires, audio, confidentialité et protection.");
   toggle.id="profileMoreToggleV926";
   page.appendChild(toggle);
   page.appendChild(group);
