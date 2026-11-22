@@ -4,5 +4,11 @@
   "assets": {
     "directory": "./dist",
     "html_handling": "auto-trailing-slash"
-  }
+  },
+  "routes": [
+    {
+      "pattern": "app.allopsycho.fr/*",
+      "zone_name": "allopsycho.fr"
+    }
+  ]
 }
