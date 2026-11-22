@@ -10927,7 +10927,18 @@ else boot();
 .public-resources-v954{margin:14px 0}
 .public-resources-v954 .pr-head-v954{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}
 .public-resources-v954 .pr-count-v954{padding:7px 10px;border-radius:999px;background:#f4eef7;font-size:.7rem;font-weight:900;white-space:nowrap}
-.public-resources-v954 .pr-note-v954{margin:10px 0 13px;padding:11px 13px;border-radius:15px;background:#faf7f5;border:1px solid #eee5e2;font-size:.72rem;line-height:1.5;color:var(--soft)}
+.public-resources-v954 .pr-note-v954{margin:8px 0 10px;padding:10px 12px;border-radius:15px;background:#faf7f5;border:1px solid #eee5e2;font-size:.7rem;line-height:1.45;color:var(--soft)}
+.public-resources-v954 .pr-sources-v960{margin:8px 0 10px;padding:10px 12px;border-radius:15px;background:#f7faf9;border:1px solid #dfeae5;font-size:.7rem;line-height:1.45;color:var(--soft)}
+.public-resources-v954 .pr-sources-v960 strong{color:var(--text)}
+.public-resources-v954 .pr-theme-chip-v960{border:1px solid transparent}
+.public-resources-v954 .pr-theme-0{background:#edf5ff!important;border-color:#d7e7fb!important}
+.public-resources-v954 .pr-theme-1{background:#eef8f1!important;border-color:#d9ecdf!important}
+.public-resources-v954 .pr-theme-2{background:#fff5e8!important;border-color:#f3dfc2!important}
+.public-resources-v954 .pr-theme-3{background:#f5effb!important;border-color:#e5d8f2!important}
+.public-resources-v954 .pr-theme-4{background:#fff0f1!important;border-color:#f2dadd!important}
+.public-resources-v954 .pr-theme-5{background:#eef7f7!important;border-color:#d7e9e9!important}
+.public-resources-v954 .pr-theme-6{background:#f4f4ec!important;border-color:#e5e5d3!important}
+.public-resources-v954 .pr-theme-7{background:#f8f0f6!important;border-color:#eadbe6!important}
 .public-resources-v954 .pr-controls-v954{display:grid;grid-template-columns:2fr repeat(3,1fr);gap:8px;margin:12px 0}
 .public-resources-v954 .pr-controls-v954 input,.public-resources-v954 .pr-controls-v954 select{min-height:44px;border:1px solid #e6dce2;border-radius:14px;background:#fff;padding:9px 11px;color:var(--text)}
 .public-resources-v954 .pr-list-v954{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
@@ -10964,6 +10975,7 @@ function init(){
  card.dataset.regressionGuard=MARK;
  card.innerHTML=
  '<div class="pr-head-v954"><div><p class="eyebrow">RESSOURCES PUBLIQUES & COMPLÉMENTAIRES · GRATUIT</p><h3>🌐 Bibliothèque de ressources publiques</h3><p class="muted">Des ressources externes fiables, séparées des outils Allo Psycho. Elles s’ouvrent sur leur site d’origine.</p></div><span class="pr-count-v954" id="prCountV954">66 ressources</span></div>'+
+ '<div class="pr-sources-v960"><strong>66 ressources publiques et associatives :</strong> retrouvez notamment des contenus de l’Assurance Maladie (ameli / Mon journal mental), Psycom, Santé publique France, UNAFAM, Santé.fr, 3114 et d’autres organismes spécialisés. Les couleurs permettent de repérer rapidement les grandes thématiques.</div>'+
  '<div class="pr-note-v954"><strong>Indépendance éditoriale :</strong> cette sélection ne constitue ni un partenariat ni une validation d’Allo Psycho par les organismes cités. Les contenus externes restent sous la responsabilité de leurs éditeurs.</div>'+
  '<div class="pr-controls-v954"><input id="prSearchV954" type="search" placeholder="🔎 Rechercher une ressource…"><select id="prThemeV954"><option value="">Toutes les thématiques</option></select><select id="prFormatV954"><option value="">Tous les formats</option></select><select id="prPublicV954"><option value="">Tous les publics</option></select></div>'+
  '<div class="pr-list-v954" id="prListV954"></div><button class="btn btn-light pr-more-v954" id="prMoreV954" type="button">Afficher davantage</button>';
@@ -10988,6 +11000,11 @@ function init(){
  fill(format,[...new Set(DATA.map(x=>x[1]))]);
  fill(pub,[...new Set(DATA.map(x=>x[2]))]);
  let limit=6;
+ const THEMES=[...new Set(DATA.map(x=>x[0]))];
+ function themeClassV960(themeName){
+   const i=Math.max(0,THEMES.indexOf(themeName));
+   return "pr-theme-"+(i%8);
+ }
  function filtered(){
    const needle=(q.value||"").trim().toLowerCase();
    return DATA.filter(x=>(!theme.value||x[0]===theme.value)&&(!format.value||x[1]===format.value)&&(!pub.value||x[2]===pub.value)&&(!needle||x.join(" ").toLowerCase().includes(needle)));
@@ -10998,7 +11015,7 @@ function init(){
    list.innerHTML="";
    rows.slice(0,limit).forEach((x,i)=>{
      const el=document.createElement("article");el.className="pr-item-v954";
-     el.innerHTML='<div class="pr-meta-v954"><span class="pr-external-v954">Ressource publique externe</span><span>'+esc(x[0])+'</span><span>'+esc(x[1])+'</span><span>'+esc(x[2])+'</span></div><strong>'+esc(x[4])+'</strong><p><b>'+esc(x[3])+'</b> · '+esc(x[4])+'</p><button type="button" class="pr-open-v954" data-pr-index="'+DATA.indexOf(x)+'">Voir la ressource ↗</button>';
+     el.innerHTML='<div class="pr-meta-v954"><span class="pr-external-v954">Ressource publique externe</span><span class="pr-theme-chip-v960 '+themeClassV960(x[0])+'">'+esc(x[0])+'</span><span>'+esc(x[1])+'</span><span>'+esc(x[2])+'</span></div><strong>'+esc(x[4])+'</strong><p><b>'+esc(x[3])+'</b> · '+esc(x[4])+'</p><button type="button" class="pr-open-v954" data-pr-index="'+DATA.indexOf(x)+'">Voir la ressource ↗</button>';
      list.appendChild(el);
    });
    if(!rows.length)list.innerHTML='<div class="pr-empty-v954">Aucune ressource ne correspond à ces filtres.</div>';
