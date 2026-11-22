@@ -10388,16 +10388,31 @@ const provisionalTherapyV942=[
 ];
 
 function alloTherapyFrenchVoiceV960(){
- const voices=(window.speechSynthesis?.getVoices?.()||[]).filter(v=>/^fr([_-]|$)/i.test(v.lang||""));
+ const voices=(window.speechSynthesis?.getVoices?.()||[])
+  .filter(v=>/^fr([_-]|$)/i.test(v.lang||""))
+  .filter(v=>!/thomas/i.test((v.name||"")+" "+(v.lang||"")));
  if(!voices.length)return null;
  let saved="";
  try{saved=localStorage.getItem("allo_therapy_voice_v960")||""}catch(_){}
- if(saved){
+ if(saved && !/thomas/i.test(saved)){
    const exact=voices.find(v=>v.name===saved);
    if(exact)return exact;
  }
- const fr=voices.find(v=>/France|French|français/i.test((v.name||"")+" "+(v.lang||"")))||voices[0];
- try{if(fr?.name)localStorage.setItem("allo_therapy_voice_v960",fr.name)}catch(_){}
+ const preferred=[
+   /premium/i,/enhanced/i,/siri/i,
+   /audrey/i,/am[eé]lie/i,/aur[eé]lie/i,/denise/i,
+   /google.*fran[cç]ais/i,/microsoft.*french/i,/henri/i
+ ];
+ let fr=null;
+ for(const rx of preferred){
+   fr=voices.find(v=>rx.test((v.name||"")+" "+(v.lang||"")));
+   if(fr)break;
+ }
+ fr=fr||voices.find(v=>v.localService)||voices[0];
+ try{
+   localStorage.removeItem("allo_therapy_voice_v960");
+   if(fr?.name)localStorage.setItem("allo_therapy_voice_v960",fr.name);
+ }catch(_){}
  return fr||null;
 }
 window.alloTherapyFrenchVoiceV960=alloTherapyFrenchVoiceV960;
