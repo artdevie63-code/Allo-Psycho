@@ -5732,7 +5732,7 @@ Vous pouvez me raconter ce qui vous traverse l'esprit aujourd'hui, sans jugement
 
       async deleteAccount() {
         const ok=window.confirm("Effacer les données Allo Psycho enregistrées sur cet appareil ? Cette action est irréversible."); if(!ok)return;
-        ["alloPsychoProfile","alloPsychoJournal","alloPsychoTCC","alloPsychoHumeurs","alloPsychoChat","alloPsychoTherapyMemory","alloPsychoLastTccV71"].forEach(k=>localStorage.removeItem(k));
+        ["alloPsychoProfile","alloPsychoJournal","alloPsychoTCC","alloPsychoHumeurs","alloPsychoChat","alloPsychoTherapyMemory","alloPsychoLastTccV71","alloPsychoOnboardingV921","alloPsychoOnboardingV960"].forEach(k=>localStorage.removeItem(k));
         try { await alloPersistClearV9(); } catch (_) {}
         try { await localAudioClear(); } catch (_) {}
         profilPatient={display_name:"",birth_year:"",response_style:"doux",primary_goal:"apaisement",routine_preference:"souple"};
@@ -8719,7 +8719,7 @@ window.addEventListener("unhandledrejection",function(e){
 <script>
 (function(){
   "use strict";
-  const ONBOARDING_KEY="alloPsychoOnboardingV921";
+  const ONBOARDING_KEY="alloPsychoOnboardingV960";
   const PROFILE_KEY="alloPsychoProfile";
   const $=id=>document.getElementById(id);
 
@@ -8745,17 +8745,22 @@ window.addEventListener("unhandledrejection",function(e){
   }
 
   function shouldShowOnboardingV921(){
-    if(localStorage.getItem(ONBOARDING_KEY)==="1")return false;
+    return localStorage.getItem(ONBOARDING_KEY)!=="1";
+  }
+
+  function prefillOnboardingV960(){
     const profile=existingProfileV921();
-    if(profile){
-      localStorage.setItem(ONBOARDING_KEY,"1");
-      return false;
-    }
-    return true;
+    if(!profile)return;
+    if($("onboardingNameV921"))$("onboardingNameV921").value=profile.display_name||"";
+    if($("onboardingBirthV921"))$("onboardingBirthV921").value=profile.birth_year||"";
+    if($("onboardingToneV921"))$("onboardingToneV921").value=profile.response_style||"doux";
+    if($("onboardingGoalV921"))$("onboardingGoalV921").value=profile.primary_goal||"apaisement";
+    if($("onboardingRoutineV921"))$("onboardingRoutineV921").value=profile.routine_preference||"souple";
   }
 
   function showOnboardingV921(){
     if(!shouldShowOnboardingV921())return;
+    prefillOnboardingV960();
     $("onboardingV921")?.classList.add("visible");
   }
 
@@ -8792,8 +8797,8 @@ window.addEventListener("unhandledrejection",function(e){
   $("openPremiumV921")?.addEventListener("click",()=>openPageV921("premium"));
   $("openAboutV921")?.addEventListener("click",()=>openPageV921("about"));
 
-  // Si un ancien profil existe, il est considéré comme déjà configuré.
-  // Sinon l'écran s'affiche une seule fois sur cet appareil.
+  // La configuration doit être validée explicitement une fois sur cet appareil.
+  // Un ancien profil sert uniquement à préremplir la fenêtre.
   if(document.readyState==="loading"){
     document.addEventListener("DOMContentLoaded",()=>setTimeout(showOnboardingV921,700),{once:true});
   }else{
