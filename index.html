@@ -2841,7 +2841,7 @@ body{font-size:16px}
           <div class="therapy-track-v940" data-static-therapy-cat="Sophrologie" id="sophrologyTrackV956">
             <div style="width:100%">
               <strong>Détente corporelle & projection positive</strong>
-              <small>Sophrologie · tension-détente, respiration, visualisation et retour progressif · environ 8 à 10 min</small>
+              <small>Sophrologie · ancrage, respiration, détente, visualisation guidée et projection positive · environ 15 à 18 min</small>
               <button type="button" class="btn btn-light full" id="playSophrologyV956" style="margin-top:10px">▶ Commencer la séance</button>
               <small id="sophrologyVoiceV956" style="display:block;margin-top:8px">Voix française naturelle de votre appareil · aucune voix Piper utilisée</small>
             </div>
@@ -10387,6 +10387,21 @@ const provisionalTherapyV942=[
  {id:"local-concentration",title:"Recentrage avant une tâche",category:"Concentration",description:"Focus guidé · environ 4 min",local_script:"Avant de commencer, pose ton téléphone ou ferme ce qui n'est pas utile pour la tâche à venir. Prends une respiration tranquille. Regarde ce qui est devant toi. Demande-toi : quelle est la seule tâche que je veux avancer maintenant ? Formule-la en une phrase courte. Puis choisis une première action qui prend moins de cinq minutes. Ouvrir le document. Écrire le titre. Lire le premier paragraphe. Préparer le matériel. Inspire normalement. À l'expiration, relâche ce qui n'a pas besoin d'être traité maintenant. Si une autre pensée arrive, note-la mentalement comme plus tard, puis reviens à la première action. Tu n'as pas besoin de terminer toute la tâche. Tu as seulement besoin de commencer clairement. Encore une respiration. Puis commence par ce premier geste."}
 ];
 
+function alloTherapyFrenchVoiceV960(){
+ const voices=(window.speechSynthesis?.getVoices?.()||[]).filter(v=>/^fr([_-]|$)/i.test(v.lang||""));
+ if(!voices.length)return null;
+ let saved="";
+ try{saved=localStorage.getItem("allo_therapy_voice_v960")||""}catch(_){}
+ if(saved){
+   const exact=voices.find(v=>v.name===saved);
+   if(exact)return exact;
+ }
+ const fr=voices.find(v=>/France|French|français/i.test((v.name||"")+" "+(v.lang||"")))||voices[0];
+ try{if(fr?.name)localStorage.setItem("allo_therapy_voice_v960",fr.name)}catch(_){}
+ return fr||null;
+}
+window.alloTherapyFrenchVoiceV960=alloTherapyFrenchVoiceV960;
+
 function playLocalTherapyV942(track,button){
  if(!("speechSynthesis" in window) || typeof SpeechSynthesisUtterance==="undefined"){
    if(typeof afficherToast==="function")afficherToast("La lecture vocale n’est pas disponible sur cet appareil.");
@@ -10396,8 +10411,7 @@ function playLocalTherapyV942(track,button){
  document.querySelectorAll("[data-play-therapy-v940]").forEach(x=>x.textContent="▶ Écouter");
  const u=new SpeechSynthesisUtterance(track.local_script);
  u.lang="fr-FR";u.rate=.88;u.pitch=1;u.volume=1;
- const voices=window.speechSynthesis.getVoices();
- const fr=voices.find(v=>/^fr[-_]/i.test(v.lang)&&/France|French|français/i.test((v.name||"")+" "+(v.lang||"")))||voices.find(v=>/^fr/i.test(v.lang));
+ const fr=alloTherapyFrenchVoiceV960();
  if(fr)u.voice=fr;
  button.textContent="⏹ Arrêter";
  u.onend=u.onerror=()=>{button.textContent="▶ Écouter";window.__therapySpeechV942=null};
@@ -11044,24 +11058,40 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 /* V9.5.6 — sophrologie longue, voix française native améliorée */
 (function(){
 "use strict";
-const SOPHRO_V956=["Installez-vous dans une position suffisamment confortable, sans chercher une posture parfaite. Si vous le souhaitez, laissez les yeux se fermer, ou gardez simplement le regard posé devant vous. Prenez quelques secondes pour sentir les points d'appui du corps. Le poids du bassin. Le contact du dos. Les pieds au sol. Rien à réussir ici. Il s'agit seulement de revenir progressivement vers des sensations simples et présentes.","Commencez par observer votre respiration telle qu'elle est. Sans l'allonger tout de suite. Sans la corriger. Remarquez simplement l'air qui entre, puis l'air qui ressort. À chaque expiration, imaginez que vous pouvez déposer un peu de ce qui n'a pas besoin d'être porté maintenant. Pas tout. Juste un peu. Laissez les épaules descendre légèrement. Desserrez la mâchoire. Laissez les mains devenir plus lourdes.","Nous allons maintenant faire une courte tension-détente. Inspirez tranquillement par le nez. Pendant deux ou trois secondes, serrez doucement les poings et remontez légèrement les épaules. Sans douleur, sans forcer. Puis expirez par la bouche et relâchez d'un seul coup. Observez la différence entre la tension et le relâchement. Reprenez une respiration naturelle.","Une deuxième fois. Inspirez. Contractez doucement les mains, les bras et les épaules. Gardez juste le temps qui vous convient. Puis expirez et relâchez. Laissez le poids des bras revenir. Peut-être percevez-vous de la chaleur, des picotements, une sensation de lourdeur, ou simplement rien de particulier. Tout cela convient.","Une dernière fois, plus globale si cela reste confortable. À l'inspiration, tonifiez doucement les jambes, les mains et les épaules. Gardez le visage souple. Puis expirez longuement et relâchez. Prenez quelques secondes pour sentir le corps après l'effort. Le but n'est pas d'être totalement détendu. Le but est de remarquer qu'il est possible de moduler un peu son niveau de tension.","Ramenez maintenant l'attention vers le visage. Le front peut s'élargir. Les paupières peuvent devenir plus lourdes. Les muscles autour des yeux n'ont rien à faire. Laissez la langue se déposer dans la bouche. Puis descendez vers la nuque et les épaules. À chaque expiration, autorisez quelques millimètres de relâchement supplémentaire, seulement si cela vient naturellement.","Portez ensuite l'attention vers la poitrine et le ventre. Vous n'avez pas besoin de respirer profondément. Une respiration confortable suffit. Imaginez que l'expiration crée un peu plus d'espace à l'intérieur. Comme si le corps pouvait cesser, pendant quelques instants, de se préparer à tout gérer en même temps. Ce qui est important pourra être repris plus tard.","Nous allons maintenant utiliser une projection positive, mais sans nous obliger à penser que tout ira parfaitement. Choisissez une situation concrète à venir : un moment de la journée, un rendez-vous, une tâche, un échange, ou simplement votre prochaine heure. Prenez une scène réaliste. Pas un idéal. Une scène que vous pouvez réellement traverser.","Imaginez-vous au début de cette situation. Observez le lieu, la lumière, quelques détails autour de vous. Puis imaginez surtout votre manière d'y entrer. Peut-être un peu plus lentement. Peut-être en respirant avant de répondre. Peut-être en gardant les épaules moins crispées. Choisissez un seul signe corporel qui représenterait pour vous davantage de stabilité.","Dans cette scène, il peut y avoir de l'inconfort, de l'incertitude ou de la fatigue. Vous n'avez pas besoin de les effacer. Imaginez plutôt que vous pouvez les remarquer et continuer avec un peu plus de marge. Vous pouvez vous dire intérieurement : je peux avancer une étape à la fois. Ou : je n'ai pas besoin de tout résoudre maintenant. Choisissez la phrase qui vous semble la plus crédible.","Voyez-vous accomplir un premier geste simple dans cette situation. Vous asseoir. Ouvrir un document. Dire bonjour. Poser une question. Commencer une tâche. Faire une pause avant de répondre. Restez sur quelque chose de petit et observable. Plus l'image est simple, plus elle peut devenir un repère utile.","Puis imaginez un petit obstacle réaliste. Une pensée qui revient. Une tension dans le ventre. Une hésitation. Quelqu'un qui vous interrompt. Et observez-vous en train de revenir à votre repère : les pieds au sol, une expiration un peu plus longue, une phrase intérieure simple, puis le prochain geste utile. Il ne s'agit pas de tout contrôler. Il s'agit de retrouver une direction.","Prenez maintenant quelques instants pour laisser cette scène se terminer. Imaginez non pas une réussite parfaite, mais le sentiment d'avoir traversé le moment avec un peu plus de présence. Remarquez ce que cela change dans votre posture ou dans votre respiration lorsque vous vous représentez cette possibilité.","Revenez doucement aux sensations réelles. Le contact du corps avec le siège ou le lit. Les pieds. Les mains. Les sons autour de vous. Inspirez un peu plus amplement si c'est agréable, puis expirez sans forcer. Faites bouger les doigts, les orteils, éventuellement les épaules.","Avant d'ouvrir complètement les yeux, choisissez un seul élément à garder avec vous : une sensation d'appui, une phrase courte, une respiration, ou le premier petit geste de votre projection. Prenez votre temps. Puis revenez à votre rythme, en gardant seulement ce qui vous est utile."];
+const SOPHRO_V956=[
+"Installez-vous dans une position suffisamment confortable. Vous n’avez pas besoin d’être parfaitement détendu ni de trouver une posture idéale. Laissez simplement le corps prendre appui là où il est. Si cela vous convient, fermez les yeux. Sinon, gardez le regard posé sur un point fixe. Prenez quelques instants pour sentir le contact des pieds, du bassin, du dos et des mains. Observez simplement que vous êtes ici, maintenant.",
+"Avant de modifier quoi que ce soit, remarquez votre état du moment. Peut-être de la fatigue, de l’agitation, une tension, ou simplement une sensation neutre. Il n’y a rien à corriger. Cette séance ne demande pas de parvenir à un état particulier. Elle propose seulement de créer un peu plus d’espace entre ce que vous ressentez et la manière dont vous y répondez.",
+"Portez maintenant votre attention sur la respiration. Laissez d’abord le souffle venir naturellement. Sentez l’air entrer. Puis ressortir. Sans chercher une grande inspiration. Après deux ou trois cycles, laissez simplement l’expiration devenir un peu plus longue que l’inspiration. Une expiration tranquille, non forcée. Puis revenez à votre rythme habituel.",
+"À chaque expiration, imaginez que le poids du corps peut être un peu mieux confié au support. Les épaules n’ont pas besoin de tenir aussi haut. Les mains peuvent se déposer davantage. La mâchoire peut se desserrer légèrement. Même un relâchement très discret suffit. Vous n’avez pas besoin de sentir quelque chose de spectaculaire.",
+"Nous allons utiliser une tension-détente douce. Inspirez tranquillement et serrez légèrement les poings pendant deux ou trois secondes. Remontez un peu les épaules, sans douleur et sans forcer. Puis expirez et relâchez. Laissez les bras redevenir lourds. Observez la différence entre le moment de tension et le moment de relâchement.",
+"Recommencez une deuxième fois. Inspirez. Contractez doucement les mains, les avant-bras et les épaules. Gardez la tension juste un instant. Puis expirez et relâchez complètement. Prenez le temps de sentir ce qui change après le relâchement : chaleur, lourdeur, picotements, calme, ou aucune sensation particulière. Tout est acceptable.",
+"Une troisième fois, si cela reste confortable, mobilisez doucement les jambes, les mains et les épaules. Gardez le visage souple. Inspirez, tonifiez légèrement le corps, puis expirez et laissez tout revenir. Le but n’est pas de supprimer la tension, mais de sentir que votre corps peut passer d’un niveau de mobilisation à un autre.",
+"Ramenez maintenant l’attention vers le visage. Le front peut devenir plus lisse. Les muscles autour des yeux peuvent se relâcher. La langue peut se déposer dans la bouche. Puis descendez vers la nuque et les épaules. Imaginez que chaque expiration crée quelques millimètres supplémentaires d’espace dans cette zone.",
+"Descendez ensuite vers la poitrine et le ventre. Ne cherchez pas à respirer profondément. Une respiration confortable suffit. À l’expiration, imaginez que l’intérieur du corps dispose d’un peu plus de place. Comme si vous pouviez momentanément cesser de tout anticiper, tout organiser ou tout contrôler.",
+"Portez maintenant l’attention vers le bassin, les jambes et les pieds. Sentez les points d’appui. Le contact avec le sol peut devenir un repère. Vous pouvez vous dire intérieurement : je suis ici. Je peux revenir à mes appuis. Prenez quelques respirations en gardant simplement cette sensation.",
+"Nous allons maintenant commencer la visualisation. Choisissez une situation concrète à venir : un rendez-vous, une tâche, un échange, un déplacement, une démarche ou un moment de votre journée. Évitez une scène trop lointaine ou trop idéale. Choisissez quelque chose de réaliste, que vous pouvez réellement rencontrer.",
+"Imaginez d’abord le lieu. La lumière. Les formes. Peut-être quelques sons. Ne cherchez pas une image parfaite. Il suffit d’avoir quelques repères. Puis observez votre posture dans cette scène. Comment êtes-vous assis ou debout ? Où sont vos pieds ? Comment sont vos épaules ?",
+"Imaginez que vous entrez dans cette situation avec un peu plus de présence. Pas sans stress. Pas sans difficulté. Simplement avec un peu plus de marge. Vous pouvez prendre une seconde avant de répondre. Vous pouvez sentir vos pieds. Vous pouvez laisser une expiration se prolonger légèrement avant de passer à l’action.",
+"Choisissez maintenant une ressource corporelle simple : les pieds au sol, les épaules relâchées, la main posée sur la cuisse, ou une respiration légèrement plus lente. Retenez-en une seule. Cette ressource deviendra votre point de retour pendant la scène.",
+"Choisissez ensuite une phrase intérieure courte et crédible. Par exemple : je peux avancer une étape à la fois. Ou : je n’ai pas besoin de tout résoudre maintenant. Ou encore : je peux prendre le temps de répondre. Choisissez une phrase qui vous ressemble et que vous pourriez réellement utiliser.",
+"Imaginez maintenant le début de la situation. Voyez-vous accomplir un premier geste concret : ouvrir une porte, vous asseoir, dire bonjour, ouvrir un document, commencer une tâche, poser une question. Restez sur quelque chose de simple et observable. Le cerveau apprend mieux à partir d’actions précises que d’images trop générales.",
+"Laissez ensuite apparaître un petit obstacle réaliste. Une hésitation. Une pensée négative. Une tension dans le ventre. Une interruption. Quelque chose qui ne se passe pas exactement comme prévu. Ne faites pas disparaître cet obstacle. Observez plutôt votre manière de revenir à votre ressource corporelle.",
+"Dans cette scène, revenez à vos pieds ou à votre respiration. Laissez une expiration se dérouler. Retrouvez votre phrase intérieure. Puis demandez-vous : quel est le prochain geste utile, même minuscule ? Imaginez-vous le faire. Une seule étape. Pas toute la situation d’un coup.",
+"Prenez maintenant quelques secondes pour observer ce que cela change lorsque vous vous imaginez capable de revenir à un repère plutôt que de devoir tout contrôler. La confiance n’a pas besoin d’être totale. Il suffit parfois de savoir que l’on peut se réorienter après un moment d’inconfort.",
+"Imaginez la scène qui continue. Vous avancez à votre rythme. Peut-être devez-vous faire une pause. Peut-être demander une précision. Peut-être ralentir. Peut-être simplement poursuivre malgré une certaine tension. L’objectif n’est pas la perfection : c’est de rester suffisamment présent pour choisir la suite.",
+"Amenez maintenant la scène vers une fin réaliste. Pas forcément une réussite parfaite. Imaginez simplement que vous avez traversé ce moment en restant davantage en contact avec vos repères. Observez votre posture à la fin. Votre respiration. La façon dont vous regardez la situation après l’avoir traversée.",
+"Demandez-vous maintenant ce que vous souhaitez conserver de cette visualisation. Une sensation ? Une posture ? Une phrase ? Un geste ? Un rythme ? Choisissez un seul élément. Plus il est simple, plus vous pourrez le retrouver facilement dans la situation réelle.",
+"Laissez ensuite l’image s’éloigner. Revenez aux sensations présentes. Le contact du corps avec le siège ou le lit. Les pieds. Les mains. Les sons autour de vous. Sentez de nouveau la pièce dans laquelle vous êtes. Prenez une respiration un peu plus ample si cela vous convient, puis expirez tranquillement.",
+"Faites bouger doucement les doigts et les orteils. Peut-être les épaules ou la nuque. Ne revenez pas trop vite. Avant d’ouvrir complètement les yeux, rappelez-vous simplement votre repère choisi. Puis revenez à votre rythme. La séance se termine ici ; gardez seulement ce qui vous semble utile pour la suite."
+]
 let sophroStateV956={playing:false,index:0,utterance:null,timer:null};
 
 function bestFrenchVoiceV956(){
- const voices=(window.speechSynthesis?.getVoices?.()||[])
-  .filter(v=>/^fr([_-]|$)/i.test(v.lang||""))
-  .filter(v=>!/thomas/i.test((v.name||"")+" "+(v.lang||"")));
- if(!voices.length)return null;
- const preferred=[
-  /premium/i,/enhanced/i,/siri/i,
-  /audrey/i,/am[eé]lie/i,/aur[eé]lie/i,/denise/i,
-  /google.*fran[cç]ais/i,/microsoft.*french/i,/henri/i
- ];
- for(const rx of preferred){
-   const hit=voices.find(v=>rx.test((v.name||"")+" "+(v.lang||"")));
-   if(hit)return hit;
+ if(typeof window.alloTherapyFrenchVoiceV960==="function"){
+   return window.alloTherapyFrenchVoiceV960();
  }
- return voices.find(v=>v.localService) || voices[0];
+ const voices=(window.speechSynthesis?.getVoices?.()||[]).filter(v=>/^fr([_-]|$)/i.test(v.lang||""));
+ return voices[0]||null;
 }
 
 function setSophroLabelV956(text){
@@ -11071,8 +11101,8 @@ function setSophroLabelV956(text){
 function setVoiceLabelV956(voice){
  const el=document.getElementById("sophrologyVoiceV956");if(!el)return;
  el.textContent=voice
-  ? "Voix utilisée : "+voice.name+" · française native de l’appareil"
-  : "Voix française naturelle de votre appareil · aucune voix Piper utilisée";
+  ? "Même voix que les autres audios guidés : "+voice.name
+  : "Même voix française que les autres audios guidés";
 }
 
 function stopSophrologyV956(){
@@ -11097,7 +11127,7 @@ function speakNextSophroV956(){
  const voice=bestFrenchVoiceV956();
  if(voice)u.voice=voice;
  u.lang=voice?.lang||"fr-FR";
- u.rate=.78;
+ u.rate=.88;
  u.pitch=.98;
  u.volume=1;
  sophroStateV956.utterance=u;
@@ -11107,7 +11137,8 @@ function speakNextSophroV956(){
  u.onend=()=>{
    if(!sophroStateV956.playing)return;
    sophroStateV956.index++;
-   const pause=(sophroStateV956.index===3||sophroStateV956.index===5||sophroStateV956.index===8||sophroStateV956.index===12)?4200:2600;
+   const longPauses=[3,7,10,14,18,21,23];
+   const pause=longPauses.includes(sophroStateV956.index)?5200:3200;
    sophroStateV956.timer=setTimeout(speakNextSophroV956,pause);
  };
  u.onerror=()=>{
