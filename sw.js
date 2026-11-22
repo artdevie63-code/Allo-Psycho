@@ -1,4 +1,4 @@
-const CACHE = 'allo-psycho-shell-v9.4.4-audiofix';
+const CACHE = 'allo-psycho-shell-v9.5.8-navfix-20261122';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png', './assets/audio/seance1.mp3'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => Promise.all(SHELL.map(async u => { const r = await fetch(u, {cache:'reload'}); if (r.ok) await cache.put(u, r); }))).then(() => self.skipWaiting()));
@@ -24,4 +24,4 @@ self.addEventListener('fetch', event => {
   })));
 });
 
-// cache version bump for therapeutic audio fix
+// cache version bump for V9.5.8 navigation + resources + reminders + sophrology
