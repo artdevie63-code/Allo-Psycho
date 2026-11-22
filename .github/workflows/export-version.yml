@@ -1,0 +1,29 @@
+name: Export preserved version
+
+on:
+  push:
+    branches:
+      - archive-export-2026-11-22
+    paths:
+      - ".github/workflows/export-version.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact archive branch
+        uses: actions/checkout@v4
+      - name: Prepare archive
+        run: |
+          mkdir -p export/Allo-Psycho-Cloudflare-PWA-puzzle-2026-11-22
+          rsync -a --exclude='.git' --exclude='.github/workflows/export-version.yml' ./ export/Allo-Psycho-Cloudflare-PWA-puzzle-2026-11-22/
+          cp .github/workflows/export-version.yml export/Allo-Psycho-Cloudflare-PWA-puzzle-2026-11-22/EXPORT-WORKFLOW-REFERENCE.yml
+      - name: Upload complete version
+        uses: actions/upload-artifact@v4
+        with:
+          name: Allo-Psycho-Cloudflare-PWA-puzzle-2026-11-22
+          path: export/Allo-Psycho-Cloudflare-PWA-puzzle-2026-11-22
+          compression-level: 6
