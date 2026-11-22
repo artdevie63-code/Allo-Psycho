@@ -66,7 +66,7 @@ if ! grep -q 'Ressources publiques · 66' dist/index.html; then
   echo "ERROR: 66 public resources drawer missing from Cloudflare bundle" >&2
   exit 1
 fi
-if ! grep -q 'allo-psycho-shell-v9.5.8-navfix-20261122' dist/sw.js; then
+if ! grep -q 'allo-psycho-shell-v9.5.9-force-refresh-20261122' dist/sw.js; then
   echo "ERROR: PWA cache version is stale" >&2
   exit 1
 fi
