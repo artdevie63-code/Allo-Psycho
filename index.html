@@ -11031,11 +11031,14 @@ const SOPHRO_V956=["Installez-vous dans une position suffisamment confortable, s
 let sophroStateV956={playing:false,index:0,utterance:null,timer:null};
 
 function bestFrenchVoiceV956(){
- const voices=(window.speechSynthesis?.getVoices?.()||[]).filter(v=>/^fr([_-]|$)/i.test(v.lang||""));
+ const voices=(window.speechSynthesis?.getVoices?.()||[])
+  .filter(v=>/^fr([_-]|$)/i.test(v.lang||""))
+  .filter(v=>!/thomas/i.test((v.name||"")+" "+(v.lang||"")));
  if(!voices.length)return null;
  const preferred=[
-  /audrey/i,/thomas/i,/am[eé]lie/i,/aur[eé]lie/i,/denise/i,/henri/i,
-  /google.*fran[cç]ais/i,/microsoft.*french/i,/enhanced/i,/premium/i
+  /premium/i,/enhanced/i,/siri/i,
+  /audrey/i,/am[eé]lie/i,/aur[eé]lie/i,/denise/i,
+  /google.*fran[cç]ais/i,/microsoft.*french/i,/henri/i
  ];
  for(const rx of preferred){
    const hit=voices.find(v=>rx.test((v.name||"")+" "+(v.lang||"")));
@@ -11077,7 +11080,7 @@ function speakNextSophroV956(){
  const voice=bestFrenchVoiceV956();
  if(voice)u.voice=voice;
  u.lang=voice?.lang||"fr-FR";
- u.rate=.82;
+ u.rate=.78;
  u.pitch=.98;
  u.volume=1;
  sophroStateV956.utterance=u;
