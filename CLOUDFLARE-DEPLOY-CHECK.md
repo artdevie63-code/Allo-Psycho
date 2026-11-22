@@ -14,3 +14,8 @@ Required release markers:
 - PWA cache `allo-psycho-shell-v9.5.8-navfix-20261122`
 
 This commit is intended to trigger a fresh Cloudflare build from the production branch.
+
+
+Deployment trigger after production project rename:
+- Wrangler project: allopsycho
+- Source commit includes V9.5.8 navigation and PWA cache bump
