@@ -2776,8 +2776,8 @@ body{font-size:16px}
         </div>
         <div class="analytics analytics-v73">
           <div class="stat"><span id="statCalme" class="stat-number">0</span><span class="stat-label">😊 Calme</span></div>
-          <div class="stat"><span id="statNuageux" class="stat-number">0</span><span class="stat-label">😔 Nuageux</span></div>
-          <div class="stat"><span id="statOrageux" class="stat-number">0</span><span class="stat-label">🤯 Orageux</span></div>
+          <div class="stat"><span id="statTriste" class="stat-number">0</span><span class="stat-label">😔 Triste</span></div>
+          <div class="stat"><span id="statSubmergé" class="stat-number">0</span><span class="stat-label">🤯 Submergé</span></div>
           <div class="stat"><span id="statPose" class="stat-number">0</span><span class="stat-label">🧘‍♂️ Posé</span></div>
         </div>
         <div id="weekBarsV7" class="week-bars-v7"></div>
@@ -3629,7 +3629,7 @@ Vous pouvez me raconter ce qui vous traverse l'esprit aujourd'hui, sans jugement
         <h3>Éditrice & contact professionnel</h3>
         <p class="muted"><strong>Laëtitia GUILLAUME — Entrepreneur individuel (micro-entreprise)</strong><br>Psychologue Clinicienne · Psychothérapeute<br>SIRET : 797 389 855 00058<br>Adresse professionnelle / domiciliation : 30 rue de Sarliève, 63800 Cournon-d’Auvergne, France<br>E-mail : <a href="mailto:artdevie63@gmail.com">artdevie63@gmail.com</a><br>Site professionnel : <a href="https://allopsycho.fr" target="_blank" rel="noopener noreferrer">allopsycho.fr</a></p>
         <h3>Hébergement de la PWA</h3>
-        <p class="muted"><strong>Vercel Inc.</strong><br>440 N Barranca Avenue #4133, Covina, CA 91723, États-Unis.<br>La PWA publique est déployée sur l’infrastructure Vercel. Les services techniques externes utilisés par certaines fonctions sont décrits séparément dans la politique de confidentialité.</p>
+        <p class="muted"><strong>Cloudflare, Inc.</strong><br>101 Townsend St., San Francisco, CA 94107, États-Unis.<br>La PWA publique est déployée sur Cloudflare Pages. Les services techniques externes utilisés par certaines fonctions sont décrits séparément dans la politique de confidentialité.</p>
 
         <h3>Privacy First</h3>
         <ul class="legal-list">
@@ -3692,7 +3692,7 @@ Vous pouvez me raconter ce qui vous traverse l'esprit aujourd'hui, sans jugement
       <ul class="legal-list">
         <li>✅ Éditrice : Laëtitia GUILLAUME, EI / micro-entreprise, SIRET intégré.</li>
         <li>✅ Adresse professionnelle et e-mail de contact intégrés ; aucun numéro de téléphone affiché dans l’application.</li>
-        <li>✅ Hébergement public Vercel identifié.</li>
+        <li>✅ Hébergement public Cloudflare Pages identifié.</li>
         <li>✅ Données psychologiques local-first ; aucune vente, publicité ou monétisation des données de santé.</li>
         <li>✅ RLS Premium prévu et secrets API côté serveur.</li>
         <li>✅ Essai Premium de 30 jours préparé sans carte bancaire.</li>
@@ -3723,7 +3723,7 @@ Vous pouvez me raconter ce qui vous traverse l'esprit aujourd'hui, sans jugement
      *
      * REMPLIS CES VALEURS UNIQUEMENT SI TU EN AS BESOIN.
      *
-     * Pour un site public GitHub/Vercel :
+     * Pour un site public GitHub/Cloudflare Pages :
      * NE METS JAMAIS MISTRAL_API_KEY ici. La clé reste dans les secrets de l’Edge Function Supabase.
      */
 
@@ -4712,10 +4712,32 @@ Vous pouvez me raconter ce qui vous traverse l'esprit aujourd'hui, sans jugement
 
     function obtenirHumeurs() {
 
-      return lireLocalStorage(
+      const donnees = lireLocalStorage(
         "alloPsychoHumeurs",
         []
       );
+
+      let migrationNecessaire = false;
+      const normalisees = Array.isArray(donnees) ? donnees.map(function (element) {
+        if (!element || typeof element !== "object") return element;
+        const copie = Object.assign({}, element);
+        if (copie.mood === "Nuageux") {
+          copie.mood = "Triste";
+          copie.emoji = "😔";
+          migrationNecessaire = true;
+        } else if (copie.mood === "Orageux") {
+          copie.mood = "Submergé";
+          copie.emoji = "🤯";
+          migrationNecessaire = true;
+        }
+        return copie;
+      }) : [];
+
+      if (migrationNecessaire) {
+        ecrireLocalStorage("alloPsychoHumeurs", normalisees);
+      }
+
+      return normalisees;
     }
 
 
@@ -4788,11 +4810,11 @@ Vous pouvez me raconter ce qui vous traverse l'esprit aujourd'hui, sans jugement
         return "😊";
       }
 
-      if (humeur === "Nuageux") {
+      if (humeur === "Triste") {
         return "😔";
       }
 
-      if (humeur === "Orageux") {
+      if (humeur === "Submergé") {
         return "🤯";
       }
 
@@ -4925,8 +4947,8 @@ Vous pouvez me raconter ce qui vous traverse l'esprit aujourd'hui, sans jugement
 
       const compteurs = {
         Calme: 0,
-        Nuageux: 0,
-        Orageux: 0,
+        Triste: 0,
+        Submergé: 0,
         Posé: 0
       };
 
@@ -4952,12 +4974,12 @@ Vous pouvez me raconter ce qui vous traverse l'esprit aujourd'hui, sans jugement
 
       const nuageux =
         document.getElementById(
-          "statNuageux"
+          "statTriste"
         );
 
       const orageux =
         document.getElementById(
-          "statOrageux"
+          "statSubmergé"
         );
 
       const pose =
@@ -4972,12 +4994,12 @@ Vous pouvez me raconter ce qui vous traverse l'esprit aujourd'hui, sans jugement
 
       if (nuageux) {
         nuageux.textContent =
-          compteurs.Nuageux;
+          compteurs.Triste;
       }
 
       if (orageux) {
         orageux.textContent =
-          compteurs.Orageux;
+          compteurs.Submergé;
       }
 
       if (pose) {
@@ -7076,10 +7098,10 @@ Vous pouvez me raconter ce qui vous traverse l'esprit aujourd'hui, sans jugement
   let selectedNeed=localStorage.getItem('alloPsychoLastNeed')||'';
 
   const feelingMood={
-    anxious:['Nuageux','😔'],
-    angry:['Orageux','🤯'],
-    sad:['Nuageux','😔'],
-    overload:['Orageux','🤯'],
+    anxious:['Triste','😔'],
+    angry:['Submergé','🤯'],
+    sad:['Triste','😔'],
+    overload:['Submergé','🤯'],
     reflect:['Posé','🧘‍♂️'],
     calm:['Calme','😊']
   };
@@ -7207,7 +7229,7 @@ Vous pouvez me raconter ce qui vous traverse l'esprit aujourd'hui, sans jugement
     const moods=read('alloPsychoHumeurs',[]),journals=read('alloPsychoJournal',[]),tcc=read('alloPsychoTCC',[]),sessions=read('alloPsychoSessionsV7',[]);
     if($('journalCountV7'))$('journalCountV7').textContent=journals.length;
     if($('tccCountV7'))$('tccCountV7').textContent=tcc.length;
-    const score={Calme:4,'Posé':4,Nuageux:2,Orageux:1};
+    const score={Calme:4,'Posé':4,Triste:2,Submergé:1};
     const recent=moods.slice(-7).map(x=>score[x.mood]||score[x.humeur]||0).filter(Boolean);
     if($('trendMoodV7'))$('trendMoodV7').textContent=recent.length?(recent.reduce((a,b)=>a+b,0)/recent.length>=3?'↗ stable+':'→ variable'):'—';
     const days=new Set();[...moods,...journals,...tcc,...sessions].forEach(x=>{const d=x.at||x.created_at||x.date;if(d)days.add(String(d).slice(0,10))});
@@ -7406,9 +7428,11 @@ Vous pouvez me raconter ce qui vous traverse l'esprit aujourd'hui, sans jugement
     const waitMs=12*60*60*1000;
     const remaining=Math.max(0,(lastDoneAt+waitMs)-Date.now());
     const pct=Math.round((done.length/v.days.length)*100);
+    const pathCompleted=done.length>=v.days.length;
 
     $('pathDetailV7').innerHTML=
       '<div class="program-head-v73"><h3>'+v.icon+' '+v.name+'</h3><span>'+done.length+'/7 étapes · '+pct+'%</span></div>'+
+      (pathCompleted?'<div class="theme-badge-v929"><span class="icon">🏅</span><div><strong>Parcours complété · Badge obtenu</strong><small>'+v.name+' · 7/7 étapes validées</small></div></div>':'')+
       '<div class="program-pacing-v74">🌿 Une seule nouvelle étape à la fois. Après validation, la suivante se déverrouille après une pause de 12 h pour laisser le temps d’observer et d’expérimenter.</div>'+
       v.days.map((d,i)=>{
         const isDone=done.includes(i);
@@ -7455,8 +7479,15 @@ Vous pouvez me raconter ce qui vous traverse l'esprit aujourd'hui, sans jugement
       cur.completedAt[i]=Date.now();
       all[k]=cur;
       write('alloPsychoPathsV7',all);
+      const parcoursTermine=cur.done.length>=v.days.length;
+      if(parcoursTermine){
+        const earned=read('alloPsychoPathBadgesV956',{});
+        if(!earned[k]) earned[k]={name:v.name,icon:v.icon||'🏅',earnedAt:Date.now()};
+        write('alloPsychoPathBadgesV956',earned);
+      }
       showPath(k);
-      toast('🌿 Étape enregistrée. La suivante se déverrouillera après une pause de 12 h.');
+      if(typeof renderBadges==='function') renderBadges();
+      toast(parcoursTermine?'🏅 Parcours terminé : badge obtenu !':'🌿 Étape enregistrée. La suivante se déverrouillera après une pause de 12 h.');
     });
 
     // Automatically open current available step only.
@@ -8893,7 +8924,12 @@ function renderBadges(){
  const n=activityCount();let cur=badges[0];badges.forEach(b=>{if(n>=b.n)cur=b});
  if($("badgeIconV923"))$("badgeIconV923").textContent=cur.icon;if($("badgeNameV923"))$("badgeNameV923").textContent=cur.name;
  if($("badgeTextV923"))$("badgeTextV923").textContent=n+" petits actes d’auto-soin enregistrés localement. Les badges célèbrent la pratique, pas la perfection.";
- if($("badgeRowV923"))$("badgeRowV923").innerHTML=badges.map(b=>'<span class="badge-chip-v923 '+(n>=b.n?"":"locked")+'">'+b.icon+" "+b.name+'</span>').join("");
+ if($("badgeRowV923")){
+  const guided=Object.values(read("alloPsychoPathBadgesV956",{}));
+  $("badgeRowV923").innerHTML=
+    badges.map(b=>'<span class="badge-chip-v923 '+(n>=b.n?"":"locked")+'">'+b.icon+" "+b.name+'</span>').join("")+
+    guided.map(b=>'<span class="badge-chip-v923">🏅 '+(b.name||"Parcours 7 étapes")+'</span>').join("");
+ }
 }
 const months=[
  ["Janvier","Nouveau départ doux","Choisir une intention réaliste","journal"],
@@ -9743,7 +9779,7 @@ function parseIntensity(v){
 }
 function points(){
   const out=[];
-  const moodScore={Calme:85,"Posé":78,Nuageux:48,Orageux:22};
+  const moodScore={Calme:85,"Posé":78,Triste:48,Submergé:22};
   read("alloPsychoHumeurs",[]).forEach(x=>{
     const value=moodScore[x.mood]??moodScore[x.humeur];
     if(Number.isFinite(value))out.push({at:ts(x),value,kind:"mood",label:x.mood||x.humeur||"Humeur"});
@@ -9801,7 +9837,7 @@ const read=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||JSON.stringify
 function ts(x){const raw=x?.at||x?.created_at||x?.date;const t=raw?new Date(raw).getTime():NaN;return Number.isFinite(t)?t:Date.now()}
 function intensity(v){const m=String(v||"").match(/\b(100|[1-9]?\d)\b/);return m?Number(m[1]):null}
 function data(){
- const out=[],mood={Calme:85,"Posé":78,Nuageux:48,Orageux:22};
+ const out=[],mood={Calme:85,"Posé":78,Triste:48,Submergé:22};
  read("alloPsychoHumeurs",[]).forEach(x=>{const v=mood[x.mood]??mood[x.humeur];if(Number.isFinite(v))out.push({at:ts(x),value:v,source:"humeur"})});
  read("alloPsychoToolFeedbackV923",[]).forEach(x=>{const a=Number(x.after);if(Number.isFinite(a))out.push({at:ts(x),value:Math.max(0,Math.min(100,100-a*10)),source:"exercice",tool:x.tool})});
  read("alloPsychoTCC",[]).forEach(x=>{const n=intensity(x?.steps?.[2]??x?.emotion??x?.intensity);if(n!==null)out.push({at:ts(x),value:100-n,source:"intensité"})});
